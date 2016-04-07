@@ -135,6 +135,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     fingerprintd
 
+# For android_filesystem_config.h
+PRODUCT_PACKAGES += \
+    fs_config_files
+
 # GPS
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/flp.conf:system/etc/flp.conf \
