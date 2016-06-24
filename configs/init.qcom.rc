@@ -474,7 +474,7 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet input graphics
-    writepid /dev/cpuset/system-background/tasks
+    writepid /dev/cpuset/camera-daemon/tasks
 
 # fingerprint service
 service fingerprintd /system/bin/fingerprintd
@@ -1344,4 +1344,4 @@ service ifaadaemon /system/bin/ifaadaemon
 service remosaic_daemon /system/bin/remosaic_daemon
     class late_start
     user camera
-    writepid /dev/cpuset/system-background/tasks
+    writepid /dev/cpuset/camera-daemon/tasks
