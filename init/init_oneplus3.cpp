@@ -35,6 +35,7 @@
 #include "log.h"
 #include "util.h"
 
+extern "C" {
 static int read_file2(const char *fname, char *data, int max_size)
 {
     int fd, rc;
@@ -111,4 +112,4 @@ void vendor_load_properties() {
 
     init_alarm_boot_properties();
 }
-
+}
