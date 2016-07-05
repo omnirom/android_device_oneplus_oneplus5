@@ -22,7 +22,7 @@ audio.dolby.ds2.hardbypass=false
 audio.offload.passthrough=false
 audio.offload.multiple.enabled=true
 audio.offload.min.duration.secs=30
-af.fast_track_multiplier=2
+af.fast_track_multiplier=1
 audio_hal.period_size=192
 persist.dirac.acs.controller=qem
 
@@ -38,9 +38,6 @@ ro.qualcomm.display.paneltype=1
 config.foss.xml=1
 config.foss.path=/system/etc/FOSSConfig.xml
 config.foss.xml.print=1
-
-# Camera
-camera.disable_zsl_mode=1
 
 # CNE
 persist.cne.feature=1

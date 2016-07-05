@@ -46,8 +46,11 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final int GESTURE_CIRCLE_SCANCODE = 62;
     private static final int GESTURE_V_SCANCODE = 63;
     private static final int KEY_DOUBLE_TAP = 61;
-
-    private static final String BUTTON_DISABLE_FILE = "/sys/kernel/touchscreen/button_disable";
+    private static final int KEY_HOME = 102;
+    private static final int KEY_BACK = 158;
+    private static final int KEY_RECENTS = 580;
+ 
+    //private static final String BUTTON_DISABLE_FILE = "/sys/kernel/touchscreen/button_disable";
 
     private static final int[] sSupportedGestures = new int[]{
         GESTURE_CIRCLE_SCANCODE,
@@ -59,12 +62,18 @@ public class KeyHandler implements DeviceKeyHandler {
         GESTURE_V_SCANCODE
     };
 
+    private static final int[] sDisabledButtons = new int[]{
+        KEY_HOME,
+        KEY_BACK,
+        KEY_RECENTS
+    };
     protected final Context mContext;
     private final PowerManager mPowerManager;
     private EventHandler mEventHandler;
     private WakeLock mGestureWakeLock;
     private Handler mHandler = new Handler();
     private SettingsObserver mSettingsObserver;
+    private static boolean mButtonDisabled;
 
     private class SettingsObserver extends ContentObserver {
         SettingsObserver(Handler handler) {
@@ -120,6 +129,13 @@ public class KeyHandler implements DeviceKeyHandler {
         if (event.getAction() != KeyEvent.ACTION_UP) {
             return false;
         }
+
+        if (mButtonDisabled) {
+            if (DEBUG) Log.i(TAG, "scanCode=" + event.getScanCode());
+            if (ArrayUtils.contains(sDisabledButtons, event.getScanCode())) {
+                return true;
+            }
+        }
         boolean isKeySupported = ArrayUtils.contains(sHandledGestures, event.getScanCode());
         if (isKeySupported && !mEventHandler.hasMessages(GESTURE_REQUEST)) {
             if (DEBUG) Log.i(TAG, "scanCode=" + event.getScanCode());
@@ -131,6 +147,11 @@ public class KeyHandler implements DeviceKeyHandler {
 
     @Override
     public boolean canHandleKeyEvent(KeyEvent event) {
+        if (mButtonDisabled) {
+            if (ArrayUtils.contains(sDisabledButtons, event.getScanCode())) {
+                return true;
+            }
+        }
         return ArrayUtils.contains(sSupportedGestures, event.getScanCode());
     }
 
@@ -141,10 +162,10 @@ public class KeyHandler implements DeviceKeyHandler {
     }
 
     public static void setButtonDisable(Context context) {
-        final boolean disableButtons = Settings.System.getInt(
+        mButtonDisabled = Settings.System.getInt(
                 context.getContentResolver(), Settings.System.HARDWARE_KEYS_DISABLE, 0) == 1;
-        if (DEBUG) Log.i(TAG, "setButtonDisable=" + disableButtons);
-        Utils.writeValue(BUTTON_DISABLE_FILE, disableButtons ? "1" : "0");
+        if (DEBUG) Log.i(TAG, "setButtonDisable=" + mButtonDisabled);
+        //Utils.writeValue(BUTTON_DISABLE_FILE, disableButtons ? "1" : "0");
     }
 
     @Override

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * Copyright (C) 2008 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ -->
+
+<!-- CameraSettings: [4640x3480, 4640x2610, 3488x3488, 3840x2160, 3264x2448, 3264x1836, 2464x2464, 1920x1080, 1440x1080, 1280x720, 1080x1080, 720x480, 640x480, 352x288, 320x240, 176x144]-->
+
+<resources>
+    <!-- Camera Preferences Picture size dialog box entries -->
+    <string-array name="pref_camera_picturesize_entries" translatable="false">
+        <item>(4:3) 16.1 MP</item>
+        <item>(4:3) 8.0 MP</item>
+        <item>(4:3) 5 MP</item>
+        <item>(4:3) 3.1 MP</item>
+        <item>(4:3) 1.9 MP</item>
+        <item>(16:9) 12.1 MP</item>
+        <item>(16:9) 8.3 MP</item>
+        <item>(16:9) 2.1 MP</item>
+        <item>(16:9) 0.9 MP</item>
+        <item>(Wide) 5.5 MP</item>
+    </string-array>
+    <!-- When launching the camera app first time, we will set the picture
+         size to the first one in the list that is also supported by the
+         driver -->
+    <string-array name="pref_camera_picturesize_entryvalues" translatable="false">
+        <item>4640x3480</item>
+        <item>3264x2448</item>
+        <item>2592x1944</item>
+        <item>2048x1536</item>
+        <item>1600x1200</item>
+        <item>4640x2610</item>
+        <item>3840x2160</item>
+        <item>1920x1080</item>
+        <item>1280x720</item>
+        <item>3264x1836</item>
+    </string-array>
+</resources>

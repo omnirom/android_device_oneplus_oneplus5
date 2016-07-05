@@ -64,6 +64,23 @@
     "repository": "vendor_qcom_opensource_dataservices",
     "target_path": "vendor/qcom/opensource/dataservices",
     "revision": "android-6.0"
+  },
+  {
+    "remote": "github",
+    "repository": "maxwen/android_vendor_nxp-nfc_opensource_frameworks",
+    "target_path": "vendor/nxp-nfc/opensource/frameworks",
+    "revision": "cm-13.0"
+  },
+  {
+    "remote": "github",
+    "repository": "maxwen/android_vendor_nxp-nfc_opensource_libnfc-nci",
+    "target_path": "vendor/nxp-nfc/opensource/libnfc-nci",
+    "revision": "cm-13.0"
+  },
+  {
+    "remote": "github",
+    "repository": "maxwen/android_vendor_nxp-nfc_opensource_Nfc",
+    "target_path": "vendor/nxp-nfc/opensource/Nfc",
+    "revision": "cm-13.0"
   }
-
 ]

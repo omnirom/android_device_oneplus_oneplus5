@@ -65,8 +65,9 @@ public class DeviceSettings extends PreferenceActivity implements
         mCameraSwitch.setOnPreferenceChangeListener(new CameraGestureSwitch());
 
         mVibratorStrength = (VibratorStrengthPreference) findPreference(KEY_VIBSTRENGTH);
-        mVibratorStrength.setEnabled(VibratorStrengthPreference.isSupported());
-
+        if (mVibratorStrength != null) {
+            mVibratorStrength.setEnabled(VibratorStrengthPreference.isSupported());
+        }
         final boolean oclickEnabled = getResources().getBoolean(R.bool.config_has_oclick);
         PreferenceCategory oclickCategory = (PreferenceCategory) findPreference(KEY_OCLICK_CATEGORY);
         if (!oclickEnabled) {
