@@ -29,46 +29,30 @@ ifeq ($(TARGET_DEVICE),oneplus3)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
-include $(CLEAR_VARS)
+ACTUAL_INI_FILE := /system/etc/wifi/WCNSS_qcom_cfg.ini
+WCNSS_INI_SYMLINK := $(TARGET_OUT)/etc/firmware/wlan/qca_cld/WCNSS_qcom_cfg.ini
 
-LOCAL_MODULE := wifi_symlinks
-LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE_CLASS := FAKE
-LOCAL_MODULE_SUFFIX := -timestamp
+ACTUAL_MAC_FILE := /persist/wlan_mac.bin
+WCNSS_MAC_SYMLINK := $(TARGET_OUT)/etc/firmware/wlan/qca_cld/wlan_mac.bin
 
-include $(BUILD_SYSTEM)/base_rules.mk
+$(shell mkdir -p $(TARGET_OUT)/etc/firmware/wlan/qca_cld/; \
+    ln -sf $(ACTUAL_INI_FILE) \
+            $(WCNSS_INI_SYMLINK))
 
-$(LOCAL_BUILT_MODULE): ACTUAL_INI_FILE := /system/etc/wifi/WCNSS_qcom_cfg.ini
-$(LOCAL_BUILT_MODULE): WCNSS_INI_SYMLINK := $(TARGET_OUT)/etc/firmware/wlan/qca_cld/WCNSS_qcom_cfg.ini
+$(shell mkdir -p $(TARGET_OUT)/etc/firmware/wlan/qca_cld/; \
+    ln -sf $(ACTUAL_MAC_FILE) \
+            $(WCNSS_MAC_SYMLINK))
 
-$(LOCAL_BUILT_MODULE): ACTUAL_MAC_FILE := /persist/wlan_mac.bin
-$(LOCAL_BUILT_MODULE): WCNSS_MAC_SYMLINK := $(TARGET_OUT)/etc/firmware/wlan/qca_cld/wlan_mac.bin
+#IMS_LIBS := libimscamera_jni.so libimsmedia_jni.so
 
+#IMS_SYMLINKS := $(addprefix $(TARGET_OUT)/app/ims/lib/arm64/,$(notdir $(IMS_LIBS)))
+#$(IMS_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+#	@echo "IMS lib link: $@"
+#	@mkdir -p $(dir $@)
+#	@rm -rf $@
+#	$(hide) ln -sf /system/vendor/lib64/$(notdir $@) $@
 
-$(LOCAL_BUILT_MODULE): $(LOCAL_PATH)/Android.mk
-$(LOCAL_BUILT_MODULE):
-	$(hide) echo "Making symlinks for wifi"
-	$(hide) mkdir -p $(dir $@)
-	$(hide) mkdir -p $(dir $(WCNSS_INI_SYMLINK))
-	$(hide) rm -rf $@
-	$(hide) rm -rf $(WCNSS_INI_SYMLINK)
-	$(hide) ln -sf $(ACTUAL_INI_FILE) $(WCNSS_INI_SYMLINK)
-	$(hide) rm -rf $(WCNSS_MAC_SYMLINK)
-	$(hide) ln -sf $(ACTUAL_MAC_FILE) $(WCNSS_MAC_SYMLINK)
-	$(hide) touch $@
-
-include $(call all-makefiles-under,$(LOCAL_PATH))
-
-IMS_LIBS := libimscamera_jni.so libimsmedia_jni.so
-
-IMS_SYMLINKS := $(addprefix $(TARGET_OUT)/app/ims/lib/arm64/,$(notdir $(IMS_LIBS)))
-$(IMS_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
-	@echo "IMS lib link: $@"
-	@mkdir -p $(dir $@)
-	@rm -rf $@
-	$(hide) ln -sf /system/vendor/lib64/$(notdir $@) $@
-
-ALL_DEFAULT_INSTALLED_MODULES += $(IMS_SYMLINKS)
+#ALL_DEFAULT_INSTALLED_MODULES += $(IMS_SYMLINKS)
 
 include device/oneplus/oneplus3/tftp.mk
 
