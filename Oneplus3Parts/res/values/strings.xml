@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 <resources>
-    <string name="app_name">Find 7</string>
+    <string name="app_name">Oneplus 3</string>
     <string name="category_gestures_title">Off screen gestures</string>
     <string name="camera_title_head">Camera</string>
     <string name="camera_summary_head">Draw a circle to start camera</string>
@@ -25,11 +25,6 @@
     <string name="vib_strength_summary_head">Define the strength of the vibrator</string>
     <string name="vib_test">Test</string>
     <string name="advanced_settings">Advanced</string>
-    <string name="category_oclick">O-Click</string>
-    <string name="oclick_title">Configure O-Click</string>
-    <string name="back_button_title">Fingerprint scanner button</string>
-    <string name="back_button_sleep">Sleep</string>
-    <string name="back_button_recents">Recents</string>
-    <string name="back_button_summary">Unassigned</string>
-    <string name="category_button">Buttons</string>
+    <string name="music_title_head">Music</string>
+    <string name="music_summary_head">Draw a II to play / pause music and \u003C / \u003E to skip tracks</string>
 </resources>

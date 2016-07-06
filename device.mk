@@ -234,11 +234,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     power.msm8996
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/power_profiles.xml:system/etc/power_profiles.xml
+
 PRODUCT_PACKAGES += \
     Oneplus3Parts
 
 # bluetooth
-PRODUCT_PACKAGES += \
+PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/init.qcom.bt.sh:system/etc/init.qcom.bt.sh
 
 # ANT+

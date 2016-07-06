@@ -29,5 +29,6 @@ public class Startup extends BroadcastReceiver {
         TorchGestureSwitch.restore(context);
         KeyHandler.setButtonDisable(context);
         VibratorStrengthPreference.restore(context);
+        MusicGestureSwitch.restore(context);
     }
 }

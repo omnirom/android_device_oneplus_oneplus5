@@ -15,8 +15,6 @@
 -->
 
 <resources>
-    <bool name="pref_camera_zsl_disabled">true</bool>
-    <string name="pref_camera_zsl_default" translatable="false">off</string>
-    <bool name="back_camera_open_legacy">false</bool>
-    <bool name="front_camera_open_legacy">false</bool>
+    <!-- Restart preview for back camera onPictureTaken -->
+    <bool name="back_camera_restart_preview_onPictureTaken">true</bool>
 </resources>

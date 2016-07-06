@@ -17,15 +17,20 @@
 */
 package org.omnirom.device;
 
+import android.app.ActivityManagerNative;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
+import android.media.IAudioService;
+import android.media.AudioManager;
+import android.media.session.MediaSessionLegacyHelper;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.os.RemoteException;
 import android.os.ServiceManager;
+import android.os.SystemClock;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
@@ -38,9 +43,9 @@ import com.android.internal.util.ArrayUtils;
 public class KeyHandler implements DeviceKeyHandler {
 
     private static final String TAG = KeyHandler.class.getSimpleName();
-    private static final boolean DEBUG = false;
+    private static final boolean DEBUG = true;
     protected static final int GESTURE_REQUEST = 1;
-    private static final int GESTURE_WAKELOCK_DURATION = 3000;
+    private static final int GESTURE_WAKELOCK_DURATION = 2000;
 
     // Supported scancodes
     //#define KEY_GESTURE_CIRCLE      250 // draw circle to lunch camera
@@ -48,9 +53,16 @@ public class KeyHandler implements DeviceKeyHandler {
     //#define KEY_GESTURE_V           252 // draw v to toggle flashlight
     //#define KEY_GESTURE_LEFT_V      253 // draw left arrow for previous track
     //#define KEY_GESTURE_RIGHT_V     254 // draw right arrow for next track
+    //#define MODE_TOTAL_SILENCE 600
+    //#define MODE_ALARMS_ONLY 601
+    //#define MODE_PRIORITY_ONLY 602
+    //#define MODE_NONE 603
 
     private static final int GESTURE_CIRCLE_SCANCODE = 250;
     private static final int GESTURE_V_SCANCODE = 252;
+    private static final int GESTURE_II_SCANCODE = 251;
+    private static final int GESTURE_LEFT_V_SCANCODE = 253;
+    private static final int GESTURE_RIGHT_V_SCANCODE = 254;
     private static final int KEY_DOUBLE_TAP = 143;
     private static final int KEY_HOME = 102;
     private static final int KEY_BACK = 158;
@@ -61,11 +73,17 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final int[] sSupportedGestures = new int[]{
         GESTURE_CIRCLE_SCANCODE,
         GESTURE_V_SCANCODE,
-        KEY_DOUBLE_TAP
+        KEY_DOUBLE_TAP,
+        GESTURE_II_SCANCODE,
+        GESTURE_LEFT_V_SCANCODE,
+        GESTURE_RIGHT_V_SCANCODE
     };
 
     private static final int[] sHandledGestures = new int[]{
-        GESTURE_V_SCANCODE
+        GESTURE_V_SCANCODE,
+        GESTURE_II_SCANCODE,
+        GESTURE_LEFT_V_SCANCODE,
+        GESTURE_RIGHT_V_SCANCODE
     };
 
     private static final int[] sDisabledButtons = new int[]{
@@ -126,6 +144,23 @@ public class KeyHandler implements DeviceKeyHandler {
                 UserHandle user = new UserHandle(UserHandle.USER_CURRENT);
                 mContext.sendBroadcastAsUser(torchIntent, user);
                 break;
+            case GESTURE_II_SCANCODE:
+                if (DEBUG) Log.i(TAG, "GESTURE_II_SCANCODE");
+                mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
+                dispatchMediaKeyWithWakeLockToAudioService(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
+                break;
+            case GESTURE_LEFT_V_SCANCODE:
+                if (isMusicActive()) {
+                    if (DEBUG) Log.i(TAG, "GESTURE_LEFT_V_SCANCODE");
+                    mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
+                    dispatchMediaKeyWithWakeLockToAudioService(KeyEvent.KEYCODE_MEDIA_PREVIOUS);
+                }
+            case GESTURE_RIGHT_V_SCANCODE:
+                if (isMusicActive()) {
+                    if (DEBUG) Log.i(TAG, "GESTURE_RIGHT_V_SCANCODE");
+                    mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
+                    dispatchMediaKeyWithWakeLockToAudioService(KeyEvent.KEYCODE_MEDIA_NEXT);
+                }
             }
         }
     }
@@ -193,6 +228,43 @@ public class KeyHandler implements DeviceKeyHandler {
             return false;
         }
         return event.getScanCode() == KEY_DOUBLE_TAP;
+    }
+
+    private IAudioService getAudioService() {
+        IAudioService audioService = IAudioService.Stub
+                .asInterface(ServiceManager.checkService(Context.AUDIO_SERVICE));
+        if (audioService == null) {
+            Log.w(TAG, "Unable to find IAudioService interface.");
+        }
+        return audioService;
+    }
+
+    boolean isMusicActive() {
+        final AudioManager am = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+        if (am == null) {
+            return false;
+        }
+        return am.isMusicActive();
+    }
+
+    private void dispatchMediaKeyWithWakeLockToAudioService(int keycode) {
+        if (ActivityManagerNative.isSystemReady()) {
+            IAudioService audioService = getAudioService();
+            if (audioService != null) {
+                KeyEvent event = new KeyEvent(SystemClock.uptimeMillis(),
+                        SystemClock.uptimeMillis(), KeyEvent.ACTION_DOWN,
+                        keycode, 0);
+                dispatchMediaKeyEventUnderWakelock(event);
+                event = KeyEvent.changeAction(event, KeyEvent.ACTION_UP);
+                dispatchMediaKeyEventUnderWakelock(event);
+            }
+        }
+    }
+
+    private void dispatchMediaKeyEventUnderWakelock(KeyEvent event) {
+        if (ActivityManagerNative.isSystemReady()) {
+            MediaSessionLegacyHelper.getHelper(mContext).sendMediaButtonEvent(event, true);
+        }
     }
 }
 

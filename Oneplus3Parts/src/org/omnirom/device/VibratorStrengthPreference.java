@@ -41,15 +41,16 @@ public class VibratorStrengthPreference extends SeekBarDialogPreference implemen
     private Vibrator mVibrator;
     private Button mTestButton;
 
-    private static final String FILE_LEVEL = "/sys/devices/virtual/timed_output/vibrator/vtg_level";
-    private static final String FILE_MIN = "/sys/devices/virtual/timed_output/vibrator/vtg_min";
-    private static final String FILE_MAX = "/sys/devices/virtual/timed_output/vibrator/vtg_max";
+    private static final String FILE_LEVEL = "/sys/devices/virtual/timed_output/vibrator/vmax_mv";
     private static final long testVibrationPattern[] = {0,250};
 
     public VibratorStrengthPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mMinValue = Integer.valueOf(Utils.getFileValue(FILE_MIN, "12"));
-        mMaxValue = Integer.valueOf(Utils.getFileValue(FILE_MAX, "31"));
+        // from drivers/platform/msm/qpnp-haptic.c
+        // #define QPNP_HAP_VMAX_MIN_MV		116
+        // #define QPNP_HAP_VMAX_MAX_MV		3596
+        mMinValue = 1000;
+        mMaxValue = 3596;
 
         mVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         setDialogLayoutResource(R.layout.preference_dialog_vibrator_strength);
@@ -87,7 +88,7 @@ public class VibratorStrengthPreference extends SeekBarDialogPreference implemen
     }
 
 	public static String getValue(Context context) {
-		return Utils.getFileValue(FILE_LEVEL, "31");
+		return Utils.getFileValue(FILE_LEVEL, "2700");
 	}
 
 	private void setValue(String newValue) {
@@ -99,7 +100,7 @@ public class VibratorStrengthPreference extends SeekBarDialogPreference implemen
             return;
         }
 
-        String storedValue = PreferenceManager.getDefaultSharedPreferences(context).getString(DeviceSettings.KEY_VIBSTRENGTH, "31"); 
+        String storedValue = PreferenceManager.getDefaultSharedPreferences(context).getString(DeviceSettings.KEY_VIBSTRENGTH, "2700"); 
         Utils.writeValue(FILE_LEVEL, storedValue);
     }
 

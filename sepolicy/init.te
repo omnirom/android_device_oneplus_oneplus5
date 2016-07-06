@@ -1,2 +1,4 @@
 allow init vfat:file { read open };
 allow init socket_device:sock_file { create setattr unlink };
+allow init sysfs:dir rw_file_perms;
+allow init sysfs:file rw_file_perms;

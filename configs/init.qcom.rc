@@ -119,8 +119,8 @@ on boot
     chmod 0660 /proc/tri-state-key/keyCode_bottom
 
     # Vibrator permissions
-    chown system system /sys/class/timed_output/vibrator/vmax_mv
-    chmod 0644 /sys/class/timed_output/vibrator/vmax_mv
+    chown root system /sys/devices/virtual/timed_output/vibrator/vmax_mv
+    chmod 0660 /sys/devices/virtual/timed_output/vibrator/vmax_mv
 
     # Graphics
     chown system graphics /sys/class/graphics/fb0/dyn_pu
@@ -507,11 +507,11 @@ service qseecomd /system/bin/qseecomd
    user root
    group root
 
-service perfd /system/vendor/bin/perfd
-   class main
-   user root
-   disabled
-   writepid /dev/cpuset/system-background/tasks
+#service perfd /system/vendor/bin/perfd
+#   class main
+#   user root
+#   disabled
+#   writepid /dev/cpuset/system-background/tasks
 
 service seempd /system/bin/seempd
    class late_start

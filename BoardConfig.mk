@@ -47,7 +47,7 @@ TARGET_USES_64_BIT_BINDER := true
 
 ENABLE_CPUSETS := true
 
-BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom androidboot.selinux=permissive user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=32M@0-0xffffffff androidboot.bootdevice=624000.ufshc
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom androidboot.selinux=enforcing user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=32M@0-0xffffffff androidboot.bootdevice=624000.ufshc
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_TAGS_OFFSET := 0x02000000
@@ -122,7 +122,7 @@ AUDIO_FEATURE_ENABLED_PROXY_DEVICE := true
 #AUDIO_FEATURE_ENABLED_SPKR_PROTECTION := true
 #AUDIO_FEATURE_ENABLED_VBAT_MONITOR := true
 AUDIO_FEATURE_ENABLED_VORBIS_OFFLOAD := true
-AUDIO_FEATURE_ENABLED_WMA_OFFLOAD := true
+#AUDIO_FEATURE_ENABLED_WMA_OFFLOAD := true
 
 AUDIO_USE_LL_AS_PRIMARY_OUTPUT := true
 BOARD_USES_ALSA_AUDIO := true
@@ -139,8 +139,7 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(BOARD_PATH)/bluetooth
 BOARD_HAS_QCA_BT_ROME := true
-#QCOM_BT_USE_BTNV := true
-#QCOM_BT_USE_SMD_TTY := true
+QCOM_BT_USE_BTNV := true
 
 # Wifi
 BOARD_HAS_QCOM_WLAN              := true
@@ -157,8 +156,6 @@ WIFI_DRIVER_FW_PATH_P2P          := "p2p"
 # charger
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
-# NOT AT THE MOMENT
-#BOARD_HAL_STATIC_LIBRARIES += libhealthd.op3
 
 # power hal
 TARGET_PROVIDES_POWERHAL := true
@@ -184,12 +181,10 @@ TARGET_USES_NQ_NFC := true
 
 # Crypto
 TARGET_HW_DISK_ENCRYPTION := false
-TARGET_CRYPTFS_HW_PATH := device/qcom/common/cryptfs_hw
+#TARGET_CRYPTFS_HW_PATH := device/qcom/common/cryptfs_hw
 
 # Increase coldboot timeout
 TARGET_INCREASES_COLDBOOT_TIMEOUT := true
-
-EXTENDED_FONT_FOOTPRINT := true
 
 # selinux
 include device/qcom/sepolicy/sepolicy.mk
