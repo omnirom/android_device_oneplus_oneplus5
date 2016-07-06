@@ -235,7 +235,7 @@ PRODUCT_PACKAGES += \
     power.msm8996
 
 PRODUCT_PACKAGES += \
-    Find7Parts
+    Oneplus3Parts
 
 # bluetooth
 PRODUCT_PACKAGES += \

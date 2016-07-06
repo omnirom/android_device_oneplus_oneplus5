@@ -69,6 +69,7 @@ static void power_hint(struct power_module __unused *module, power_hint_t hint,
 
 void set_feature(struct power_module __unused *module, feature_t feature, int state) {
     if (feature == POWER_FEATURE_DOUBLE_TAP_TO_WAKE) {
+        ALOGI("%s POWER_FEATURE_DOUBLE_TAP_TO_WAKE %s", __func__, (state ? "ON" : "OFF"));
         sysfs_write(DOUBLE_TAP_FILE, state ? "1" : "0");
     }
 }

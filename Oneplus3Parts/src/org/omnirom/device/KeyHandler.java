@@ -43,9 +43,15 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final int GESTURE_WAKELOCK_DURATION = 3000;
 
     // Supported scancodes
-    private static final int GESTURE_CIRCLE_SCANCODE = 62;
-    private static final int GESTURE_V_SCANCODE = 63;
-    private static final int KEY_DOUBLE_TAP = 61;
+    //#define KEY_GESTURE_CIRCLE      250 // draw circle to lunch camera
+    //#define KEY_GESTURE_TWO_SWIPE	251 // swipe two finger vertically to play/pause
+    //#define KEY_GESTURE_V           252 // draw v to toggle flashlight
+    //#define KEY_GESTURE_LEFT_V      253 // draw left arrow for previous track
+    //#define KEY_GESTURE_RIGHT_V     254 // draw right arrow for next track
+
+    private static final int GESTURE_CIRCLE_SCANCODE = 250;
+    private static final int GESTURE_V_SCANCODE = 252;
+    private static final int KEY_DOUBLE_TAP = 143;
     private static final int KEY_HOME = 102;
     private static final int KEY_BACK = 158;
     private static final int KEY_RECENTS = 580;
@@ -147,12 +153,17 @@ public class KeyHandler implements DeviceKeyHandler {
 
     @Override
     public boolean canHandleKeyEvent(KeyEvent event) {
+        return ArrayUtils.contains(sSupportedGestures, event.getScanCode());
+    }
+
+    @Override
+    public boolean isDisabledKeyEvent(KeyEvent event) {
         if (mButtonDisabled) {
             if (ArrayUtils.contains(sDisabledButtons, event.getScanCode())) {
                 return true;
             }
         }
-        return ArrayUtils.contains(sSupportedGestures, event.getScanCode());
+        return false;
     }
 
     private Message getMessageForKeyEvent(KeyEvent keyEvent) {

@@ -1044,7 +1044,6 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     disabled
     oneshot
 
-# FST Manager can be started by property_set("ctl.start", "fstman:<hostap ctrl iface>");
 service fstman /system/bin/fstman -B -ddd -c /data/misc/wifi/fstman.ini
     user wifi
     group wifi net_admin net_raw
