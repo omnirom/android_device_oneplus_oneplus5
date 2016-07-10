@@ -29,14 +29,14 @@
 
 //#define LOG_NDEBUG 0
 
-#define SCALING_MAX_PATH "/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq"
 #define CPUFREQ_ROOT_PATH "/sys/devices/system/cpu/cpu"
 #define CPUFREQ_TAIL_PATH "/cpufreq/"
 
 // what is the max frequency (for using max value)
-#define MAX_FREQ_PATH "/sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_max_freq"
+#define MAX_FREQ_PATH "cpuinfo_max_freq"
 // how much cpus ara available (for using max value) e.g. 0-3
 #define CPUS_MAX_PATH "/sys/devices/system/cpu/present"
+#define ONLINE_PATH "/online"
 
 #define PROFILE_MAX_TAG "max"
 
@@ -63,7 +63,6 @@ void sysfs_write(const char *path, const char *s)
 
 int sysfs_write_silent(const char *path, const char *s)
 {
-    char buf[80];
     int len;
     int rc = 0;
     int fd = open(path, O_WRONLY);
@@ -124,20 +123,35 @@ int sysfs_read_buf(const char* path, char *buf, int size) {
     return 0;
 }
 
-int get_max_freq(char *freq, int size) {
-    return sysfs_read_buf(MAX_FREQ_PATH, freq, size);
+int get_max_freq(int cpu, char *freq, int size) {
+    char cpufreq_path[256];
+
+    sprintf(cpufreq_path, "%s%d%s%s", CPUFREQ_ROOT_PATH, cpu, CPUFREQ_TAIL_PATH, MAX_FREQ_PATH);
+    return sysfs_read_buf(cpufreq_path, freq, size);
+}
+
+int set_online_state(int cpu, const char* value) {
+    char online_path[256];
+
+    sprintf(online_path, "%s%d%s", CPUFREQ_ROOT_PATH, cpu, ONLINE_PATH);
+    int rc = sysfs_write_silent(online_path, value);
+    if (!rc) {
+        ALOGI("write %s -> %s", online_path, value);
+    }
+    return rc;
 }
 
 int get_max_cpus(char *cpus, int size) {
     return sysfs_read_buf(CPUS_MAX_PATH, cpus, size);
 }
 
-void write_cpufreq_value(int cpu, const char* key, const char* value)
-{
+int write_cpufreq_value(int cpu, const char* key, const char* value) {
     char cpufreq_path[256];
 
     sprintf(cpufreq_path, "%s%d%s%s", CPUFREQ_ROOT_PATH, cpu, CPUFREQ_TAIL_PATH, key);
-    if (!sysfs_write_silent(cpufreq_path, value)) {
-        ALOGV("write %s -> %s", cpufreq_path, value);
+    int rc = sysfs_write_silent(cpufreq_path, value);
+    if (!rc) {
+        ALOGI("write %s -> %s", cpufreq_path, value);
     }
+    return rc;
 }

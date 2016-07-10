@@ -70,8 +70,8 @@ on boot
     # Update foreground and background cpusets
     write /dev/cpuset/foreground/cpus 0-3
     write /dev/cpuset/foreground/boost/cpus 2-3
-    write /dev/cpuset/background/cpus 0
-    write /dev/cpuset/system-background/cpus 0-1
+    write /dev/cpuset/background/cpus 0-1
+    write /dev/cpuset/system-background/cpus 0-3
 
     # Secure touch
     chmod 0660 /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch_enable
@@ -507,11 +507,12 @@ service qseecomd /system/bin/qseecomd
    user root
    group root
 
-#service perfd /system/vendor/bin/perfd
-#   class main
-#   user root
-#   disabled
-#   writepid /dev/cpuset/system-background/tasks
+service perfd /system/vendor/bin/perfd
+   class main
+   user root
+   socket perfd seqpacket 0666 root system
+   disabled
+   writepid /dev/cpuset/system-background/tasks
 
 service seempd /system/bin/seempd
    class late_start
@@ -524,16 +525,16 @@ service secotad /system/bin/secotad
    user system
    group system
 
-service thermal-engine /system/vendor/bin/thermal-engine
-   class main
-   user root
-   socket thermal-send-client stream 0666 system system
-   socket thermal-recv-client stream 0660 system system
-   socket thermal-recv-passive-client stream 0666 system system
-   group root
-   socket thermal-send-client stream 0666 system system
-   socket thermal-recv-client stream 0660 system system
-   socket thermal-recv-passive-client stream 0666 system system
+#service thermal-engine /system/vendor/bin/thermal-engine
+#   class main
+#   user root
+#   socket thermal-send-client stream 0666 system system
+#   socket thermal-recv-client stream 0660 system system
+#   socket thermal-recv-passive-client stream 0666 system system
+#   group root
+#   socket thermal-send-client stream 0666 system system
+#   socket thermal-recv-client stream 0660 system system
+#   socket thermal-recv-passive-client stream 0666 system system
 
 service time_daemon /system/bin/time_daemon
    class late_start
