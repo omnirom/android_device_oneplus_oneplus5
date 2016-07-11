@@ -18,6 +18,7 @@
 package org.omnirom.device;
 
 import android.app.ActivityManagerNative;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
@@ -33,6 +34,7 @@ import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.os.UserHandle;
 import android.provider.Settings;
+import android.provider.Settings.Global;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.WindowManagerGlobal;
@@ -67,8 +69,10 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final int KEY_HOME = 102;
     private static final int KEY_BACK = 158;
     private static final int KEY_RECENTS = 580;
- 
-    //private static final String BUTTON_DISABLE_FILE = "/sys/kernel/touchscreen/button_disable";
+    private static final int KEY_MODE_TOTAL_SILENCE = 601;
+    //private static final int KEY_MODE_ALARMS_ONLY = 601;
+    private static final int KEY_MODE_PRIORITY_ONLY = 602;
+    private static final int KEY_MODE_NONE = 603;
 
     private static final int[] sSupportedGestures = new int[]{
         GESTURE_CIRCLE_SCANCODE,
@@ -76,14 +80,22 @@ public class KeyHandler implements DeviceKeyHandler {
         KEY_DOUBLE_TAP,
         GESTURE_II_SCANCODE,
         GESTURE_LEFT_V_SCANCODE,
-        GESTURE_RIGHT_V_SCANCODE
+        GESTURE_RIGHT_V_SCANCODE,
+        KEY_MODE_TOTAL_SILENCE,
+        //KEY_MODE_ALARMS_ONLY,
+        KEY_MODE_PRIORITY_ONLY,
+        KEY_MODE_NONE
     };
 
     private static final int[] sHandledGestures = new int[]{
         GESTURE_V_SCANCODE,
         GESTURE_II_SCANCODE,
         GESTURE_LEFT_V_SCANCODE,
-        GESTURE_RIGHT_V_SCANCODE
+        GESTURE_RIGHT_V_SCANCODE,
+        KEY_MODE_TOTAL_SILENCE,
+        //KEY_MODE_ALARMS_ONLY,
+        KEY_MODE_PRIORITY_ONLY,
+        KEY_MODE_NONE
     };
 
     private static final int[] sDisabledButtons = new int[]{
@@ -98,6 +110,7 @@ public class KeyHandler implements DeviceKeyHandler {
     private Handler mHandler = new Handler();
     private SettingsObserver mSettingsObserver;
     private static boolean mButtonDisabled;
+    private final NotificationManager mNoMan;
 
     private class SettingsObserver extends ContentObserver {
         SettingsObserver(Handler handler) {
@@ -124,11 +137,12 @@ public class KeyHandler implements DeviceKeyHandler {
     public KeyHandler(Context context) {
         mContext = context;
         mEventHandler = new EventHandler();
-        mPowerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        mPowerManager = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
         mGestureWakeLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
                 "GestureWakeLock");
         mSettingsObserver = new SettingsObserver(mHandler);
         mSettingsObserver.observe();
+        mNoMan = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
     private class EventHandler extends Handler {
@@ -155,12 +169,34 @@ public class KeyHandler implements DeviceKeyHandler {
                     mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
                     dispatchMediaKeyWithWakeLockToAudioService(KeyEvent.KEYCODE_MEDIA_PREVIOUS);
                 }
+                break;
             case GESTURE_RIGHT_V_SCANCODE:
                 if (isMusicActive()) {
                     if (DEBUG) Log.i(TAG, "GESTURE_RIGHT_V_SCANCODE");
                     mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
                     dispatchMediaKeyWithWakeLockToAudioService(KeyEvent.KEYCODE_MEDIA_NEXT);
                 }
+                break;
+            case KEY_MODE_TOTAL_SILENCE:
+                if (DEBUG) Log.i(TAG, "KEY_MODE_TOTAL_SILENCE");
+                mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
+                mNoMan.setZenMode(Global.ZEN_MODE_NO_INTERRUPTIONS, null, TAG);
+                break;
+            /*case KEY_MODE_ALARMS_ONLY:
+                if (DEBUG) Log.i(TAG, "KEY_MODE_ALARMS_ONLY " + Global.ZEN_MODE_ALARMS);
+                mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
+                mNoMan.setZenMode(Global.ZEN_MODE_ALARMS, null, TAG);
+                break;*/
+            case KEY_MODE_PRIORITY_ONLY:
+                if (DEBUG) Log.i(TAG, "KEY_MODE_PRIORITY_ONLY");
+                mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
+                mNoMan.setZenMode(Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, null, TAG);
+                break;
+            case KEY_MODE_NONE:
+                if (DEBUG) Log.i(TAG, "KEY_MODE_NONE");
+                mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
+                mNoMan.setZenMode(Global.ZEN_MODE_OFF, null, TAG);
+                break;
             }
         }
     }
@@ -211,7 +247,6 @@ public class KeyHandler implements DeviceKeyHandler {
         mButtonDisabled = Settings.System.getInt(
                 context.getContentResolver(), Settings.System.HARDWARE_KEYS_DISABLE, 0) == 1;
         if (DEBUG) Log.i(TAG, "setButtonDisable=" + mButtonDisabled);
-        //Utils.writeValue(BUTTON_DISABLE_FILE, disableButtons ? "1" : "0");
     }
 
     @Override
