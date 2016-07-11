@@ -26,5 +26,5 @@
     <string name="vib_test">Test</string>
     <string name="advanced_settings">Advanced</string>
     <string name="music_title_head">Music</string>
-    <string name="music_summary_head">Draw a II to play / pause music and \u003C / \u003E to skip tracks</string>
+    <string name="music_summary_head">Draw a II to play / pause music and \u003C / \u003E to skip tracks forward and backward</string>
 </resources>
