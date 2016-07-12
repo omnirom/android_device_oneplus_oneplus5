@@ -89,13 +89,8 @@ void init_alarm_boot_properties()
 }
 
 void vendor_load_properties() {
-    char device[PROP_VALUE_MAX];
     char rf_version[PROP_VALUE_MAX];
     int rc;
-
-    rc = property_get("ro.product.device", device);
-    if (!rc || strncmp(device, "oneplus3", PROP_VALUE_MAX))
-        return;
 
     property_get("ro.boot.rf_version", rf_version);
 
