@@ -1,4 +1,5 @@
 on post-fs-data
+    write /proc/sys/kernel/sched_boost 1
 
     # Disable thermal bcl hotplug to switch governor
     write /sys/module/msm_thermal/core_control/enabled 0
@@ -104,13 +105,5 @@ on charger
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
 
-#on class_start:late_start
-#    write /proc/sys/kernel/sched_boost 1
-#    trigger enable-low-power
-
-#on property:init.svc.recovery=running
-#    trigger enable-low-power
-
-#on property:dev.bootcomplete=1
-#    write /proc/sys/kernel/sched_boost 0
-#    setprop sys.io.scheduler "bfq"
+on property:sys.boot_completed=1
+    write /proc/sys/kernel/sched_boost 0
