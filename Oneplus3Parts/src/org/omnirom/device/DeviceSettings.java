@@ -37,11 +37,13 @@ public class DeviceSettings extends PreferenceActivity implements
     public static final String KEY_TORCH_SWITCH = "torch";
     public static final String KEY_VIBSTRENGTH = "vib_strength";
     public static final String KEY_MUSIC_SWITCH = "music";
+    public static final String KEY_SLIDER_MODE = "slider_mode";
 
     private TwoStatePreference mTorchSwitch;
     private TwoStatePreference mCameraSwitch;
     private VibratorStrengthPreference mVibratorStrength;
     private TwoStatePreference mMusicSwitch;
+    private ListPreference mSliderMode;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,14 @@ public class DeviceSettings extends PreferenceActivity implements
         mMusicSwitch.setEnabled(MusicGestureSwitch.isSupported());
         mMusicSwitch.setChecked(MusicGestureSwitch.isEnabled(this));
         mMusicSwitch.setOnPreferenceChangeListener(new MusicGestureSwitch());
+
+        mSliderMode = (ListPreference) findPreference(KEY_SLIDER_MODE);
+        mSliderMode.setOnPreferenceChangeListener(this);
+        int sliderMode = Settings.System.getInt(getContentResolver(),
+                    Settings.System.BUTTON_EXTRA_KEY_MAPPING, 0);
+        int valueIndex = mSliderMode.findIndexOfValue(String.valueOf(sliderMode));
+        mSliderMode.setValueIndex(valueIndex);
+        mSliderMode.setSummary(mSliderMode.getEntries()[valueIndex]);
     }
 
     @Override
@@ -90,6 +100,14 @@ public class DeviceSettings extends PreferenceActivity implements
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (preference == mSliderMode) {
+            String value = (String) newValue;
+            int sliderMode = Integer.valueOf(value);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.BUTTON_EXTRA_KEY_MAPPING, sliderMode);
+            int valueIndex = mSliderMode.findIndexOfValue(value);
+            mSliderMode.setSummary(mSliderMode.getEntries()[valueIndex]);
+        }
         return true;
     }
 }

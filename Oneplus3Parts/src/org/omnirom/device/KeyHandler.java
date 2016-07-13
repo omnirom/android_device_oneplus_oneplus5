@@ -111,6 +111,7 @@ public class KeyHandler implements DeviceKeyHandler {
     private SettingsObserver mSettingsObserver;
     private static boolean mButtonDisabled;
     private final NotificationManager mNoMan;
+    private final AudioManager mAudioManager;
 
     private class SettingsObserver extends ContentObserver {
         SettingsObserver(Handler handler) {
@@ -143,6 +144,7 @@ public class KeyHandler implements DeviceKeyHandler {
         mSettingsObserver = new SettingsObserver(mHandler);
         mSettingsObserver.observe();
         mNoMan = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
+        mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
     }
 
     private class EventHandler extends Handler {
@@ -180,7 +182,11 @@ public class KeyHandler implements DeviceKeyHandler {
             case KEY_MODE_TOTAL_SILENCE:
                 if (DEBUG) Log.i(TAG, "KEY_MODE_TOTAL_SILENCE");
                 mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
-                mNoMan.setZenMode(Global.ZEN_MODE_NO_INTERRUPTIONS, null, TAG);
+                if (getSliderMode() == 0) {
+                    mNoMan.setZenMode(Global.ZEN_MODE_NO_INTERRUPTIONS, null, TAG);
+                } else {
+                    mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_SILENT);
+                }
                 break;
             /*case KEY_MODE_ALARMS_ONLY:
                 if (DEBUG) Log.i(TAG, "KEY_MODE_ALARMS_ONLY " + Global.ZEN_MODE_ALARMS);
@@ -190,12 +196,20 @@ public class KeyHandler implements DeviceKeyHandler {
             case KEY_MODE_PRIORITY_ONLY:
                 if (DEBUG) Log.i(TAG, "KEY_MODE_PRIORITY_ONLY");
                 mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
-                mNoMan.setZenMode(Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, null, TAG);
+                if (getSliderMode() == 0) {
+                    mNoMan.setZenMode(Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, null, TAG);
+                } else {
+                    mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_VIBRATE);
+                }
                 break;
             case KEY_MODE_NONE:
                 if (DEBUG) Log.i(TAG, "KEY_MODE_NONE");
                 mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
-                mNoMan.setZenMode(Global.ZEN_MODE_OFF, null, TAG);
+                if (getSliderMode() == 0) {
+                    mNoMan.setZenMode(Global.ZEN_MODE_OFF, null, TAG);
+                } else {
+                    mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
+                }
                 break;
             }
         }
@@ -275,11 +289,7 @@ public class KeyHandler implements DeviceKeyHandler {
     }
 
     boolean isMusicActive() {
-        final AudioManager am = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
-        if (am == null) {
-            return false;
-        }
-        return am.isMusicActive();
+        return mAudioManager.isMusicActive();
     }
 
     private void dispatchMediaKeyWithWakeLockToAudioService(int keycode) {
@@ -300,6 +310,11 @@ public class KeyHandler implements DeviceKeyHandler {
         if (ActivityManagerNative.isSystemReady()) {
             MediaSessionLegacyHelper.getHelper(mContext).sendMediaButtonEvent(event, true);
         }
+    }
+
+    private int getSliderMode() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+                    Settings.System.BUTTON_EXTRA_KEY_MAPPING, 0);
     }
 }
 

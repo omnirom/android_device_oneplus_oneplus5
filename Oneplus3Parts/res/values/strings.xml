@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2014 The OmniROM Project
+<!-- Copyright (C) 2014-2016 The OmniROM Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -27,4 +27,8 @@
     <string name="advanced_settings">Advanced</string>
     <string name="music_title_head">Music</string>
     <string name="music_summary_head">Draw a II to play / pause music and \u003C / \u003E to skip tracks forward and backward</string>
+    <string name="category_slider">Slider</string>
+    <string name="slider_mode_title">Slider mode</string>
+    <string name="slider_mode_zen">Do not disturb</string>
+    <string name="slider_mode_ringer">Ringer mode</string>
 </resources>
