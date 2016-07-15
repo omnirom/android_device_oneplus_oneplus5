@@ -1,4 +1,4 @@
-on post-fs-data
+on class_start:late_start
     write /proc/sys/kernel/sched_boost 1
 
     # Disable thermal bcl hotplug to switch governor
