@@ -63,10 +63,12 @@ dev.pm.dyn_samplingrate=1
 persist.demo.hdmirotationlock=false
 ro.opengles.version=196609
 ro.sf.lcd_density=480
+persist.debug.wfd.enable=1
 persist.sys.wfd.virtual=0
 sdm.perf_hint_window=50
 persist.hwc.enable_vds=1
 sdm.debug.disable_rotator_split=1
+ro.vendor.wl_library=libqti-wl.so
 
 # NFC
 ro.nfc.port=I2C
@@ -121,3 +123,6 @@ persist.timed.enable=true
 
 # Wifi
 wifi.interface=wlan0
+
+# misc
+ro.build.selinux=1
