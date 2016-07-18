@@ -10,7 +10,7 @@
 		android:minSdkVersion="18"
 		android:targetSdkVersion="21" />
 	<application
-		android:icon="@drawable/icon"
+		android:icon="@drawable/ic_launcher"
 		android:label="@string/advanced_settings"
 		android:theme="@android:style/Theme.Material.Settings"
 		android:supportsRtl="true" >
