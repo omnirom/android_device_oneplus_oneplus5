@@ -24,12 +24,6 @@
     "revision": "android-6.0"
   },
   {
-    "remote": "github",
-    "repository": "maxwen/android_device_qcom_common",
-    "target_path": "device/qcom/common",
-    "revision": "android-6.0"
-  },
-  {
     "remote": "omnirom",
     "repository": "android_device_qcom_caf-sepolicy",
     "target_path": "device/qcom/sepolicy",
@@ -78,21 +72,21 @@
     "revision": "android-6.0"
   },
   {
-    "remote": "github",
-    "repository": "maxwen/android_vendor_nxp-nfc_opensource_frameworks",
+    "remote": "omnirom",
+    "repository": "android_vendor_nxp-nfc_opensource_frameworks",
     "target_path": "vendor/nxp-nfc/opensource/frameworks",
-    "revision": "cm-13.0"
+    "revision": "android-6.0"
   },
   {
-    "remote": "github",
-    "repository": "maxwen/android_vendor_nxp-nfc_opensource_libnfc-nci",
+    "remote": "omnirom",
+    "repository": "android_vendor_nxp-nfc_opensource_libnfc-nci",
     "target_path": "vendor/nxp-nfc/opensource/libnfc-nci",
-    "revision": "cm-13.0"
+    "revision": "android-6.0"
   },
   {
-    "remote": "github",
-    "repository": "maxwen/android_vendor_nxp-nfc_opensource_Nfc",
+    "remote": "omnirom",
+    "repository": "android_vendor_nxp-nfc_opensource_Nfc",
     "target_path": "vendor/nxp-nfc/opensource/Nfc",
-    "revision": "cm-13.0"
+    "revision": "android-6.0"
   }
 ]
