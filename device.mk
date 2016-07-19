@@ -239,6 +239,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/init.qcom.bt.sh:system/etc/init.qcom.bt.sh
 
+# hack a shaq
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/netmgrd_control.sh:system/etc/netmgrd_control.sh
+
 # ANT+
 #PRODUCT_PACKAGES += \
 #    AntHalService \

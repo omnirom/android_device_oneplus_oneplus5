@@ -1,1 +1,7 @@
 allow netmgrd diag_prop:property_service set;
+allow netmgrd shell_exec:file entrypoint;
+allow netmgrd netmgrd_exec:file execute_no_trans;
+allow netmgrd domain:dir { search open read getattr };
+allow netmgrd domain:{ file lnk_file } { open read getattr };
+allow netmgrd self:capability { kill };
+allow netmgrd rild:process { signal };
