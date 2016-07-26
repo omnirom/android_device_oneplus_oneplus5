@@ -18,8 +18,8 @@
     "revision": "android-6.0"
   },
   {
-    "remote": "github",
-    "repository": "maxwen/android_kernel_oneplus_msm8996-1",
+    "remote": "omnirom",
+    "repository": "android_kernel_oneplus_msm8996",
     "target_path": "kernel/oneplus/msm8996",
     "revision": "android-6.0"
   },
