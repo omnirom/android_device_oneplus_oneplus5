@@ -31,4 +31,7 @@
     <string name="slider_mode_title">Slider mode</string>
     <string name="slider_mode_zen">Do not disturb</string>
     <string name="slider_mode_ringer">Ringer mode</string>
+    <string name="buttons_title">Buttons</string>
+	<string name="swap_back_recents_summary"></string>
+	<string name="swap_back_recents_title">Swap back and recents button</string>
 </resources>
