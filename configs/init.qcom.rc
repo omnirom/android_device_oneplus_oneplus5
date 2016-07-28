@@ -464,6 +464,10 @@ on post-fs-data
     chown radio radio /data/misc/radio/db_check_done
     chmod 0660 /data/misc/radio/db_check_done
 
+    # dash charger
+    chmod 0660 /dev/dash
+    restorecon  /dev/dash
+
 # start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
@@ -722,6 +726,7 @@ on charger
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
+    start dashd
 
 service iop /system/bin/iop
     class main
@@ -1413,3 +1418,8 @@ service netmgrd /system/bin/sh /system/etc/netmgrd_control.sh
    seclabel u:r:netmgrd:s0
    class main
 
+service dashd /sbin/dashd
+    class core
+    critical
+    seclabel u:r:dashd:s0
+    group root system
