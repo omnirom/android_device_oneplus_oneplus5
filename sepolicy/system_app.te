@@ -3,3 +3,5 @@ allow system_app proc_touchpanel:file { write read getattr open read };
 allow system_app system_app_data_file:file { execute execute_no_trans };
 allow system_app sysfs_vibrator:file rw_file_perms;
 allow system_app sysfs_vibrator:dir search;
+allow system_app sysfs_graphics:file rw_file_perms;
+allow system_app sysfs_graphics:dir search;

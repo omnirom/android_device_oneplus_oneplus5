@@ -65,4 +65,13 @@
 			android:title="@string/swap_back_recents_title"
 			android:persistent="false" />
 	</PreferenceCategory>
+
+	<PreferenceCategory
+        android:title="@string/graphics_title">
+		<CheckBoxPreference
+			android:key="srgb"
+			android:summary="@string/srgb_mode_summary"
+			android:title="@string/srgb_mode_title"
+			android:persistent="false" />
+	</PreferenceCategory>
 </PreferenceScreen>

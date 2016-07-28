@@ -39,6 +39,7 @@ public class DeviceSettings extends PreferenceActivity implements
     public static final String KEY_MUSIC_SWITCH = "music";
     private static final String KEY_SLIDER_MODE = "slider_mode";
     private static final String KEY_SWAP_BACK_RECENTS = "swap_back_recents";
+    public static final String KEY_SRGB_SWITCH = "srgb";
 
     private TwoStatePreference mTorchSwitch;
     private TwoStatePreference mCameraSwitch;
@@ -46,6 +47,7 @@ public class DeviceSettings extends PreferenceActivity implements
     private TwoStatePreference mMusicSwitch;
     private ListPreference mSliderMode;
     private TwoStatePreference mSwapBackRecents;
+    private TwoStatePreference mSRGBModeSwitch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,6 +88,10 @@ public class DeviceSettings extends PreferenceActivity implements
         mSwapBackRecents.setChecked(Settings.System.getInt(getContentResolver(),
                     Settings.System.BUTTON_SWAP_BACK_RECENTS, 0) != 0);
 
+        mSRGBModeSwitch = (TwoStatePreference) findPreference(KEY_SRGB_SWITCH);
+        mSRGBModeSwitch.setEnabled(SRGBModeSwitch.isSupported());
+        mSRGBModeSwitch.setChecked(SRGBModeSwitch.isEnabled(this));
+        mSRGBModeSwitch.setOnPreferenceChangeListener(new SRGBModeSwitch());
     }
 
     @Override
