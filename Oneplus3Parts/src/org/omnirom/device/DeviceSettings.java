@@ -40,6 +40,7 @@ public class DeviceSettings extends PreferenceActivity implements
     private static final String KEY_SLIDER_MODE = "slider_mode";
     private static final String KEY_SWAP_BACK_RECENTS = "swap_back_recents";
     public static final String KEY_SRGB_SWITCH = "srgb";
+    public static final String KEY_HBM_SWITCH = "hbm";
 
     private TwoStatePreference mTorchSwitch;
     private TwoStatePreference mCameraSwitch;
@@ -48,6 +49,7 @@ public class DeviceSettings extends PreferenceActivity implements
     private ListPreference mSliderMode;
     private TwoStatePreference mSwapBackRecents;
     private TwoStatePreference mSRGBModeSwitch;
+    private TwoStatePreference mHBMModeSwitch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -92,6 +94,11 @@ public class DeviceSettings extends PreferenceActivity implements
         mSRGBModeSwitch.setEnabled(SRGBModeSwitch.isSupported());
         mSRGBModeSwitch.setChecked(SRGBModeSwitch.isEnabled(this));
         mSRGBModeSwitch.setOnPreferenceChangeListener(new SRGBModeSwitch());
+
+        mHBMModeSwitch = (TwoStatePreference) findPreference(KEY_HBM_SWITCH);
+        mHBMModeSwitch.setEnabled(HBMModeSwitch.isSupported());
+        mHBMModeSwitch.setChecked(HBMModeSwitch.isEnabled(this));
+        mHBMModeSwitch.setOnPreferenceChangeListener(new HBMModeSwitch());
     }
 
     @Override

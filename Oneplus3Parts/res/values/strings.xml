@@ -37,4 +37,6 @@
 	<string name="graphics_title">Graphics</string>
 	<string name="srgb_mode_summary"></string>
 	<string name="srgb_mode_title">sRGB mode</string>
+	<string name="hbm_mode_summary"></string>
+	<string name="hbm_mode_title">High brightness mode</string>
 </resources>

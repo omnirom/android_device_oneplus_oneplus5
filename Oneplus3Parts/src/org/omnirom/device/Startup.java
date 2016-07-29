@@ -31,5 +31,6 @@ public class Startup extends BroadcastReceiver {
         VibratorStrengthPreference.restore(context);
         MusicGestureSwitch.restore(context);
         SRGBModeSwitch.restore(context);
+        HBMModeSwitch.restore(context);
     }
 }
