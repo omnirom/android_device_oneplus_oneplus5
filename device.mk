@@ -243,6 +243,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/netmgrd_control.sh:system/etc/netmgrd_control.sh
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/FOSSConfig.xml:system/etc/FOSSConfig.xml
+
 # ANT+
 #PRODUCT_PACKAGES += \
 #    AntHalService \
