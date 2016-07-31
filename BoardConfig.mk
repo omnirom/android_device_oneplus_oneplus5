@@ -173,8 +173,8 @@ TARGET_USES_NQ_NFC := true
 BOARD_ANT_WIRELESS_DEVICE := "qualcomm-uart"
 
 # Crypto
-TARGET_HW_DISK_ENCRYPTION := false
-#TARGET_CRYPTFS_HW_PATH := device/qcom/common/cryptfs_hw
+TARGET_HW_DISK_ENCRYPTION := true
+TARGET_CRYPTFS_HW_PATH := $(BOARD_PATH)/cryptfs_hw
 
 # Increase coldboot timeout
 TARGET_INCREASES_COLDBOOT_TIMEOUT := true

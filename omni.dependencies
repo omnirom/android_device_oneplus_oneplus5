@@ -19,12 +19,6 @@
   },
   {
     "remote": "omnirom",
-    "repository": "android_kernel_oneplus_msm8996",
-    "target_path": "kernel/oneplus/msm8996",
-    "revision": "android-6.0"
-  },
-  {
-    "remote": "omnirom",
     "repository": "android_device_qcom_caf-sepolicy",
     "target_path": "device/qcom/sepolicy",
     "revision": "android-6.0"
