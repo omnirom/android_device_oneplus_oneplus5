@@ -15,6 +15,5 @@
 -->
 
 <resources>
-    <!-- Restart preview for back camera onPictureTaken -->
-    <bool name="back_camera_restart_preview_onPictureTaken">true</bool>
+
 </resources>

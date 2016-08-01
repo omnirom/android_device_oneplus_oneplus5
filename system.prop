@@ -132,3 +132,8 @@ wifi.interface=wlan0
 
 # misc
 ro.build.selinux=1
+
+# Camera
+persist.camera.imglib.fddsp=1
+persist.camera.llc=1
+persist.camera.llnoise=1
