@@ -1297,6 +1297,11 @@ service netmgrd /system/bin/sh /system/etc/netmgrd_control.sh
    seclabel u:r:netmgrd:s0
    class main
 
+service ifaadaemon /system/bin/ifaadaemon
+    class late_start
+    user system
+    group system
+
 service dashd /sbin/dashd
     class core
     critical

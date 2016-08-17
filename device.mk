@@ -90,6 +90,7 @@ PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 PRODUCT_CHARACTERISTICS := nosdcard
 
+<<<<<<< HEAD
 # Display
 PRODUCT_PACKAGES += \
     copybit.msm8996 \
@@ -98,6 +99,13 @@ PRODUCT_PACKAGES += \
     memtrack.msm8996 \
     liboverlay \
     libtinyxml
+
+# Alipay
+PRODUCT_PACKAGES += \
+    org.ifaa.android.manager
+
+PRODUCT_BOOT_JARS += \
+    org.ifaa.android.manager
 
 # audio
 PRODUCT_PACKAGES += \
