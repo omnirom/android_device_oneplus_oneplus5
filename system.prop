@@ -28,8 +28,6 @@ audio_hal.period_size=192
 # Bluetooth
 bt.max.hfpclient.connections=1
 qcom.bluetooth.soc=rome
-ro.bluetooth.wipower=true
-ro.bluetooth.emb_wp_mode=true
 
 # Display power reduction (FOSS)
 ro.qcom.dpps.sensortype=3
