@@ -90,7 +90,6 @@ PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 PRODUCT_CHARACTERISTICS := nosdcard
 
-<<<<<<< HEAD
 # Display
 PRODUCT_PACKAGES += \
     copybit.msm8996 \
@@ -100,10 +99,7 @@ PRODUCT_PACKAGES += \
     liboverlay \
     libtinyxml
 
-# Alipay
-PRODUCT_PACKAGES += \
-    org.ifaa.android.manager
-
+# Alipay / WeChat
 PRODUCT_BOOT_JARS += \
     org.ifaa.android.manager
 
