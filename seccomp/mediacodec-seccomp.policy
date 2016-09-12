@@ -4,4 +4,5 @@ pselect6: 1
 sendto: 1
 recvfrom: 1
 _llseek: 1
-
+sysinfo: 1
+getcwd: 1
