@@ -9,7 +9,7 @@ on boot
     # Enable sched boost
     write /proc/sys/kernel/sched_boost 1
 
-on class_start:late_start
+on enable-low-power
     # Disable thermal bcl hotplug to switch governor
     write /sys/module/msm_thermal/core_control/enabled 0
     write /sys/devices/soc/soc:qcom,bcl/mode "disable"
@@ -69,8 +69,8 @@ on class_start:late_start
 
     # Setting b.L scheduler parameters
     write /proc/sys/kernel/sched_boost 0
-    write /proc/sys/kernel/sched_upmigrate 45
     write /proc/sys/kernel/sched_downmigrate 45
+    write /proc/sys/kernel/sched_upmigrate 45
     write /proc/sys/kernel/sched_freq_inc_notify 400000
     write /proc/sys/kernel/sched_freq_dec_notify 400000
     write /proc/sys/kernel/sched_spill_nr_run 3
@@ -112,11 +112,19 @@ on class_start:late_start
     start iop
 
 on charger
-    write /sys/module/msm_thermal/core_control/cpus_offlined 14
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "powersave"
     write /sys/devices/system/cpu/cpu1/online 0
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
+    write /sys/module/msm_thermal/core_control/cpus_offlined 14
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "powersave"
+    write /sys/module/lpm_levels/parameters/sleep_disabled 0
+    start dashd
 
-on property:sys.boot_completed=1
-    write /proc/sys/kernel/sched_boost 0
+on class_start:late_start
+    trigger enable-low-power
+
+on property:init.svc.recovery=running
+    trigger enable-low-power
+
+on property:dev.bootcomplete=1
+    setprop sys.io.scheduler "bfq"

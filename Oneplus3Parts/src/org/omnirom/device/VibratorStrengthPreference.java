@@ -41,7 +41,7 @@ public class VibratorStrengthPreference extends SeekBarDialogPreference implemen
     private Vibrator mVibrator;
     private Button mTestButton;
 
-    private static final String FILE_LEVEL = "/sys/devices/virtual/timed_output/vibrator/vmax_mv";
+    private static final String FILE_LEVEL = "/sys/devices/virtual/timed_output/vibrator/vtg_level";
     private static final long testVibrationPattern[] = {0,250};
 
     public VibratorStrengthPreference(Context context, AttributeSet attrs) {
@@ -49,7 +49,7 @@ public class VibratorStrengthPreference extends SeekBarDialogPreference implemen
         // from drivers/platform/msm/qpnp-haptic.c
         // #define QPNP_HAP_VMAX_MIN_MV		116
         // #define QPNP_HAP_VMAX_MAX_MV		3596
-        mMinValue = 1000;
+        mMinValue = 116;
         mMaxValue = 3596;
 
         mVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);

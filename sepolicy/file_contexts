@@ -14,11 +14,11 @@
 /data/fpc_images(/.*)?                                          u:object_r:fpc_images_file:s0
 /sys/devices/soc/soc:fpc_fpc1020/irq                            u:object_r:sysfs_fpc_irq:s0
 
-/sys/devices/virtual/timed_output/vibrator/vmax_mv              u:object_r:sysfs_vibrator:s0
+/sys/devices/virtual/timed_output/vibrator/vtg_level              u:object_r:sysfs_vibrator:s0
 
 /dev/dash                                                       u:object_r:input_device:s0
 
 /sys/devices/virtual/graphics/fb0/hbm                           u:object_r:sysfs_graphics:s0
-/sys/devices/virtual/graphics/fb0/SRGB                          u:object_r:sysfs_graphics:s0
+/sys/devices/virtual/graphics/fb0/srgb                          u:object_r:sysfs_graphics:s0
 
 /system/bin/ifaadaemon                                          u:object_r:ifaadaemon_exec:s0

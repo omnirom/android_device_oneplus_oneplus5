@@ -33,6 +33,7 @@ on early-init
     mkdir /bt_firmware 0771 system system
     symlink /data/tombstones /tombstones
     mkdir /dsp 0771 media media
+    mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
 
 on init
@@ -43,8 +44,6 @@ on init
 
     # Support legacy paths
     symlink /sdcard /storage/sdcard0
-
-    write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
@@ -68,12 +67,6 @@ on fs
     mount_all fstab.qcom
 
 on boot
-    # Update foreground and background cpusets
-    write /dev/cpuset/foreground/cpus 0-3
-    write /dev/cpuset/foreground/boost/cpus 2-3
-    write /dev/cpuset/background/cpus 0-1
-    write /dev/cpuset/system-background/cpus 0-3
-
     # Secure touch
     chmod 0660 /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch_enable
     chmod 0440 /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch
@@ -119,8 +112,8 @@ on boot
     chmod 0660 /proc/tri-state-key/keyCode_bottom
 
     # Vibrator permissions
-    chown root system /sys/devices/virtual/timed_output/vibrator/vmax_mv
-    chmod 0660 /sys/devices/virtual/timed_output/vibrator/vmax_mv
+    chown root system /sys/devices/virtual/timed_output/vibrator/vtg_level
+    chmod 0660 /sys/devices/virtual/timed_output/vibrator/vtg_level
 
     # Graphics
     chown system graphics /sys/class/graphics/fb0/dyn_pu
@@ -133,8 +126,8 @@ on boot
     chmod 0664 /sys/class/graphics/fb0/modes
     chown system graphics /sys/class/graphics/fb0/hbm
     chmod 0664 /sys/class/graphics/fb0/hbm
-    chown system graphics /sys/class/graphics/fb0/SRGB
-    chmod 0664 /sys/class/graphics/fb0/SRGB
+    chown system graphics /sys/class/graphics/fb0/srgb
+    chmod 0664 /sys/class/graphics/fb0/srgb
 
     # Fingerprint
     chmod 0664 /sys/devices/soc/soc:fpc_fpc1020/irq
@@ -429,9 +422,6 @@ on post-fs-data
 
     setprop vold.post_fs_data_done 1
 
-    # Create a folder for SRS to be able to create a usercfg file
-    mkdir /data/data/media 0770 media media
-
     # Create FM dir for patchdownloader
     mkdir /data/misc/fm 0770 system system
     chmod 0770 /data/misc/fm
@@ -670,11 +660,14 @@ service mdtpd /system/vendor/bin/mdtpd
     user root
     group system radio drmrpc
 
-on charger
-    write /sys/devices/system/cpu/cpu2/online 0
-    write /sys/devices/system/cpu/cpu3/online 0
-    write /sys/module/lpm_levels/parameters/sleep_disabled 0
-    start dashd
+service dashd /sbin/dashd
+    class core
+    critical
+    seclabel u:r:dashd:s0
+    group root system
+
+on property:init.svc.healthd=restarting
+    restart dashd
 
 service dashd /sbin/dashd
     class core
@@ -722,10 +715,10 @@ on property:persist.sys.ssr.enable_ramdumps=0
 
 on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed "
-    # Reset the read_ahead_kb to 512
-    write /sys/block/dm-0/queue/read_ahead_kb 512
-    write /sys/block/sda/queue/read_ahead_kb 512
-    write /sys/block/sde/queue/read_ahead_kb 512
+    # Reset the read_ahead_kb to 256
+    write /sys/block/dm-0/queue/read_ahead_kb 256
+    write /sys/block/sda/queue/read_ahead_kb 256
+    write /sys/block/sde/queue/read_ahead_kb 256
 
     # CPE fw_name used by sound trigger HAL
     chown media audio /sys/kernel/wcd_cpe0/fw_name
@@ -784,7 +777,7 @@ service dpmd /system/bin/dpmd
     socket dpmd stream 660 root system
     writepid /dev/cpuset/system-background/tasks
 
-service irsc_util /system/bin/irsc_util "/etc/sec_config"
+service irsc_util /system/bin/irsc_util /system/etc/sec_config
     class core
     user root
     oneshot
@@ -1011,6 +1004,7 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     disabled
     oneshot
 
+# FST Manager can be started by property_set("ctl.start", "fstman:<hostap ctrl iface>");
 service fstman /system/bin/fstman -B -ddd -c /data/misc/wifi/fstman.ini
     user wifi
     group wifi net_admin net_raw
@@ -1023,6 +1017,36 @@ on property:netd.fstman.start=true
 
 on property:netd.fstman.start=false
     stop fstman
+
+service dhcpcd_wlan0 /system/bin/dhcpcd -ABKLG
+    class late_start
+    disabled
+    oneshot
+
+service dhcpcd_bond0 /system/bin/dhcpcd -ABKLG
+    class late_start
+    disabled
+    oneshot
+
+service dhcpcd_p2p /system/bin/dhcpcd -ABKLG
+    class late_start
+    disabled
+    oneshot
+
+service iprenew_wlan0 /system/bin/dhcpcd -n
+    class late_start
+    disabled
+    oneshot
+
+service iprenew_bond0 /system/bin/dhcpcd -n
+    class late_start
+    disabled
+    oneshot
+
+service iprenew_p2p /system/bin/dhcpcd -n
+    class late_start
+    disabled
+    oneshot
 
 service ptt_socket_app /system/bin/ptt_socket_app -d
     class main
@@ -1058,6 +1082,36 @@ service cnss_diag /system/bin/cnss_diag -q -f
 
 service cnss-daemon /system/bin/cnss-daemon -n -l
     class late_start
+
+service dhcpcd_bt-pan /system/bin/dhcpcd -BKLG
+    class late_start
+    disabled
+    oneshot
+
+service iprenew_bt-pan /system/bin/dhcpcd -n
+    class late_start
+    disabled
+    oneshot
+
+service dhcpcd_bnep0 /system/bin/dhcpcd -BKLG
+    disabled
+    oneshot
+
+service dhcpcd_bnep1 /system/bin/dhcpcd -BKLG
+    disabled
+    oneshot
+
+service dhcpcd_bnep2 /system/bin/dhcpcd -BKLG
+    disabled
+    oneshot
+
+service dhcpcd_bnep3 /system/bin/dhcpcd -BKLG
+    disabled
+    oneshot
+
+service dhcpcd_bnep4 /system/bin/dhcpcd -BKLG
+    disabled
+    oneshot
 
 service loc_launcher /system/bin/loc_launcher
     # loc_launcher will start as root and set its uid to gps

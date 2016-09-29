@@ -25,7 +25,7 @@ import android.preference.PreferenceManager;
 
 public class SRGBModeSwitch implements OnPreferenceChangeListener {
 
-    private static final String FILE = "/sys/devices/virtual/graphics/fb0/SRGB";
+    private static final String FILE = "/sys/devices/virtual/graphics/fb0/srgb";
 
     public static boolean isSupported() {
         return Utils.fileWritable(FILE);

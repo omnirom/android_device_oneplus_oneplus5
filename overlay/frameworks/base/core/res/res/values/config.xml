@@ -47,7 +47,9 @@
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
         <item>1</item>        <!-- pitch black -->
-        <item>11</item>       <!-- dark indoor -->
+        <item>5</item>
+        <item>9</item>
+        <item>14</item>
         <item>25</item>       <!-- twilight -->
         <item>50</item>       <!-- dim indoor -->
         <item>100</item>      <!-- home -->
@@ -56,8 +58,10 @@
         <item>500</item>      <!-- sunrise -->
         <item>750</item>
         <item>1000</item>     <!-- overcast -->
+        <item>2000</item>
         <item>5000</item>
         <item>10000</item>    <!-- daylight -->
+        <item>20000</item>
     </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
@@ -66,6 +70,8 @@
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
         <item>7</item>
+        <item>8</item>
+        <item>10</item>
         <item>12</item>
         <item>17</item>
         <item>29</item>
@@ -74,14 +80,16 @@
         <item>75</item>
         <item>114</item>
         <item>130</item>
-        <item>170</item>
-        <item>195</item>
-        <item>220</item>
+        <item>152</item>
+        <item>175</item>
+        <item>200</item>
+        <item>215</item>
+        <item>235</item>
         <item>255</item>
     </integer-array>
 
     <!-- Boolean indicating whether we want button brightness support -->
-    <bool name="config_button_brightness_support">true</bool>
+    <!--<bool name="config_button_brightness_support">true</bool>-->
 
     <!-- Minimum screen brightness setting allowed by the power manager.
          The user is forbidden from setting the brightness below this level. -->
@@ -98,7 +106,7 @@
     <!-- Screen brightness used to dim the screen when the user activity
          timeout expires.  May be less than the minimum allowed brightness setting
          that can be set by the user. -->
-    <integer name="config_screenBrightnessDim">20</integer>
+    <integer name="config_screenBrightnessDim">6</integer>
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          USB interfaces.  If the device doesn't want to support tething over USB this should
@@ -244,7 +252,7 @@
             16 - App switch
          For example, a device with Home, Back and Menu keys would set this
          config to 7. -->
-    <integer name="config_deviceHardwareKeys">7</integer>
+    <!--<integer name="config_deviceHardwareKeys">7</integer>-->
 
     <!-- Disable lockscreen translucent decor by default -->
     <bool name="config_enableLockScreenTranslucentDecor">true</bool>
@@ -261,12 +269,12 @@
 
     <!-- The list absolute paths of jar/apk files containing the device specific handlers,
         delimited by File.pathSeparator, which defaults to ":" on Android -->
-    <string name="config_deviceKeyHandlerLib" translatable="false">/system/app/Oneplus3Parts/Oneplus3Parts.apk</string>
+    <string name="config_deviceKeyHandlerLib" translatable="false">/system/priv-app/Oneplus3Parts/Oneplus3Parts.apk</string>
     <!-- Full qualified name of the class that implements
         com.android.internal.os.DeviceKeyHandler interface. -->
     <string name="config_deviceKeyHandlerClass" translatable="false">org.omnirom.device.KeyHandler</string>
 
-    <bool name="config_powerProfilesSupported">true</bool>
+    <!--<bool name="config_powerProfilesSupported">true</bool>-->
 
     <!-- Whether Multiuser UI should be shown -->
     <bool name="config_enableMultiUserUI">true</bool>
@@ -312,7 +320,7 @@
          This needs to match the constants in
          policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
     -->
-    <integer name="config_longPressOnMenuBehavior">1</integer>
+    <!--<integer name="config_longPressOnMenuBehavior">1</integer>-->
 
     <!-- Flag indicating if device supports EAP SIM, AKA, AKA' -->
     <bool name="config_eap_sim_based_auth_supported">false</bool>
