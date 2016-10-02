@@ -241,6 +241,6 @@
 /dev/hbtp_vm              0660   system     system
 
 # Add device block for FRP
-/dev/block/bootdevice/by-name/config    0660   system     system
+/dev/block/platform/soc/624000.ufshc/by-name/config    0660   system     system
 
 /sys/devices/system/cpu/cpu*   online   0664  system system
