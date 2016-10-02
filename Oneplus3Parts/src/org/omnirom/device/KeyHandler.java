@@ -22,6 +22,9 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.ContentObserver;
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraCharacteristics;
+import android.hardware.camera2.CameraManager;
 import android.media.IAudioService;
 import android.media.AudioManager;
 import android.media.session.MediaSessionLegacyHelper;
@@ -112,6 +115,9 @@ public class KeyHandler implements DeviceKeyHandler {
     private static boolean mButtonDisabled;
     private final NotificationManager mNoMan;
     private final AudioManager mAudioManager;
+    private CameraManager mCameraManager;
+    private String mRearCameraId;
+    private boolean mTorchEnabled;
 
     private class SettingsObserver extends ContentObserver {
         SettingsObserver(Handler handler) {
@@ -135,6 +141,22 @@ public class KeyHandler implements DeviceKeyHandler {
         }
     }
 
+    private class MyTorchCallback extends CameraManager.TorchCallback {
+        @Override
+        public void onTorchModeChanged(String cameraId, boolean enabled) {
+            if (!cameraId.equals(mRearCameraId))
+                return;
+            mTorchEnabled = enabled;
+        }
+
+        @Override
+        public void onTorchModeUnavailable(String cameraId) {
+            if (!cameraId.equals(mRearCameraId))
+                return;
+            mTorchEnabled = false;
+        }
+    }
+
     public KeyHandler(Context context) {
         mContext = context;
         mEventHandler = new EventHandler();
@@ -145,6 +167,8 @@ public class KeyHandler implements DeviceKeyHandler {
         mSettingsObserver.observe();
         mNoMan = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+        mCameraManager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
+        mCameraManager.registerTorchCallback(new MyTorchCallback(), mEventHandler);
     }
 
     private class EventHandler extends Handler {
@@ -154,11 +178,16 @@ public class KeyHandler implements DeviceKeyHandler {
             switch(event.getScanCode()) {
             case GESTURE_V_SCANCODE:
                 if (DEBUG) Log.i(TAG, "GESTURE_V_SCANCODE");
-                mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
-                Intent torchIntent = new Intent("com.android.systemui.TOGGLE_FLASHLIGHT");
-                torchIntent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
-                UserHandle user = new UserHandle(UserHandle.USER_CURRENT);
-                mContext.sendBroadcastAsUser(torchIntent, user);
+                String rearCameraId = getRearCameraId();
+                if (rearCameraId != null) {
+                    mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
+                    try {
+                        mCameraManager.setTorchMode(rearCameraId, !mTorchEnabled);
+                        mTorchEnabled = !mTorchEnabled;
+                    } catch (Exception e) {
+                        // Ignore
+                    }
+                }
                 break;
             case GESTURE_II_SCANCODE:
                 if (DEBUG) Log.i(TAG, "GESTURE_II_SCANCODE");
@@ -241,7 +270,7 @@ public class KeyHandler implements DeviceKeyHandler {
         return ArrayUtils.contains(sSupportedGestures, event.getScanCode());
     }
 
-    @Override
+    /*@Override
     public boolean isDisabledKeyEvent(KeyEvent event) {
         if (mButtonDisabled) {
             if (ArrayUtils.contains(sDisabledButtons, event.getScanCode())) {
@@ -249,7 +278,7 @@ public class KeyHandler implements DeviceKeyHandler {
             }
         }
         return false;
-    }
+    }*/
 
     private Message getMessageForKeyEvent(KeyEvent keyEvent) {
         Message msg = mEventHandler.obtainMessage(GESTURE_REQUEST);
@@ -317,12 +346,12 @@ public class KeyHandler implements DeviceKeyHandler {
                     Settings.System.BUTTON_EXTRA_KEY_MAPPING, 0);
     }
 
-    private boolean swapBackAndRecents() {
+    /*private boolean swapBackAndRecents() {
         return Settings.System.getInt(mContext.getContentResolver(),
                     Settings.System.BUTTON_SWAP_BACK_RECENTS, 0) != 0;
-    }
+    }*/
 
-    @Override
+    /*@Override
     public KeyEvent translateKeyEvent(KeyEvent event) {
         // KeyEvent(long downTime, long eventTime, int action, int code, int repeat, int metaState, int deviceId, int scancode, int flags, int source)
         if (event.getScanCode() == KEY_BACK) {
@@ -342,6 +371,26 @@ public class KeyHandler implements DeviceKeyHandler {
             }
         }
         return null;
+    }*/
+
+    private String getRearCameraId() {
+        if (mRearCameraId == null) {
+            try {
+                for (final String cameraId : mCameraManager.getCameraIdList()) {
+	            CameraCharacteristics c = mCameraManager.getCameraCharacteristics(cameraId);
+	            Boolean flashAvailable = c.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
+	            Integer lensFacing = c.get(CameraCharacteristics.LENS_FACING);
+	            if (flashAvailable != null && flashAvailable
+	                    && lensFacing != null && lensFacing == CameraCharacteristics.LENS_FACING_BACK) {
+                        mRearCameraId = cameraId;
+                        break;
+                    }
+                }
+            } catch (CameraAccessException e) {
+                // Ignore
+            }
+        }
+        return mRearCameraId;
     }
 }
 

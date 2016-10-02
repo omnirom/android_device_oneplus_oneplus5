@@ -17,10 +17,6 @@
 	<PreferenceCategory
 	    android:key="gesture_category"
 	    android:title="@string/category_gestures_title" >
-		<!--<CheckBoxPreference
-			android:key="double_tap"
-			android:summary="@string/double_tap_wake_summary_head"
-			android:title="@string/double_tap_wake_title_head" />-->
 
 		<CheckBoxPreference
 			android:key="camera"
@@ -57,14 +53,14 @@
             android:persistent="false" />
 	</PreferenceCategory>
 
-	<PreferenceCategory
+	<!--<PreferenceCategory
         android:title="@string/buttons_title">
 		<CheckBoxPreference
 			android:key="swap_back_recents"
 			android:summary="@string/swap_back_recents_summary"
 			android:title="@string/swap_back_recents_title"
 			android:persistent="false" />
-	</PreferenceCategory>
+	</PreferenceCategory>-->
 
 	<PreferenceCategory
         android:title="@string/graphics_title">
