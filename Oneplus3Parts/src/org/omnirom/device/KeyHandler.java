@@ -270,7 +270,7 @@ public class KeyHandler implements DeviceKeyHandler {
         return ArrayUtils.contains(sSupportedGestures, event.getScanCode());
     }
 
-    /*@Override
+    @Override
     public boolean isDisabledKeyEvent(KeyEvent event) {
         if (mButtonDisabled) {
             if (ArrayUtils.contains(sDisabledButtons, event.getScanCode())) {
@@ -278,7 +278,7 @@ public class KeyHandler implements DeviceKeyHandler {
             }
         }
         return false;
-    }*/
+    }
 
     private Message getMessageForKeyEvent(KeyEvent keyEvent) {
         Message msg = mEventHandler.obtainMessage(GESTURE_REQUEST);
