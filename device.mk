@@ -238,8 +238,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     power.msm8996
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/power_profiles.xml:system/etc/power_profiles.xml
+#PRODUCT_COPY_FILES += \
+#    $(LOCAL_PATH)/configs/power_profiles.xml:system/etc/power_profiles.xml
 
 PRODUCT_PACKAGES += \
     Oneplus3Parts
@@ -249,7 +249,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/init.qcom.bt.sh:system/etc/init.qcom.bt.sh
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/FOSSConfig.xml:system/etc/FOSSConfig.xml
+    $(LOCAL_PATH)/configs/FOSSConfig.xml:system/etc/FOSSConfig.xml \
+    $(LOCAL_PATH)/configs/qdcm_calib_data_samsung_s6e3fa3_1080p_cmd_mode_dsi_panel.xml:system/etc/qdcm_calib_data_samsung_s6e3fa3_1080p_cmd_mode_dsi_panel.xml
 
 # ANT+
 #PRODUCT_PACKAGES += \
