@@ -1,8 +1,20 @@
 [
   {
-    "remote": "github",
-    "repository": "maxwen/android_hardware_qcom_display-caf-msm8996",
+    "remote": "omnirom",
+    "repository": "android_hardware_qcom_display-caf-msm8996",
     "target_path": "hardware/qcom/display-caf-msm8996",
+    "revision": "android-7.0"
+  },
+  {
+    "remote": "omnirom",
+    "repository": "android_hardware_qcom_audio-caf-msm8996",
+    "target_path": "hardware/qcom/audio-caf-msm8996",
+    "revision": "android-7.0"
+  },
+  {
+    "remote": "omnirom",
+    "repository": "android_hardware_qcom_media-caf-msm8996",
+    "target_path": "hardware/qcom/media-caf-msm8996",
     "revision": "android-7.0"
   },
   {
