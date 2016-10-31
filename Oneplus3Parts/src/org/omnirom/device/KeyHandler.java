@@ -51,6 +51,7 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final boolean DEBUG = true;
     protected static final int GESTURE_REQUEST = 1;
     private static final int GESTURE_WAKELOCK_DURATION = 2000;
+    private static String KEY_CONTROL_PATH = "/proc/s1302/virtual_key";
 
     // Supported scancodes
     //#define KEY_GESTURE_CIRCLE      250 // draw circle to lunch camera
@@ -175,72 +176,76 @@ public class KeyHandler implements DeviceKeyHandler {
         @Override
         public void handleMessage(Message msg) {
             KeyEvent event = (KeyEvent) msg.obj;
-            switch(event.getScanCode()) {
-            case GESTURE_V_SCANCODE:
-                if (DEBUG) Log.i(TAG, "GESTURE_V_SCANCODE");
-                String rearCameraId = getRearCameraId();
-                if (rearCameraId != null) {
-                    mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
-                    try {
-                        mCameraManager.setTorchMode(rearCameraId, !mTorchEnabled);
-                        mTorchEnabled = !mTorchEnabled;
-                    } catch (Exception e) {
-                        // Ignore
-                    }
-                }
-                break;
-            case GESTURE_II_SCANCODE:
-                if (DEBUG) Log.i(TAG, "GESTURE_II_SCANCODE");
+            handleKey(event.getScanCode());
+        }
+    }
+
+    private void handleKey(int scanCode) {
+        switch(scanCode) {
+        case GESTURE_V_SCANCODE:
+            if (DEBUG) Log.i(TAG, "GESTURE_V_SCANCODE");
+            String rearCameraId = getRearCameraId();
+            if (rearCameraId != null) {
                 mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
-                dispatchMediaKeyWithWakeLockToAudioService(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
-                break;
-            case GESTURE_LEFT_V_SCANCODE:
-                if (isMusicActive()) {
-                    if (DEBUG) Log.i(TAG, "GESTURE_LEFT_V_SCANCODE");
-                    mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
-                    dispatchMediaKeyWithWakeLockToAudioService(KeyEvent.KEYCODE_MEDIA_PREVIOUS);
+                try {
+                    mCameraManager.setTorchMode(rearCameraId, !mTorchEnabled);
+                    mTorchEnabled = !mTorchEnabled;
+                } catch (Exception e) {
+                    // Ignore
                 }
-                break;
-            case GESTURE_RIGHT_V_SCANCODE:
-                if (isMusicActive()) {
-                    if (DEBUG) Log.i(TAG, "GESTURE_RIGHT_V_SCANCODE");
-                    mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
-                    dispatchMediaKeyWithWakeLockToAudioService(KeyEvent.KEYCODE_MEDIA_NEXT);
-                }
-                break;
-            case KEY_MODE_TOTAL_SILENCE:
-                if (DEBUG) Log.i(TAG, "KEY_MODE_TOTAL_SILENCE");
-                mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
-                if (getSliderMode() == 0) {
-                    mNoMan.setZenMode(Global.ZEN_MODE_NO_INTERRUPTIONS, null, TAG);
-                } else {
-                    mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_SILENT);
-                }
-                break;
-            /*case KEY_MODE_ALARMS_ONLY:
-                if (DEBUG) Log.i(TAG, "KEY_MODE_ALARMS_ONLY " + Global.ZEN_MODE_ALARMS);
-                mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
-                mNoMan.setZenMode(Global.ZEN_MODE_ALARMS, null, TAG);
-                break;*/
-            case KEY_MODE_PRIORITY_ONLY:
-                if (DEBUG) Log.i(TAG, "KEY_MODE_PRIORITY_ONLY");
-                mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
-                if (getSliderMode() == 0) {
-                    mNoMan.setZenMode(Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, null, TAG);
-                } else {
-                    mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_VIBRATE);
-                }
-                break;
-            case KEY_MODE_NONE:
-                if (DEBUG) Log.i(TAG, "KEY_MODE_NONE");
-                mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
-                if (getSliderMode() == 0) {
-                    mNoMan.setZenMode(Global.ZEN_MODE_OFF, null, TAG);
-                } else {
-                    mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
-                }
-                break;
             }
+            break;
+        case GESTURE_II_SCANCODE:
+            if (DEBUG) Log.i(TAG, "GESTURE_II_SCANCODE");
+            mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
+            dispatchMediaKeyWithWakeLockToAudioService(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
+            break;
+        case GESTURE_LEFT_V_SCANCODE:
+            if (isMusicActive()) {
+                if (DEBUG) Log.i(TAG, "GESTURE_LEFT_V_SCANCODE");
+                mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
+                dispatchMediaKeyWithWakeLockToAudioService(KeyEvent.KEYCODE_MEDIA_PREVIOUS);
+            }
+            break;
+        case GESTURE_RIGHT_V_SCANCODE:
+            if (isMusicActive()) {
+                if (DEBUG) Log.i(TAG, "GESTURE_RIGHT_V_SCANCODE");
+                mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
+                dispatchMediaKeyWithWakeLockToAudioService(KeyEvent.KEYCODE_MEDIA_NEXT);
+            }
+            break;
+        case KEY_MODE_TOTAL_SILENCE:
+            if (DEBUG) Log.i(TAG, "KEY_MODE_TOTAL_SILENCE");
+            mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
+            if (getSliderMode() == 0) {
+                mNoMan.setZenMode(Global.ZEN_MODE_NO_INTERRUPTIONS, null, TAG);
+            } else {
+                mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_SILENT);
+            }
+            break;
+        /*case KEY_MODE_ALARMS_ONLY:
+            if (DEBUG) Log.i(TAG, "KEY_MODE_ALARMS_ONLY " + Global.ZEN_MODE_ALARMS);
+            mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
+            mNoMan.setZenMode(Global.ZEN_MODE_ALARMS, null, TAG);
+            break;*/
+        case KEY_MODE_PRIORITY_ONLY:
+            if (DEBUG) Log.i(TAG, "KEY_MODE_PRIORITY_ONLY");
+            mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
+            if (getSliderMode() == 0) {
+                mNoMan.setZenMode(Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, null, TAG);
+            } else {
+                mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_VIBRATE);
+            }
+            break;
+        case KEY_MODE_NONE:
+            if (DEBUG) Log.i(TAG, "KEY_MODE_NONE");
+            mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
+            if (getSliderMode() == 0) {
+                mNoMan.setZenMode(Global.ZEN_MODE_OFF, null, TAG);
+            } else {
+                mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
+            }
+            break;
         }
     }
 
@@ -250,16 +255,11 @@ public class KeyHandler implements DeviceKeyHandler {
             return false;
         }
 
-        if (mButtonDisabled) {
-            if (DEBUG) Log.i(TAG, "scanCode=" + event.getScanCode());
-            if (ArrayUtils.contains(sDisabledButtons, event.getScanCode())) {
-                return true;
-            }
-        }
         boolean isKeySupported = ArrayUtils.contains(sHandledGestures, event.getScanCode());
-        if (isKeySupported && !mEventHandler.hasMessages(GESTURE_REQUEST)) {
+        if (isKeySupported) {
             if (DEBUG) Log.i(TAG, "scanCode=" + event.getScanCode());
             Message msg = getMessageForKeyEvent(event);
+            mEventHandler.removeMessages(GESTURE_REQUEST);
             mEventHandler.sendMessage(msg);
         }
         return isKeySupported;
@@ -272,11 +272,6 @@ public class KeyHandler implements DeviceKeyHandler {
 
     @Override
     public boolean isDisabledKeyEvent(KeyEvent event) {
-        if (mButtonDisabled) {
-            if (ArrayUtils.contains(sDisabledButtons, event.getScanCode())) {
-                return true;
-            }
-        }
         return false;
     }
 
@@ -290,6 +285,10 @@ public class KeyHandler implements DeviceKeyHandler {
         mButtonDisabled = Settings.System.getInt(
                 context.getContentResolver(), Settings.System.HARDWARE_KEYS_DISABLE, 0) == 1;
         if (DEBUG) Log.i(TAG, "setButtonDisable=" + mButtonDisabled);
+        if(mButtonDisabled)
+            Utils.writeValue(KEY_CONTROL_PATH, "1");
+        else
+            Utils.writeValue(KEY_CONTROL_PATH, "0");
     }
 
     @Override
