@@ -41,6 +41,7 @@ public class DeviceSettings extends PreferenceActivity implements
     //private static final String KEY_SWAP_BACK_RECENTS = "swap_back_recents";
     public static final String KEY_SRGB_SWITCH = "srgb";
     public static final String KEY_HBM_SWITCH = "hbm";
+    public static final String KEY_PROXI_SWITCH = "proxi";
 
     private TwoStatePreference mTorchSwitch;
     private TwoStatePreference mCameraSwitch;
@@ -50,6 +51,7 @@ public class DeviceSettings extends PreferenceActivity implements
     private TwoStatePreference mSwapBackRecents;
     private TwoStatePreference mSRGBModeSwitch;
     private TwoStatePreference mHBMModeSwitch;
+    private TwoStatePreference mProxiSwitch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -99,6 +101,10 @@ public class DeviceSettings extends PreferenceActivity implements
         mHBMModeSwitch.setEnabled(HBMModeSwitch.isSupported());
         mHBMModeSwitch.setChecked(HBMModeSwitch.isEnabled(this));
         mHBMModeSwitch.setOnPreferenceChangeListener(new HBMModeSwitch());
+
+        mProxiSwitch = (TwoStatePreference) findPreference(KEY_PROXI_SWITCH);
+        mProxiSwitch.setChecked(Settings.System.getInt(getContentResolver(),
+                Settings.System.DEVICE_PROXI_CHECK_ENABLED, 1) != 0);
     }
 
     @Override
@@ -120,6 +126,11 @@ public class DeviceSettings extends PreferenceActivity implements
                     Settings.System.BUTTON_SWAP_BACK_RECENTS, mSwapBackRecents.isChecked() ? 1 : 0);
             return true;
         }*/
+        if (preference == mProxiSwitch) {
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.DEVICE_PROXI_CHECK_ENABLED, mProxiSwitch.isChecked() ? 1 : 0);
+            return true;
+        }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
     }
 

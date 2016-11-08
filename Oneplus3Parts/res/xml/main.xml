@@ -33,6 +33,12 @@
 			android:summary="@string/music_summary_head"
 			android:title="@string/music_title_head" />
 
+        <CheckBoxPreference
+            android:key="proxi"
+            android:summary="@string/proxi_summary_head"
+            android:title="@string/proxi_title_head"
+            android:persistent="false" />
+
 	</PreferenceCategory>
 
 	<PreferenceCategory

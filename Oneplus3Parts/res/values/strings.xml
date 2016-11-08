@@ -39,4 +39,6 @@
 	<string name="srgb_mode_title">sRGB mode</string>
 	<string name="hbm_mode_summary"></string>
 	<string name="hbm_mode_title">High brightness mode</string>
+    <string name="proxi_summary_head">Check proximity sensor for handling gesture and fingerprint sensor</string>
+    <string name="proxi_title_head">Proximity check</string>
 </resources>
