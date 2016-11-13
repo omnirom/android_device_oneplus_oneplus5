@@ -34,63 +34,7 @@
 
 // #define LOG_NDEBUG 0
 
-#define CPUFREQ_SCALING_MAX_PATH "scaling_max_freq"
 #define DOUBLE_TAP_FILE "/proc/touchpanel/double_tap_enable"
-
-// we can handle those tags
-#define PROFILE_MAX_CPU0_FREQ_TAG "cpu0"
-#define PROFILE_MAX_CPU2_FREQ_TAG "cpu2"
-#define PROFILE_MAX_TAG "max"
-#define PROFILE_SEPARATOR ":"
-
-static void apply_profile(char* profile)
-{
-    char *token;
-    char *separator = PROFILE_SEPARATOR;
-    char max_freq_profile[80];
-
-    token = strtok(profile, separator);
-    while(token != NULL) {
-        ALOGV("token %s", token);
-        if (!strcmp(token, PROFILE_MAX_CPU0_FREQ_TAG)) {
-            token = strtok(NULL, separator);
-            strcpy(max_freq_profile, token);
-            if (strlen(max_freq_profile) != 0) {
-                if (!strcmp(max_freq_profile, PROFILE_MAX_TAG)) {
-                    get_max_freq(0, max_freq_profile, sizeof(max_freq_profile));
-                }
-                ALOGI("set max_freq 0 %s", max_freq_profile);
-                write_cpufreq_value(0, CPUFREQ_SCALING_MAX_PATH, max_freq_profile);
-            }
-        }
-        if (!strcmp(token, PROFILE_MAX_CPU2_FREQ_TAG)) {
-            token = strtok(NULL, separator);
-            strcpy(max_freq_profile, token);
-            if (strlen(max_freq_profile) != 0) {
-                if (!strcmp(max_freq_profile, PROFILE_MAX_TAG)) {
-                    get_max_freq(2, max_freq_profile, sizeof(max_freq_profile));
-                }
-                ALOGI("set max_freq 2 %s", max_freq_profile);
-                if (write_cpufreq_value(2, CPUFREQ_SCALING_MAX_PATH, max_freq_profile)) {
-                    // ugh - trick ueventd to set the permissions for us
-                    // cores are onlines without ueventd geting noticed
-                    set_online_state(2, "0");
-                    set_online_state(2, "1");
-                    int count = 0;
-                    while(count < 5) {
-                        if (!write_cpufreq_value(2, CPUFREQ_SCALING_MAX_PATH, max_freq_profile)) {
-                            break;
-                        }
-                        // max 500ms
-                        usleep(100000);
-                        count++;
-                    }
-                }
-            }
-        }
-        token = strtok(NULL, separator);
-    }
-}
 
 static void power_init(struct power_module __unused *module)
 {
@@ -109,15 +53,7 @@ static void power_hint(struct power_module __unused *module, power_hint_t hint,
             break;
         case POWER_HINT_VIDEO_ENCODE:
             break;
-        case POWER_HINT_POWER_PROFILE:
-            ALOGV("POWER_HINT_POWER_PROFILE %s", (char*)data);
-            // profile is contributed as string with key value
-            // pairs separated with ":"
-            apply_profile((char*)data);
-            break;
         case POWER_HINT_LOW_POWER:
-            // handled by power profiles!
-            ALOGV("POWER_HINT_LOW_POWER");
             break;
         default:
              break;
