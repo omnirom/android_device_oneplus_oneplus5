@@ -192,6 +192,9 @@ BOARD_SECCOMP_POLICY += $(BOARD_PATH)/seccomp
 
 WITH_DEXPREOPT := false
 
+# camera hax
+TARGET_HAS_LEGACY_CAMERA_HAL1 := true
+
 # Recovery:Start
 TARGET_RECOVERY_FSTAB := $(BOARD_PATH)/configs/fstab.qcom
 TW_THEME := portrait_hdpi
