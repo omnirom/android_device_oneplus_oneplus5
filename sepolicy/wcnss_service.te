@@ -5,4 +5,3 @@ allow wcnss_service self:capability {
     net_raw
 };
 get_prop(wcnss_service, diag_prop);
-
