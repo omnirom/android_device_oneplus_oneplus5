@@ -1,0 +1,2 @@
+allow rmt_storage self:capability net_raw;
+

@@ -1,1 +1,3 @@
 allow ueventd vfat:file { read open };
+allow ueventd input_device:chr_file { relabelfrom relabelto };
+allow ueventd device:chr_file { relabelfrom relabelto };

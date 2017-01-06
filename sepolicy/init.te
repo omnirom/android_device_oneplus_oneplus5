@@ -1,6 +1,8 @@
 allow init vfat:file { read open };
 allow init socket_device:sock_file { create setattr unlink };
+allow init property_socket:sock_file write;
 allow init sysfs:dir rw_file_perms;
 allow init sysfs:file rw_file_perms;
 allow init input_device:chr_file r_file_perms;
 domain_trans(init, rootfs, dashd)
+
