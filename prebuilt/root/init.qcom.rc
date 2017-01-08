@@ -709,7 +709,7 @@ service wpa_supplicant /system/bin/wpa_supplicant \
 service wigig_supplicant /system/bin/wpa_supplicant \
     -iwigig0 -Dnl80211 -c/data/misc/wifi/wigig_supplicant.conf \
     -m/data/misc/wifi/wigig_p2p_supplicant.conf \
-    -O/data/misc/wifi/wigig_sockets -dd \
+    -O/data/misc/wifi/wigig_sockets \
     -e/data/misc/wifi/wigig_entropy.bin -g@android:wpa_wigig0
     #   we will start as root and wpa_supplicant will switch to user wifi
     #   after setting up the capabilities required for WEXT
