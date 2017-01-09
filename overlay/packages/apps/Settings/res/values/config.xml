@@ -23,4 +23,5 @@
        3 = right side
     -->
     <integer name="config_fingerprintSensorLocation">1</integer>
+    <bool name="config_gesture_settings_enabled">true</bool>
 </resources>
