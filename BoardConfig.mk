@@ -192,8 +192,6 @@ BOARD_SEPOLICY_DIRS += $(BOARD_PATH)/sepolicy
 
 BOARD_SECCOMP_POLICY += $(BOARD_PATH)/seccomp
 
-WITH_DEXPREOPT := false
-
 # camera hax
 TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 
