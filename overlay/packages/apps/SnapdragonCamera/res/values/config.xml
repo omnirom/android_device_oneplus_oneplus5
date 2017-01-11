@@ -15,5 +15,10 @@
 -->
 
 <resources>
-
+    <!-- A list of scenemodes where Longshot should be enabled. Comma separated.
+    An empty list will use the default restrictions. If defined, longshot
+    will be enabled ONLY for these scenemodes and disabled for others. -->
+    <string-array name="longshot_scenemodes">
+        <item>sports</item>
+    </string-array>
 </resources>

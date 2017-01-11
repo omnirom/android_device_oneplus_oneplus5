@@ -50,45 +50,21 @@
     <string-array name="pref_camera_scenemode_entries" translatable="false">
         <item>@string/pref_camera_scenemode_entry_auto</item>
         <item>@string/pref_camera_scenemode_entry_hdr</item>
-        <item>@string/pref_camera_scenemode_entry_refocus</item>
-        <item>@string/pref_camera_scenemode_entry_landscape</item>
+        <item>@string/pref_camera_scenemode_entry_asd</item>
         <item>@string/pref_camera_scenemode_entry_sports</item>
-        <item>@string/pref_camera_scenemode_entry_flowers</item>
-        <item>@string/pref_camera_scenemode_entry_backlight</item>
-        <item>@string/pref_camera_scenemode_entry_candlelight</item>
-        <item>@string/pref_camera_scenemode_entry_sunset</item>
-        <item>@string/pref_camera_scenemode_entry_night</item>
-        <item>@string/pref_camera_scenemode_entry_beach</item>
-        <item>@string/pref_camera_scenemode_entry_snow</item>
     </string-array>
 
     <array name="scenemode_thumbnails" translatable="false">
         <item>@drawable/ic_scene_mode_auto</item>
         <item>@drawable/ic_scene_mode_hdr</item>
-        <item>@drawable/ic_scene_mode_refocus</item>
-        <item>@drawable/ic_scene_mode_landscape</item>
+        <item>@drawable/ic_scene_mode_smartauto</item>
         <item>@drawable/ic_scene_mode_sports</item>
-        <item>@drawable/ic_scene_mode_flower</item>
-        <item>@drawable/ic_scene_mode_backlight</item>
-        <item>@drawable/ic_scene_mode_candlelight</item>
-        <item>@drawable/ic_scene_mode_sunset</item>
-        <item>@drawable/ic_scene_mode_night</item>
-        <item>@drawable/ic_scene_mode_beach</item>
-        <item>@drawable/ic_scene_mode_snow</item>
     </array>
 
     <string-array name="pref_camera_scenemode_entryvalues" translatable="false">
         <item>auto</item>
         <item>hdr</item>
-        <item>refocus</item>
-        <item>landscape</item>
+        <item>asd</item>
         <item>sports</item>
-        <item>flowers</item>
-        <item>backlight</item>
-        <item>candlelight</item>
-        <item>sunset</item>
-        <item>night</item>
-        <item>beach</item>
-        <item>snow</item>
     </string-array>
 </resources>
