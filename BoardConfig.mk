@@ -124,6 +124,7 @@ AUDIO_FEATURE_ENABLED_PLAYBACK_ULL := false
 
 # Camera
 USE_CAMERA_STUB := true
+TARGET_USES_MEDIA_EXTENSIONS := true
 
 # Disable secure discard because it's SLOW
 BOARD_SUPPRESS_SECURE_ERASE := true
