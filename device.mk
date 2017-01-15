@@ -265,10 +265,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     fs_config_files
 
-# Telephony extension
-PRODUCT_PACKAGES += telephony-ext
-PRODUCT_BOOT_JARS += telephony-ext
-
 # Sensors
 PRODUCT_PACKAGES += \
     sensors.msm8996
