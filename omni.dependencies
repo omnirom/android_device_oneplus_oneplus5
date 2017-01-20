@@ -66,12 +66,6 @@
     "revision": "android-7.1"
   },
   {
-    "remote": "omnirom",
-    "repository": "android_vendor_codeaurora_telephony",
-    "target_path": "vendor/codeaurora/telephony",
-    "revision": "android-7.1"
-  },
-  {
     "repository": "android_external_ant-wireless_antradio-library",
     "target_path": "external/ant-wireless/antradio-library",
     "revision": "android-7.1"
