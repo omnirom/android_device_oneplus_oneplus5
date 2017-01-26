@@ -78,6 +78,9 @@ BOARD_USES_QCOM_HARDWARE := true
 TARGET_USES_QCOM_BSP := true
 TARGET_USERIMAGES_USE_EXT4 := true
 
+# RIL
+BOARD_PROVIDES_LIBRIL := true
+
 # Display
 BOARD_USES_ADRENO := true
 TARGET_QCOM_DISPLAY_VARIANT := caf-msm8996
@@ -196,9 +199,6 @@ include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += $(BOARD_PATH)/sepolicy
 
 BOARD_SECCOMP_POLICY += $(BOARD_PATH)/seccomp
-
-# camera hax
-TARGET_HAS_LEGACY_CAMERA_HAL1 := true
 
 # Recovery:Start
 TARGET_RECOVERY_FSTAB := $(BOARD_PATH)/configs/fstab.qcom

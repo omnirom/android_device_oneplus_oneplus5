@@ -130,10 +130,9 @@ wifi.interface=wlan0
 ro.build.selinux=1
 
 # Camera
-persist.camera.imglib.fddsp=1
-persist.camera.llc=1
-persist.camera.llnoise=1
+#persist.camera.imglib.fddsp=1
+#persist.camera.llc=1
+#persist.camera.llnoise=1
 # ZOMG HAX!! - remove when we have something that works
-persist.camera.HAL3.enabled=0
-media.stagefright.legacyencoder=true
-media.stagefright.less-secure=true
+camera.hal1.packagelist=com.skype.raider,com.whatsapp,com.tencent.mm,com.google.android.GoogleCamera
+persist.camera.HAL3.enabled=1

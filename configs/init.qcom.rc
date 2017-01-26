@@ -39,6 +39,8 @@ on early-init
 
 on init
     export LD_SHIM_LIBS /system/lib/hw/camera.msm8996.so|libcamera_shim.so:/system/lib/libopcamera_native_modules.so|libcamera_shim.so
+    
+    setprop persist.camera.HAL3.enabled 1
 
     #export LD_PRELOAD libcamera_shim.so
 
@@ -1340,4 +1342,3 @@ service ifaadaemon /system/bin/ifaadaemon
     user system
     group system
     writepid /dev/cpuset/system-background/tasks
-
