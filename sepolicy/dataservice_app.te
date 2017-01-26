@@ -1,0 +1,2 @@
+allow dataservice_app diag_prop:file r_file_perms;
+
