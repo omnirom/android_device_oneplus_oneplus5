@@ -15,10 +15,15 @@
 -->
 
 <resources>
-    <!-- A list of scenemodes where Longshot should be enabled. Comma separated.
-    An empty list will use the default restrictions. If defined, longshot
-    will be enabled ONLY for these scenemodes and disabled for others. -->
-    <string-array name="longshot_scenemodes">
-        <item>sports</item>
-    </string-array>
+    <!-- Opens back camera using openLegacy() and forces api v1 -->
+    <bool name="back_camera_open_legacy">false</bool>
+
+    <!-- Opens front camera using openLegacy() and forces api v1 -->
+    <bool name="front_camera_open_legacy">false</bool>
+
+    <!-- Restart preview for back camera onPictureTaken -->
+    <bool name="back_camera_restart_preview_onPictureTaken">true</bool>
+
+    <!-- Restart preview for front camera onPictureTaken -->
+    <bool name="front_camera_restart_preview_onPictureTaken">true</bool>
 </resources>
