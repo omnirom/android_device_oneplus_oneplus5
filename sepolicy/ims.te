@@ -1,3 +1,1 @@
 allow ims diag_prop:property_service set;
-allow ims diag_prop:file r_file_perms;
-allow ims self:capability net_raw;
