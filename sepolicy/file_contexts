@@ -23,3 +23,5 @@
 /sys/devices/virtual/graphics/fb0/srgb                          u:object_r:sysfs_graphics:s0
 
 /system/bin/ifaadaemon                                          u:object_r:ifaadaemon_exec:s0
+
+/system/bin/remosaic_daemon                                     u:object_r:remosaic_daemon_exec:s0
