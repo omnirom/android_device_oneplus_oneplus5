@@ -20,7 +20,8 @@
 <resources>
     <!-- Camera Preferences Picture size dialog box entries -->
     <string-array name="pref_camera_picturesize_entries" translatable="false">
-        <item>(4:3) 16.1 MP</item>
+        <item>(4:3) 16.0 MP</item>
+        <item>(4:3) 16.0 MP</item>
         <item>(4:3) 8.0 MP</item>
         <item>(4:3) 5 MP</item>
         <item>(4:3) 3.1 MP</item>
@@ -36,6 +37,7 @@
          driver -->
     <string-array name="pref_camera_picturesize_entryvalues" translatable="false">
         <item>4640x3480</item>
+        <item>4608x3456</item>
         <item>3264x2448</item>
         <item>2592x1944</item>
         <item>2048x1536</item>
