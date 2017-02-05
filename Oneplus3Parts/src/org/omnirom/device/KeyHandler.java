@@ -402,33 +402,6 @@ public class KeyHandler implements DeviceKeyHandler {
                     Settings.System.BUTTON_EXTRA_KEY_MAPPING, 0);
     }
 
-    /*private boolean swapBackAndRecents() {
-        return Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.BUTTON_SWAP_BACK_RECENTS, 0) != 0;
-    }*/
-
-    /*@Override
-    public KeyEvent translateKeyEvent(KeyEvent event) {
-        // KeyEvent(long downTime, long eventTime, int action, int code, int repeat, int metaState, int deviceId, int scancode, int flags, int source)
-        if (event.getScanCode() == KEY_BACK) {
-            if (swapBackAndRecents()) {
-                KeyEvent newEvent = new KeyEvent(event.getDownTime(), event.getEventTime(), event.getAction(),
-                        KeyEvent.KEYCODE_APP_SWITCH, event.getRepeatCount(), event.getMetaState(), event.getDeviceId(),
-                        KEY_RECENTS, event.getFlags(), event.getSource());
-                return newEvent;
-            }
-        }
-        if (event.getScanCode() == KEY_RECENTS) {
-            if (swapBackAndRecents()) {
-                KeyEvent newEvent = new KeyEvent(event.getDownTime(), event.getEventTime(), event.getAction(),
-                        KeyEvent.KEYCODE_BACK, event.getRepeatCount(), event.getMetaState(), event.getDeviceId(),
-                        KEY_BACK, event.getFlags(), event.getSource());
-                return newEvent;
-            }
-        }
-        return null;
-    }*/
-
     private String getRearCameraId() {
         if (mRearCameraId == null) {
             try {

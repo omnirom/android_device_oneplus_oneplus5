@@ -38,7 +38,7 @@ public class DeviceSettings extends PreferenceActivity implements
     public static final String KEY_VIBSTRENGTH = "vib_strength";
     public static final String KEY_MUSIC_SWITCH = "music";
     private static final String KEY_SLIDER_MODE = "slider_mode";
-    //private static final String KEY_SWAP_BACK_RECENTS = "swap_back_recents";
+    private static final String KEY_SWAP_BACK_RECENTS = "swap_back_recents";
     public static final String KEY_SRGB_SWITCH = "srgb";
     public static final String KEY_HBM_SWITCH = "hbm";
     public static final String KEY_PROXI_SWITCH = "proxi";
@@ -88,9 +88,9 @@ public class DeviceSettings extends PreferenceActivity implements
         mSliderMode.setValueIndex(valueIndex);
         mSliderMode.setSummary(mSliderMode.getEntries()[valueIndex]);
 
-        //mSwapBackRecents = (TwoStatePreference) findPreference(KEY_SWAP_BACK_RECENTS);
-        //mSwapBackRecents.setChecked(Settings.System.getInt(getContentResolver(),
-        //            Settings.System.BUTTON_SWAP_BACK_RECENTS, 0) != 0);
+        mSwapBackRecents = (TwoStatePreference) findPreference(KEY_SWAP_BACK_RECENTS);
+        mSwapBackRecents.setChecked(Settings.System.getInt(getContentResolver(),
+                    Settings.System.BUTTON_SWAP_BACK_RECENTS, 0) != 0);
 
         mSRGBModeSwitch = (TwoStatePreference) findPreference(KEY_SRGB_SWITCH);
         mSRGBModeSwitch.setEnabled(SRGBModeSwitch.isSupported());
@@ -121,11 +121,11 @@ public class DeviceSettings extends PreferenceActivity implements
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
-        /*if (preference == mSwapBackRecents) {
+        if (preference == mSwapBackRecents) {
             Settings.System.putInt(getContentResolver(),
                     Settings.System.BUTTON_SWAP_BACK_RECENTS, mSwapBackRecents.isChecked() ? 1 : 0);
             return true;
-        }*/
+        }
         if (preference == mProxiSwitch) {
             Settings.System.putInt(getContentResolver(),
                     Settings.System.DEVICE_PROXI_CHECK_ENABLED, mProxiSwitch.isChecked() ? 1 : 0);
