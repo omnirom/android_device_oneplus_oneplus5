@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Find 7</string>
+    <string name="app_name">Oneplus 3</string>
     <string name="category_gestures_title">Gesture da schermo spento</string>
     <string name="double_tap_wake_title_head">Doppio tocco</string>
     <string name="double_tap_wake_summary_head">Effettua un doppio tocco sullo schermo per attivare il device</string>

@@ -14,7 +14,7 @@
      limitations under the License.
 -->
 <resources>
-    <string name="app_name">Find 7</string>
+    <string name="app_name">Oneplus 3</string>
     <string name="category_gestures_title">Appui écran éteint</string>
     <string name="double_tap_wake_title_head">Double appui pour réveiller</string>
     <string name="double_tap_wake_summary_head">Un double appui sur l\'écran réveille l\'appareil</string>
