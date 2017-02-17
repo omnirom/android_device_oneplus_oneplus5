@@ -31,6 +31,10 @@ public class MusicGestureSwitch implements OnPreferenceChangeListener {
         return Utils.fileWritable(FILE);
     }
 
+    public static boolean isCurrentlyEnabled(Context context) {
+        return Utils.getFileValueAsBoolean(FILE, false);
+    }
+
     public static boolean isEnabled(Context context) {
         boolean enabled = Utils.getFileValueAsBoolean(FILE, false);
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -62,5 +66,4 @@ public class MusicGestureSwitch implements OnPreferenceChangeListener {
             Utils.writeValue(FILE, "0");
         return true;
     }
-
 }
