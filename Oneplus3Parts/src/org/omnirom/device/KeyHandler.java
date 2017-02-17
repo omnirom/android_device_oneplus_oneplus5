@@ -172,8 +172,9 @@ public class KeyHandler implements DeviceKeyHandler {
 
         public void update() {
             setButtonDisable(mContext);
-            mUseProxiCheck = Settings.System.getInt(
-                    mContext.getContentResolver(), Settings.System.DEVICE_PROXI_CHECK_ENABLED, 1) == 1;
+            mUseProxiCheck = Settings.System.getIntForUser(
+                    mContext.getContentResolver(), Settings.System.DEVICE_PROXI_CHECK_ENABLED, 1,
+                    UserHandle.USER_CURRENT) == 1;
         }
     }
 
@@ -339,8 +340,9 @@ public class KeyHandler implements DeviceKeyHandler {
     }
 
     public static void setButtonDisable(Context context) {
-        mButtonDisabled = Settings.System.getInt(
-                context.getContentResolver(), Settings.System.HARDWARE_KEYS_DISABLE, 0) == 1;
+        mButtonDisabled = Settings.System.getIntForUser(
+                context.getContentResolver(), Settings.System.HARDWARE_KEYS_DISABLE, 0,
+                UserHandle.USER_CURRENT) == 1;
         if (DEBUG) Log.i(TAG, "setButtonDisable=" + mButtonDisabled);
         if(mButtonDisabled)
             Utils.writeValue(KEY_CONTROL_PATH, "1");
@@ -398,8 +400,9 @@ public class KeyHandler implements DeviceKeyHandler {
     }
 
     private int getSliderMode() {
-        return Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.BUTTON_EXTRA_KEY_MAPPING, 0);
+        return Settings.System.getIntForUser(mContext.getContentResolver(),
+                    Settings.System.BUTTON_EXTRA_KEY_MAPPING, 0,
+                    UserHandle.USER_CURRENT);
     }
 
     private String getRearCameraId() {
