@@ -67,6 +67,8 @@
         <value>1996800</value>
         <value>2073600</value>
         <value>2150400</value>
+        <value>2246400</value>
+        <value>2342400</value>
     </array>
     <array name="cpu.active.cluster0">
         <value>50</value>
@@ -112,6 +114,8 @@
         <value>515</value>
         <value>559</value>
         <value>655</value>
+        <value>690</value>
+        <value>720</value>
     </array>
     <item name="cpu.idle">4.1</item>
     <item name="cpu.awake">16</item>
