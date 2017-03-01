@@ -80,10 +80,9 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final int KEY_HOME = 102;
     private static final int KEY_BACK = 158;
     private static final int KEY_RECENTS = 580;
-    private static final int KEY_MODE_TOTAL_SILENCE = 601;
-    //private static final int KEY_MODE_ALARMS_ONLY = 601;
-    private static final int KEY_MODE_PRIORITY_ONLY = 602;
-    private static final int KEY_MODE_NONE = 603;
+    private static final int KEY_SLIDER_TOP = 601;
+    private static final int KEY_SLIDER_CENTER = 602;
+    private static final int KEY_SLIDER_BOTTOM = 603;
 
     private static final int[] sSupportedGestures = new int[]{
         GESTURE_CIRCLE_SCANCODE,
@@ -92,10 +91,9 @@ public class KeyHandler implements DeviceKeyHandler {
         GESTURE_II_SCANCODE,
         GESTURE_LEFT_V_SCANCODE,
         GESTURE_RIGHT_V_SCANCODE,
-        KEY_MODE_TOTAL_SILENCE,
-        //KEY_MODE_ALARMS_ONLY,
-        KEY_MODE_PRIORITY_ONLY,
-        KEY_MODE_NONE
+        KEY_SLIDER_TOP,
+        KEY_SLIDER_CENTER,
+        KEY_SLIDER_BOTTOM
     };
 
     private static final int[] sHandledGestures = new int[]{
@@ -103,10 +101,9 @@ public class KeyHandler implements DeviceKeyHandler {
         GESTURE_II_SCANCODE,
         GESTURE_LEFT_V_SCANCODE,
         GESTURE_RIGHT_V_SCANCODE,
-        KEY_MODE_TOTAL_SILENCE,
-        //KEY_MODE_ALARMS_ONLY,
-        KEY_MODE_PRIORITY_ONLY,
-        KEY_MODE_NONE
+        KEY_SLIDER_TOP,
+        KEY_SLIDER_CENTER,
+        KEY_SLIDER_BOTTOM
     };
 
     private static final int[] sProxiCheckedGestures = new int[]{
@@ -266,37 +263,20 @@ public class KeyHandler implements DeviceKeyHandler {
                 dispatchMediaKeyWithWakeLockToAudioService(KeyEvent.KEYCODE_MEDIA_NEXT);
             }
             break;
-        case KEY_MODE_TOTAL_SILENCE:
-            if (DEBUG) Log.i(TAG, "KEY_MODE_TOTAL_SILENCE");
+        case KEY_SLIDER_TOP:
+            if (DEBUG) Log.i(TAG, "KEY_SLIDER_TOP");
             mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
-            if (getSliderMode() == 0) {
-                mNoMan.setZenMode(Global.ZEN_MODE_NO_INTERRUPTIONS, null, TAG);
-            } else {
-                mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_SILENT);
-            }
+            doHandleSliderAction(0);
             break;
-        /*case KEY_MODE_ALARMS_ONLY:
-            if (DEBUG) Log.i(TAG, "KEY_MODE_ALARMS_ONLY " + Global.ZEN_MODE_ALARMS);
+        case KEY_SLIDER_CENTER:
+            if (DEBUG) Log.i(TAG, "KEY_SLIDER_CENTER");
             mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
-            mNoMan.setZenMode(Global.ZEN_MODE_ALARMS, null, TAG);
-            break;*/
-        case KEY_MODE_PRIORITY_ONLY:
-            if (DEBUG) Log.i(TAG, "KEY_MODE_PRIORITY_ONLY");
-            mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
-            if (getSliderMode() == 0) {
-                mNoMan.setZenMode(Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, null, TAG);
-            } else {
-                mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_VIBRATE);
-            }
+            doHandleSliderAction(1);
             break;
-        case KEY_MODE_NONE:
-            if (DEBUG) Log.i(TAG, "KEY_MODE_NONE");
+        case KEY_SLIDER_BOTTOM:
+            if (DEBUG) Log.i(TAG, "KEY_SLIDER_BOTTOM");
             mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
-            if (getSliderMode() == 0) {
-                mNoMan.setZenMode(Global.ZEN_MODE_OFF, null, TAG);
-            } else {
-                mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
-            }
+            doHandleSliderAction(2);
             break;
         }
     }
@@ -399,21 +379,15 @@ public class KeyHandler implements DeviceKeyHandler {
         }
     }
 
-    private int getSliderMode() {
-        return Settings.System.getIntForUser(mContext.getContentResolver(),
-                    Settings.System.BUTTON_EXTRA_KEY_MAPPING, 0,
-                    UserHandle.USER_CURRENT);
-    }
-
     private String getRearCameraId() {
         if (mRearCameraId == null) {
             try {
                 for (final String cameraId : mCameraManager.getCameraIdList()) {
-	            CameraCharacteristics c = mCameraManager.getCameraCharacteristics(cameraId);
-	            Boolean flashAvailable = c.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
-	            Integer lensFacing = c.get(CameraCharacteristics.LENS_FACING);
-	            if (flashAvailable != null && flashAvailable
-	                    && lensFacing != null && lensFacing == CameraCharacteristics.LENS_FACING_BACK) {
+                    CameraCharacteristics c = mCameraManager.getCameraCharacteristics(cameraId);
+                    Boolean flashAvailable = c.get(CameraCharacteristics.FLASH_INFO_AVAILABLE);
+                    Integer lensFacing = c.get(CameraCharacteristics.LENS_FACING);
+                    if (flashAvailable != null && flashAvailable
+                            && lensFacing != null && lensFacing == CameraCharacteristics.LENS_FACING_BACK) {
                         mRearCameraId = cameraId;
                         break;
                     }
@@ -437,6 +411,48 @@ public class KeyHandler implements DeviceKeyHandler {
             if (DEBUG) Log.d(TAG, "Display off");
             mSensorManager.registerListener(mProximitySensor, mSensor,
                         SensorManager.SENSOR_DELAY_NORMAL);
+        }
+    }
+
+    private int getSliderAction(int position) {
+        String value = Settings.System.getStringForUser(mContext.getContentResolver(),
+                    Settings.System.BUTTON_EXTRA_KEY_MAPPING,
+                    UserHandle.USER_CURRENT);
+        final String defaultValue = "5,3,0";
+
+        if (value == null) {
+            value = defaultValue;
+        } else if (value.indexOf(",") == -1) {
+            value = defaultValue;
+        }
+        try {
+            String[] parts = value.split(",");
+            return Integer.valueOf(parts[position]);
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    private void doHandleSliderAction(int position) {
+        int action = getSliderAction(position);
+        if ( action == 0) {
+            mNoMan.setZenMode(Global.ZEN_MODE_OFF, null, TAG);
+            mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
+        } else if (action == 1) {
+            mNoMan.setZenMode(Global.ZEN_MODE_OFF, null, TAG);
+            mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_VIBRATE);
+        } else if (action == 2) {
+            mNoMan.setZenMode(Global.ZEN_MODE_OFF_ONLY, null, TAG);
+            mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_SILENT);
+        } else if (action == 3) {
+            mNoMan.setZenMode(Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, null, TAG);
+            mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
+        } else if (action == 4) {
+            mNoMan.setZenMode(Global.ZEN_MODE_ALARMS, null, TAG);
+            mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
+        } else if (action == 5) {
+            mNoMan.setZenMode(Global.ZEN_MODE_NO_INTERRUPTIONS, null, TAG);
+            mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
         }
     }
 }

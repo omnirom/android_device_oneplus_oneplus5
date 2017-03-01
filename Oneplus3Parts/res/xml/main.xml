@@ -14,24 +14,24 @@
      limitations under the License.
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-	<PreferenceCategory
-	    android:key="gesture_category"
-	    android:title="@string/category_gestures_title" >
+    <PreferenceCategory
+        android:key="gesture_category"
+        android:title="@string/category_gestures_title" >
 
-		<CheckBoxPreference
-			android:key="camera"
-			android:summary="@string/camera_summary_head"
-			android:title="@string/camera_title_head" />
+        <CheckBoxPreference
+            android:key="camera"
+            android:summary="@string/camera_summary_head"
+            android:title="@string/camera_title_head" />
 
-		<CheckBoxPreference
-			android:key="torch"
-			android:summary="@string/torch_summary_head"
-			android:title="@string/torch_title_head" />
+        <CheckBoxPreference
+            android:key="torch"
+            android:summary="@string/torch_summary_head"
+            android:title="@string/torch_title_head" />
 
-		<CheckBoxPreference
-			android:key="music"
-			android:summary="@string/music_summary_head"
-			android:title="@string/music_title_head" />
+        <CheckBoxPreference
+            android:key="music"
+            android:summary="@string/music_summary_head"
+            android:title="@string/music_title_head" />
 
         <CheckBoxPreference
             android:key="proxi"
@@ -39,44 +39,56 @@
             android:title="@string/proxi_title_head"
             android:persistent="false" />
 
-	</PreferenceCategory>
+    </PreferenceCategory>
 
-	<PreferenceCategory
+    <PreferenceCategory
         android:title="@string/category_vibrator">
         <org.omnirom.device.VibratorStrengthPreference
-	        android:key="vib_strength"
-	        android:title="@string/vib_strength_title_head"
-	        android:summary="@string/vib_strength_summary_head" />
-	</PreferenceCategory>
+            android:key="vib_strength"
+            android:title="@string/vib_strength_title_head"
+            android:summary="@string/vib_strength_summary_head" />
+    </PreferenceCategory>
 
-	<PreferenceCategory
+    <PreferenceCategory
         android:title="@string/category_slider">
         <ListPreference
-            android:key="slider_mode"
-            android:title="@string/slider_mode_title"
-            android:entries="@array/slider_mode_entries"
-            android:entryValues="@array/slider_mode_values"
+            android:key="slider_mode_top"
+            android:title="@string/slider_mode_title_top"
+            android:entries="@array/slider_key_action_entries"
+            android:entryValues="@array/slider_key_action_values"
             android:persistent="false" />
-	</PreferenceCategory>
+        <ListPreference
+            android:key="slider_mode_center"
+            android:title="@string/slider_mode_title_center"
+            android:entries="@array/slider_key_action_entries"
+            android:entryValues="@array/slider_key_action_values"
+            android:persistent="false" />
+        <ListPreference
+            android:key="slider_mode_bottom"
+            android:title="@string/slider_mode_title_bottom"
+            android:entries="@array/slider_key_action_entries"
+            android:entryValues="@array/slider_key_action_values"
+            android:persistent="false" />
+    </PreferenceCategory>
 
-	<PreferenceCategory
+    <PreferenceCategory
         android:title="@string/buttons_title">
-		<CheckBoxPreference
-			android:key="swap_back_recents"
-			android:summary="@string/swap_back_recents_summary"
-			android:title="@string/swap_back_recents_title"
-			android:persistent="false" />
-	</PreferenceCategory>
+        <CheckBoxPreference
+            android:key="swap_back_recents"
+            android:summary="@string/swap_back_recents_summary"
+            android:title="@string/swap_back_recents_title"
+            android:persistent="false" />
+    </PreferenceCategory>
 
-	<PreferenceCategory
+    <PreferenceCategory
         android:title="@string/graphics_title">
-		<CheckBoxPreference
-			android:key="srgb"
-			android:summary="@string/srgb_mode_summary"
-			android:title="@string/srgb_mode_title" />
-		<CheckBoxPreference
-			android:key="hbm"
-			android:summary="@string/hbm_mode_summary"
-			android:title="@string/hbm_mode_title" />
-	</PreferenceCategory>
+        <CheckBoxPreference
+            android:key="srgb"
+            android:summary="@string/srgb_mode_summary"
+            android:title="@string/srgb_mode_title" />
+        <CheckBoxPreference
+            android:key="hbm"
+            android:summary="@string/hbm_mode_summary"
+            android:title="@string/hbm_mode_title" />
+    </PreferenceCategory>
 </PreferenceScreen>

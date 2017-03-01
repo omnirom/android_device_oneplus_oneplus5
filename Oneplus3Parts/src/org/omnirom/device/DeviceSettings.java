@@ -27,6 +27,7 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.preference.TwoStatePreference;
 import android.provider.Settings;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.util.Log;
 
@@ -37,7 +38,9 @@ public class DeviceSettings extends PreferenceActivity implements
     public static final String KEY_TORCH_SWITCH = "torch";
     public static final String KEY_VIBSTRENGTH = "vib_strength";
     public static final String KEY_MUSIC_SWITCH = "music";
-    private static final String KEY_SLIDER_MODE = "slider_mode";
+    private static final String KEY_SLIDER_MODE_TOP = "slider_mode_top";
+    private static final String KEY_SLIDER_MODE_CENTER = "slider_mode_center";
+    private static final String KEY_SLIDER_MODE_BOTTOM = "slider_mode_bottom";
     private static final String KEY_SWAP_BACK_RECENTS = "swap_back_recents";
     public static final String KEY_SRGB_SWITCH = "srgb";
     public static final String KEY_HBM_SWITCH = "hbm";
@@ -47,7 +50,9 @@ public class DeviceSettings extends PreferenceActivity implements
     private TwoStatePreference mCameraSwitch;
     private VibratorStrengthPreference mVibratorStrength;
     private TwoStatePreference mMusicSwitch;
-    private ListPreference mSliderMode;
+    private ListPreference mSliderModeTop;
+    private ListPreference mSliderModeCenter;
+    private ListPreference mSliderModeBottom;
     private TwoStatePreference mSwapBackRecents;
     private TwoStatePreference mSRGBModeSwitch;
     private TwoStatePreference mHBMModeSwitch;
@@ -80,13 +85,26 @@ public class DeviceSettings extends PreferenceActivity implements
         mMusicSwitch.setChecked(MusicGestureSwitch.isCurrentlyEnabled(this));
         mMusicSwitch.setOnPreferenceChangeListener(new MusicGestureSwitch());
 
-        mSliderMode = (ListPreference) findPreference(KEY_SLIDER_MODE);
-        mSliderMode.setOnPreferenceChangeListener(this);
-        int sliderMode = Settings.System.getInt(getContentResolver(),
-                    Settings.System.BUTTON_EXTRA_KEY_MAPPING, 0);
-        int valueIndex = mSliderMode.findIndexOfValue(String.valueOf(sliderMode));
-        mSliderMode.setValueIndex(valueIndex);
-        mSliderMode.setSummary(mSliderMode.getEntries()[valueIndex]);
+        mSliderModeTop = (ListPreference) findPreference(KEY_SLIDER_MODE_TOP);
+        mSliderModeTop.setOnPreferenceChangeListener(this);
+        int sliderModeTop = getSliderAction(0);
+        int valueIndex = mSliderModeTop.findIndexOfValue(String.valueOf(sliderModeTop));
+        mSliderModeTop.setValueIndex(valueIndex);
+        mSliderModeTop.setSummary(mSliderModeTop.getEntries()[valueIndex]);
+
+        mSliderModeCenter = (ListPreference) findPreference(KEY_SLIDER_MODE_CENTER);
+        mSliderModeCenter.setOnPreferenceChangeListener(this);
+        int sliderModeCenter = getSliderAction(1);
+        valueIndex = mSliderModeCenter.findIndexOfValue(String.valueOf(sliderModeCenter));
+        mSliderModeCenter.setValueIndex(valueIndex);
+        mSliderModeCenter.setSummary(mSliderModeCenter.getEntries()[valueIndex]);
+
+        mSliderModeBottom = (ListPreference) findPreference(KEY_SLIDER_MODE_BOTTOM);
+        mSliderModeBottom.setOnPreferenceChangeListener(this);
+        int sliderModeBottom = getSliderAction(2);
+        valueIndex = mSliderModeBottom.findIndexOfValue(String.valueOf(sliderModeBottom));
+        mSliderModeBottom.setValueIndex(valueIndex);
+        mSliderModeBottom.setSummary(mSliderModeBottom.getEntries()[valueIndex]);
 
         mSwapBackRecents = (TwoStatePreference) findPreference(KEY_SWAP_BACK_RECENTS);
         mSwapBackRecents.setChecked(Settings.System.getInt(getContentResolver(),
@@ -136,14 +154,66 @@ public class DeviceSettings extends PreferenceActivity implements
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mSliderMode) {
+        if (preference == mSliderModeTop) {
             String value = (String) newValue;
             int sliderMode = Integer.valueOf(value);
-            Settings.System.putInt(getContentResolver(),
-                    Settings.System.BUTTON_EXTRA_KEY_MAPPING, sliderMode);
-            int valueIndex = mSliderMode.findIndexOfValue(value);
-            mSliderMode.setSummary(mSliderMode.getEntries()[valueIndex]);
+            setSliderAction(0, sliderMode);
+            int valueIndex = mSliderModeTop.findIndexOfValue(value);
+            mSliderModeTop.setSummary(mSliderModeTop.getEntries()[valueIndex]);
+        }
+        if (preference == mSliderModeCenter) {
+            String value = (String) newValue;
+            int sliderMode = Integer.valueOf(value);
+            setSliderAction(1, sliderMode);
+            int valueIndex = mSliderModeCenter.findIndexOfValue(value);
+            mSliderModeCenter.setSummary(mSliderModeCenter.getEntries()[valueIndex]);
+        }
+        if (preference == mSliderModeBottom) {
+            String value = (String) newValue;
+            int sliderMode = Integer.valueOf(value);
+            setSliderAction(2, sliderMode);
+            int valueIndex = mSliderModeBottom.findIndexOfValue(value);
+            mSliderModeBottom.setSummary(mSliderModeBottom.getEntries()[valueIndex]);
         }
         return true;
+    }
+
+    private int getSliderAction(int position) {
+        String value = Settings.System.getString(getContentResolver(),
+                    Settings.System.BUTTON_EXTRA_KEY_MAPPING);
+        final String defaultValue = "5,3,0";
+
+        if (value == null) {
+            value = defaultValue;
+        } else if (value.indexOf(",") == -1) {
+            value = defaultValue;
+        }
+        try {
+            String[] parts = value.split(",");
+            return Integer.valueOf(parts[position]);
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    private void setSliderAction(int position, int action) {
+        String value = Settings.System.getString(getContentResolver(),
+                    Settings.System.BUTTON_EXTRA_KEY_MAPPING);
+        final String defaultValue = "5,3,0";
+
+        if (value == null) {
+            value = defaultValue;
+        } else if (value.indexOf(",") == -1) {
+            value = defaultValue;
+        }
+        try {
+            String[] parts = value.split(",");
+            parts[position] = String.valueOf(action);
+            String newValue = TextUtils.join(",", parts);
+            Settings.System.putString(getContentResolver(),
+                    Settings.System.BUTTON_EXTRA_KEY_MAPPING, newValue);
+            Log.d("maxwen", newValue);
+        } catch (Exception e) {
+        }
     }
 }
