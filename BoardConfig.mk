@@ -196,6 +196,9 @@ BOARD_SEPOLICY_DIRS += $(BOARD_PATH)/sepolicy
 
 BOARD_SECCOMP_POLICY += $(BOARD_PATH)/seccomp
 
+# for offmode charging
+BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
+
 # Recovery:Start
 TARGET_RECOVERY_FSTAB := $(BOARD_PATH)/configs/fstab.qcom
 TW_THEME := portrait_hdpi
