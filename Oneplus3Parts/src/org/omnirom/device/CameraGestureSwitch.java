@@ -26,17 +26,28 @@ import android.preference.PreferenceManager;
 public class CameraGestureSwitch implements OnPreferenceChangeListener {
 
     private static final String FILE = "/proc/touchpanel/camera_enable";
+    private static final String FILE_ALT = "/proc/touchpanel/letter_o_enable";
+
+    private static String getFile() {
+        if (Utils.fileWritable(FILE)) {
+            return FILE;
+        }
+        if (Utils.fileWritable(FILE_ALT)) {
+            return FILE_ALT;
+        }
+        return null;
+    }
 
     public static boolean isSupported() {
-        return Utils.fileWritable(FILE);
+        return Utils.fileWritable(getFile());
     }
 
     public static boolean isCurrentlyEnabled(Context context) {
-        return Utils.getFileValueAsBoolean(FILE, false);
+        return Utils.getFileValueAsBoolean(getFile(), false);
     }
 
     public static boolean isEnabled(Context context) {
-        boolean enabled = Utils.getFileValueAsBoolean(FILE, false);
+        boolean enabled = Utils.getFileValueAsBoolean(getFile(), false);
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         return sharedPrefs.getBoolean(DeviceSettings.KEY_CAMERA_SWITCH, enabled);
     }
@@ -52,19 +63,18 @@ public class CameraGestureSwitch implements OnPreferenceChangeListener {
 
         boolean enabled = isEnabled(context);
         if(enabled)
-            Utils.writeValue(FILE, "1");
+            Utils.writeValue(getFile(), "1");
         else
-            Utils.writeValue(FILE, "0");
+            Utils.writeValue(getFile(), "0");
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         Boolean enabled = (Boolean) newValue;
         if(enabled)
-            Utils.writeValue(FILE, "1");
+            Utils.writeValue(getFile(), "1");
         else
-            Utils.writeValue(FILE, "0");
+            Utils.writeValue(getFile(), "0");
         return true;
     }
-
 }

@@ -32,6 +32,9 @@ public class Utils {
      * @param value         The value
      */
     public static void writeValue(String filename, String value) {
+        if (filename == null) {
+            return;
+        }
         try {
             FileOutputStream fos = new FileOutputStream(new File(filename));
             fos.write(value.getBytes());
@@ -45,30 +48,14 @@ public class Utils {
     }
 
     /**
-     * Write the "color value" to the specified file. The value is scaled from
-     * an integer to an unsigned integer by multiplying by 2.
-     * @param filename      The filename
-     * @param value         The value of max value Integer.MAX
-     */
-    public static void writeColor(String filename, int value) {
-        writeValue(filename, String.valueOf((long) value * 2));
-    }
-
-    /**
-     * Write the "gamma value" to the specified file.
-     * @param filename      The filename
-     * @param value         The value
-     */
-    public static void writeGamma(String filename, int value) {
-        writeValue(filename, String.valueOf(value));
-    }
-
-    /**
      * Check if the specified file exists.
      * @param filename      The filename
      * @return              Whether the file exists or not
      */
     public static boolean fileExists(String filename) {
+        if (filename == null) {
+            return false;
+        }
         return new File(filename).exists();
     }
 
@@ -77,6 +64,9 @@ public class Utils {
     }
 
     public static String readLine(String filename) {
+        if (filename == null) {
+            return null;
+        }
         BufferedReader br = null;
         String line = null;
         try {
