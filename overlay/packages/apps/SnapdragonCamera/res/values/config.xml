@@ -25,4 +25,8 @@
     <bool name="front_camera_restart_preview_onPictureTaken">true</bool>
 
     <bool name="pref_camera_zsl_disabled">true</bool>
+
+    <string name="preview_fps_range">30000,30000</string>
+
+    <bool name="config_iso_auto_tweak">true</bool>
 </resources>
