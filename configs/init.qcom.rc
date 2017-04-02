@@ -665,12 +665,6 @@ service mdtpd /system/vendor/bin/mdtpd
     user root
     group system radio drmrpc
 
-service dashd /sbin/dashd
-    class core
-    critical
-    seclabel u:r:dashd:s0
-    group root system
-
 on property:init.svc.healthd=restarting
     restart dashd
 
