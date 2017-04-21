@@ -618,4 +618,9 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.-->
         <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
     </carrier_config>
 
+    <carrier_config mcc="293" mnc="41">
+       <boolean name="carrier_wfc_ims_available_bool" value="true" />
+       <boolean name="carrier_volte_provisioning_required_bool" value="false" />
+       <boolean name="carrier_volte_available_bool" value="true" />
+    </carrier_config>
 </carrier_config_list>
