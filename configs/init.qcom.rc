@@ -1020,7 +1020,6 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     disabled
     oneshot
 
-# FST Manager can be started by property_set("ctl.start", "fstman:<hostap ctrl iface>");
 service fstman /system/bin/fstman -B -ddd -c /data/misc/wifi/fstman.ini
     user wifi
     group wifi net_admin net_raw
@@ -1098,6 +1097,11 @@ on property:drmdiag.load=1
 
 on property:drmdiag.load=0
     stop drmdiag
+
+service qcom-sh /system/bin/sh /init.qcom.sh
+    class late_start
+    user root
+    oneshot
 
 service atfwd /system/bin/ATFWD-daemon
     class late_start
