@@ -451,9 +451,11 @@ on post-fs-data
     mkdir /data/misc/SelfHost/socket/ 2770 system system
 
     # Create PERFD deamon related dirs
+    setprop ro.min_freq_0 384000
     mkdir /data/misc/perfd 0755 root system
     chmod 2755 /data/misc/perfd
     mkdir /data/system/perfd 0770 root system
+    rm /data/system/perfd/default_values
     chmod 2770 /data/system/perfd
 
     # NFC local data and nfcee xml storage
@@ -511,6 +513,7 @@ service qvop-daemon /system/bin/qvop-daemon
     class late_start
     user system
     group system drmrpc
+    disabled
 
 # start up peripheral manager
 service per_mgr /system/bin/pm-service
@@ -541,20 +544,11 @@ service qseecomd /system/bin/qseecomd
 service perfd /system/vendor/bin/perfd
    class main
    user root
+   group root system
    socket perfd seqpacket 0666 root system
-   disabled
    writepid /dev/cpuset/system-background/tasks
-
-service seempd /system/bin/seempd
-   class late_start
-   user system
-   group system
-   socket seempdw dgram 0666 system system
-
-service secotad /system/bin/secotad
-   class late_start
-   user system
-   group system
+   # will be started init init.qcom.power.rc
+   disabled
 
 service thermal-engine /system/vendor/bin/thermal-engine
    class main
@@ -633,6 +627,7 @@ service dts_configurator /system/bin/dts_configurator
     user system
     group system media audio
     oneshot
+    disabled
 
 service dtseagleservice /system/bin/dts_eagle_service
     class late_start
@@ -672,6 +667,7 @@ service tlocd /system/bin/tloc_daemon
     class late_start
     user system
     group drmrpc gps net_raw
+    disabled
 
 service energy-awareness /system/bin/energy-awareness
     class main
@@ -683,6 +679,7 @@ service mdtpd /system/vendor/bin/mdtpd
     class late_start
     user root
     group system radio drmrpc
+    disabled
 
 on property:init.svc.healthd=restarting
     restart dashd
@@ -701,6 +698,7 @@ service iop /system/bin/iop
     class main
     user root
     group root
+    # will be started init init.qcom.power.rc
     disabled
     socket iop seqpacket 0666 root system
     writepid /dev/cpuset/system-background/tasks
@@ -709,6 +707,7 @@ service qcomsysd /system/bin/qcom-system-daemon
     class main
     user root
     group root qcom_diag
+    disabled
 
 service ssr_setup /system/bin/ssr_setup
     oneshot
@@ -780,7 +779,6 @@ on property:bluetooth.startbtsnoop=false
 on property:vold.decrypt=trigger_restart_framework
     start config_bt_addr
     start config_bluetooth
-    start wcnss-service
     start cnss_diag
 
 on property:persist.env.fastdorm.enabled=true
@@ -909,20 +907,13 @@ service port-bridge /system/bin/port-bridge
     user radio system
     group radio system inet
     oneshot
+    disabled
 
 service qmiproxy /system/bin/qmiproxy
     class main
     user radio
     group radio qcom_diag
     disabled
-
-# QMUX must be in multiple groups to support external process connections
-# VENDOR_EDIT, yangrujin@BSP 2015-11-06, modify user from root to radio, to fix qmuxd communicate encounter permission error
-service qmuxd /system/bin/qmuxd
-    class main
-    user radio
-    group radio audio bluetooth gps nfc qcom_diag wakelock
-    writepid /dev/cpuset/system-background/tasks
 
 service netmgrd /system/bin/netmgrd
     class main
@@ -1038,6 +1029,7 @@ service ptt_socket_app /system/bin/ptt_socket_app -d
     user root
     group root
     oneshot
+    disabled
 
 service ptt_ffbm /system/bin/ptt_socket_app -f -d
     user root
@@ -1107,6 +1099,7 @@ service atfwd /system/bin/ATFWD-daemon
     class late_start
     user system
     group system radio
+    disabled
 
 service hostapd /system/bin/hostapd /data/hostapd/hostapd.conf
     class late_start
@@ -1168,6 +1161,7 @@ service usb_uicc_daemon /system/bin/usb_uicc_client
     user system
     group system log net_raw
     oneshot
+    disabled
 
 on property:sys.usb_uicc.enabled=1
     start usb_uicc_enable
@@ -1245,18 +1239,13 @@ service vm_bms /system/bin/vm_bms
     disabled
 
 service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
+    socket msm_irqbalance seqpacket 660 root system
     class main
     user root
     group root
+    # will be started in init.qcom.sh
     disabled
     writepid /dev/cpuset/system-background/tasks
-
-service wfdservice /system/bin/wfdservice
-    class main
-    user system
-    group audio camera inet net_bt_stack drmrpc media_rw media input net_admin
-    # removed these because of limit of 12 groups
-    #graphics net_bt net_bt_admin bluetooth
 
 # Coresight early boot service
 service cs-early-boot /system/bin/sh /persist/coresight/qdss.agent.sh early-boot /system/etc/init.qcom.debug.sh
@@ -1284,12 +1273,6 @@ service qseeproxydaemon /system/vendor/bin/qseeproxydaemon
     user system
     group system
     writepid /dev/cpuset/system-background/tasks
-
-# Seemp health service
-service seemp_healthd /system/vendor/bin/seemp_healthd
-    class late_start
-    user system
-    group system
 
 service ifaadaemon /system/bin/ifaadaemon
     class late_start
