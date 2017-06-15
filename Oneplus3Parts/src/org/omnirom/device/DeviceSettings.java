@@ -212,7 +212,6 @@ public class DeviceSettings extends PreferenceActivity implements
             String newValue = TextUtils.join(",", parts);
             Settings.System.putString(getContentResolver(),
                     Settings.System.BUTTON_EXTRA_KEY_MAPPING, newValue);
-            Log.d("maxwen", newValue);
         } catch (Exception e) {
         }
     }
