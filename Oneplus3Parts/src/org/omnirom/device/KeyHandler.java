@@ -346,6 +346,14 @@ public class KeyHandler implements DeviceKeyHandler {
         return event.getScanCode() == KEY_DOUBLE_TAP;
     }
 
+    @Override
+    public Intent isActivityLaunchEvent(KeyEvent event) {
+        if (event.getAction() != KeyEvent.ACTION_UP) {
+            return null;
+        }
+        return null;
+    }
+
     private IAudioService getAudioService() {
         IAudioService audioService = IAudioService.Stub
                 .asInterface(ServiceManager.checkService(Context.AUDIO_SERVICE));
