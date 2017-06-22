@@ -14,32 +14,15 @@
      limitations under the License.
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory
+    <PreferenceScreen
         android:key="gesture_category"
-        android:title="@string/category_gestures_title" >
-
-        <CheckBoxPreference
-            android:key="camera"
-            android:summary="@string/camera_summary_head"
-            android:title="@string/camera_title_head" />
-
-        <CheckBoxPreference
-            android:key="torch"
-            android:summary="@string/torch_summary_head"
-            android:title="@string/torch_title_head" />
-
-        <CheckBoxPreference
-            android:key="music"
-            android:summary="@string/music_summary_head"
-            android:title="@string/music_title_head" />
-
-        <CheckBoxPreference
-            android:key="proxi"
-            android:summary="@string/proxi_summary_head"
-            android:title="@string/proxi_title_head"
-            android:persistent="false" />
-
-    </PreferenceCategory>
+        android:title="@string/category_gestures_title"
+        android:summary="@string/category_gestures_summary"
+        android:persistent="false" >
+        <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="org.omnirom.device"
+                android:targetClass="org.omnirom.device.GestureSettings" />
+    </PreferenceScreen>
 
     <PreferenceCategory
         android:title="@string/category_vibrator">

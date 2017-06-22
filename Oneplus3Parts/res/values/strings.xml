@@ -16,17 +16,11 @@
 <resources>
     <string name="app_name">Oneplus 3</string>
     <string name="category_gestures_title">Off screen gestures</string>
-    <string name="camera_title_head">Camera</string>
-    <string name="camera_summary_head">Draw a circle to start camera</string>
-    <string name="torch_title_head">Torch</string>
-    <string name="torch_summary_head">Draw a V to toggle torch</string>
     <string name="category_vibrator">Vibrator</string>
     <string name="vib_strength_title_head">Strength</string>
     <string name="vib_strength_summary_head">Define the strength of the vibrator</string>
     <string name="vib_test">Test</string>
     <string name="advanced_settings">Advanced</string>
-    <string name="music_title_head">Music</string>
-    <string name="music_summary_head">Draw a II to play / pause music and \u003C / \u003E to skip tracks forward and backward</string>
     <string name="category_slider">Slider</string>
     <string name="slider_mode_title">Slider mode</string>
     <string name="buttons_title">Buttons</string>
@@ -48,4 +42,21 @@
     <string name="slider_mode_title_top">Top position</string>
     <string name="slider_mode_title_center">Center position</string>
     <string name="slider_mode_title_bottom">Bottom position</string>
+
+    <string name="choose_app">Choose app</string>
+    <string name="category_music_gesture">II gesture</string>
+    <string name="gesture_enable_title">Enable</string>
+    <string name="gesture_app_title">Launch app</string>
+    <string name="category_camera_gesture">O gesture</string>
+    <string name="music_gesture_control_title">Music control</string>
+    <string name="music_gesture_control_summary">Play / pause music and \u003C / \u003E to skip tracks forward and backward</string>
+    <string name="camera_gesture_control_title">Camera</string>
+    <string name="camera_gesture_control_summary">Start camera</string>
+    <string name="category_torch_gesture">V gesture</string>
+    <string name="torch_gesture_control_title">Torch</string>
+    <string name="torch_gesture_control_summary">Toggle torch</string>
+    <string name="category_up_arrow_gesture">A gesture</string>
+    <string name="category_left_arrow_gesture">&lt; gesture</string>
+    <string name="category_right_arrow_gesture">&gt; gesture</string>
+    <string name="category_gestures_summary">Configure off screen gesture actions</string>
 </resources>

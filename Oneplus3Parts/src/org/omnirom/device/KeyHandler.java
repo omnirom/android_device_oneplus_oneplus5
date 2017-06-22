@@ -20,6 +20,7 @@ package org.omnirom.device;
 import android.app.ActivityManagerNative;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -34,6 +35,7 @@ import android.hardware.SensorManager;
 import android.media.IAudioService;
 import android.media.AudioManager;
 import android.media.session.MediaSessionLegacyHelper;
+import android.text.TextUtils;
 import android.os.Handler;
 import android.os.Message;
 import android.os.PowerManager;
@@ -76,6 +78,7 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final int GESTURE_II_SCANCODE = 251;
     private static final int GESTURE_LEFT_V_SCANCODE = 253;
     private static final int GESTURE_RIGHT_V_SCANCODE = 254;
+	private static final int GESTURE_A_SCANCODE = 255;
     private static final int KEY_DOUBLE_TAP = 143;
     private static final int KEY_HOME = 102;
     private static final int KEY_BACK = 158;
@@ -91,6 +94,7 @@ public class KeyHandler implements DeviceKeyHandler {
         GESTURE_II_SCANCODE,
         GESTURE_LEFT_V_SCANCODE,
         GESTURE_RIGHT_V_SCANCODE,
+        GESTURE_A_SCANCODE,
         KEY_SLIDER_TOP,
         KEY_SLIDER_CENTER,
         KEY_SLIDER_BOTTOM
@@ -113,6 +117,7 @@ public class KeyHandler implements DeviceKeyHandler {
         GESTURE_II_SCANCODE,
         GESTURE_LEFT_V_SCANCODE,
         GESTURE_RIGHT_V_SCANCODE,
+        GESTURE_A_SCANCODE,
     };
 
     protected final Context mContext;
@@ -232,32 +237,38 @@ public class KeyHandler implements DeviceKeyHandler {
     private void handleKey(int scanCode) {
         switch(scanCode) {
         case GESTURE_V_SCANCODE:
-            if (DEBUG) Log.i(TAG, "GESTURE_V_SCANCODE");
-            String rearCameraId = getRearCameraId();
-            if (rearCameraId != null) {
-                mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
-                try {
-                    mCameraManager.setTorchMode(rearCameraId, !mTorchEnabled);
-                    mTorchEnabled = !mTorchEnabled;
-                } catch (Exception e) {
-                    // Ignore
+            String value = Settings.System.getStringForUser(mContext.getContentResolver(),
+                    GestureSettings.DEVICE_GESTURE_MAPPING_2, UserHandle.USER_CURRENT);
+            if (TextUtils.isEmpty(value) || value.startsWith("default#")) {
+                if (DEBUG) Log.i(TAG, "GESTURE_V_SCANCODE");
+                String rearCameraId = getRearCameraId();
+                if (rearCameraId != null) {
+                    mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
+                    try {
+                        mCameraManager.setTorchMode(rearCameraId, !mTorchEnabled);
+                        mTorchEnabled = !mTorchEnabled;
+                    } catch (Exception e) {
+                        // Ignore
+                    }
                 }
             }
             break;
         case GESTURE_II_SCANCODE:
-            if (DEBUG) Log.i(TAG, "GESTURE_II_SCANCODE");
-            mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
-            dispatchMediaKeyWithWakeLockToAudioService(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
+            if (isMusicGestureEnabled()) {
+                if (DEBUG) Log.i(TAG, "handleKey GESTURE_II_SCANCODE");
+                mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
+                dispatchMediaKeyWithWakeLockToAudioService(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
+            }
             break;
         case GESTURE_LEFT_V_SCANCODE:
-            if (isMusicActive()) {
+            if (isMusicGestureEnabled() && isMusicActive()) {
                 if (DEBUG) Log.i(TAG, "GESTURE_LEFT_V_SCANCODE");
                 mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
                 dispatchMediaKeyWithWakeLockToAudioService(KeyEvent.KEYCODE_MEDIA_PREVIOUS);
             }
             break;
         case GESTURE_RIGHT_V_SCANCODE:
-            if (isMusicActive()) {
+            if (isMusicGestureEnabled() && isMusicActive()) {
                 if (DEBUG) Log.i(TAG, "GESTURE_RIGHT_V_SCANCODE");
                 mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
                 dispatchMediaKeyWithWakeLockToAudioService(KeyEvent.KEYCODE_MEDIA_NEXT);
@@ -335,7 +346,12 @@ public class KeyHandler implements DeviceKeyHandler {
         if (event.getAction() != KeyEvent.ACTION_UP) {
             return false;
         }
-        return event.getScanCode() == GESTURE_CIRCLE_SCANCODE;
+        String value = Settings.System.getStringForUser(mContext.getContentResolver(),
+                GestureSettings.DEVICE_GESTURE_MAPPING_1, UserHandle.USER_CURRENT);
+        if (TextUtils.isEmpty(value) || value.startsWith("default#")) {
+            return event.getScanCode() == GESTURE_CIRCLE_SCANCODE;
+        }
+        return false;
     }
 
     @Override
@@ -350,6 +366,59 @@ public class KeyHandler implements DeviceKeyHandler {
     public Intent isActivityLaunchEvent(KeyEvent event) {
         if (event.getAction() != KeyEvent.ACTION_UP) {
             return null;
+        }
+        if (event.getScanCode() == GESTURE_II_SCANCODE) {
+            String value = Settings.System.getStringForUser(mContext.getContentResolver(),
+                    GestureSettings.DEVICE_GESTURE_MAPPING_0, UserHandle.USER_CURRENT);
+            if (!TextUtils.isEmpty(value) && !value.startsWith("default#")) {
+                if (DEBUG) Log.i(TAG, "isActivityLaunchEvent GESTURE_II_SCANCODE " + value);
+                Intent intent = createIntent(value);
+                return intent;
+            }
+        } else if (event.getScanCode() == GESTURE_CIRCLE_SCANCODE) {
+            String value = Settings.System.getStringForUser(mContext.getContentResolver(),
+                    GestureSettings.DEVICE_GESTURE_MAPPING_1, UserHandle.USER_CURRENT);
+            if (!TextUtils.isEmpty(value) && !value.startsWith("default#")) {
+                if (DEBUG) Log.i(TAG, "isActivityLaunchEvent GESTURE_CIRCLE_SCANCODE " + value);
+                Intent intent = createIntent(value);
+                return intent;
+            }
+        } else if (event.getScanCode() == GESTURE_V_SCANCODE) {
+            String value = Settings.System.getStringForUser(mContext.getContentResolver(),
+                    GestureSettings.DEVICE_GESTURE_MAPPING_2, UserHandle.USER_CURRENT);
+            if (!TextUtils.isEmpty(value) && !value.startsWith("default#")) {
+                if (DEBUG) Log.i(TAG, "isActivityLaunchEvent GESTURE_V_SCANCODE " + value);
+                Intent intent = createIntent(value);
+                return intent;
+            }
+        } else if (event.getScanCode() == GESTURE_A_SCANCODE) {
+            String value = Settings.System.getStringForUser(mContext.getContentResolver(),
+                    GestureSettings.DEVICE_GESTURE_MAPPING_3, UserHandle.USER_CURRENT);
+            if (!TextUtils.isEmpty(value)) {
+                if (DEBUG) Log.i(TAG, "isActivityLaunchEvent GESTURE_A_SCANCODE " + value);
+                Intent intent = createIntent(value);
+                return intent;
+            }
+        } else if (event.getScanCode() == GESTURE_LEFT_V_SCANCODE) {
+            if (!isMusicGestureEnabled()) {
+                String value = Settings.System.getStringForUser(mContext.getContentResolver(),
+                        GestureSettings.DEVICE_GESTURE_MAPPING_4, UserHandle.USER_CURRENT);
+                if (!TextUtils.isEmpty(value)) {
+                    if (DEBUG) Log.i(TAG, "isActivityLaunchEvent GESTURE_LEFT_V_SCANCODE " + value);
+                    Intent intent = createIntent(value);
+                    return intent;
+                }
+            }
+        } else if (event.getScanCode() == GESTURE_RIGHT_V_SCANCODE) {
+            if (!isMusicGestureEnabled()) {
+                String value = Settings.System.getStringForUser(mContext.getContentResolver(),
+                        GestureSettings.DEVICE_GESTURE_MAPPING_5, UserHandle.USER_CURRENT);
+                if (!TextUtils.isEmpty(value)) {
+                    if (DEBUG) Log.i(TAG, "isActivityLaunchEvent GESTURE_RIGHT_V_SCANCODE " + value);
+                    Intent intent = createIntent(value);
+                    return intent;
+                }
+            }
         }
         return null;
     }
@@ -460,5 +529,20 @@ public class KeyHandler implements DeviceKeyHandler {
             mNoMan.setZenMode(Global.ZEN_MODE_NO_INTERRUPTIONS, null, TAG);
         }
     }
-}
 
+    private Intent createIntent(String value) {
+        ComponentName componentName = ComponentName.unflattenFromString(value);
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+        intent.setComponent(componentName);
+        return intent;
+    }
+
+    private boolean isMusicGestureEnabled() {
+        String value = Settings.System.getStringForUser(mContext.getContentResolver(),
+                GestureSettings.DEVICE_GESTURE_MAPPING_0, UserHandle.USER_CURRENT);
+        return TextUtils.isEmpty(value) || value.startsWith("default#");
+    }
+}

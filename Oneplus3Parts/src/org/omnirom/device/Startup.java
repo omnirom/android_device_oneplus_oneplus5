@@ -20,17 +20,46 @@ package org.omnirom.device;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 public class Startup extends BroadcastReceiver {
 
+    public static void restore(Context context, String file, boolean enabled) {
+        if (file == null) {
+            return;
+        }
+        Utils.writeValue(file, enabled ? "1" : "0");
+    }
+
+    public static void restore(Context context, String file, String value) {
+        if (file == null) {
+            return;
+        }
+        Utils.writeValue(file, value);
+    }
+
     @Override
     public void onReceive(final Context context, final Intent bootintent) {
-        CameraGestureSwitch.restore(context);
-        TorchGestureSwitch.restore(context);
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean enabled = sharedPrefs.getBoolean(GestureSettings.KEY_TORCH_SWITCH, false);
+        restore(context, TorchGestureSwitch.getFile(), enabled);
+        enabled = sharedPrefs.getBoolean(GestureSettings.KEY_UP_ARROW_SWITCH, false);
+        restore(context, UpArrowGestureSwitch.getFile(), enabled);
+        enabled = sharedPrefs.getBoolean(GestureSettings.KEY_CAMERA_SWITCH, false);
+        restore(context, CameraGestureSwitch.getFile(), enabled);
+        enabled = sharedPrefs.getBoolean(GestureSettings.KEY_MUSIC_SWITCH, false);
+        restore(context, MusicGestureSwitch.getFile(), enabled);
+        enabled = sharedPrefs.getBoolean(DeviceSettings.KEY_SRGB_SWITCH, false);
+        restore(context, SRGBModeSwitch.getFile(), enabled);
+        enabled = sharedPrefs.getBoolean(DeviceSettings.KEY_HBM_SWITCH, false);
+        restore(context, HBMModeSwitch.getFile(), enabled ? "2" : "0");
+        enabled = sharedPrefs.getBoolean(GestureSettings.KEY_LEFT_ARROW_SWITCH, false);
+        restore(context, LeftArrowGestureSwitch.getFile(), enabled);
+        enabled = sharedPrefs.getBoolean(GestureSettings.KEY_RIGHT_ARROW_SWITCH, false);
+        restore(context, RightArrowGestureSwitch.getFile(), enabled);
+
         KeyHandler.setButtonDisable(context);
         VibratorStrengthPreference.restore(context);
-        MusicGestureSwitch.restore(context);
-        SRGBModeSwitch.restore(context);
-        HBMModeSwitch.restore(context);
     }
 }
