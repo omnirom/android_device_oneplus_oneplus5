@@ -82,19 +82,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/category_up_arrow_gesture">
-
-        <CheckBoxPreference
-            android:key="up_arrow"
-            android:title="@string/gesture_enable_title" />
-        <org.omnirom.device.AppSelectListPreference
-            android:key="up_arrow_gesture_app"
-            android:title="@string/gesture_app_title"
-            android:persistent="false"
-            android:dependency="up_arrow" />
-    </PreferenceCategory>
-
-    <PreferenceCategory
         android:title="@string/category_left_arrow_gesture">
 
         <CheckBoxPreference
@@ -120,4 +107,16 @@
             android:dependency="right_arrow" />
     </PreferenceCategory>
 
+    <PreferenceCategory
+        android:title="@string/category_up_arrow_gesture">
+
+        <CheckBoxPreference
+            android:key="up_arrow"
+            android:title="@string/gesture_enable_title" />
+        <org.omnirom.device.AppSelectListPreference
+            android:key="up_arrow_gesture_app"
+            android:title="@string/gesture_app_title"
+            android:persistent="false"
+            android:dependency="up_arrow" />
+    </PreferenceCategory>
 </PreferenceScreen>
