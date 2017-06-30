@@ -42,6 +42,8 @@
     <string name="slider_mode_title_top">Top position</string>
     <string name="slider_mode_title_center">Center position</string>
     <string name="slider_mode_title_bottom">Bottom position</string>
+    <string name="dci_mode_summary"></string>
+    <string name="dci_mode_title">Wide color gammut mode</string>
 
     <string name="choose_app">Choose app</string>
     <string name="category_music_gesture">II gesture</string>

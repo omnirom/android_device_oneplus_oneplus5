@@ -58,6 +58,8 @@ public class Startup extends BroadcastReceiver {
         restore(context, LeftArrowGestureSwitch.getFile(), enabled);
         enabled = sharedPrefs.getBoolean(GestureSettings.KEY_RIGHT_ARROW_SWITCH, false);
         restore(context, RightArrowGestureSwitch.getFile(), enabled);
+        enabled = sharedPrefs.getBoolean(DeviceSettings.KEY_DCI_SWITCH, false);
+        restore(context, DCIModeSwitch.getFile(), enabled);
 
         KeyHandler.setButtonDisable(context);
         VibratorStrengthPreference.restore(context);
