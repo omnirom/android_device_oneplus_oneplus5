@@ -225,8 +225,13 @@ public class GestureSettings extends PreferenceActivity implements
 
     private void updateGestureConfig(String prefKey, AppSelectListPreference appPref, TwoStatePreference controlPref) {
         String value = Settings.System.getString(getContentResolver(), prefKey);
+        if (TextUtils.isEmpty(value)) {
+            appPref.setEnabled(true);
+            controlPref.setChecked(false);
+            return;
+        }
         boolean defaultValue = false;
-        if (TextUtils.isEmpty(value) || value.equals("default#")) {
+        if (value.equals("default#")) {
             defaultValue = true;
             value = "";
         } else if (value.startsWith("default#")) {

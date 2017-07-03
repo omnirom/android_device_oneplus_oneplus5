@@ -32,7 +32,6 @@
             android:summary="@string/camera_gesture_control_summary"
             android:title="@string/camera_gesture_control_title"
             android:persistent="false"
-            android:defaultValue="true"
             android:dependency="camera" />
         <org.omnirom.device.AppSelectListPreference
             android:key="camera_gesture_app"
@@ -52,7 +51,6 @@
             android:summary="@string/torch_gesture_control_summary"
             android:title="@string/torch_gesture_control_title"
             android:persistent="false"
-            android:defaultValue="true"
             android:dependency="torch" />
         <org.omnirom.device.AppSelectListPreference
             android:key="torch_gesture_app"
@@ -72,7 +70,6 @@
             android:summary="@string/music_gesture_control_summary"
             android:title="@string/music_gesture_control_title"
             android:persistent="false"
-            android:defaultValue="true"
             android:dependency="music" />
         <org.omnirom.device.AppSelectListPreference
             android:key="music_gesture_app"

@@ -239,7 +239,7 @@ public class KeyHandler implements DeviceKeyHandler {
         case GESTURE_V_SCANCODE:
             String value = Settings.System.getStringForUser(mContext.getContentResolver(),
                     GestureSettings.DEVICE_GESTURE_MAPPING_2, UserHandle.USER_CURRENT);
-            if (TextUtils.isEmpty(value) || value.startsWith("default#")) {
+            if (!TextUtils.isEmpty(value) && value.startsWith("default#")) {
                 if (DEBUG) Log.i(TAG, "GESTURE_V_SCANCODE");
                 String rearCameraId = getRearCameraId();
                 if (rearCameraId != null) {
@@ -348,7 +348,7 @@ public class KeyHandler implements DeviceKeyHandler {
         }
         String value = Settings.System.getStringForUser(mContext.getContentResolver(),
                 GestureSettings.DEVICE_GESTURE_MAPPING_1, UserHandle.USER_CURRENT);
-        if (TextUtils.isEmpty(value) || value.startsWith("default#")) {
+        if (!TextUtils.isEmpty(value) && value.startsWith("default#")) {
             return event.getScanCode() == GESTURE_CIRCLE_SCANCODE;
         }
         return false;
@@ -543,6 +543,6 @@ public class KeyHandler implements DeviceKeyHandler {
     private boolean isMusicGestureEnabled() {
         String value = Settings.System.getStringForUser(mContext.getContentResolver(),
                 GestureSettings.DEVICE_GESTURE_MAPPING_0, UserHandle.USER_CURRENT);
-        return TextUtils.isEmpty(value) || value.startsWith("default#");
+        return !TextUtils.isEmpty(value) && value.startsWith("default#");
     }
 }
