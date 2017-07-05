@@ -687,7 +687,7 @@
     </path>
 
     <path name="deep-buffer-playback receiver">
-        <path name="deep-buffer-playback speaker" />
+        <path name="deep-buffer-playback" />
     </path>
 
     <path name="deep-buffer-playback speaker-protected">
@@ -756,7 +756,7 @@
     </path>
 
     <path name="low-latency-playback receiver">
-        <path name="low-latency-playback speaker" />
+        <path name="low-latency-playback" />
     </path>
 
 
@@ -826,7 +826,7 @@
     </path>
 
     <path name="audio-ull-playback receiver">
-        <path name="audio-ull-playback speaker" />
+        <path name="audio-ull-playback" />
     </path>
 
     <path name="audio-ull-playback speaker-protected">
@@ -902,7 +902,7 @@
     </path>
 
     <path name="compress-offload-playback receiver">
-        <path name="compress-offload-playback speaker" />
+        <path name="compress-offload-playback" />
     </path>
 
     <path name="compress-offload-playback speaker-protected">
@@ -983,7 +983,7 @@
     </path>
 
     <path name="compress-offload-playback2 receiver">
-        <path name="compress-offload-playback2 speaker" />
+        <path name="compress-offload-playback2" />
     </path>
 
     <path name="compress-offload-playback2 hdmi">
@@ -1052,7 +1052,7 @@
     </path>
 
     <path name="compress-offload-playback3 receiver">
-        <path name="compress-offload-playback3 speaker" />
+        <path name="compress-offload-playback3" />
     </path>
 
     <path name="compress-offload-playback3 hdmi">
@@ -1121,7 +1121,7 @@
     </path>
 
     <path name="compress-offload-playback4 receiver">
-        <path name="compress-offload-playback4 speaker" />
+        <path name="compress-offload-playback4" />
     </path>
 
     <path name="compress-offload-playback4 hdmi">
@@ -1191,7 +1191,7 @@
     </path>
 
     <path name="compress-offload-playback5 receiver">
-        <path name="compress-offload-playback5 speaker" />
+        <path name="compress-offload-playback5" />
     </path>
 
     <path name="compress-offload-playback5 hdmi">
@@ -1260,7 +1260,7 @@
     </path>
 
     <path name="compress-offload-playback6 receiver">
-        <path name="compress-offload-playback6 speaker" />
+        <path name="compress-offload-playback6" />
     </path>
 
     <path name="compress-offload-playback6 hdmi">
@@ -1329,7 +1329,7 @@
     </path>
 
     <path name="compress-offload-playback7 receiver">
-        <path name="compress-offload-playback7 speaker" />
+        <path name="compress-offload-playback7" />
     </path>
 
     <path name="compress-offload-playback7 hdmi">
@@ -1398,7 +1398,7 @@
     </path>
 
     <path name="compress-offload-playback8 receiver">
-        <path name="compress-offload-playback8 speaker" />
+        <path name="compress-offload-playback8" />
     </path>
 
     <path name="compress-offload-playback8 hdmi">
@@ -1467,7 +1467,7 @@
     </path>
 
     <path name="compress-offload-playback9 receiver">
-        <path name="compress-offload-playback9 speaker" />
+        <path name="compress-offload-playback9" />
     </path>
 
     <path name="compress-offload-playback9 hdmi">
@@ -1762,8 +1762,7 @@
     </path>
 
     <path name="compress-voip-call receiver">
-        <ctl name="QUAT_MI2S_RX_Voice Mixer Voip" value="1" />
-        <ctl name="Voip_Tx Mixer SLIM_0_TX_Voip" value="1" />
+        <path name="compress-voip-call" />
     </path>
 
     <path name="compress-voip-call headphones">
@@ -1882,8 +1881,7 @@
     </path>
 
     <path name="voicemmode1-call receiver">
-        <ctl name="QUAT_MI2S_RX_Voice Mixer VoiceMMode1" value="1" />
-        <ctl name="VoiceMMode1_Tx Mixer SLIM_0_TX_MMode1" value="1" />
+        <path name="voicemmode1-call" />
     </path>
 
     <path name="voicemmode1-call headphones">
@@ -1943,8 +1941,7 @@
     </path>
 
     <path name="voicemmode2-call receiver">
-        <ctl name="QUAT_MI2S_RX_Voice Mixer VoiceMMode2" value="1" />
-        <ctl name="VoiceMMode2_Tx Mixer SLIM_0_TX_MMode2" value="1" />
+        <path name="voicemmode2-call" />
     </path>
 
     <path name="voicemmode2-call headphones">
