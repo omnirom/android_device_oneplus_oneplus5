@@ -22,6 +22,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.provider.Settings;
+import android.text.TextUtils;
 
 public class Startup extends BroadcastReceiver {
 
@@ -41,23 +43,35 @@ public class Startup extends BroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, final Intent bootintent) {
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean enabled = sharedPrefs.getBoolean(GestureSettings.KEY_TORCH_SWITCH, false);
-        restore(context, TorchGestureSwitch.getFile(), enabled);
-        enabled = sharedPrefs.getBoolean(GestureSettings.KEY_UP_ARROW_SWITCH, false);
+        String value = Settings.System.getString(context.getContentResolver(), GestureSettings.DEVICE_GESTURE_MAPPING_0);
+        boolean enabled = !TextUtils.isEmpty(value) && !value.equals(AppSelectListPreference.DISABLED_ENTRY);
+        restore(context, DoubleSwipeGestureSwitch.getFile(), enabled);
+
+        value = Settings.System.getString(context.getContentResolver(), GestureSettings.DEVICE_GESTURE_MAPPING_1);
+        enabled = !TextUtils.isEmpty(value) && !value.equals(AppSelectListPreference.DISABLED_ENTRY);
+        restore(context, CircleGestureSwitch.getFile(), enabled);
+
+        value = Settings.System.getString(context.getContentResolver(), GestureSettings.DEVICE_GESTURE_MAPPING_2);
+        enabled = !TextUtils.isEmpty(value) && !value.equals(AppSelectListPreference.DISABLED_ENTRY);
+        restore(context, DownArrowGestureSwitch.getFile(), enabled);
+
+        value = Settings.System.getString(context.getContentResolver(), GestureSettings.DEVICE_GESTURE_MAPPING_3);
+        enabled = !TextUtils.isEmpty(value) && !value.equals(AppSelectListPreference.DISABLED_ENTRY);
         restore(context, UpArrowGestureSwitch.getFile(), enabled);
-        enabled = sharedPrefs.getBoolean(GestureSettings.KEY_CAMERA_SWITCH, false);
-        restore(context, CameraGestureSwitch.getFile(), enabled);
-        enabled = sharedPrefs.getBoolean(GestureSettings.KEY_MUSIC_SWITCH, false);
-        restore(context, MusicGestureSwitch.getFile(), enabled);
+
+        value = Settings.System.getString(context.getContentResolver(), GestureSettings.DEVICE_GESTURE_MAPPING_4);
+        enabled = !TextUtils.isEmpty(value) && !value.equals(AppSelectListPreference.DISABLED_ENTRY);
+        restore(context, LeftArrowGestureSwitch.getFile(), enabled);
+
+        value = Settings.System.getString(context.getContentResolver(), GestureSettings.DEVICE_GESTURE_MAPPING_5);
+        enabled = !TextUtils.isEmpty(value) && !value.equals(AppSelectListPreference.DISABLED_ENTRY);
+        restore(context, RightArrowGestureSwitch.getFile(), enabled);
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         enabled = sharedPrefs.getBoolean(DeviceSettings.KEY_SRGB_SWITCH, false);
         restore(context, SRGBModeSwitch.getFile(), enabled);
         enabled = sharedPrefs.getBoolean(DeviceSettings.KEY_HBM_SWITCH, false);
         restore(context, HBMModeSwitch.getFile(), enabled ? "2" : "0");
-        enabled = sharedPrefs.getBoolean(GestureSettings.KEY_LEFT_ARROW_SWITCH, false);
-        restore(context, LeftArrowGestureSwitch.getFile(), enabled);
-        enabled = sharedPrefs.getBoolean(GestureSettings.KEY_RIGHT_ARROW_SWITCH, false);
-        restore(context, RightArrowGestureSwitch.getFile(), enabled);
         enabled = sharedPrefs.getBoolean(DeviceSettings.KEY_DCI_SWITCH, false);
         restore(context, DCIModeSwitch.getFile(), enabled);
 

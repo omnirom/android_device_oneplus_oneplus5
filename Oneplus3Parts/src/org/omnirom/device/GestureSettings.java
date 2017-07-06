@@ -40,46 +40,27 @@ import android.util.Log;
 public class GestureSettings extends PreferenceActivity implements
         Preference.OnPreferenceChangeListener {
 
-    public static final String KEY_CAMERA_SWITCH = "camera";
-    public static final String KEY_TORCH_SWITCH = "torch";
-    public static final String KEY_MUSIC_SWITCH = "music";
-    public static final String KEY_UP_ARROW_SWITCH ="up_arrow";
-    public static final String KEY_LEFT_ARROW_SWITCH ="left_arrow";
-    public static final String KEY_RIGHT_ARROW_SWITCH ="right_arrow";
-
     public static final String KEY_PROXI_SWITCH = "proxi";
-    private static final String KEY_MUSIC_APP = "music_gesture_app";
-    private static final String KEY_MUSIC_CONTROL = "music_gesture_control";
-    private static final String KEY_CAMERA_APP = "camera_gesture_app";
-    private static final String KEY_CAMERA_CONTROL = "camera_gesture_control";
-    private static final String KEY_TORCH_APP = "torch_gesture_app";
-    private static final String KEY_TORCH_CONTROL = "torch_gesture_control";
+    private static final String KEY_DOUBLE_SWIPE_APP = "double_swipe_gesture_app";
+    private static final String KEY_CIRCLE_APP = "circle_gesture_app";
+    private static final String KEY_DOWN_ARROW_APP = "down_arrow_gesture_app";
     private static final String KEY_UP_ARROW_APP = "up_arrow_gesture_app";
     private static final String KEY_LEFT_ARROW_APP = "left_arrow_gesture_app";
     private static final String KEY_RIGHT_ARROW_APP = "right_arrow_gesture_app";
 
-    public static final String DEVICE_GESTURE_MAPPING_0 = "device_gesture_mapping_0";
-    public static final String DEVICE_GESTURE_MAPPING_1 = "device_gesture_mapping_1";
-    public static final String DEVICE_GESTURE_MAPPING_2 = "device_gesture_mapping_2";
-    public static final String DEVICE_GESTURE_MAPPING_3 = "device_gesture_mapping_3";
-    public static final String DEVICE_GESTURE_MAPPING_4 = "device_gesture_mapping_4";
-    public static final String DEVICE_GESTURE_MAPPING_5 = "device_gesture_mapping_5";
+    public static final String DEVICE_GESTURE_MAPPING_0 = "device_gesture_mapping_0_0";
+    public static final String DEVICE_GESTURE_MAPPING_1 = "device_gesture_mapping_1_0";
+    public static final String DEVICE_GESTURE_MAPPING_2 = "device_gesture_mapping_2_0";
+    public static final String DEVICE_GESTURE_MAPPING_3 = "device_gesture_mapping_3_0";
+    public static final String DEVICE_GESTURE_MAPPING_4 = "device_gesture_mapping_4_0";
+    public static final String DEVICE_GESTURE_MAPPING_5 = "device_gesture_mapping_5_0";
 
-    private TwoStatePreference mTorchSwitch;
-    private TwoStatePreference mCameraSwitch;
-    private TwoStatePreference mMusicSwitch;
     private TwoStatePreference mProxiSwitch;
-    private AppSelectListPreference mMusicApp;
-    private TwoStatePreference mMusicControl;
-    private AppSelectListPreference mCameraApp;
-    private TwoStatePreference mCameraControl;
-    private AppSelectListPreference mTorchApp;
-    private TwoStatePreference mTorchControl;
-    private TwoStatePreference mUpArrowSwitch;
+    private AppSelectListPreference mDoubleSwipeApp;
+    private AppSelectListPreference mCircleApp;
+    private AppSelectListPreference mDownArrowApp;
     private AppSelectListPreference mUpArrowApp;
-    private TwoStatePreference mLeftArrowSwitch;
     private AppSelectListPreference mLeftArrowApp;
-    private TwoStatePreference mRightArrowSwitch;
     private AppSelectListPreference mRightArrowApp;
 
     @Override
@@ -89,81 +70,45 @@ public class GestureSettings extends PreferenceActivity implements
 
         addPreferencesFromResource(R.xml.gesture_settings);
 
-        mTorchSwitch = (TwoStatePreference) findPreference(KEY_TORCH_SWITCH);
-        mTorchSwitch.setEnabled(TorchGestureSwitch.isSupported());
-        mTorchSwitch.setChecked(TorchGestureSwitch.isCurrentlyEnabled(this));
-        mTorchSwitch.setOnPreferenceChangeListener(new TorchGestureSwitch());
-
-        mCameraSwitch = (TwoStatePreference) findPreference(KEY_CAMERA_SWITCH);
-        mCameraSwitch.setEnabled(CameraGestureSwitch.isSupported());
-        mCameraSwitch.setChecked(CameraGestureSwitch.isCurrentlyEnabled(this));
-        mCameraSwitch.setOnPreferenceChangeListener(new CameraGestureSwitch());
-
-        mMusicSwitch = (TwoStatePreference) findPreference(KEY_MUSIC_SWITCH);
-        mMusicSwitch.setEnabled(MusicGestureSwitch.isSupported());
-        mMusicSwitch.setChecked(MusicGestureSwitch.isCurrentlyEnabled(this));
-        mMusicSwitch.setOnPreferenceChangeListener(new MusicGestureSwitch());
-
         mProxiSwitch = (TwoStatePreference) findPreference(KEY_PROXI_SWITCH);
         mProxiSwitch.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.DEVICE_PROXI_CHECK_ENABLED, 1) != 0);
 
-        mMusicApp = (AppSelectListPreference) findPreference(KEY_MUSIC_APP);
-        mMusicApp.setOnPreferenceChangeListener(this);
+        mDoubleSwipeApp = (AppSelectListPreference) findPreference(KEY_DOUBLE_SWIPE_APP);
+        mDoubleSwipeApp.setEnabled(DoubleSwipeGestureSwitch.isSupported());
+        String value = Settings.System.getString(getContentResolver(), DEVICE_GESTURE_MAPPING_0);
+        mDoubleSwipeApp.setValue(value);
+        mDoubleSwipeApp.setOnPreferenceChangeListener(this);
 
-        mMusicControl = (TwoStatePreference) findPreference(KEY_MUSIC_CONTROL);
-        mMusicControl.setOnPreferenceChangeListener(this);
+        mCircleApp = (AppSelectListPreference) findPreference(KEY_CIRCLE_APP);
+        mCircleApp.setEnabled(CircleGestureSwitch.isSupported());
+        value = Settings.System.getString(getContentResolver(), DEVICE_GESTURE_MAPPING_1);
+        mCircleApp.setValue(value);
+        mCircleApp.setOnPreferenceChangeListener(this);
 
-        updateGestureConfig(DEVICE_GESTURE_MAPPING_0, mMusicApp, mMusicControl);
-
-        mCameraApp = (AppSelectListPreference) findPreference(KEY_CAMERA_APP);
-        mCameraApp.setOnPreferenceChangeListener(this);
-
-        mCameraControl = (TwoStatePreference) findPreference(KEY_CAMERA_CONTROL);
-        mCameraControl.setOnPreferenceChangeListener(this);
-
-        updateGestureConfig(DEVICE_GESTURE_MAPPING_1, mCameraApp, mCameraControl);
-
-        mTorchApp = (AppSelectListPreference) findPreference(KEY_TORCH_APP);
-        mTorchApp.setOnPreferenceChangeListener(this);
-
-        mTorchControl = (TwoStatePreference) findPreference(KEY_TORCH_CONTROL);
-        mTorchControl.setOnPreferenceChangeListener(this);
-
-        updateGestureConfig(DEVICE_GESTURE_MAPPING_2, mTorchApp, mTorchControl);
-
-        mUpArrowSwitch = (TwoStatePreference) findPreference(KEY_UP_ARROW_SWITCH);
-        mUpArrowSwitch.setEnabled(UpArrowGestureSwitch.isSupported());
-        mUpArrowSwitch.setChecked(UpArrowGestureSwitch.isCurrentlyEnabled(this));
-        mUpArrowSwitch.setOnPreferenceChangeListener(new UpArrowGestureSwitch());
+        mDownArrowApp = (AppSelectListPreference) findPreference(KEY_DOWN_ARROW_APP);
+        mDownArrowApp.setEnabled(DownArrowGestureSwitch.isSupported());
+        value = Settings.System.getString(getContentResolver(), DEVICE_GESTURE_MAPPING_2);
+        mDownArrowApp.setValue(value);
+        mDownArrowApp.setOnPreferenceChangeListener(this);
 
         mUpArrowApp = (AppSelectListPreference) findPreference(KEY_UP_ARROW_APP);
-        String value = Settings.System.getString(getContentResolver(), DEVICE_GESTURE_MAPPING_3);
+        mUpArrowApp.setEnabled(UpArrowGestureSwitch.isSupported());
+        value = Settings.System.getString(getContentResolver(), DEVICE_GESTURE_MAPPING_3);
         mUpArrowApp.setValue(value);
         mUpArrowApp.setOnPreferenceChangeListener(this);
 
-        mLeftArrowSwitch = (TwoStatePreference) findPreference(KEY_LEFT_ARROW_SWITCH);
-        mLeftArrowSwitch.setEnabled(LeftArrowGestureSwitch.isSupported());
-        mLeftArrowSwitch.setChecked(LeftArrowGestureSwitch.isCurrentlyEnabled(this));
-        mLeftArrowSwitch.setOnPreferenceChangeListener(new LeftArrowGestureSwitch());
-
         mLeftArrowApp = (AppSelectListPreference) findPreference(KEY_LEFT_ARROW_APP);
+        mLeftArrowApp.setEnabled(LeftArrowGestureSwitch.isSupported());
         value = Settings.System.getString(getContentResolver(), DEVICE_GESTURE_MAPPING_4);
         mLeftArrowApp.setValue(value);
         mLeftArrowApp.setOnPreferenceChangeListener(this);
 
-        mRightArrowSwitch = (TwoStatePreference) findPreference(KEY_RIGHT_ARROW_SWITCH);
-        mRightArrowSwitch.setEnabled(RightArrowGestureSwitch.isSupported());
-        mRightArrowSwitch.setChecked(RightArrowGestureSwitch.isCurrentlyEnabled(this));
-        mRightArrowSwitch.setOnPreferenceChangeListener(new RightArrowGestureSwitch());
-
         mRightArrowApp = (AppSelectListPreference) findPreference(KEY_RIGHT_ARROW_APP);
+        mRightArrowApp.setEnabled(RightArrowGestureSwitch.isSupported());
         value = Settings.System.getString(getContentResolver(), DEVICE_GESTURE_MAPPING_5);
         mRightArrowApp.setValue(value);
         mRightArrowApp.setOnPreferenceChangeListener(this);
-
-        mRightArrowApp.setEnabled(!mMusicControl.isChecked());
-        mLeftArrowApp.setEnabled(!mMusicControl.isChecked());
     }
 
     @Override
@@ -190,77 +135,37 @@ public class GestureSettings extends PreferenceActivity implements
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        if (preference == mMusicApp) {
+        if (preference == mDoubleSwipeApp) {
             String value = (String) newValue;
+            boolean gestureDisabled = value.equals(AppSelectListPreference.DISABLED_ENTRY);
+            DoubleSwipeGestureSwitch.setEnabled(!gestureDisabled);
             Settings.System.putString(getContentResolver(), DEVICE_GESTURE_MAPPING_0, value);
-        } else if (preference == mMusicControl) {
-            Boolean value = (Boolean) newValue;
-            updateGestureConfig(DEVICE_GESTURE_MAPPING_0, mMusicApp, value);
-            mRightArrowApp.setEnabled(!value);
-            mLeftArrowApp.setEnabled(!value);
-        } else if (preference == mCameraApp) {
+        } else if (preference == mCircleApp) {
             String value = (String) newValue;
+            boolean gestureDisabled = value.equals(AppSelectListPreference.DISABLED_ENTRY);
+            CircleGestureSwitch.setEnabled(!gestureDisabled);
             Settings.System.putString(getContentResolver(), DEVICE_GESTURE_MAPPING_1, value);
-        } else if (preference == mCameraControl) {
-            Boolean value = (Boolean) newValue;
-            updateGestureConfig(DEVICE_GESTURE_MAPPING_1, mCameraApp, value);
-        } else if (preference == mTorchApp) {
+        } else if (preference == mDownArrowApp) {
             String value = (String) newValue;
+            boolean gestureDisabled = value.equals(AppSelectListPreference.DISABLED_ENTRY);
+            DownArrowGestureSwitch.setEnabled(!gestureDisabled);
             Settings.System.putString(getContentResolver(), DEVICE_GESTURE_MAPPING_2, value);
-        } else if (preference == mTorchControl) {
-            Boolean value = (Boolean) newValue;
-            updateGestureConfig(DEVICE_GESTURE_MAPPING_2, mTorchApp, value);
         } else if (preference == mUpArrowApp) {
             String value = (String) newValue;
+            boolean gestureDisabled = value.equals(AppSelectListPreference.DISABLED_ENTRY);
+            UpArrowGestureSwitch.setEnabled(!gestureDisabled);
             Settings.System.putString(getContentResolver(), DEVICE_GESTURE_MAPPING_3, value);
         } else if (preference == mLeftArrowApp) {
             String value = (String) newValue;
+            boolean gestureDisabled = value.equals(AppSelectListPreference.DISABLED_ENTRY);
+            LeftArrowGestureSwitch.setEnabled(!gestureDisabled);
             Settings.System.putString(getContentResolver(), DEVICE_GESTURE_MAPPING_4, value);
         } else if (preference == mRightArrowApp) {
             String value = (String) newValue;
+            boolean gestureDisabled = value.equals(AppSelectListPreference.DISABLED_ENTRY);
+            RightArrowGestureSwitch.setEnabled(!gestureDisabled);
             Settings.System.putString(getContentResolver(), DEVICE_GESTURE_MAPPING_5, value);
         }
         return true;
-    }
-
-    private void updateGestureConfig(String prefKey, AppSelectListPreference appPref, TwoStatePreference controlPref) {
-        String value = Settings.System.getString(getContentResolver(), prefKey);
-        if (TextUtils.isEmpty(value)) {
-            appPref.setEnabled(true);
-            controlPref.setChecked(false);
-            return;
-        }
-        boolean defaultValue = false;
-        if (value.equals("default#")) {
-            defaultValue = true;
-            value = "";
-        } else if (value.startsWith("default#")) {
-            defaultValue = true;
-            value = value.substring("default#".length(), value.length());
-        }
-        if (defaultValue) {
-            appPref.setEnabled(false);
-            controlPref.setChecked(true);
-        } else {
-            appPref.setValue(value);
-            controlPref.setChecked(false);
-        }
-    }
-
-    private void updateGestureConfig(String prefKey, AppSelectListPreference appPref, boolean defaultValue) {
-        String oldValue = Settings.System.getString(getContentResolver(), prefKey);
-        if (TextUtils.isEmpty(oldValue) || oldValue.equals("default#")) {
-            oldValue = "";
-        } else if (oldValue.startsWith("default#")) {
-            oldValue = oldValue.substring("default#".length(), oldValue.length());
-        }
-        if (defaultValue) {
-            appPref.setEnabled(false);
-            Settings.System.putString(getContentResolver(), prefKey, "default#" + oldValue);
-        } else {
-            appPref.setEnabled(true);
-            appPref.setValue(oldValue);
-            Settings.System.putString(getContentResolver(), prefKey, oldValue);
-        }
     }
 }

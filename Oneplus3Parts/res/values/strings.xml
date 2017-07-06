@@ -46,19 +46,20 @@
     <string name="dci_mode_title">Wide color gammut mode</string>
 
     <string name="choose_app">Choose app</string>
-    <string name="category_music_gesture">II gesture</string>
-    <string name="gesture_enable_title">Enable</string>
+    <string name="category_double_swipe_gesture">II gesture</string>
     <string name="gesture_app_title">Launch app</string>
-    <string name="category_camera_gesture">O gesture</string>
-    <string name="music_gesture_control_title">Music control</string>
-    <string name="music_gesture_control_summary">Play / pause music and \u003C / \u003E to skip tracks forward and backward</string>
-    <string name="camera_gesture_control_title">Camera</string>
-    <string name="camera_gesture_control_summary">Start camera</string>
-    <string name="category_torch_gesture">V gesture</string>
-    <string name="torch_gesture_control_title">Torch</string>
-    <string name="torch_gesture_control_summary">Toggle torch</string>
+    <string name="category_circle_gesture">O gesture</string>
+    <string name="category_down_arrow_gesture">V gesture</string>
     <string name="category_up_arrow_gesture">A gesture</string>
     <string name="category_left_arrow_gesture">&lt; gesture</string>
     <string name="category_right_arrow_gesture">&gt; gesture</string>
     <string name="category_gestures_summary">Configure off screen gesture actions</string>
+    <string name="torch_entry">Flashlight</string>
+    <string name="disabled_entry">Disabled</string>
+    <string name="camera_entry">Camera</string>
+    <string name="music_play_entry">Play / pause music</string>
+    <string name="music_prev_entry">Prev track</string>
+    <string name="music_next_entry">Next track</string>
+    <string name="not_ready_summary">Resolving...</string>
+    <string name="resolve_failed_summary">Resolving app failed</string>
 </resources>

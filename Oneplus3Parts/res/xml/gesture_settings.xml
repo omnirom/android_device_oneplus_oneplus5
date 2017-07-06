@@ -22,98 +22,56 @@
         android:persistent="false" />
 
     <PreferenceCategory
-        android:title="@string/category_camera_gesture">
+        android:title="@string/category_circle_gesture">
 
-        <CheckBoxPreference
-            android:key="camera"
-            android:title="@string/gesture_enable_title" />
-        <CheckBoxPreference
-            android:key="camera_gesture_control"
-            android:summary="@string/camera_gesture_control_summary"
-            android:title="@string/camera_gesture_control_title"
-            android:persistent="false"
-            android:dependency="camera" />
         <org.omnirom.device.AppSelectListPreference
-            android:key="camera_gesture_app"
+            android:key="circle_gesture_app"
             android:title="@string/gesture_app_title"
-            android:persistent="false"
-            android:dependency="camera" />
+            android:persistent="false"/>
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/category_torch_gesture">
+        android:title="@string/category_down_arrow_gesture">
 
-        <CheckBoxPreference
-            android:key="torch"
-            android:title="@string/gesture_enable_title" />
-        <CheckBoxPreference
-            android:key="torch_gesture_control"
-            android:summary="@string/torch_gesture_control_summary"
-            android:title="@string/torch_gesture_control_title"
-            android:persistent="false"
-            android:dependency="torch" />
         <org.omnirom.device.AppSelectListPreference
-            android:key="torch_gesture_app"
+            android:key="down_arrow_gesture_app"
             android:title="@string/gesture_app_title"
-            android:persistent="false"
-            android:dependency="torch" />
+            android:persistent="false"/>
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/category_music_gesture">
+        android:title="@string/category_double_swipe_gesture">
 
-        <CheckBoxPreference
-            android:key="music"
-            android:title="@string/gesture_enable_title" />
-        <CheckBoxPreference
-            android:key="music_gesture_control"
-            android:summary="@string/music_gesture_control_summary"
-            android:title="@string/music_gesture_control_title"
-            android:persistent="false"
-            android:dependency="music" />
         <org.omnirom.device.AppSelectListPreference
-            android:key="music_gesture_app"
+            android:key="double_swipe_gesture_app"
             android:title="@string/gesture_app_title"
-            android:persistent="false"
-            android:dependency="music" />
+            android:persistent="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:title="@string/category_left_arrow_gesture">
 
-        <CheckBoxPreference
-            android:key="left_arrow"
-            android:title="@string/gesture_enable_title" />
         <org.omnirom.device.AppSelectListPreference
             android:key="left_arrow_gesture_app"
             android:title="@string/gesture_app_title"
-            android:persistent="false"
-            android:dependency="left_arrow" />
+            android:persistent="false"/>
     </PreferenceCategory>
 
     <PreferenceCategory
         android:title="@string/category_right_arrow_gesture">
 
-        <CheckBoxPreference
-            android:key="right_arrow"
-            android:title="@string/gesture_enable_title" />
         <org.omnirom.device.AppSelectListPreference
             android:key="right_arrow_gesture_app"
             android:title="@string/gesture_app_title"
-            android:persistent="false"
-            android:dependency="right_arrow" />
+            android:persistent="false"/>
     </PreferenceCategory>
 
     <PreferenceCategory
         android:title="@string/category_up_arrow_gesture">
 
-        <CheckBoxPreference
-            android:key="up_arrow"
-            android:title="@string/gesture_enable_title" />
         <org.omnirom.device.AppSelectListPreference
             android:key="up_arrow_gesture_app"
             android:title="@string/gesture_app_title"
-            android:persistent="false"
-            android:dependency="up_arrow" />
+            android:persistent="false" />
     </PreferenceCategory>
 </PreferenceScreen>

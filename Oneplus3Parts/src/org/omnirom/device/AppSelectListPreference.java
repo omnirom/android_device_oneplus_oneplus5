@@ -49,23 +49,38 @@ public class AppSelectListPreference extends DialogPreference implements DialogI
 
     private static String TAG = "AppSelectListPreference";
 
+    public static final String TORCH_ENTRY = "torch";
+    public static final String DISABLED_ENTRY = "disabled";
+    public static final String CAMERA_ENTRY = "camera";
+    public static final String MUSIC_PLAY_ENTRY = "music_play";
+    public static final String MUSIC_PREV_ENTRY = "music_prev";
+    public static final String MUSIC_NEXT_ENTRY = "music_next";
+
     private ImageView mAppIcon;
     private AppSelectListAdapter mAdapter;
     private Drawable mAppIconDrawable;
+    private int mAppIconResourceId;
     private CharSequence mTitle;
     private String mValue;
 
     public class PackageItem implements Comparable<PackageItem> {
-        public final String mPackageName;
         public final CharSequence mTitle;
         public final Drawable mAppIcon;
+        public final int mAppIconResourceId;
         public final String mComponentName;
 
-        PackageItem(String packageName, CharSequence title, Drawable icon, String componentName) {
-            this.mPackageName = packageName;
-            this.mTitle = title;
-            this.mAppIcon = icon;
-            this.mComponentName = componentName;
+        PackageItem(CharSequence title, int iconResourceId, String componentName) {
+            mTitle = title;
+            mAppIconResourceId = iconResourceId;
+            mAppIcon = null;
+            mComponentName = componentName;
+        }
+
+        PackageItem(CharSequence title, Drawable icon, String componentName) {
+            mTitle = title;
+            mAppIcon = icon;
+            mAppIconResourceId= 0;
+            mComponentName = componentName;
         }
 
         @Override
@@ -95,6 +110,31 @@ public class AppSelectListPreference extends DialogPreference implements DialogI
         private final Handler mHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
+                // now add the special actions on top
+                PackageItem cameraItem = new PackageItem(getContext().getResources().getString(R.string.camera_entry),
+                        R.drawable.ic_camera, CAMERA_ENTRY);
+                mInstalledPackages.add(0, cameraItem);
+
+                PackageItem torchItem = new PackageItem(getContext().getResources().getString(R.string.torch_entry),
+                        R.drawable.ic_flashlight, TORCH_ENTRY);
+                mInstalledPackages.add(0, torchItem);
+
+                PackageItem musicNextItem = new PackageItem(getContext().getResources().getString(R.string.music_next_entry),
+                        R.drawable.ic_music_next, MUSIC_NEXT_ENTRY);
+                mInstalledPackages.add(0, musicNextItem);
+
+                PackageItem musicPrevItem = new PackageItem(getContext().getResources().getString(R.string.music_prev_entry),
+                        R.drawable.ic_music_prev, MUSIC_PREV_ENTRY);
+                mInstalledPackages.add(0, musicPrevItem);
+
+                PackageItem musicPlayItem = new PackageItem(getContext().getResources().getString(R.string.music_play_entry),
+                        R.drawable.ic_music_play, MUSIC_PLAY_ENTRY);
+                mInstalledPackages.add(0, musicPlayItem);
+
+                PackageItem disabledItem = new PackageItem(getContext().getResources().getString(R.string.disabled_entry),
+                        R.drawable.ic_disabled, DISABLED_ENTRY);
+                mInstalledPackages.add(0, disabledItem);
+
                 notifyDataSetChanged();
                 updatePreferenceViews();
             }
@@ -136,7 +176,11 @@ public class AppSelectListPreference extends DialogPreference implements DialogI
 
             PackageItem applicationInfo = getItem(position);
             holder.title.setText(applicationInfo.mTitle);
-            holder.icon.setImageDrawable(applicationInfo.mAppIcon);
+            if (applicationInfo.mAppIcon != null) {
+                holder.icon.setImageDrawable(applicationInfo.mAppIcon);
+            } else {
+                holder.icon.setImageResource(applicationInfo.mAppIconResourceId);
+            }
             return convertView;
         }
 
@@ -156,8 +200,12 @@ public class AppSelectListPreference extends DialogPreference implements DialogI
                 ApplicationInfo appInfo = activity.applicationInfo;
                 ComponentName name = new ComponentName(appInfo.packageName, activity.name);
                 try {
-                    final PackageItem item = new PackageItem(appInfo.packageName,
-                            activity.loadLabel(mPm), mPm.getActivityIcon(name), name.flattenToString());
+                    Drawable appIcon = mPm.getActivityIcon(name);
+                    if (appIcon == null) {
+                        appIcon = getDefaultActivityIcon();
+                    }
+                    final PackageItem item = new PackageItem(
+                            activity.loadLabel(mPm), appIcon, name.flattenToString());
                     mInstalledPackages.add(item);
                 } catch (PackageManager.NameNotFoundException e) {
                 }
@@ -207,9 +255,13 @@ public class AppSelectListPreference extends DialogPreference implements DialogI
         mAppIcon = (ImageView) v.findViewById(R.id.app_icon);
         if (mTitle != null) {
             setSummary(mTitle);
+        } else {
+            setSummary(getContext().getResources().getString(R.string.not_ready_summary));
         }
         if (mAppIconDrawable != null) {
             mAppIcon.setImageDrawable(mAppIconDrawable);
+        } else {
+            mAppIcon.setImageResource(mAppIconResourceId);
         }
         return v;
     }
@@ -221,23 +273,52 @@ public class AppSelectListPreference extends DialogPreference implements DialogI
         } else {
             name = mValue;
         }
+
         if (name != null) {
-            if (mTitle == null || mAppIconDrawable == null) {
-                ComponentName componentName = ComponentName.unflattenFromString(name);
-                PackageItem item = mAdapter.resolveApplication(componentName);
-                if (item != null) {
-                    mTitle = item.mTitle;
-                    mAppIconDrawable = item.mAppIcon;
+            if (mTitle == null) {
+                mAppIconDrawable = null;
+                mAppIconResourceId = 0;
+                if (name.equals(DISABLED_ENTRY)) {
+                    mTitle = getContext().getResources().getString(R.string.disabled_entry);
+                    mAppIconResourceId = R.drawable.ic_disabled;
+                } else if (name.equals(TORCH_ENTRY)) {
+                    mTitle = getContext().getResources().getString(R.string.torch_entry);
+                    mAppIconResourceId = R.drawable.ic_flashlight;
+                } else if (name.equals(CAMERA_ENTRY)) {
+                    mTitle = getContext().getResources().getString(R.string.camera_entry);
+                    mAppIconResourceId = R.drawable.ic_camera;
+                } else if (name.equals(MUSIC_PLAY_ENTRY)) {
+                    mTitle = getContext().getResources().getString(R.string.music_play_entry);
+                    mAppIconResourceId = R.drawable.ic_music_play;
+                } else if (name.equals(MUSIC_NEXT_ENTRY)) {
+                    mTitle = getContext().getResources().getString(R.string.music_next_entry);
+                    mAppIconResourceId = R.drawable.ic_music_next;
+                } else if (name.equals(MUSIC_PREV_ENTRY)) {
+                    mTitle = getContext().getResources().getString(R.string.music_prev_entry);
+                    mAppIconResourceId = R.drawable.ic_music_prev;
+                } else {
+                    ComponentName componentName = ComponentName.unflattenFromString(name);
+                    PackageItem item = mAdapter.resolveApplication(componentName);
+                    if (item != null) {
+                        mTitle = item.mTitle;
+                        mAppIconDrawable = item.mAppIcon;
+                    } else {
+                        mTitle = getContext().getResources().getString(R.string.resolve_failed_summary);
+                    }
                 }
             }
         } else {
-            mTitle = null;
-            mAppIconDrawable = null;
+            mTitle = getContext().getResources().getString(R.string.disabled_entry);
+            mAppIconResourceId = R.drawable.ic_disabled;
         }
 
         if (mAppIcon != null) {
             setSummary(mTitle);
-            mAppIcon.setImageDrawable(mAppIconDrawable);
+            if (mAppIconDrawable != null) {
+                mAppIcon.setImageDrawable(mAppIconDrawable);
+            } else {
+                mAppIcon.setImageResource(mAppIconResourceId);
+            }
         }
     }
 
@@ -259,9 +340,8 @@ public class AppSelectListPreference extends DialogPreference implements DialogI
                 }
                 mTitle = info.mTitle;
                 mAppIconDrawable = info.mAppIcon;
-                if (mAppIconDrawable == null) {
-                    mAppIconDrawable = getDefaultActivityIcon();
-                }
+                mAppIconResourceId = info.mAppIconResourceId;
+
                 updatePreferenceViews();
                 callChangeListener(mValue);
                 getDialog().dismiss();

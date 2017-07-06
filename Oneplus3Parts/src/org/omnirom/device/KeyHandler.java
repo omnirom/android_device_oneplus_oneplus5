@@ -229,51 +229,6 @@ public class KeyHandler implements DeviceKeyHandler {
     private class EventHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
-            KeyEvent event = (KeyEvent) msg.obj;
-            handleKey(event.getScanCode());
-        }
-    }
-
-    private void handleKey(int scanCode) {
-        switch(scanCode) {
-        case GESTURE_V_SCANCODE:
-            String value = Settings.System.getStringForUser(mContext.getContentResolver(),
-                    GestureSettings.DEVICE_GESTURE_MAPPING_2, UserHandle.USER_CURRENT);
-            if (!TextUtils.isEmpty(value) && value.startsWith("default#")) {
-                if (DEBUG) Log.i(TAG, "GESTURE_V_SCANCODE");
-                String rearCameraId = getRearCameraId();
-                if (rearCameraId != null) {
-                    mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
-                    try {
-                        mCameraManager.setTorchMode(rearCameraId, !mTorchEnabled);
-                        mTorchEnabled = !mTorchEnabled;
-                    } catch (Exception e) {
-                        // Ignore
-                    }
-                }
-            }
-            break;
-        case GESTURE_II_SCANCODE:
-            if (isMusicGestureEnabled()) {
-                if (DEBUG) Log.i(TAG, "handleKey GESTURE_II_SCANCODE");
-                mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
-                dispatchMediaKeyWithWakeLockToAudioService(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
-            }
-            break;
-        case GESTURE_LEFT_V_SCANCODE:
-            if (isMusicGestureEnabled() && isMusicActive()) {
-                if (DEBUG) Log.i(TAG, "GESTURE_LEFT_V_SCANCODE");
-                mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
-                dispatchMediaKeyWithWakeLockToAudioService(KeyEvent.KEYCODE_MEDIA_PREVIOUS);
-            }
-            break;
-        case GESTURE_RIGHT_V_SCANCODE:
-            if (isMusicGestureEnabled() && isMusicActive()) {
-                if (DEBUG) Log.i(TAG, "GESTURE_RIGHT_V_SCANCODE");
-                mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
-                dispatchMediaKeyWithWakeLockToAudioService(KeyEvent.KEYCODE_MEDIA_NEXT);
-            }
-            break;
         }
     }
 
@@ -300,10 +255,6 @@ public class KeyHandler implements DeviceKeyHandler {
                     doHandleSliderAction(2);
                     return true;
             }
-
-            Message msg = getMessageForKeyEvent(event);
-            mEventHandler.removeMessages(GESTURE_REQUEST);
-            mEventHandler.sendMessage(msg);
         }
         return isKeySupported;
     }
@@ -324,12 +275,6 @@ public class KeyHandler implements DeviceKeyHandler {
         return false;
     }
 
-    private Message getMessageForKeyEvent(KeyEvent keyEvent) {
-        Message msg = mEventHandler.obtainMessage(GESTURE_REQUEST);
-        msg.obj = keyEvent;
-        return msg;
-    }
-
     public static void setButtonDisable(Context context) {
         mButtonDisabled = Settings.System.getIntForUser(
                 context.getContentResolver(), Settings.System.HARDWARE_KEYS_DISABLE, 0,
@@ -346,12 +291,8 @@ public class KeyHandler implements DeviceKeyHandler {
         if (event.getAction() != KeyEvent.ACTION_UP) {
             return false;
         }
-        String value = Settings.System.getStringForUser(mContext.getContentResolver(),
-                GestureSettings.DEVICE_GESTURE_MAPPING_1, UserHandle.USER_CURRENT);
-        if (!TextUtils.isEmpty(value) && value.startsWith("default#")) {
-            return event.getScanCode() == GESTURE_CIRCLE_SCANCODE;
-        }
-        return false;
+        String value = getGestureValueForScanCode(event.getScanCode());
+        return !TextUtils.isEmpty(value) && value.equals(AppSelectListPreference.CAMERA_ENTRY);
     }
 
     @Override
@@ -370,51 +311,59 @@ public class KeyHandler implements DeviceKeyHandler {
         if (event.getScanCode() == GESTURE_II_SCANCODE) {
             String value = Settings.System.getStringForUser(mContext.getContentResolver(),
                     GestureSettings.DEVICE_GESTURE_MAPPING_0, UserHandle.USER_CURRENT);
-            if (!TextUtils.isEmpty(value) && !value.startsWith("default#")) {
+            if (!TextUtils.isEmpty(value) && !value.equals(AppSelectListPreference.DISABLED_ENTRY)) {
                 if (DEBUG) Log.i(TAG, "isActivityLaunchEvent GESTURE_II_SCANCODE " + value);
-                Intent intent = createIntent(value);
-                return intent;
+                if (!launchSpecialActions(value)) {
+                    Intent intent = createIntent(value);
+                    return intent;
+                }
             }
         } else if (event.getScanCode() == GESTURE_CIRCLE_SCANCODE) {
             String value = Settings.System.getStringForUser(mContext.getContentResolver(),
                     GestureSettings.DEVICE_GESTURE_MAPPING_1, UserHandle.USER_CURRENT);
-            if (!TextUtils.isEmpty(value) && !value.startsWith("default#")) {
+            if (!TextUtils.isEmpty(value) && !value.equals(AppSelectListPreference.DISABLED_ENTRY)) {
                 if (DEBUG) Log.i(TAG, "isActivityLaunchEvent GESTURE_CIRCLE_SCANCODE " + value);
-                Intent intent = createIntent(value);
-                return intent;
+                if (!launchSpecialActions(value)) {
+                    Intent intent = createIntent(value);
+                    return intent;
+                }
             }
         } else if (event.getScanCode() == GESTURE_V_SCANCODE) {
             String value = Settings.System.getStringForUser(mContext.getContentResolver(),
                     GestureSettings.DEVICE_GESTURE_MAPPING_2, UserHandle.USER_CURRENT);
-            if (!TextUtils.isEmpty(value) && !value.startsWith("default#")) {
+            if (!TextUtils.isEmpty(value) && !value.equals(AppSelectListPreference.DISABLED_ENTRY)) {
                 if (DEBUG) Log.i(TAG, "isActivityLaunchEvent GESTURE_V_SCANCODE " + value);
-                Intent intent = createIntent(value);
-                return intent;
+                if (!launchSpecialActions(value)) {
+                    Intent intent = createIntent(value);
+                    return intent;
+                }
             }
         } else if (event.getScanCode() == GESTURE_A_SCANCODE) {
             String value = Settings.System.getStringForUser(mContext.getContentResolver(),
                     GestureSettings.DEVICE_GESTURE_MAPPING_3, UserHandle.USER_CURRENT);
-            if (!TextUtils.isEmpty(value)) {
+            if (!TextUtils.isEmpty(value) && !value.equals(AppSelectListPreference.DISABLED_ENTRY)) {
                 if (DEBUG) Log.i(TAG, "isActivityLaunchEvent GESTURE_A_SCANCODE " + value);
-                Intent intent = createIntent(value);
-                return intent;
+                if (!launchSpecialActions(value)) {
+                    Intent intent = createIntent(value);
+                    return intent;
+                }
             }
         } else if (event.getScanCode() == GESTURE_LEFT_V_SCANCODE) {
-            if (!isMusicGestureEnabled()) {
-                String value = Settings.System.getStringForUser(mContext.getContentResolver(),
-                        GestureSettings.DEVICE_GESTURE_MAPPING_4, UserHandle.USER_CURRENT);
-                if (!TextUtils.isEmpty(value)) {
-                    if (DEBUG) Log.i(TAG, "isActivityLaunchEvent GESTURE_LEFT_V_SCANCODE " + value);
+            String value = Settings.System.getStringForUser(mContext.getContentResolver(),
+                    GestureSettings.DEVICE_GESTURE_MAPPING_4, UserHandle.USER_CURRENT);
+            if (!TextUtils.isEmpty(value) && !value.equals(AppSelectListPreference.DISABLED_ENTRY)) {
+                if (DEBUG) Log.i(TAG, "isActivityLaunchEvent GESTURE_LEFT_V_SCANCODE " + value);
+                if (!launchSpecialActions(value)) {
                     Intent intent = createIntent(value);
                     return intent;
                 }
             }
         } else if (event.getScanCode() == GESTURE_RIGHT_V_SCANCODE) {
-            if (!isMusicGestureEnabled()) {
-                String value = Settings.System.getStringForUser(mContext.getContentResolver(),
-                        GestureSettings.DEVICE_GESTURE_MAPPING_5, UserHandle.USER_CURRENT);
-                if (!TextUtils.isEmpty(value)) {
-                    if (DEBUG) Log.i(TAG, "isActivityLaunchEvent GESTURE_RIGHT_V_SCANCODE " + value);
+            String value = Settings.System.getStringForUser(mContext.getContentResolver(),
+                    GestureSettings.DEVICE_GESTURE_MAPPING_5, UserHandle.USER_CURRENT);
+            if (!TextUtils.isEmpty(value) && !value.equals(AppSelectListPreference.DISABLED_ENTRY)) {
+                if (DEBUG) Log.i(TAG, "isActivityLaunchEvent GESTURE_RIGHT_V_SCANCODE " + value);
+                if (!launchSpecialActions(value)) {
                     Intent intent = createIntent(value);
                     return intent;
                 }
@@ -540,9 +489,60 @@ public class KeyHandler implements DeviceKeyHandler {
         return intent;
     }
 
-    private boolean isMusicGestureEnabled() {
-        String value = Settings.System.getStringForUser(mContext.getContentResolver(),
-                GestureSettings.DEVICE_GESTURE_MAPPING_0, UserHandle.USER_CURRENT);
-        return !TextUtils.isEmpty(value) && value.startsWith("default#");
+    private boolean launchSpecialActions(String value) {
+        if (value.equals(AppSelectListPreference.TORCH_ENTRY)) {
+            String rearCameraId = getRearCameraId();
+            if (rearCameraId != null) {
+                mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
+                try {
+                    mCameraManager.setTorchMode(rearCameraId, !mTorchEnabled);
+                    mTorchEnabled = !mTorchEnabled;
+                } catch (Exception e) {
+                    // Ignore
+                }
+            }
+            return true;
+        } else if (value.equals(AppSelectListPreference.MUSIC_PLAY_ENTRY)) {
+            mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
+            dispatchMediaKeyWithWakeLockToAudioService(KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE);
+            return true;
+        } else if (value.equals(AppSelectListPreference.MUSIC_NEXT_ENTRY)) {
+            if (isMusicActive()) {
+                mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
+                dispatchMediaKeyWithWakeLockToAudioService(KeyEvent.KEYCODE_MEDIA_NEXT);
+            }
+            return true;
+        } else if (value.equals(AppSelectListPreference.MUSIC_PREV_ENTRY)) {
+            if (isMusicActive()) {
+                mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
+                dispatchMediaKeyWithWakeLockToAudioService(KeyEvent.KEYCODE_MEDIA_PREVIOUS);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private String getGestureValueForScanCode(int scanCode) {
+        switch(scanCode) {
+            case GESTURE_II_SCANCODE:
+                return Settings.System.getStringForUser(mContext.getContentResolver(),
+                    GestureSettings.DEVICE_GESTURE_MAPPING_0, UserHandle.USER_CURRENT);
+            case GESTURE_CIRCLE_SCANCODE:
+                return Settings.System.getStringForUser(mContext.getContentResolver(),
+                    GestureSettings.DEVICE_GESTURE_MAPPING_1, UserHandle.USER_CURRENT);
+            case GESTURE_V_SCANCODE:
+                return Settings.System.getStringForUser(mContext.getContentResolver(),
+                    GestureSettings.DEVICE_GESTURE_MAPPING_2, UserHandle.USER_CURRENT);
+            case GESTURE_A_SCANCODE:
+                return Settings.System.getStringForUser(mContext.getContentResolver(),
+                    GestureSettings.DEVICE_GESTURE_MAPPING_3, UserHandle.USER_CURRENT);
+            case GESTURE_LEFT_V_SCANCODE:
+                return Settings.System.getStringForUser(mContext.getContentResolver(),
+                    GestureSettings.DEVICE_GESTURE_MAPPING_4, UserHandle.USER_CURRENT);
+            case GESTURE_RIGHT_V_SCANCODE:
+                return Settings.System.getStringForUser(mContext.getContentResolver(),
+                    GestureSettings.DEVICE_GESTURE_MAPPING_5, UserHandle.USER_CURRENT);
+        }
+        return null;
     }
 }

@@ -20,10 +20,9 @@ package org.omnirom.device;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceManager;
 
-public class LeftArrowGestureSwitch implements OnPreferenceChangeListener {
+public class LeftArrowGestureSwitch {
 
     private static final String FILE = "/proc/touchpanel/left_arrow_enable";
 
@@ -38,14 +37,11 @@ public class LeftArrowGestureSwitch implements OnPreferenceChangeListener {
         return Utils.fileWritable(getFile());
     }
 
-    public static boolean isCurrentlyEnabled(Context context) {
+    public static boolean isCurrentlyEnabled() {
         return Utils.getFileValueAsBoolean(getFile(), false);
     }
 
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        Boolean enabled = (Boolean) newValue;
+    public static void setEnabled(boolean enabled) {
         Utils.writeValue(getFile(), enabled ? "1" : "0");
-        return true;
     }
 }

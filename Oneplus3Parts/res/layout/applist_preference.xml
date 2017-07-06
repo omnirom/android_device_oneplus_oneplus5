@@ -15,7 +15,7 @@
 
 <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
            android:id="@+id/app_icon"
-           android:layout_width="36dp"
-           android:layout_height="36dp"
+           android:layout_width="42dp"
+           android:layout_height="42dp"
            android:padding="2dp"
            android:scaleType="centerInside" />

@@ -23,7 +23,7 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceManager;
 
-public class UpArrowGestureSwitch implements OnPreferenceChangeListener {
+public class UpArrowGestureSwitch {
 
     private static final String FILE = "/proc/touchpanel/up_arrow_enable";
 
@@ -38,14 +38,11 @@ public class UpArrowGestureSwitch implements OnPreferenceChangeListener {
         return Utils.fileWritable(getFile());
     }
 
-    public static boolean isCurrentlyEnabled(Context context) {
+    public static boolean isCurrentlyEnabled() {
         return Utils.getFileValueAsBoolean(getFile(), false);
     }
 
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        Boolean enabled = (Boolean) newValue;
+    public static void setEnabled(boolean enabled) {
         Utils.writeValue(getFile(), enabled ? "1" : "0");
-        return true;
     }
 }

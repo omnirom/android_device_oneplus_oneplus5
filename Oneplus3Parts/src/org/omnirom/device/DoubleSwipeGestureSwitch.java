@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2013 The OmniROM Project
+* Copyright (C) 2016 The OmniROM Project
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -20,12 +20,11 @@ package org.omnirom.device;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceManager;
 
-public class CameraGestureSwitch implements OnPreferenceChangeListener {
+public class DoubleSwipeGestureSwitch {
 
-    private static final String FILE = "/proc/touchpanel/letter_o_enable";
+    private static final String FILE = "/proc/touchpanel/double_swipe_enable";
 
     public static String getFile() {
         if (Utils.fileWritable(FILE)) {
@@ -38,14 +37,11 @@ public class CameraGestureSwitch implements OnPreferenceChangeListener {
         return Utils.fileWritable(getFile());
     }
 
-    public static boolean isCurrentlyEnabled(Context context) {
+    public static boolean isCurrentlyEnabled() {
         return Utils.getFileValueAsBoolean(getFile(), false);
     }
 
-    @Override
-    public boolean onPreferenceChange(Preference preference, Object newValue) {
-        Boolean enabled = (Boolean) newValue;
+    public static void setEnabled(boolean enabled) {
         Utils.writeValue(getFile(), enabled ? "1" : "0");
-        return true;
     }
 }
