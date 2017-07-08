@@ -62,4 +62,8 @@
     <string name="music_next_entry">Next track</string>
     <string name="not_ready_summary">Resolving...</string>
     <string name="resolve_failed_summary">Resolving app failed</string>
+    <string name="category_down_swipe_gesture">Down swipe</string>
+    <string name="category_up_swipe_gesture">Up swipe</string>
+    <string name="category_left_swipe_gesture">Left swipe</string>
+    <string name="category_right_swipe_gesture">Right swipe</string>
 </resources>

@@ -55,30 +55,24 @@ import com.android.internal.util.ArrayUtils;
 
 public class KeyHandler implements DeviceKeyHandler {
 
-    private static final String TAG = KeyHandler.class.getSimpleName();
+    private static final String TAG = "KeyHandler";
     private static final boolean DEBUG = true;
     protected static final int GESTURE_REQUEST = 1;
     private static final int GESTURE_WAKELOCK_DURATION = 2000;
     private static final String KEY_CONTROL_PATH = "/proc/s1302/virtual_key";
     private static final String FPC_CONTROL_PATH = "/sys/devices/soc/soc:fpc_fpc1020/proximity_state";
 
-    // Supported scancodes
-    //#define KEY_GESTURE_CIRCLE      250 // draw circle to lunch camera
-    //#define KEY_GESTURE_TWO_SWIPE	251 // swipe two finger vertically to play/pause
-    //#define KEY_GESTURE_V           252 // draw v to toggle flashlight
-    //#define KEY_GESTURE_LEFT_V      253 // draw left arrow for previous track
-    //#define KEY_GESTURE_RIGHT_V     254 // draw right arrow for next track
-    //#define MODE_TOTAL_SILENCE 600
-    //#define MODE_ALARMS_ONLY 601
-    //#define MODE_PRIORITY_ONLY 602
-    //#define MODE_NONE 603
-
     private static final int GESTURE_CIRCLE_SCANCODE = 250;
     private static final int GESTURE_V_SCANCODE = 252;
     private static final int GESTURE_II_SCANCODE = 251;
     private static final int GESTURE_LEFT_V_SCANCODE = 253;
     private static final int GESTURE_RIGHT_V_SCANCODE = 254;
-	private static final int GESTURE_A_SCANCODE = 255;
+    private static final int GESTURE_A_SCANCODE = 255;
+    private static final int GESTURE_RIGHT_SWIPE_SCANCODE = 63;
+    private static final int GESTURE_LEFT_SWIPE_SCANCODE = 64;
+    private static final int GESTURE_DOWN_SWIPE_SCANCODE = 65;
+    private static final int GESTURE_UP_SWIPE_SCANCODE = 66;
+
     private static final int KEY_DOUBLE_TAP = 143;
     private static final int KEY_HOME = 102;
     private static final int KEY_BACK = 158;
@@ -88,36 +82,40 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final int KEY_SLIDER_BOTTOM = 603;
 
     private static final int[] sSupportedGestures = new int[]{
+        GESTURE_II_SCANCODE,
         GESTURE_CIRCLE_SCANCODE,
         GESTURE_V_SCANCODE,
-        KEY_DOUBLE_TAP,
-        GESTURE_II_SCANCODE,
+        GESTURE_A_SCANCODE,
         GESTURE_LEFT_V_SCANCODE,
         GESTURE_RIGHT_V_SCANCODE,
-        GESTURE_A_SCANCODE,
+        GESTURE_DOWN_SWIPE_SCANCODE,
+        GESTURE_UP_SWIPE_SCANCODE,
+        GESTURE_LEFT_SWIPE_SCANCODE,
+        GESTURE_RIGHT_SWIPE_SCANCODE,
+        KEY_DOUBLE_TAP,
         KEY_SLIDER_TOP,
         KEY_SLIDER_CENTER,
         KEY_SLIDER_BOTTOM
     };
 
     private static final int[] sHandledGestures = new int[]{
-        GESTURE_V_SCANCODE,
-        GESTURE_II_SCANCODE,
-        GESTURE_LEFT_V_SCANCODE,
-        GESTURE_RIGHT_V_SCANCODE,
         KEY_SLIDER_TOP,
         KEY_SLIDER_CENTER,
         KEY_SLIDER_BOTTOM
     };
 
     private static final int[] sProxiCheckedGestures = new int[]{
+        GESTURE_II_SCANCODE,
         GESTURE_CIRCLE_SCANCODE,
         GESTURE_V_SCANCODE,
-        KEY_DOUBLE_TAP,
-        GESTURE_II_SCANCODE,
+        GESTURE_A_SCANCODE,
         GESTURE_LEFT_V_SCANCODE,
         GESTURE_RIGHT_V_SCANCODE,
-        GESTURE_A_SCANCODE,
+        GESTURE_DOWN_SWIPE_SCANCODE,
+        GESTURE_UP_SWIPE_SCANCODE,
+        GESTURE_LEFT_SWIPE_SCANCODE,
+        GESTURE_RIGHT_SWIPE_SCANCODE,
+        KEY_DOUBLE_TAP
     };
 
     protected final Context mContext;
@@ -308,65 +306,12 @@ public class KeyHandler implements DeviceKeyHandler {
         if (event.getAction() != KeyEvent.ACTION_UP) {
             return null;
         }
-        if (event.getScanCode() == GESTURE_II_SCANCODE) {
-            String value = Settings.System.getStringForUser(mContext.getContentResolver(),
-                    GestureSettings.DEVICE_GESTURE_MAPPING_0, UserHandle.USER_CURRENT);
-            if (!TextUtils.isEmpty(value) && !value.equals(AppSelectListPreference.DISABLED_ENTRY)) {
-                if (DEBUG) Log.i(TAG, "isActivityLaunchEvent GESTURE_II_SCANCODE " + value);
-                if (!launchSpecialActions(value)) {
-                    Intent intent = createIntent(value);
-                    return intent;
-                }
-            }
-        } else if (event.getScanCode() == GESTURE_CIRCLE_SCANCODE) {
-            String value = Settings.System.getStringForUser(mContext.getContentResolver(),
-                    GestureSettings.DEVICE_GESTURE_MAPPING_1, UserHandle.USER_CURRENT);
-            if (!TextUtils.isEmpty(value) && !value.equals(AppSelectListPreference.DISABLED_ENTRY)) {
-                if (DEBUG) Log.i(TAG, "isActivityLaunchEvent GESTURE_CIRCLE_SCANCODE " + value);
-                if (!launchSpecialActions(value)) {
-                    Intent intent = createIntent(value);
-                    return intent;
-                }
-            }
-        } else if (event.getScanCode() == GESTURE_V_SCANCODE) {
-            String value = Settings.System.getStringForUser(mContext.getContentResolver(),
-                    GestureSettings.DEVICE_GESTURE_MAPPING_2, UserHandle.USER_CURRENT);
-            if (!TextUtils.isEmpty(value) && !value.equals(AppSelectListPreference.DISABLED_ENTRY)) {
-                if (DEBUG) Log.i(TAG, "isActivityLaunchEvent GESTURE_V_SCANCODE " + value);
-                if (!launchSpecialActions(value)) {
-                    Intent intent = createIntent(value);
-                    return intent;
-                }
-            }
-        } else if (event.getScanCode() == GESTURE_A_SCANCODE) {
-            String value = Settings.System.getStringForUser(mContext.getContentResolver(),
-                    GestureSettings.DEVICE_GESTURE_MAPPING_3, UserHandle.USER_CURRENT);
-            if (!TextUtils.isEmpty(value) && !value.equals(AppSelectListPreference.DISABLED_ENTRY)) {
-                if (DEBUG) Log.i(TAG, "isActivityLaunchEvent GESTURE_A_SCANCODE " + value);
-                if (!launchSpecialActions(value)) {
-                    Intent intent = createIntent(value);
-                    return intent;
-                }
-            }
-        } else if (event.getScanCode() == GESTURE_LEFT_V_SCANCODE) {
-            String value = Settings.System.getStringForUser(mContext.getContentResolver(),
-                    GestureSettings.DEVICE_GESTURE_MAPPING_4, UserHandle.USER_CURRENT);
-            if (!TextUtils.isEmpty(value) && !value.equals(AppSelectListPreference.DISABLED_ENTRY)) {
-                if (DEBUG) Log.i(TAG, "isActivityLaunchEvent GESTURE_LEFT_V_SCANCODE " + value);
-                if (!launchSpecialActions(value)) {
-                    Intent intent = createIntent(value);
-                    return intent;
-                }
-            }
-        } else if (event.getScanCode() == GESTURE_RIGHT_V_SCANCODE) {
-            String value = Settings.System.getStringForUser(mContext.getContentResolver(),
-                    GestureSettings.DEVICE_GESTURE_MAPPING_5, UserHandle.USER_CURRENT);
-            if (!TextUtils.isEmpty(value) && !value.equals(AppSelectListPreference.DISABLED_ENTRY)) {
-                if (DEBUG) Log.i(TAG, "isActivityLaunchEvent GESTURE_RIGHT_V_SCANCODE " + value);
-                if (!launchSpecialActions(value)) {
-                    Intent intent = createIntent(value);
-                    return intent;
-                }
+        String value = getGestureValueForScanCode(event.getScanCode());
+        if (!TextUtils.isEmpty(value) && !value.equals(AppSelectListPreference.DISABLED_ENTRY)) {
+            if (DEBUG) Log.i(TAG, "isActivityLaunchEvent " + event.getScanCode() + value);
+            if (!launchSpecialActions(value)) {
+                Intent intent = createIntent(value);
+                return intent;
             }
         }
         return null;
@@ -542,6 +487,18 @@ public class KeyHandler implements DeviceKeyHandler {
             case GESTURE_RIGHT_V_SCANCODE:
                 return Settings.System.getStringForUser(mContext.getContentResolver(),
                     GestureSettings.DEVICE_GESTURE_MAPPING_5, UserHandle.USER_CURRENT);
+            case GESTURE_DOWN_SWIPE_SCANCODE:
+                return Settings.System.getStringForUser(mContext.getContentResolver(),
+                    GestureSettings.DEVICE_GESTURE_MAPPING_6, UserHandle.USER_CURRENT);
+            case GESTURE_UP_SWIPE_SCANCODE:
+                return Settings.System.getStringForUser(mContext.getContentResolver(),
+                    GestureSettings.DEVICE_GESTURE_MAPPING_7, UserHandle.USER_CURRENT);
+            case GESTURE_LEFT_SWIPE_SCANCODE:
+                return Settings.System.getStringForUser(mContext.getContentResolver(),
+                    GestureSettings.DEVICE_GESTURE_MAPPING_8, UserHandle.USER_CURRENT);
+            case GESTURE_RIGHT_SWIPE_SCANCODE:
+                return Settings.System.getStringForUser(mContext.getContentResolver(),
+                    GestureSettings.DEVICE_GESTURE_MAPPING_9, UserHandle.USER_CURRENT);
         }
         return null;
     }
