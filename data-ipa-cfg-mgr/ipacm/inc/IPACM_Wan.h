@@ -54,6 +54,8 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #ifdef FEATURE_IPA_ANDROID
 #define IPA_V2_NUM_DEFAULT_WAN_FILTER_RULE_IPV6 6
+#define IPA_V2_NUM_TCP_WAN_FILTER_RULE_IPV6 3
+#define IPA_V2_NUM_MULTICAST_WAN_FILTER_RULE_IPV6 3
 #else
 #define IPA_V2_NUM_DEFAULT_WAN_FILTER_RULE_IPV6 3
 #endif
@@ -97,6 +99,7 @@ public:
 	static uint8_t xlat_mux_id;
 	/* IPACM interface name */
 	static char wan_up_dev_name[IF_NAME_LEN];
+	static uint32_t curr_wan_ip;
 	IPACM_Wan(int, ipacm_wan_iface_type, uint8_t *);
 	virtual ~IPACM_Wan();
 
@@ -140,6 +143,11 @@ public:
 #endif
 	}
 
+	static uint32_t getWANIP()
+	{
+		return curr_wan_ip;
+	}
+
 	static bool getXlat_Mux_Id()
 	{
 		return xlat_mux_id;
@@ -176,6 +184,7 @@ public:
 
 private:
 
+	bool is_ipv6_frag_firewall_flt_rule_installed;
 	uint32_t ipv6_frag_firewall_flt_rule_hdl;
 	uint32_t *wan_route_rule_v4_hdl;
 	uint32_t *wan_route_rule_v6_hdl;
@@ -202,6 +211,7 @@ private:
 	bool header_partial_default_wan_v4;
 	bool header_partial_default_wan_v6;
 	uint8_t ext_router_mac_addr[IPA_MAC_ADDR_SIZE];
+	uint8_t netdev_mac[IPA_MAC_ADDR_SIZE];
 
 	static int num_ipv4_modem_pdn;
 
@@ -228,6 +238,8 @@ private:
 
 	/* update network stats for CNE */
 	int ipa_network_stats_fd;
+	uint32_t hdr_hdl_dummy_v6;
+	uint32_t hdr_proc_hdl_dummy_v6;
 
 	inline ipa_wan_client* get_client_memptr(ipa_wan_client *param, int cnt)
 	{
@@ -449,9 +461,6 @@ private:
 	int config_dft_firewall_rules_ex(struct ipa_flt_rule_add* rules, int rule_offset,
 		ipa_ip_type iptype);
 
-	/* Change IP Type.*/
-	void config_ip_type(ipa_ip_type iptype);
-
 	/* init filtering rule in wan dl filtering table */
 	int init_fl_rule_ex(ipa_ip_type iptype);
 
@@ -469,6 +478,8 @@ private:
 
 	int add_dft_filtering_rule(struct ipa_flt_rule_add* rules, int rule_offset, ipa_ip_type iptype);
 
+	int add_tcpv6_filtering_rule(struct ipa_flt_rule_add* rules, int rule_offset);
+
 	int install_wan_filtering_rule(bool is_sw_routing);
 
 	void change_to_network_order(ipa_ip_type iptype, ipa_rule_attrib* attrib);
@@ -476,6 +487,7 @@ private:
 	bool is_global_ipv6_addr(uint32_t* ipv6_addr);
 
 	void handle_wlan_SCC_MCC_switch(bool, ipa_ip_type);
+
 	void handle_wan_client_SCC_MCC_switch(bool, ipa_ip_type);
 
 	int handle_network_stats_evt();
@@ -483,6 +495,9 @@ private:
 	int m_fd_ipa;
 
 	int handle_network_stats_update(ipa_get_apn_data_stats_resp_msg_v01 *data);
+
+	/* construct dummy ethernet header */
+	int add_dummy_rx_hdr();
 };
 
 #endif /* IPACM_WAN_H */
