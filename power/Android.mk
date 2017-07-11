@@ -9,7 +9,7 @@ LOCAL_SHARED_LIBRARIES := liblog libcutils libdl
 LOCAL_SRC_FILES := power.c \
                    util.c
 
-LOCAL_MODULE := power.msm8996
+LOCAL_MODULE := power.msm8998
 LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_SHARED_LIBRARY)

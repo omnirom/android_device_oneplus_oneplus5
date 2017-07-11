@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright (c) 2013,2016, Qualcomm Technologies, Inc.
+ * All Rights Reserved.
+ * Confidential and Proprietary - Qualcomm Technologies, Inc.
+ */
+-->
+<spnOverrides>
+    <!-- China -->
+    <spnOverride numeric="46000" spn="China Mobile" />
+    <spnOverride numeric="46001" spn="China Unicom" />
+    <spnOverride numeric="46002" spn="China Mobile" />
+    <spnOverride numeric="46003" spn="China Telecom" />
+    <spnOverride numeric="46005" spn="China Telecom" />
+    <spnOverride numeric="46006" spn="China Unicom" />
+    <spnOverride numeric="46007" spn="China Mobile" />
+    <!-- Taiwan -->
+    <spnOverride numeric="46601" spn="FarEasTone" />
+    <spnOverride numeric="46605" spn="APBW" />
+    <spnOverride numeric="46606" spn="Tuntex" />
+    <spnOverride numeric="46688" spn="KG Telecom" />
+    <spnOverride numeric="46689" spn="T Star" />
+    <spnOverride numeric="46692" spn="Chunghwa Telecom" />
+    <spnOverride numeric="46693" spn="MobiTai" />
+    <spnOverride numeric="46697" spn="Taiwan Mobile" />
+    <spnOverride numeric="46699" spn="TransAsia" />
+    <!--Hong Kong -->
+    <spnOverride numeric="45429" spn="PCCW" />
+    <spnOverride numeric="45404" spn="Hutchison"  />
+    <spnOverride numeric="45406" spn="Smartone"  />
+    <!-- Angela 20161107 add for O2 UK customization-->
+    <spnOverride numeric="23410" spn="O2 - UK"/>
+</spnOverrides>

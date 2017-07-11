@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<compatconfiglist update-time="2017-04-11 17:54:47">
+    <ab>cn.com.fetion</ab>
+    <ab>com.android.captiveportallogin</ab>
+    <cs>net.oneplus.h2launcher</cs>
+    <cs>com.oneplus.calendar</cs>
+    <cs>com.oneplus.card</cs>
+    <cs>com.oneplus.filemanager</cs>
+    <cs>net.oneplus.launcher</cs>
+    <cs>net.oneplus.music</cs>
+    <cs>com.oneplus.note</cs>
+    <cs>cn.oneplus.photos</cs>
+    <cs>net.oneplus.push</cs>
+    <cs>com.oneplus.soundrecorder</cs>
+    <cs>com.oneplus.userservice</cs>
+    <cs>net.oneplus.weather</cs>
+    <cs>net.oneplus.widget</cs>
+</compatconfiglist>

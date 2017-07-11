@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<voicemail>
+    <voicemail
+        numeric="23410"
+        carrier="O2 UK"
+        vmnumber="901"
+        vmtag="Voicemail" />
+</voicemail>

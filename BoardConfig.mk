@@ -18,16 +18,16 @@
 # device-specific aspects (drivers) with a device-agnostic
 # product configuration (apps).
 #
--include vendor/oneplus/oneplus3/BoardConfigVendor.mk
+-include vendor/oneplus/oneplus5/BoardConfigVendor.mk
 
-BOARD_PATH := device/oneplus/oneplus3
+BOARD_PATH := device/oneplus/oneplus5
 
 TARGET_NO_BOOTLOADER := true
-TARGET_OTA_ASSERT_DEVICE := OnePlus3,oneplus3,OnePlus3T,oneplus3t
-TARGET_BOOTLOADER_BOARD_NAME := msm8996
+TARGET_OTA_ASSERT_DEVICE := OnePlus5,oneplus5
+TARGET_BOOTLOADER_BOARD_NAME := msm8998
 
 # Platform
-TARGET_BOARD_PLATFORM := msm8996
+TARGET_BOARD_PLATFORM := msm8998
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno530
 
 # Architecture
@@ -41,14 +41,14 @@ TARGET_2ND_ARCH := arm
 TARGET_2ND_ARCH_VARIANT := armv7-a-neon
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := cortex-a53
+TARGET_2ND_CPU_VARIANT := krait
 
 TARGET_USE_QCOM_BIONIC_OPTIMIZATION := true
 TARGET_USES_64_BIT_BINDER := true
 
 ENABLE_CPUSETS := true
 
-BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom androidboot.selinux=enforcing user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=32M@0-0xffffffff androidboot.bootdevice=624000.ufshc
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom androidboot.selinux=permissive user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 sched_enable_hmp=1 sched_enable_power_aware=1 service_locator.enable=1 swiotlb=2048
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_TAGS_OFFSET := 0x02000000
@@ -58,8 +58,8 @@ TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 TARGET_KERNEL_APPEND_DTB := true
-TARGET_KERNEL_SOURCE := kernel/oneplus/msm8996
-TARGET_KERNEL_CONFIG := omni_oneplus3_defconfig
+TARGET_KERNEL_SOURCE := kernel/oneplus/msm8998
+TARGET_KERNEL_CONFIG := omni_oneplus5_defconfig
 
 # partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
@@ -81,7 +81,7 @@ BOARD_PROVIDES_LIBRIL := true
 
 # Display
 BOARD_USES_ADRENO := true
-TARGET_QCOM_DISPLAY_VARIANT := caf-msm8996
+TARGET_QCOM_DISPLAY_VARIANT := caf-msm8998
 USE_OPENGL_RENDERER := true
 TARGET_USES_ION := true
 TARGET_USES_C2D_COMPOSITION := true
@@ -94,8 +94,8 @@ MAX_VIRTUAL_DISPLAY_DIMENSION := 4096
 TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
 
 # Audio/media
-TARGET_QCOM_AUDIO_VARIANT := caf-msm8996
-TARGET_QCOM_MEDIA_VARIANT := caf-msm8996
+TARGET_QCOM_AUDIO_VARIANT := caf-msm8998
+TARGET_QCOM_MEDIA_VARIANT := caf-msm8998
 
 # audio
 #AUDIO_FEATURE_ENABLED_AAC_ADTS_OFFLOAD := true
@@ -140,7 +140,7 @@ BOARD_HAVE_BLUETOOTH_QCOM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(BOARD_PATH)/bluetooth
 BOARD_HAS_QCA_BT_ROME := true
 QCOM_BT_USE_BTNV := true
-TARGET_QCOM_BLUETOOTH_VARIANT := caf-msm8996
+TARGET_QCOM_BLUETOOTH_VARIANT := caf-msm8998
 
 # Wifi
 BOARD_HAS_QCOM_WLAN              := true
@@ -163,7 +163,7 @@ TARGET_PROVIDES_POWERHAL := true
 
 # libinit
 TARGET_UNIFIED_DEVICE := true
-TARGET_INIT_VENDOR_LIB := libinit_oneplus3
+TARGET_INIT_VENDOR_LIB := libinit_oneplus5
 
 # liblights
 TARGET_PROVIDES_LIBLIGHT := true
