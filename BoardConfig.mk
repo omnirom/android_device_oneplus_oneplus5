@@ -197,7 +197,7 @@ BOARD_SECCOMP_POLICY += $(BOARD_PATH)/seccomp
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
 
 # Recovery:Start
-TARGET_RECOVERY_FSTAB := $(BOARD_PATH)/configs/fstab.qcom
+TARGET_RECOVERY_FSTAB := $(BOARD_PATH)/prebuilt/root/fstab.qcom
 TW_THEME := portrait_hdpi
 BOARD_HAS_NO_REAL_SDCARD := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
