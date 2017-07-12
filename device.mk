@@ -20,7 +20,7 @@
 # product configuration (apps).
 #
 
-$(call inherit-product, vendor/oneplus/oneplus5/oneplus5-vendor.mk)
+$(call inherit-product, vendor/oneplus/oneplus5/device-vendor.mk)
 $(call inherit-product, frameworks/native/build/phone-xxhdpi-4096-dalvik-heap.mk)
 $(call inherit-product, frameworks/native/build/phone-xxhdpi-2048-hwui-memory.mk)
 
