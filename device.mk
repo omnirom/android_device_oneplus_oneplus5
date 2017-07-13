@@ -98,10 +98,6 @@ PRODUCT_PACKAGES += \
     liboverlay \
     libtinyxml
 
-# Alipay / WeChat
-PRODUCT_BOOT_JARS += \
-    org.ifaa.android.manager
-
 # audio
 PRODUCT_PACKAGES += \
     audiod \

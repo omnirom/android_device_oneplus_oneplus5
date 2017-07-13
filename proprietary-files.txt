@@ -381,7 +381,8 @@ etc/firmware/tp/fw_synaptics_15801b.img
 etc/firmware/tp/fw_synaptics_15801.img
 etc/firmware/tp/fw_synaptics_16859.img
 
-#openmobileapi
+#Misc
 etc/permissions/org.simalliance.openmobileapi.xml
 -framework/org.simalliance.openmobileapi.jar
+bin/ifaadaemon
 
