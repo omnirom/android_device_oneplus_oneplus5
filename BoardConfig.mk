@@ -48,12 +48,13 @@ TARGET_USES_64_BIT_BINDER := true
 TARGET_COMPILE_WITH_MSM_KERNEL := ture
 
 ENABLE_CPUSETS := true
+ENABLE_SCHEDBOOST := true
 
-BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom androidboot.selinux=permissive user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 sched_enable_hmp=1 sched_enable_power_aware=1 service_locator.enable=1 swiotlb=2048
-BOARD_KERNEL_BASE := 0x80000000
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 sched_enable_hmp=1 sched_enable_power_aware=1 service_locator.enable=1 swiotlb=2048 androidboot.selinux=permissive
+BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 4096
-BOARD_KERNEL_TAGS_OFFSET := 0x02000000
-BOARD_RAMDISK_OFFSET     := 0x02200000
+BOARD_KERNEL_TAGS_OFFSET := 0x00000100
+BOARD_RAMDISK_OFFSET := 0x01000000
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
@@ -66,8 +67,8 @@ TARGET_KERNEL_CONFIG := omni_oneplus5_defconfig
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
 BOARD_CACHEIMAGE_PARTITION_SIZE := 268435456
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 67108864
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3154116608
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 57436708864
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3221225472
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 56908316672
 BOARD_FLASH_BLOCK_SIZE := 262144
 
 # global
@@ -82,6 +83,7 @@ BOARD_USES_ADRENO := true
 TARGET_QCOM_DISPLAY_VARIANT := caf-msm8998
 USE_OPENGL_RENDERER := true
 TARGET_USES_ION := true
+TARGET_USES_NEW_ION_API :=true
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_OVERLAY := true
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
@@ -186,6 +188,9 @@ TARGET_INCREASES_COLDBOOT_TIMEOUT := true
 # CNE and DPM
 #TARGET_LDPRELOAD := libNimsWrap.so
 BOARD_USES_QCNE := true
+
+# Timeservice
+BOARD_USES_QC_TIME_SERVICES := true
 
 # selinux
 include device/qcom/sepolicy/sepolicy.mk
