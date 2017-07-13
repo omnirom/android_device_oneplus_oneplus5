@@ -1,0 +1,316 @@
+﻿##################################################################################
+### VENDOR_EDIT, OEM All rights reserved.
+###
+### File: - init.oem.rc
+### Author: jiangyonggao
+### all oem triger & init are here
+### ------------------------------- Revision History: ----------------------------
+### <author>                        <data>       <version>   <desc>
+### ------------------------------------------------------------------------------
+### jiangyg@PM                     2013-10-21                Create this file
+##################################################################################
+
+
+
+#erik.yang, 2015/3/20, add for property self-adaptive
+service self-init /sbin/self-init
+    class core
+    user root
+    oneshot
+    seclabel u:r:self-init:s0
+
+service oem_early_boot /system/bin/sh /init.oem.early_boot.sh
+    class core
+    user root
+    oneshot
+
+on post-fs-data
+    #NFC, ruanbanmao add for 15801 nfc. 2015/10/19
+    mkdir /data/nfc
+    mkdir /data/oemnvitems  0771 radio radio
+    #fingerint, changhua add for fp debug image usage,feature default off
+    mkdir /data/fpc_images 0770 system system
+    mkdir /data/fpc_images/verify 0770 system system
+    mkdir /data/fpc_images/enroll 0770 system system
+    mkdir /data/fpc 0770 system system
+    mkdir /data/coredump  0777 system system
+    mkdir /data/theme 0775 system system
+    mkdir /data/mdm 0775 system system
+    mkdir /data/theme_storage 0775 system system
+
+#changhua add for fingerint
+on boot
+    chmod 0664 /sys/devices/soc/soc:fpc_fpc1020/irq
+    chown system system /sys/devices/soc/soc:fpc_fpc1020/irq
+    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/report_home
+    chown system system /sys/devices/soc/soc:fpc_fpc1020/report_home
+    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/update_info
+    chown system system /sys/devices/soc/soc:fpc_fpc1020/update_info
+    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/screen_state
+    chown system system /sys/devices/soc/soc:fpc_fpc1020/screen_state
+    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/hw_reset
+    chown system system /sys/devices/soc/soc:fpc_fpc1020/hw_reset
+    #chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/wakeup_enable
+    #chown system system /sys/devices/soc/soc:fpc_fpc1020/wakeup_enable
+    chmod 0666 /dev/qseecom
+    #NFC, ruanbanmao add for 15801 nfc. 2015/10/19
+    setprop ro.nfc.port "I2C"
+    chmod 0666 /dev/pn544
+    chown nfc nfc /dev/pn544
+    chmod 0666 /dev/p61
+    chown spi spi /dev/p61
+    chmod 0666 /dev/dash/
+    restorecon  /dev/dash
+
+ #ifdef VENDOR_EDIT
+    #wulaibin@bsp , 2015/11/18, Modify for RGB light support
+    chown system system /sys/class/leds/red/pause_lo
+    chown system system /sys/class/leds/blue/pause_lo
+    chown system system /sys/class/leds/green/pause_lo
+
+    chown system system /sys/class/leds/red/pause_hi
+    chown system system /sys/class/leds/blue/pause_hi
+    chown system system /sys/class/leds/green/pause_hi
+
+    chown system system /sys/class/leds/red/blink
+    chown system system /sys/class/leds/blue/blink
+    chown system system /sys/class/leds/green/blink
+ #endif /*VENDOR_EDIT*/
+
+#ifdef VENDOR_EDIT
+#lijianpeng@oneplus.framework , 2016/11/21, turn otg on by default
+    write /sys/module/dwc3_msm/parameters/otg_switch 1
+#endif
+
+#ifdef VENDOR_EDIT
+    # camera. enable mobicat
+    setprop persist.camera.mobicat 2
+    setprop persist.camera.stats.debugexif 3080192
+    # camera. enable mobicat
+#endif
+
+#wujialong , 2015/10/22, Add for RGB light support
+    chown system system /sys/class/leds/red/blink
+    chown system system /sys/class/leds/blue/blink
+    chown system system /sys/class/leds/green/blink
+    chown system system /sys/class/leds/red/ramp_step_ms
+    chown system system /sys/class/leds/blue/ramp_step_ms
+    chown system system /sys/class/leds/green/ramp_step_ms
+    chown system system /sys/class/leds/red/duty_pcts
+    chown system system /sys/class/leds/blue/duty_pcts
+    chown system system /sys/class/leds/green/duty_pcts
+    chmod 660 /sys/class/leds/red/ramp_step_ms
+    chmod 660 /sys/class/leds/green/ramp_step_ms
+    chmod 660 /sys/class/leds/blue/ramp_step_ms
+    chmod 660 /sys/class/leds/red/duty_pcts
+    chmod 660 /sys/class/leds/green/duty_pcts
+    chmod 660 /sys/class/leds/blue/duty_pcts
+
+#ifdef VENDOR_EDIT
+#wujialong@BSP 20161010 modify for copy big file stuck issue
+    write /proc/sys/vm/page-cluster 0
+#endif
+
+# Setup coredump mechanism
+    chmod 0755 /system/bin/coredump.sh
+    write /proc/sys/kernel/core_pattern |/system/bin/coredump.sh\ %p\ %u\ %t
+
+#ifdef VENDOR_EDIT
+#lifeng@bsp tp 2015/6/3 for firmware update
+    write /sys/bus/i2c/devices/12-0020/tp_fw_update 0
+    write /proc/s1302/fw_update 0
+#endif /*VENDOR_EDIT*/
+
+#ifdef VENDOR_EDIT
+#/* Liyu.Tan, 2015.10.26, wifi test bin */
+    chown system system /system/bin/wifi_ftm
+    chmod 0777  /system/bin/wifi_ftm
+    chown system system /system/bin/wifi_single
+    chmod 0777  /system/bin/wifi_single
+    chown system system /system/bin/iwpriv
+    chmod 0777  /system/bin/iwpriv
+    chown system system /system/bin/iwlist
+    chmod 0777  /system/bin/iwlist
+    chown system system /system/xbin/tcpdump
+    chmod 0777  /system/xbin/tcpdump
+#endif /*VENDOR_EDIT*/
+
+#ifdef VENDOR_EDIT
+#/* Liyu.Tan, 2015.10.26, wifi ftm shell */
+service wififtmserver /system/bin/sh system/bin/wifi_ftm
+    class late_start
+    user root
+    group root
+    disabled
+    #oneshot
+
+on property:WFtmUp=1
+    start wififtmserver
+on init
+    mount tmpfs none /sys/fs/cgroup mode=0750,uid=0,gid=1000
+    mkdir /sys/fs/cgroup/freezer 0750 root system
+    mount cgroup none /sys/fs/cgroup/freezer  freezer
+    chmod 777 /sys/fs/cgroup/freezer
+
+service wifisingle /system/bin/sh system/bin/wifi_single
+    class late_start
+    user root
+    group root
+    disabled
+    oneshot
+
+on property:wlan.WifiSgle=1
+    start wifisingle
+
+on property:wlan.WifiSgle=0
+    stop wifisingle
+#endif /*VENDOR_EDIT*/
+
+#ifdef VENDOR_EDIT
+#liuhuisheng@framework add for enginerr app for sys/class selinux recon
+    restorecon /sys/class/leds/keyboard-backlight/brightness
+    restorecon /sys/class/leds/button-backlight/brightness
+    restorecon /sys/class/leds/red/brightness
+    restorecon /sys/class/leds/green/brightness
+    restorecon /sys/class/leds/blue/brightness
+    restorecon /sys/class/leds/red/blink
+    restorecon /sys/class/leds/green/blink
+    restorecon /sys/class/leds/blue/blink
+#endif /*VENDOR_EDIT*/
+
+#ifdef VENDOR_EDIT
+#/* zuoyonghua add nfc transmit  */
+    chown system system /system/xbin/nfc_trasmit_start.sh
+    chmod 0777  /system/xbin/nfc_trasmit_start.sh
+    chown system system /system/xbin/nfc_trasmit_stop.sh
+    chmod 0777  /system/xbin/nfc_trasmit_stop.sh
+    chown system system system/xbin/pnx
+    chmod 0777  system/xbin/pnx
+
+service nfctransmitstart /system/bin/sh /system/xbin/nfc_trasmit_start.sh
+    class late_start
+    user nfc
+    group nfc
+    disabled
+    oneshot
+
+service nfctransmitstop /system/bin/sh /system/xbin/nfc_trasmit_stop.sh
+    class late_start
+    user nfc
+    group nfc
+    disabled
+    oneshot
+
+on property:nfc.transmit.start=1
+    start nfctransmitstart
+
+on property:nfc.transmit.start=0
+    stop nfctransmitstart
+
+on property:nfc.transmit.stop=1
+    start nfctransmitstop
+
+on property:nfc.transmit.stop=0
+    stop nfctransmitstop
+
+#endif /*VENDOR_EDIT*/
+
+service OPNetlinkService /sbin/OPNetlinkService
+    class core
+    oneshot
+    seclabel u:r:OPNetlinkService:s0
+
+on charger
+    start OPNetlinkService
+
+#ifdef VENDOR_EDIT
+#added by wuaijun@system
+service deleteXml /system/bin/rm data/system/packages.xml
+    class core
+    disabled
+    oneshot
+    seclabel u:r:logserver:s0
+
+service engineermode-sh /system/bin/sh /init.oem.engineermode.sh
+    class late_start
+    user root
+    oneshot
+
+on post-fs
+    chown system system /proc/ship_mode
+    chown system system /dev/param
+    chown system system /dev/block/mmcblk0p21
+    chmod 660 /dev/block/mmcblk0p21
+#endif /*VENDOR_EDIT*/
+
+#ifdef VENDOR_EDIT
+#niejianan@oneplus.framework , 2015/04/25, add for mmi charging test
+on property:sys.fastcharger=true
+    write /sys/class/power_supply/battery/charging_enabled 1
+
+on property:sys.fastcharger=false
+    write /sys/class/power_supply/battery/charging_enabled 0
+#endif /* VENDOR_EDIT */
+
+on property:persist.sys.adbroot=1
+    setprop selinux.reload_policy 1
+
+#ifdef VENDOR_EDIT
+#hieu@oneplus.net, 2015/10/30, SND-10768, add service for bugreport
+service bugreport /system/bin/dumpstate -d -p -B \
+        -o /data/data/com.android.shell/files/bugreports/bugreport
+    class main
+    disabled
+    oneshot
+#endif
+
+#ifdef VENDOR_EDIT
+#lifei@oneplus.media, 2016/02/14,  add service for CTS and engineer app
+service oem_audio_device /system/bin/chcon u:object_r:oem_audio_device:s0 /dev/snd
+    class late_start
+    oneshot
+#endif
+
+#ifdef VENDOR_EDIT
+#kimi, 2016/03/29, trigger systrace
+on property:persist.sys.systrace.enable=true
+    start izanami
+on property:persist.sys.systrace.enable=false
+    start stop_izanami
+service izanami /system/bin/izanami
+    class main
+    user root
+    disabled
+    oneshot
+    keycodes 115 116
+service stop_izanami /system/bin/izanami stop
+    class main
+    user root
+    disabled
+    oneshot
+#endif
+
+#ifdef VENDOR_EDIT
+#xiaoxiaohuan@OnePlus.MultiMediaService,2016/09/05
+#Add smartadjust daemon to control BATTERY,BALANCED and PERFORMANCE modes.
+service smartadjust /system/bin/smartadjust
+    class core
+    critical
+    socket smartadjust seqpacket 0660 system system
+#endif/*VENDOR_EDIT*/
+
+#ifdef VENDOR_EDIT
+# liuyan 2016/7/22, add ifaadaemon
+service ifaadaemon /system/bin/ifaadaemon
+class late_start
+user system
+group system
+#endif
+
+#ifdef VENDOR_EDIT
+service atrace /system/bin/atrace -t10 -b 20480 res irq hal freq disk gfx sync sched power ss regulators video binder_lock app sm audio wm camera webview workq dalvik database bionic idle input am pagecache rs pm mmc memreclaim load view binder_driver -z -o /sdcard/atrace.html
+    class core
+    disabled
+    oneshot
+    seclabel u:r:logserver:s0
+#endif
