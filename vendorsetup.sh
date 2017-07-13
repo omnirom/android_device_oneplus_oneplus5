@@ -20,5 +20,5 @@
 # In particular, you can add lunch options with the add_lunch_combo
 # function: add_lunch_combo generic-eng
 
-add_lunch_combo omni_oneplus3-userdebug
-add_lunch_combo omni_oneplus3-eng
+add_lunch_combo omni_oneplus5-userdebug
+add_lunch_combo omni_oneplus5-eng
