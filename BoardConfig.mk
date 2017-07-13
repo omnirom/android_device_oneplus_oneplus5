@@ -184,7 +184,7 @@ TARGET_CRYPTFS_HW_PATH := $(BOARD_PATH)/cryptfs_hw
 TARGET_INCREASES_COLDBOOT_TIMEOUT := true
 
 # CNE and DPM
-TARGET_LDPRELOAD := libNimsWrap.so
+#TARGET_LDPRELOAD := libNimsWrap.so
 BOARD_USES_QCNE := true
 
 # selinux
