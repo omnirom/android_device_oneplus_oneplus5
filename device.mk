@@ -218,6 +218,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     fs_config_files
 
+# QMI
+PRODUCT_PACKAGES += \
+    libjson
+
 # Sensors
 PRODUCT_PACKAGES += \
     sensors.msm8998
