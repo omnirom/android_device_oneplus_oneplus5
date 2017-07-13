@@ -15,5 +15,12 @@
      limitations under the License.
 -->
 <resources>
-  <string name="category_left_arrow_gesture">&lt; gesture</string>
+  <string name="app_name">Oneplus 3</string>
+  <string name="category_gestures_title">Scherm-uit gebaren</string>
+  <string name="category_vibrator">Vibrator</string>
+  <string name="vib_strength_title_head">Sterkte</string>
+  <string name="vib_strength_summary_head">De sterkte van de vibrator aanpassen</string>
+  <string name="vib_test">Test</string>
+  <string name="advanced_settings">Geavanceerd</string>
+  <string name="buttons_title">Knoppen</string>
 </resources>
