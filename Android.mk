@@ -14,6 +14,7 @@
 # limitations under the License.
 #
 
+#
 # This contains the module build definitions for the hardware-specific
 # components for this device.
 #
@@ -22,20 +23,15 @@
 # bitrot and build breakages. Building a component unconditionally does
 # *not* include it on all devices, so it is safe even with hardware-specific
 # components.
+#
 
 LOCAL_PATH := $(call my-dir)
 
 ifeq ($(TARGET_DEVICE),oneplus5)
+
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
 include $(CLEAR_VARS)
-
-BT_SYMLINK := $(TARGET_OUT)/vendor/firmware/btfw32.tlv
-$(BT_SYMLINK): $(LOCAL_INSTALLED_MODULE)
-	@echo "BT firmware link: $@"
-	@mkdir -p $(dir $@)
-	@rm -rf $@
-	$(hide) ln -sf /bt_firmware/image/$(notdir $@) $@
 
 IMS_LIBS := libimscamera_jni.so libimsmedia_jni.so
 IMS_SYMLINKS := $(addprefix $(TARGET_OUT_VENDOR_APPS)/ims/lib/arm64/,$(notdir $(IMS_LIBS)))
@@ -57,6 +53,7 @@ $(RFS_MSM_ADSP_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	$(hide) ln -sf /persist/rfs/shared $@/shared
 	$(hide) ln -sf /persist/hlos_rfs/shared $@/hlos
 	$(hide) ln -sf /firmware $@/readonly/firmware
+	$(hide) ln -sf /vendor/firmware $@/readonly/vendor
 
 RFS_MSM_MPSS_SYMLINKS := $(TARGET_OUT)/rfs/msm/mpss/
 $(RFS_MSM_MPSS_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
@@ -68,6 +65,7 @@ $(RFS_MSM_MPSS_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 	$(hide) ln -sf /persist/rfs/shared $@/shared
 	$(hide) ln -sf /persist/hlos_rfs/shared $@/hlos
 	$(hide) ln -sf /firmware $@/readonly/firmware
+	$(hide) ln -sf /vendor/firmware $@/readonly/vendor
 
 ALL_DEFAULT_INSTALLED_MODULES += $(RFS_MSM_ADSP_SYMLINKS) $(RFS_MSM_MPSS_SYMLINKS)
 
@@ -88,4 +86,3 @@ $(WCNSS_MAC_SYMLINK): $(LOCAL_INSTALLED_MODULE)
 ALL_DEFAULT_INSTALLED_MODULES += $(WCNSS_INI_SYMLINK) $(WCNSS_MAC_SYMLINK)
 
 endif
-
