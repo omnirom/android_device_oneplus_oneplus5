@@ -220,16 +220,23 @@ lib/rfsa/adsp/libmorpho_image_stabilizer4_hvx_skel.so
 lib/rfsa/adsp/libmorpho_video_denoiser_hvx_skel.so
 
 # Camera firmware
-etc/firmware/cpp_firmware_v1_1_1.fw
-etc/firmware/cpp_firmware_v1_1_6.fw
 etc/firmware/cpp_firmware_v1_10_0.fw
+etc/firmware/cpp_firmware_v1_1_1.fw
 etc/firmware/cpp_firmware_v1_12_0.fw
+etc/firmware/cpp_firmware_v1_1_6.fw
 etc/firmware/cpp_firmware_v1_2_0.fw
 etc/firmware/cpp_firmware_v1_4_0.fw
 etc/firmware/cpp_firmware_v1_5_0.fw
 etc/firmware/cpp_firmware_v1_5_2.fw
 etc/firmware/cpp_firmware_v1_6_0.fw
 etc/firmware/cpp_firmware_v1_8_0.fw
+
+#HBTP
+etc/firmware/hbtp/hbtpcfg2.dat
+etc/firmware/hbtp/hbtpcfg.dat
+etc/firmware/hbtp/qtc800h.bin
+etc/firmware/hbtp/qtc800s_dsp.bin
+
 
 # Camera sensors
 vendor/lib/libmmcamera_isp_abf48.so
@@ -303,6 +310,10 @@ etc/firmware/ipa_fws.b03
 etc/firmware/ipa_fws.b04
 etc/firmware/ipa_fws.mdt
 
+#LEIA
+etc/firmware/leia_pfp_470.fw
+etc/firmware/leia_pm4_470.fw
+
 # NFC firmware
 vendor/firmware/libpn553_fw.so
 
@@ -312,9 +323,65 @@ lib64/libparam.so
 # Radio - MBN
 etc/firmware/mbn_ota/mbn_ota.txt
 
+#nvm
+etc/firmware/nvm_tlv_1.3.bin
+etc/firmware/nvm_tlv_2.1.bin
+etc/firmware/nvm_tlv_3.0.bin
+etc/firmware/nvm_tlv_3.2.bin
+etc/firmware/nvm_tlv.bin
+
+#rampatch
+etc/firmware/rampatch_tlv_1.3.tlv
+etc/firmware/rampatch_tlv_2.1.tlv
+etc/firmware/rampatch_tlv_3.0.tlv
+etc/firmware/rampatch_tlv_3.2.tlv
+etc/firmware/rampatch_tlv.img
+
+
+
 # Sensors
 etc/sensors/hals.conf
 etc/sensors/sensor_def_qcomdev.conf
 
 # Wi-Fi
 lib/modules/qca_cld3/qca_cld3_wlan.ko
+
+#firmware
+etc/firmware/a225p5_pm4.fw
+etc/firmware/a225_pfp.fw
+etc/firmware/a225_pm4.fw
+etc/firmware/a300_pfp.fw
+etc/firmware/a300_pm4.fw
+etc/firmware/a330_pfp.fw
+etc/firmware/a330_pm4.fw
+etc/firmware/a420_pfp.fw
+etc/firmware/a420_pm4.fw
+etc/firmware/a530_gpmu.fw2
+etc/firmware/a530_pfp.fw
+etc/firmware/a530_pm4.fw
+etc/firmware/a530v1_pfp.fw
+etc/firmware/a530v1_pm4.fw
+etc/firmware/a530v2_seq.fw2
+etc/firmware/a530v3_gpmu.fw2
+etc/firmware/a530v3_seq.fw2
+etc/firmware/a530_zap.b00
+etc/firmware/a530_zap.b01
+etc/firmware/a530_zap.b02
+etc/firmware/a530_zap.elf
+etc/firmware/a530_zap.mdt
+etc/firmware/a540_gpmu.fw2
+etc/firmware/a540_zap.b00
+etc/firmware/a540_zap.b01
+etc/firmware/a540_zap.b02
+etc/firmware/a540_zap.elf
+etc/firmware/a540_zap.mdt
+
+#tp
+etc/firmware/tp/fw_synaptics_15801b.img
+etc/firmware/tp/fw_synaptics_15801.img
+etc/firmware/tp/fw_synaptics_16859.img
+
+#openmobileapi
+etc/permissions/org.simalliance.openmobileapi.xml
+-framework/org.simalliance.openmobileapi.jar
+
