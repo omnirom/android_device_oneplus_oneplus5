@@ -243,11 +243,6 @@ static const locClientEventIndTableStructT locClientEventIndTable[]= {
     QMI_LOC_EVENT_MASK_GDT_UPLOAD_END_REQ_V02,
   },
 
-   //GNSS measurement event
-  { QMI_LOC_EVENT_GNSS_MEASUREMENT_REPORT_IND_V02 ,
-    sizeof(qmiLocEventGnssSvMeasInfoIndMsgT_v02),
-    QMI_LOC_EVENT_MASK_GNSS_MEASUREMENT_REPORT_V02},
-
   { QMI_LOC_EVENT_DBT_POSITION_REPORT_IND_V02,
     sizeof(qmiLocEventDbtPositionReportIndMsgT_v02),
     0},
@@ -276,7 +271,12 @@ static const locClientEventIndTableStructT locClientEventIndTable[]= {
 
   { QMI_LOC_EVENT_GDT_DOWNLOAD_END_REQ_IND_V02,
     sizeof(qmiLocEventGdtDownloadEndReqIndMsgT_v02),
-    0}
+    0},
+
+  // SRN Ap data inject request
+  { QMI_LOC_EVENT_INJECT_SRN_AP_DATA_REQ_IND_V02,
+    sizeof(qmiLocEventInjectSrnApDataReqIndMsgT_v02),
+    QMI_LOC_EVENT_MASK_INJECT_SRN_AP_DATA_REQ_V02}
 };
 
 /* table to relate the respInd Id with its size */
@@ -550,7 +550,7 @@ static const locClientRespIndTableStructT locClientRespIndTable[]= {
      sizeof(qmiLocGetBatchSizeIndMsgT_v02)},
 
    { QMI_LOC_EVENT_LIVE_BATCHED_POSITION_REPORT_IND_V02,
-     sizeof(qmiLocEventPositionReportIndMsgT_v02)},
+     sizeof(qmiLocEventLiveBatchedPositionReportIndMsgT_v02)},
 
    { QMI_LOC_EVENT_BATCH_FULL_NOTIFICATION_IND_V02,
      sizeof(qmiLocEventBatchFullIndMsgT_v02)},
@@ -575,7 +575,7 @@ static const locClientRespIndTableStructT locClientRespIndTable[]= {
      sizeof(qmiLocNotifyWifiEnabledStatusIndMsgT_v02)},
 
    { QMI_LOC_SET_PREMIUM_SERVICES_CONFIG_IND_V02,
-     sizeof(qmiLocSetPremiumServicesCfgReqMsgT_v02)},
+     sizeof(qmiLocSetPremiumServicesCfgIndMsgT_v02)},
 
    { QMI_LOC_GET_AVAILABLE_WWAN_POSITION_IND_V02,
      sizeof(qmiLocGetAvailWwanPositionIndMsgT_v02)},
@@ -635,7 +635,11 @@ static const locClientRespIndTableStructT locClientRespIndTable[]= {
      sizeof(qmiLocInjectXtraDataIndMsgT_v02) },
 
    { QMI_LOC_INJECT_XTRA_PCID_IND_V02,
-     sizeof(qmiLocInjectXtraPcidIndMsgT_v02) }
+     sizeof(qmiLocInjectXtraPcidIndMsgT_v02) },
+
+   // SRN Ap data inject
+   { QMI_LOC_INJECT_SRN_AP_DATA_IND_V02,
+     sizeof(qmiLocInjectSrnApDataIndMsgT_v02) }
 };
 
 
@@ -940,6 +944,7 @@ static void locClientIndCb
       LOC_LOGE("%s:%d]: memory allocation failed\n", __func__, __LINE__);
       return;
     }
+    memset(indBuffer, 0, indSize);
 
     rc = QMI_NO_ERR;
 
@@ -1558,6 +1563,13 @@ static bool validateRequest(
         break;
     }
 
+    // SRN AP data injection
+    case QMI_LOC_INJECT_SRN_AP_DATA_REQ_V02:
+    {
+        *pOutLen = sizeof(qmiLocInjectSrnApDataReqMsgT_v02);
+        break;
+    }
+
     // ALL requests with no payload
     case QMI_LOC_GET_SERVICE_REVISION_REQ_V02:
     case QMI_LOC_GET_FIX_CRITERIA_REQ_V02:
@@ -2067,6 +2079,7 @@ locClientStatusEnumType locClientSendReq(
   // back from the modem, to avoid confusing log order. We trust
   // that the QMI framework is robust.
   EXIT_LOG_CALLFLOW(%s, loc_get_v02_event_name(reqId));
+  memset(&resp, 0, sizeof(resp));
   rc = qmi_client_send_msg_sync(
       pCallbackData->userHandle,
       reqId,

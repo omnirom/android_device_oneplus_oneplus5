@@ -20,12 +20,12 @@ LOCAL_SHARED_LIBRARIES := \
     libloc_pla
 
 LOCAL_SRC_FILES += \
+    loc.cpp \
     loc_eng.cpp \
     loc_eng_agps.cpp \
     loc_eng_xtra.cpp \
     loc_eng_ni.cpp \
     loc_eng_log.cpp \
-    loc_eng_nmea.cpp \
     LocEngAdapter.cpp
 
 LOCAL_SRC_FILES += \
@@ -42,7 +42,7 @@ LOCAL_CFLAGS += \
 LOCAL_C_INCLUDES:= \
     $(TARGET_OUT_HEADERS)/gps.utils \
     $(TARGET_OUT_HEADERS)/libloc_core \
-    $(call project-path-for,qcom-gps) \
+    hardware/qcom/gps/loc_api/libloc_api_50001 \
     $(TARGET_OUT_HEADERS)/libflp \
     $(TARGET_OUT_HEADERS)/libloc_pla
 
@@ -63,7 +63,7 @@ include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := gps.msm8998
+LOCAL_MODULE := gps.$(BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE)
 LOCAL_MODULE_OWNER := qcom
 
 LOCAL_MODULE_TAGS := optional
@@ -84,7 +84,8 @@ ifneq ($(filter $(TARGET_DEVICE), apq8084 msm8960), false)
 endif
 
 LOCAL_SRC_FILES += \
-    loc.cpp \
+    gps_interface.cpp \
+    gps_converter.cpp \
     gps.c
 
 LOCAL_CFLAGS += \

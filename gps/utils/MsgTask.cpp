@@ -26,7 +26,7 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
-#define LOG_NDDEBUG 0
+#define LOG_NDEBUG 0
 #define LOG_TAG "LocSvc_MsgTask"
 
 #include <unistd.h>
@@ -73,7 +73,11 @@ void MsgTask::destroy() {
 }
 
 void MsgTask::sendMsg(const LocMsg* msg) const {
-    msg_q_snd((void*)mQ, (void*)msg, LocMsgDestroy);
+    if (msg) {
+        msg_q_snd((void*)mQ, (void*)msg, LocMsgDestroy);
+    } else {
+        LOC_LOGe("msg is NULL");
+    }
 }
 
 void MsgTask::prerun() {
