@@ -66,6 +66,7 @@ persist.gps.qc_nlp_in_use=1
 ro.gps.agps_provider=1
 
 # Graphics
+debug.sf.latch_unsignaled=1
 debug.gralloc.enable_fb_ubwc=1
 ro.opengles.version=196610
 sdm.perf_hint_window=50
