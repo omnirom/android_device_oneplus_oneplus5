@@ -119,6 +119,12 @@ PRODUCT_PACKAGES += \
 # GPS
 PRODUCT_PACKAGES += \
     gps.msm8998 \
+    gps.conf \
+    libgps.utils \
+    libloc_core \
+    libloc_eng \
+    libloc_pla \
+    libloc_stub \
     libcurl \
     libgnsspps
 
@@ -129,6 +135,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/lowi.conf:system/etc/lowi.conf \
     $(LOCAL_PATH)/gps/etc/sap.conf:system/etc/sap.conf \
     $(LOCAL_PATH)/gps/etc/xtwifi.conf:system/etc/xtwifi.conf
+
+# Vehicle network (for slim_daemon)
+PRODUCT_PACKAGES += \
+    libvehiclenetwork-native
 
 # IPv6
 PRODUCT_PACKAGES += \
