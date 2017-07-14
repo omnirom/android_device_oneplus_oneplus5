@@ -161,10 +161,6 @@ BOARD_CHARGER_DISABLE_INIT_BLANK := true
 # power hal
 TARGET_PROVIDES_POWERHAL := true
 
-# libinit
-TARGET_UNIFIED_DEVICE := true
-TARGET_INIT_VENDOR_LIB := libinit_oneplus5
-
 # liblights
 TARGET_PROVIDES_LIBLIGHT := true
 
