@@ -512,6 +512,9 @@ vendor/firmware/libpn553_fw.so
 vendor/bin/qvrservice
 vendor/bin/qvrservicetest
 vendor/bin/qvrservicetest64
+vendor/lib/libqvrservice.so
+vendor/lib/libqvrservice_client.so
+vendor/lib64/libqvrservice_client.so
 vendor/etc/qvr/qvrservice_6dof_config.xml
 vendor/etc/qvr/qvrservice_config.txt
 
