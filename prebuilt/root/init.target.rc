@@ -1,4 +1,4 @@
-# Copyright (c) 2013-2015, The Linux Foundation. All rights reserved.
+# Copyright (c) 2013-2017, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are
@@ -27,6 +27,8 @@
 #
 #
 
+import init.qcom.power.rc
+
 on early-init
     mkdir /firmware 0771 system system
     mkdir /bt_firmware 0771 system system
@@ -34,7 +36,8 @@ on early-init
     mkdir /dsp 0771 media media
 
 on fs
-    wait /dev/block/bootdevice
+    wait /dev/block/platform/soc/1da4000.ufshc
+    symlink /dev/block/platform/soc/1da4000.ufshc /dev/block/bootdevice
     mount_all fstab.qcom
     swapon_all fstab.qcom
 
@@ -42,125 +45,174 @@ on fs
     # these partition flashed on the device. Failure to mount any partition in fstab file
     # results in failure to launch late-start class.
 
-    wait /dev/block/bootdevice/by-name/cache
-    #ifdef VENDOR_EDIT
-    exec /system/bin/e2fsck -y /dev/block/bootdevice/by-name/cache
-    #endif
-    mount ext4 /dev/block/bootdevice/by-name/cache /cache nosuid nodev barrier=1
-
     wait /dev/block/bootdevice/by-name/persist
-    #ifdef VENDOR_EDIT
     exec /system/bin/e2fsck -y /dev/block/bootdevice/by-name/persist
-    #endif
     mount ext4 /dev/block/bootdevice/by-name/persist /persist nosuid nodev barrier=1
+
     mkdir /persist/data 0700 system system
     mkdir /persist/bms 0700 root system
     restorecon_recursive /persist
 
-    wait /dev/block/bootdevice/by-name/dsp
+#ifdef VENDOR_EDIT
+#### zhiguang.su,make adsp boot faster.
+    write /sys/kernel/boot_adsp/boot 1
+#endif
+
     mount ext4 /dev/block/bootdevice/by-name/dsp /dsp ro nosuid nodev barrier=1
 
-    wait /dev/block/bootdevice/by-name/modem
-    mount vfat /dev/block/bootdevice/by-name/modem /firmware ro shortname=lower,uid=1000,gid=1000,dmask=227,fmask=337,context=u:object_r:firmware_file:s0
-
-    wait /dev/block/bootdevice/by-name/bluetooth
-	#ifndef VENDOR_EDIT
-    mount vfat /dev/block/bootdevice/by-name/bluetooth /bt_firmware ro shortname=lower,uid=1002,gid=3002,dmask=227,fmask=337,context=u:object_r:bt_firmware_file:s0
-    #else zuoyonghua@oneplus.cn need add bt_fimware other user read permission
-    mount vfat /dev/block/bootdevice/by-name/bluetooth /bt_firmware ro shortname=lower,uid=1002,gid=3002,dmask=222,fmask=333,context=u:object_r:bt_firmware_file:s0
-    #endif
-	
 on init
     write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
 
+    write /dev/stune/foreground/schedtune.sched_boost_no_override 1
+    write /dev/stune/top-app/schedtune.sched_boost_no_override 1
+    write /dev/stune/schedtune.colocate 0
+    write /dev/stune/background/schedtune.colocate 0
+    write /dev/stune/system-background/schedtune.colocate 0
+    write /dev/stune/foreground/schedtune.colocate 0
+    write /dev/stune/top-app/schedtune.colocate 1
+
+on post-fs
+    chown system system /proc/ship_mode
+    chown system system /dev/param
+
+    chown system system /dev/block/mmcblk0p21
+    chmod 660 /dev/block/mmcblk0p21
+
+    chown system log /sys/fs/pstore/console-ramoops-0
+    chmod 0440 /sys/fs/pstore/console-ramoops-0
+
+    # Initialize IPA for rmnet
+    write /dev/ipa 1
+
 on post-fs-data
-    mkdir /data/tombstones 0771 system system
-    mkdir /tombstones/modem 0771 system system
-    mkdir /tombstones/lpass 0771 system system
-    mkdir /tombstones/wcnss 0771 system system
-    mkdir /tombstones/dsps 0771 system system
-    mkdir /persist/data/sfs 0700 system system
-    mkdir /persist/data/tz 0700 system system
-    mkdir /data/misc/dts 0770 media audio
-    mkdir /data/misc/seemp 0700 system system
-    mkdir /data/usf 0700 system system
-    mkdir /data/misc/tloc/ 0700 system drmrpc
+    mkdir /data/tombstones/modem 0771 system system
+    mkdir /data/tombstones/lpass 0771 system system
+    mkdir /data/tombstones/wcnss 0771 system system
+    mkdir /data/tombstones/dsps 0771 system system
     mkdir /data/misc/qvop 0660 system system
+    mkdir /data/misc/hbtp 0750 system system
+    mkdir /data/misc/seemp 0700 system system
     mkdir /data/misc/qvr 0770 system system
-    mkdir /data/misc/audio_pp 0771 media audio
+    mkdir /data/misc/camera/cp 0771 system system
+    mkdir /data/misc/qdmastats 0700 system system
+    mkdir /data/misc/qdma 0770 system system
 
-#on property:init.svc.bootanim=running
-#    write /sys/class/leds/wled/brightness 4095
+on property:init.svc.bootanim=running
+    write /sys/class/leds/wled/brightness 4095
 
+# For cpusets initialize for Silver Only first and then Silver + Gold
+# Silver Only configuration cannot work with 0-7
 on boot
     start rmt_storage
     start rfs_access
-# access permission for secure touch
-    chmod 0660 /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch_enable
-    chmod 0440 /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch
-    chown system drmrpc /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch_enable
-    chown system drmrpc /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/secure_touch
-    write /proc/sys/kernel/sched_boost 1
-    write /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input0/update_fw 1
 
-    #chenneng@camera add for torch permission @2015-10-26
-    chown system system /sys/class/leds/led:torch_0/brightness
-    chmod 666 /sys/class/leds/led:torch_0/brightness
-    chown system system /sys/class/leds/led:torch_1/brightness
-    chmod 666 /sys/class/leds/led:torch_1/brightness
-    chown system system /sys/class/leds/led:switch/brightness
-    chmod 666 /sys/class/leds/led:switch/brightness
-#ifdef VENDOR_EDIT
-    chmod 666 /sys/devices/virtual/graphics/fb0/hbm
-    write sys/kernel/debug/dynamic_debug/control "file signal.c +p"
-#endif
-#ifdef VENDOR_EDIT
-    chmod 666 /sys/devices/virtual/graphics/fb0/SRGB
-    on property:sys.srgb=1
-     write /sys/devices/virtual/graphics/fb0/SRGB 1
-    on property:sys.srgb=0
-     write /sys/devices/virtual/graphics/fb0/SRGB 0
+    chmod 0644 /persist/speccfg/spec
+    chmod 0644 /persist/speccfg/devicetype
+    chmod 0644 /persist/speccfg/mbnversion
+    chmod 0644 /persist/speccfg/.not_triggered
+    chmod 0644 /persist/speccfg/vendor_ro.prop
+    chmod 0644 /persist/speccfg/vendor_persist.prop
+    chmod 0644 /persist/speccfg/submask
+    chmod 0644 /persist/speccfg/partition
 
-    chmod 666 /sys/devices/virtual/graphics/fb0/Adobe_RGB
-    on property:sys.adobergb=1
-     write /sys/devices/virtual/graphics/fb0/Adobe_RGB 1
-    on property:sys.adobergb=0
-     write /sys/devices/virtual/graphics/fb0/Adobe_RGB 0
-          
-    chmod 666 /sys/devices/virtual/graphics/fb0/DCI_P3
-    on property:sys.dci3p=1
-     write /sys/devices/virtual/graphics/fb0/DCI_P3 1
-    on property:sys.dci3p=0
-     write /sys/devices/virtual/graphics/fb0/DCI_P3 0
-     
-    chmod 666 /sys/devices/virtual/graphics/fb0/hbm
-    on property:sys.hbm=1
-     write /sys/devices/virtual/graphics/fb0/hbm 2
-    on property:sys.hbm=0
-     write /sys/devices/virtual/graphics/fb0/hbm 0
-#endif
-#start camera server as daemon
-service qcamerasvr /system/bin/mm-qcamera-daemon
-    class late_start
-    user camera
-    group camera system inet input graphics
+    chown system system /persist/speccfg/spec
+    chown system system /persist/speccfg/devicetype
+    chown system system /persist/speccfg/mbnversion
+    chown system system /persist/speccfg/.not_triggered
+    chown system system /persist/speccfg/vendor_ro.prop
+    chown system system /persist/speccfg/vendor_persist.prop
+    chown system system /persist/speccfg/submask
+    chown system system /persist/speccfg/partition
 
-#ifdef VENDOR_EDIT
-service remosaic_daemon /system/bin/remosaic_daemon
-    class late_start
-    user camera
-#endif
+    # Update touchscreen firmware
+    write /sys/bus/i2c/devices/5-0020/tp_fw_update 0
+
+    # Camera
+    chmod 0777 /persist/dual_camera_calibration
+    chmod 0644 /persist/dual_camera_calibration/calibrationOutput.bin
+
+    # Graphics
+    chown system graphics /sys/devices/virtual/graphics/fb0/SRGB
+    chown system graphics /sys/devices/virtual/graphics/fb0/DCI_P3
+    chown system graphics /sys/devices/virtual/graphics/fb0/hbm
+    chown system graphics /sys/devices/virtual/graphics/fb0/night_mode
+    chmod 0666 /sys/devices/virtual/graphics/fb0/SRGB
+    chmod 0666 /sys/devices/virtual/graphics/fb0/DCI_P3
+    chmod 0666 /sys/devices/virtual/graphics/fb0/hbm
+    chmod 0666 /sys/devices/virtual/graphics/fb0/night_mode
+
+    # Fingerprint
+    chmod 0664 /sys/devices/soc/soc:fpc_fpc1020/irq
+    chown system system /sys/devices/soc/soc:fpc_fpc1020/irq
+    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/report_home
+    chown system system /sys/devices/soc/soc:fpc_fpc1020/report_home
+    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/update_info
+    chown system system /sys/devices/soc/soc:fpc_fpc1020/update_info
+    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/screen_state
+    chown system system /sys/devices/soc/soc:fpc_fpc1020/screen_state
+    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/sensor_version
+    chown system system /sys/devices/soc/soc:fpc_fpc1020/sensor_version
+    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/hw_reset
+    chown system system /sys/devices/soc/soc:fpc_fpc1020/hw_reset
+
+    chmod 0666 /sys/module/fpc1020_tee/parameters/ignor_home_for_ESD
+
+    # NFC
+    chmod 0666 /dev/pn544
+    chown nfc nfc /dev/pn544
+    chmod 0666 /dev/p61
+    chown spi spi /dev/p61
+
+    # DASH
+    chmod 0666 /dev/dash
+    restorecon  /dev/dash
+
+    # RGB light
+    chown system system /sys/class/leds/red/pause_lo
+    chown system system /sys/class/leds/blue/pause_lo
+    chown system system /sys/class/leds/green/pause_lo
+
+    chown system system /sys/class/leds/red/pause_hi
+    chown system system /sys/class/leds/blue/pause_hi
+    chown system system /sys/class/leds/green/pause_hi
+
+    chown system system /sys/class/leds/red/blink
+    chown system system /sys/class/leds/blue/blink
+    chown system system /sys/class/leds/green/blink
+
+    chown system system /sys/class/leds/red/ramp_step_ms
+    chown system system /sys/class/leds/blue/ramp_step_ms
+    chown system system /sys/class/leds/green/ramp_step_ms
+    chown system system /sys/class/leds/red/duty_pcts
+    chown system system /sys/class/leds/blue/duty_pcts
+    chown system system /sys/class/leds/green/duty_pcts
+
+    chmod 660 /sys/class/leds/red/ramp_step_ms
+    chmod 660 /sys/class/leds/green/ramp_step_ms
+    chmod 660 /sys/class/leds/blue/ramp_step_ms
+    chmod 660 /sys/class/leds/red/duty_pcts
+    chmod 660 /sys/class/leds/green/duty_pcts
+    chmod 660 /sys/class/leds/blue/duty_pcts
+
+    # Vibrator
+    chown system system /sys/class/timed_output/vibrator/vmax
+    chown system system /sys/class/timed_output/vibrator/wf_s0
+    chown system system /sys/class/timed_output/vibrator/wf_s1
+    chown system system /sys/class/timed_output/vibrator/wf_s2
+    chown system system /sys/class/timed_output/vibrator/wf_s3
+    chown system system /sys/class/timed_output/vibrator/wf_s4
+    chown system system /sys/class/timed_output/vibrator/wf_s5
+    chown system system /sys/class/timed_output/vibrator/wf_s6
+    chown system system /sys/class/timed_output/vibrator/wf_s7
+    chown system system /sys/class/timed_output/vibrator/wf_update
+    chown system system /sys/class/timed_output/vibrator/wf_rep
+    chown system system /sys/class/timed_output/vibrator/wf_s_rep
 
 #fingerprint service
 service fingerprintd /system/bin/fingerprintd
     class late_start
     user system
     group system
-
-service qfp-daemon /system/bin/qfp-daemon
-    class late_start
-    user system
-    group system drmrpc diag
 
 service qvop-daemon /system/bin/qvop-daemon
     class late_start
@@ -174,10 +226,9 @@ service qvrd /system/vendor/bin/qvrservice
     socket qvrservice stream 0666 system system
 
 #Start up peripheral manager
-service per_mgr system/bin/pm-service
+service per_mgr /system/bin/pm-service
     class core
-    user system
-    group system net_raw
+    user root
     ioprio rt 4
 
 service per_proxy /system/bin/pm-proxy
@@ -192,68 +243,17 @@ on property:init.svc.per_mgr=running
 on property:sys.shutdown.requested=*
     stop per_proxy
 
-service mdm_launcher /system/bin/sh init.mdm.sh
-     class core
-     oneshot
-
-service mdm_helper /system/bin/mdm_helper
-     class core
-     group root system
-     disabled
-## Allow usb charging to be disabled peristently
-#on property:persist.usb.chgdisabled=1
-#    write /sys/class/power_supply/battery/charging_enabled 0
-#
-#on property:persist.usb.chgdisabled=0
-#    write /sys/class/power_supply/battery/charging_enabled 1
-#
-#service qrngd /system/bin/qrngd -f
-#   class main
-#   user root
-#   group root
-#
-#service qrngp /system/bin/qrngp
-#    class main
-#    user root
-#    group root
-#    oneshot
-#    disabled
-#
-#on property:sys.boot_completed=1
-#    start qrngp
-
 service qseecomd /system/bin/qseecomd
    class core
    user root
    group root
 
-service gamed /system/vendor/bin/gamed
-   class main
-   user system
-   group system
-   disabled
-   socket gamed seqpacket 0640 system system
-
 service seempd /system/bin/seempd
-   class late_start
-   user system
-   group system
-   socket seempdw dgram 0666 system system
+    class late_start
+    user system
+    group system
+    socket seempdw dgram 0666 system system
 
-service secotad /system/bin/secotad
-   class late_start
-   user system
-   group system
-
-#service mpdecision /system/bin/mpdecision --avg_comp
-#   user root
-#   disabled
-#
-#service qosmgrd /system/bin/qosmgr /system/etc/qosmgr_rules.xml
-#   user system
-#   group system
-#   disabled
-#
 service thermal-engine /system/vendor/bin/thermal-engine
    class main
    user root
@@ -261,18 +261,7 @@ service thermal-engine /system/vendor/bin/thermal-engine
    socket thermal-recv-client stream 0660 system system
    socket thermal-recv-passive-client stream 0666 system system
    group root
-   socket thermal-send-client stream 0666 system system
-   socket thermal-recv-client stream 0660 system system
-   socket thermal-recv-passive-client stream 0666 system system
 
-#service security-check1 /sbin/security_boot_check system
-#    class core
-#    oneshot
-#
-#service security-check2 /sbin/security_boot_check recovery
-#    class core
-#    oneshot
-#
 service time_daemon /system/bin/time_daemon
    class late_start
    user root
@@ -287,70 +276,6 @@ service audiod /system/bin/audiod
    class late_start
    user system
    group system
-
-
-service usf_tester /system/bin/usf_tester
-    user system
-    group system inet
-    disabled
-    oneshot
-
-service usf_epos /system/bin/usf_epos
-    class main
-    user system
-    group system inet
-    disabled
-    oneshot
-
-service usf_gesture /system/bin/usf_gesture
-    user system
-    group system inet
-    disabled
-    oneshot
-
-service usf_sync_gesture /system/bin/usf_sync_gesture
-    user system
-    group system inet audio
-    disabled
-    oneshot
-
-service usf_p2p /system/bin/usf_p2p
-    user system
-    group system inet
-    disabled
-    oneshot
-
-service usf_hovering /system/bin/usf_hovering
-    user system
-    group system inet
-    disabled
-    oneshot
-
-service usf_proximity /system/bin/usf_proximity
-    class late_start
-    user system
-    group system inet audio
-
-service usf_pairing /system/bin/usf_pairing
-    user system
-    group system inet
-    disabled
-    oneshot
-
-service usf_sw_calib /system/bin/usf_sw_calib
-    user system
-    group system inet
-    disabled
-    oneshot
-
-service usf-post-boot /system/bin/sh /system/etc/usf_post_boot.sh
-    class late_start
-    user root
-    disabled
-    oneshot
-
-on property:init.svc.bootanim=stopped
-    start usf-post-boot
 
 service imsqmidaemon /system/bin/imsqmidaemon
     class main
@@ -367,21 +292,7 @@ service imsdatadaemon /system/bin/imsdatadaemon
 
 service pd_mapper /system/vendor/bin/pd-mapper
      class core
-     disabled
 
-on property:persist.sys.pd_enable=1
-     start pd_mapper
-     write /sys/class/service_locator/service_locator_status 1
-
-on property:persist.sys.pd_enable=0
-     write /sys/class/service_locator/service_locator_status 0
-
-#
-## QCA1530 SoC late_start group trigger
-#service gnss-init /system/vendor/bin/gnss.qca1530.sh init
-#   class late_start
-#   oneshot
-#
 on property:sys.ims.QMI_DAEMON_STATUS=1
     start imsdatadaemon
 
@@ -399,23 +310,8 @@ service imscmservice /system/bin/imscmservice
    disabled
 
 on property:sys.ims.DATA_DAEMON_STATUS=1
-   start ims_rtp_daemon
-   start imscmservice
-
-service dts_configurator /system/bin/dts_configurator
-    class late_start
-    user system
-    group system media audio
-    oneshot
-
-service dtseagleservice /system/bin/dts_eagle_service
-    class late_start
-    user system
-    group audio media
-    disabled
-
-on property:init.svc.dts_configurator=stopped
-    start dtseagleservice
+    start ims_rtp_daemon
+    start imscmservice
 
 service ppd /system/vendor/bin/mm-pp-dpps
     class late_start
@@ -442,43 +338,69 @@ on property:init.svc.zygote=running
 on property:init.svc.zygote=restarting
     stop ppd
 
-#Modify by Songhao.Connectivity, 2016-06-27,Comment out TLOC
-#service tlocd /system/bin/tloc_daemon
-#    class late_start
-#    user system
-#    group drmrpc gps net_raw
-
 service energy-awareness /system/bin/energy-awareness
     class main
-    user root
+    user system
     group system
     oneshot
-## Modify by david.liu@oneplus.tw 2016/01/19, we do not support HVDCP
-#service hvdcp_opti /system/bin/hvdcp_opti
-#    class main
-#    user root
-#    group root
 
 service mdtpd /system/vendor/bin/mdtpd
-   class late_start
-   user root
-   group system radio drmrpc
+    class late_start
+    user root
+    group system radio drmrpc
 
-on charger
-    write /sys/devices/system/cpu/cpu2/online 0
-    write /sys/devices/system/cpu/cpu3/online 0
-    write /sys/module/lpm_levels/parameters/sleep_disabled 0
-    wait /dev/block/bootdevice/by-name/system
-    mount ext4 /dev/block/bootdevice/by-name/system /system ro barrier=1
-    start hvdcp_opti
-    start dashd
+service dashd /sbin/dashd
+    class core
+    critical
+    seclabel u:r:dashd:s0
+    group root system
 
-service dhcpcd_eth0 /system/bin/dhcpcd -ABKLG
-	class late_start
-	disabled
-	oneshot
+service ifaadaemon /system/bin/ifaadaemon
+    class late_start
+    user system
+    group system
 
-service iprenew_eth0 /system/bin/dhcpcd -n
-	class late_start
-	disabled
-	oneshot
+service spdaemon /system/bin/spdaemon
+   class core
+   user system
+   group system
+
+service hbtp /system/vendor/bin/hbtp_daemon
+    class main
+    user system
+    group system
+    disabled
+
+service smcinvoked /system/vendor/bin/smcinvoked
+    class main
+    user system
+    group system
+
+service qdmastatsd /system/bin/qdmastatsd
+    class late_start
+    user system
+    group system
+
+on property:sys.srgb=1
+   write /sys/devices/virtual/graphics/fb0/SRGB 1
+
+on property:sys.srgb=0
+   write /sys/devices/virtual/graphics/fb0/SRGB 0
+
+on property:sys.dci3p=1
+   write /sys/devices/virtual/graphics/fb0/DCI_P3 1
+
+on property:sys.dci3p=0
+   write /sys/devices/virtual/graphics/fb0/DCI_P3 0
+
+on property:sys.hbm=1
+   write /sys/devices/virtual/graphics/fb0/hbm 1
+
+on property:sys.hbm=0
+   write /sys/devices/virtual/graphics/fb0/hbm 0
+
+on property:sys.night_mode=1
+   write /sys/devices/virtual/graphics/fb0/night_mode 1
+
+on property:sys.night_mode=0
+   write /sys/devices/virtual/graphics/fb0/night_mode 0

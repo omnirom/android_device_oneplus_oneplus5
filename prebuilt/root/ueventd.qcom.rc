@@ -29,6 +29,7 @@
 /dev/diag                 0660   system     qcom_diag
 
 /dev/genlock              0666   system     system
+/dev/wlan                 0660   system     system
 /dev/kgsl                 0666   system     system
 /dev/kgsl-3d0             0666   system     system
 /dev/kgsl-2d0             0666   root       root
@@ -50,6 +51,12 @@
 
 #permissions for CSVT
 /dev/smd11                0660   radio      radio
+
+#permsissions for BT/FM
+/dev/btpower              0660   bluetooth  system
+
+#permissions for pta
+/dev/pta                  0660   system     system
 
 /dev/radio0               0640   system     system
 /dev/rfcomm0              0660   bluetooth  bluetooth
@@ -109,12 +116,16 @@
 /dev/media*               0660   system     camera
 /dev/v4l-subdev*          0660   system     camera
 /dev/qseecom              0660   system     drmrpc
+/dev/smcinvoke            0660   system     system
 /dev/qsee_ipc_irq_spss    0660   system     drmrpc
 /dev/seemplog             0660   system     system
 /dev/pft                  0660   system     drmrpc
 /dev/spcom                0660   system     system
+/dev/splog                0660   system     system
 /dev/sp_kernel            0660   system     system
 /dev/sp_ssr               0660   system     system
+/dev/sec_nvm_sampleapp    0660   system     system
+/dev/sec_nvm_jcos         0660   system     system
 /dev/sp_keymaster         0660   system     system
 /dev/cryptoapp            0660   system     system
 /dev/gemini0              0660   system     camera
@@ -130,6 +141,9 @@
 /dev/wcnss_ctrl           0660   system     system
 /sys/devices/soc/a000000.qcom,wcnss-wlan/net/wlan0/queues/rx-* rps_cpus           0660   system     system
 /sys/devices/soc/a000000.qcom,wcnss-wlan/net/p2p0/queues/rx-* rps_cpus            0660   system     system
+/sys/devices/soc/18800000.qcom,icnss/net/wlan0/queues/rx-* rps_cpus   0660   system     system
+/sys/devices/soc/18800000.qcom,icnss/net/p2p0/queues/rx-* rps_cpus    0660   system     system
+/sys/devices/soc/18800000.qcom,icnss/net/softap0/queues/rx-* rps_cpus 0660   system     system
 /dev/msm_camera/*         0660   system     camera
 /dev/gemini/              0660   system     camera
 /dev/mercury0             0660   system     camera
@@ -142,6 +156,7 @@
 /dev/sdsprpc-smd          0660   system     system
 
 #permissions for audio
+/dev/wcd_dsp0_control     0660   system     audio
 /dev/wcd-dsp-glink        0660   system     audio
 /dev/audio_slimslave      0660   system     audio
 /dev/msm_qcelp            0660   system     audio
@@ -222,6 +237,8 @@
 /sys/devices/soc/78b7000.i2c/i2c-3/3-004b/input/input*    secure_touch_enable  0660   system  drmrpc
 /sys/devices/soc/c179000.i2c/i2c-5/5-0020/input/input*    secure_touch         0440   system  drmrpc
 /sys/devices/soc/c179000.i2c/i2c-5/5-0020/input/input*    secure_touch_enable  0660   system  drmrpc
+/sys/devices/soc/c178000.i2c/i2c-4/4-0020/input/input*    secure_touch         0440   system  drmrpc
+/sys/devices/soc/c178000.i2c/i2c-4/4-0020/input/input*    secure_touch_enable  0660   system  drmrpc
 
 # laser sensor access
 /sys/devices/virtual/input/input*                   enable_ps_sensor 0660  system   system
@@ -268,3 +285,7 @@
 /dev/block/platform/soc/7464900.sdhci/by-name/frp       0600   system     system
 /dev/block/platform/soc/624000.ufshc/by-name/frp        0600   system     system
 /dev/block/platform/soc/1da4000.ufshc/by-name/frp       0600   system     system
+/dev/block/platform/soc/c0c4000.sdhci/by-name/frp       0600   system     system
+
+# Kmsg device
+/dev/kmsg                                               0620   root       system
