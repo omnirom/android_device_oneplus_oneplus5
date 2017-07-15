@@ -517,6 +517,7 @@ vendor/lib/libqvrservice_client.so
 vendor/lib64/libqvrservice_client.so
 vendor/etc/qvr/qvrservice_6dof_config.xml
 vendor/etc/qvr/qvrservice_config.txt
+vendor/lib/rfsa/adsp/libqvr_adsp_driver_skel.so
 
 #openmobile
 -vendor/app/SmartcardService/SmartcardService.apk
