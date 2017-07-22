@@ -14,10 +14,6 @@ etc/acdbdata/adsp_avs_config.acdb
 
 # Camera
 bin/mm-qcamera-daemon
-etc/camera/camera_config.xml
-etc/camera/imx350_chromatix.xml
-etc/camera/imx371_chromatix.xml
-etc/camera/imx398_chromatix.xml
 lib/hw/camera.msm8998.so
 lib/libmmcamera_interface.so
 lib/libmmjpeg_interface.so
@@ -190,14 +186,6 @@ vendor/lib/libchromatix_imx398_isp_panorama.so
 vendor/lib/libchromatix_imx398_postproc.so
 
 # Camera postprocessing
-etc/fsync_db.config
-etc/GyroOffset_db.config
-etc/oneplus5_vstab_db_1080p_video_0_30fps.config
-etc/oneplus5_vstab_db_1080p_video_0_60fps.config
-etc/oneplus5_vstab_db_1080p_video_1_30fps.config
-etc/oneplus5_vstab_db_4k_video_0_30fps.config
-etc/oneplus5_vstab_db_720p_video_0_30fps.config
-etc/oneplus5_vstab_db_720p_video_1_30fps.config
 lib/lib_oneplus_facebeauty.so
 lib/lib_oneplus_md.so
 lib/lib_oneplus_watermark.so
@@ -336,12 +324,6 @@ etc/firmware/rampatch_tlv_2.1.tlv
 etc/firmware/rampatch_tlv_3.0.tlv
 etc/firmware/rampatch_tlv_3.2.tlv
 etc/firmware/rampatch_tlv.img
-
-
-
-# Sensors
-etc/sensors/hals.conf
-etc/sensors/sensor_def_qcomdev.conf
 
 # Wi-Fi
 lib/modules/qca_cld3/qca_cld3_wlan.ko
