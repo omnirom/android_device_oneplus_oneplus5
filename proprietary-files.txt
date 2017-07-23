@@ -1,5 +1,7 @@
 # Audio
 etc/firmware/tfa98xx.cnt
+lib64/libstagefright_soft_flacdec.so
+lib/libstagefright_soft_flacdec.so
 
 # Audio ACDB
 etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb
