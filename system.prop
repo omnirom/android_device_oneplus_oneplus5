@@ -39,7 +39,7 @@ ro.cutoff_voltage_mv=3250
 
 # Bluetooth
 bt.max.hfpclient.connections=1
-qcom.bluetooth.soc=rome
+qcom.bluetooth.soc=cherokee
 
 # Display power reduction (FOSS)
 ro.qcom.dpps.sensortype=3
