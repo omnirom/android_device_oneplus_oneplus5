@@ -27,9 +27,6 @@
 <audio_platform_info>
     <acdb_ids>
         <device name="SND_DEVICE_OUT_SPEAKER" acdb_id="15"/>
-        <!-- add by lifei for A2DP Dirac audio effect 20170413-->
-        <!--device name="SND_DEVICE_OUT_BT_A2DP" acdb_id="10"/-->
-        <!-- add by lifei end-->
         <device name="SND_DEVICE_OUT_SPEAKER_PROTECTED" acdb_id="124"/>
         <device name="SND_DEVICE_IN_VOICE_REC_QMIC_FLUENCE" acdb_id="131"/>
         <device name="SND_DEVICE_IN_VOICE_REC_TMIC" acdb_id="131"/>
@@ -78,7 +75,7 @@
         <!-- In the below value string, first parameter indicates size -->
         <!-- followed by perf lock options                             -->
         <param key="perf_lock_opts" value="4, 0x40400000, 0x1, 0x40C00000, 0x1"/>
-        <param key="native_audio_mode" value="true"/>
+        <param key="native_audio_mode" value="src"/>
         <param key="input_mic_max_count" value="4"/>
         <param key="true_32_bit" value="true"/>
         <!-- In the below value string, the value indicates sidetone gain in dB -->
@@ -109,6 +106,16 @@
         <device name="SND_DEVICE_OUT_VOICE_LINE" backend="headphones" interface="SLIMBUS_6_RX"/>
         <device name="SND_DEVICE_OUT_VOICE_TTY_FULL_HEADPHONES" backend="headphones" interface="SLIMBUS_6_RX"/>
         <device name="SND_DEVICE_OUT_VOICE_TTY_VCO_HEADPHONES" backend="headphones" interface="SLIMBUS_6_RX"/>
+
+        <device name="SND_DEVICE_OUT_SPEAKER" backend="quat_i2s" />
+        <device name="SND_DEVICE_OUT_VOICE_SPEAKER" backend="quat_i2s" />
+        <device name="SND_DEVICE_OUT_SPEAKER_AND_HEADPHONES" backend="speaker-and-headphones" />
+        <device name="SND_DEVICE_OUT_SPEAKER_PROTECTED" backend="speaker-protected" interface="SLIMBUS_0_RX" />
+        <device name="SND_DEVICE_OUT_VOICE_SPEAKER_PROTECTED" backend="voice-speaker-protected" interface="SLIMBUS_0_RX" />
+        <device name="SND_DEVICE_OUT_VOICE_SPEAKER_2_PROTECTED" backend="voice-speaker-2-protected" interface="SLIMBUS_0_RX" />
+        <device name="SND_DEVICE_OUT_SPEAKER_PROTECTED_VBAT" backend="speaker-protected-vbat" interface="SLIMBUS_0_RX" />
+        <device name="SND_DEVICE_OUT_VOICE_SPEAKER_PROTECTED_VBAT" backend="voice-speaker-protected-vbat" interface="SLIMBUS_0_RX" />
+        <device name="SND_DEVICE_OUT_VOICE_SPEAKER_2_PROTECTED_VBAT" backend="voice-speaker-2-protected-vbat" interface="SLIMBUS_0_RX" />
     </backend_names>
 </audio_platform_info>
 
