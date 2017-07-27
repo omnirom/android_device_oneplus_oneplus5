@@ -83,8 +83,8 @@
     "revision": "android-7.1"
   },
   {
-    "remote": "github",
-    "repository": "darkobasorg/android_kernel_oneplus_msm8998",
+    "remote": "omnirom",
+    "repository": "android_kernel_oneplus_msm8998",
     "target_path": "kernel/oneplus/msm8998",
     "revision": "android-7.1"
   },
