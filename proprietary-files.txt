@@ -370,3 +370,5 @@ etc/permissions/org.simalliance.openmobileapi.xml
 -framework/org.simalliance.openmobileapi.jar
 bin/ifaadaemon
 
+#Sensors
+lib/sensors.hal.tof.so
