@@ -39,3 +39,5 @@ allow dashd sysfs_batteryinfo:file r_file_perms;
 r_dir_file(dashd, sysfs_usb_supply);
 r_dir_file(dashd, sysfs_battery_supply);
 
+allow dashd sysfs:file { open read };
+
