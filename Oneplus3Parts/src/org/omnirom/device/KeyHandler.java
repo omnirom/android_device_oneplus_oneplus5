@@ -59,8 +59,8 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final boolean DEBUG = true;
     protected static final int GESTURE_REQUEST = 1;
     private static final int GESTURE_WAKELOCK_DURATION = 2000;
-    private static final String KEY_CONTROL_PATH = "/proc/s1302/virtual_key";
-    private static final String FPC_CONTROL_PATH = "/sys/devices/soc/soc:fpc_fpc1020/proximity_state";
+    private static final String KEY_CONTROL_PATH = "/proc/touchpanel/key_disable";
+    private static final String FPC_CONTROL_PATH = "/sys/module/fpc1020_tee/parameters/ignor_home_for_ESD";
 
     // Supported scancodes
     //#define KEY_GESTURE_CIRCLE      250 // draw circle to lunch camera
