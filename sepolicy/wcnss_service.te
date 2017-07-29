@@ -5,3 +5,10 @@ allow wcnss_service self:capability {
     net_raw
 };
 get_prop(wcnss_service, diag_prop);
+allow servicemanager wcnss_service:dir search;
+allow servicemanager wcnss_service:file { open read };
+allow servicemanager wcnss_service:process getattr;
+allow wcnss_service per_mgr:binder { call transfer };
+allow wcnss_service servicemanager:binder call;
+allow wcnss_service shell_exec:file { execute execute_no_trans getattr open read };
+allow wcnss_service toolbox_exec:file { execute execute_no_trans getattr open read };

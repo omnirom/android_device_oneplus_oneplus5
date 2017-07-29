@@ -1,1 +1,2 @@
 allow logd unlabeled:dir search;
+allow logd logd:capability { dac_override dac_read_search };
