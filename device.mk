@@ -166,7 +166,9 @@ PRODUCT_COPY_FILES += \
 # NFC
 PRODUCT_PACKAGES += \
     com.android.nfc_extras \
+    com.gsma.services.nfc \
     com.nxp.nfc.nq \
+    libnqnfc-nci \
     nfc_nci.nqx.default \
     NQNfcNci \
     nqnfcee_access.xml \
