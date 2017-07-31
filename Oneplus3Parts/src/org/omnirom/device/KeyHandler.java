@@ -63,11 +63,11 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final String FPC_CONTROL_PATH = "/sys/module/fpc1020_tee/parameters/ignor_home_for_ESD";
 
     private static final int GESTURE_CIRCLE_SCANCODE = 250;
-    private static final int GESTURE_V_SCANCODE = 252;
+    private static final int GESTURE_V_SCANCODE = 255;
     private static final int GESTURE_II_SCANCODE = 251;
     private static final int GESTURE_LEFT_V_SCANCODE = 253;
     private static final int GESTURE_RIGHT_V_SCANCODE = 254;
-    private static final int GESTURE_A_SCANCODE = 255;
+    private static final int GESTURE_A_SCANCODE = 252;
     private static final int GESTURE_RIGHT_SWIPE_SCANCODE = 63;
     private static final int GESTURE_LEFT_SWIPE_SCANCODE = 64;
     private static final int GESTURE_DOWN_SWIPE_SCANCODE = 65;
