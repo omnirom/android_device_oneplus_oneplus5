@@ -215,7 +215,7 @@ PRODUCT_PACKAGES += \
     power.msm8998
 
 PRODUCT_PACKAGES += \
-    Oneplus3Parts
+    DeviceParts
 
 # ANT+
 PRODUCT_PACKAGES += \
