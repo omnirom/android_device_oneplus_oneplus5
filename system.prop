@@ -137,3 +137,10 @@ wifi.interface=wlan0
 # misc
 ro.build.selinux=1
 
+# Sensors
+ro.qti.sensors.dev_ori=true
+ro.qti.sensors.pmd=true
+ro.qti.sensors.sta_detect=true
+ro.qti.sensors.mot_detect=true
+ro.qti.sensors.dpc=true
+ro.qti.sensors.multishake=true
