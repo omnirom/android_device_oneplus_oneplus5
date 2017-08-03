@@ -269,8 +269,6 @@
         com.android.internal.os.DeviceKeyHandler interface. -->
     <string name="config_deviceKeyHandlerClass" translatable="false">org.omnirom.device.KeyHandler</string>
 
-    <!--<bool name="config_powerProfilesSupported">true</bool>-->
-
     <!-- Flag specifying whether WFC over IMS is available on device -->
     <bool name="config_device_wfc_ims_available">true</bool>
 
@@ -400,8 +398,8 @@
     <integer name="config_bluetooth_operating_voltage_mv">3300</integer>
 
     <!-- Enable overlay for all location components. -->
-    <!--<string name="config_networkLocationProviderPackageName" translatable="false">com.qualcomm.location</string>
-    <string name="config_fusedLocationProviderPackageName" translatable="false">com.qualcomm.location</string>-->
+    <string name="config_networkLocationProviderPackageName" translatable="false">com.qualcomm.location</string>
+    <string name="config_fusedLocationProviderPackageName" translatable="false">com.qualcomm.location</string>
 
     <!-- Default list of files pinned by the Pinner Service -->
     <string-array translatable="false" name="config_defaultPinnerServiceFiles">
@@ -410,6 +408,9 @@
         <item>"/system/framework/arm64/boot.oat"</item>
         <item>"/system/framework/arm64/boot-core-libart.oat"</item>
    </string-array>
+
+   <!-- Should the pinner service pin the Camera application? -->
+   <bool name="config_pinnerCameraApp">true</bool>
 
    <bool name="config_fingerprintRemoveClientOnCancel">true</bool>
 </resources>
