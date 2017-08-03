@@ -142,6 +142,8 @@ on boot
     chown system system /sys/devices/soc/soc:fpc_fpc1020/sensor_version
     chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/hw_reset
     chown system system /sys/devices/soc/soc:fpc_fpc1020/hw_reset
+    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/proximity_state
+    chown system system /sys/devices/soc/soc:fpc_fpc1020/proximity_state
 
     chmod 0666 /sys/module/fpc1020_tee/parameters/ignor_home_for_ESD
 
