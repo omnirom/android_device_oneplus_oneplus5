@@ -1,11 +1,13 @@
 # We have a couple of non-standard NV partitions
-/dev/block/platform/soc/624000.ufshc/by-name/oem_dycnvbk                       u:object_r:modem_efs_partition_device:s0
-/dev/block/platform/soc/624000.ufshc/by-name/oem_stanvbk                       u:object_r:modem_efs_partition_device:s0
+/dev/block/bootdevice/by-name/oem_dycnvbk                       u:object_r:modem_efs_partition_device:s0
+/dev/block/bootdevice/by-name/oem_stanvbk                       u:object_r:modem_efs_partition_device:s0
 
 # FRP partition
-/dev/block/platform/soc/624000.ufshc/by-name/config                u:object_r:frp_block_device:s0
+/dev/block/bootdevice/by-name/frp                               u:object_r:frp_block_device:s0
 
 /persist/sensors/gyro_sensitity_cal                             u:object_r:sensors_persist_file:s0
+
+/data/misc/netmgr(/.*)?                                         u:object_r:net_data_file:s0
 
 /data/oemnvitems(/.*)?                                          u:object_r:nv_data_file:s0
 
@@ -34,3 +36,9 @@
 /system/bin/ifaadaemon                                          u:object_r:ifaadaemon_exec:s0
 
 /system/bin/remosaic_daemon                                     u:object_r:remosaic_daemon_exec:s0
+
+/sys/kernel/debug/msm_core(/.*)?                                u:object_r:debugfs_msm_core:s0
+
+/sys/kernel/debug/rmt_storage/rmts                              u:object_r:debugfs_rmts:s0
+
+/data/data/org.simalliance.openmobileapi.service/files(/.*)?    u:object_r:dalvikcache_data_file:s0

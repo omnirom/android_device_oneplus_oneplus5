@@ -3,3 +3,5 @@ allow vold system_block_device:blk_file getattr;
 allow vold logd:dir { getattr open read };
 allow vold persist_file:dir { ioctl open read };
 
+allow vold proc_fingerprint:dir { read open };
+
