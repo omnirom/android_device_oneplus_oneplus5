@@ -134,11 +134,11 @@ PRODUCT_PACKAGES += \
     libgnsspps
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/gps/etc/flp.conf:system/etc/flp.conf \
+    $(LOCAL_PATH)/gps/etc/flp.conf:system/vendor/etc/flp.conf \
     $(LOCAL_PATH)/gps/etc/izat.conf:system/vendor/etc/izat.conf \
-    $(LOCAL_PATH)/gps/etc/lowi.conf:system/etc/lowi.conf \
-    $(LOCAL_PATH)/gps/etc/sap.conf:system/etc/sap.conf \
-    $(LOCAL_PATH)/gps/etc/xtwifi.conf:system/etc/xtwifi.conf
+    $(LOCAL_PATH)/gps/etc/lowi.conf:system/vendor/etc/lowi.conf \
+    $(LOCAL_PATH)/gps/etc/sap.conf:system/vendor/etc/sap.conf \
+    $(LOCAL_PATH)/gps/etc/xtwifi.conf:system/vendor/etc/xtwifi.conf
 
 # Vehicle network (for slim_daemon)
 PRODUCT_PACKAGES += \
