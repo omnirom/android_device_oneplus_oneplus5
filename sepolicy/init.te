@@ -7,3 +7,5 @@ allow init input_device:chr_file r_file_perms;
 allow init proc_touchpanel:file write;
 domain_trans(init, rootfs, dashd)
 
+allow init debugfs:file { rw_file_perms };
+allow init debugfs:dir mounton;

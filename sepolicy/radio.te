@@ -1,2 +1,5 @@
 allow radio qcom_ims_prop:property_service set;
 
+# Talk to qmuxd (/dev/socket/qmux_radio)
+qmux_socket(radio)
+
