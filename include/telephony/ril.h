@@ -596,10 +596,8 @@ typedef struct {
 } RIL_Dial;
 
 typedef struct {
-    #ifdef VENDOR_EDIT
     //dengql@OnLineRD.AirService.RIL, 2012/09/26, Add for NFC E-wallet
     int cla;
-    #endif /* VENDOR_EDIT */
 
     int command;    /* one of the commands listed for TS 27.007 +CRSM*/
     int fileid;     /* EF id */
@@ -615,10 +613,8 @@ typedef struct {
 } RIL_SIM_IO_v5;
 
 typedef struct {
-    #ifdef VENDOR_EDIT
     //dengql@OnLineRD.AirService.RIL, 2012/09/26, Add for NFC E-wallet
     int cla;
-    #endif /* VENDOR_EDIT */
 
     int command;    /* one of the commands listed for TS 27.007 +CRSM*/
     int fileid;     /* EF id */
@@ -5299,7 +5295,6 @@ typedef struct {
  *  Must never fail
  */
 #define RIL_REQUEST_UPDATE_ADN_RECORD 141
-#ifdef VENDOR_EDIT 
 //DuYuanHua@OnLineRD.AirService.RIL, 2012/09/26, Add for EngineerMode
 //xufei@OnLineRD.AirService.RIL, 2012/12/14, Add for factory mode nv process
 #define RIL_REQUEST_FACTORY_MODE_NV_PROCESS 142
@@ -5321,7 +5316,6 @@ typedef struct {
 
 #define RIL_REQUEST_GET_BAND_MODE 144
 
-//#ifdef VENDOR_EDIT
 //Zhengpeng.Tan@OnlineRD.AirService.Module, 2013/10/28, Add for  report nv_restore when bootup
 #define RIL_REQUEST_REPORT_BOOTUPNVRESTOR_STATE 145 
 
@@ -5342,7 +5336,6 @@ typedef struct {
 // "response" is a const RIL_SIM_IO_Response *
 #define RIL_REQUEST_SIM_TRANSMIT_CHANNEL 150
 
-#endif /* VENDOR_EDIT */
 
 //yangli@OnlineRD.AirService.Module, 2014/05/20, Add for send msg to make modem reset, {
 #define RIL_REQUEST_GO_TO_ERROR_FATAL 151
@@ -6000,14 +5993,10 @@ typedef struct {
 #define RIL_UNSOL_RESPONSE_ADN_RECORDS 1048
 
 //penghongyi@oem.network add for nv backup response
-//#ifdef VENDOR_EDIT
 #define RIL_UNSOL_OEM_NV_BACKUP_RESPONSE 1049
-//#endif
 
-//#ifdef VENDOR_EDIT
 //Hongyu.Bi@EXP.DataComm.Modem, 2014/02/26, Add for clearcode29/33
 #define RIL_UNSOL_RAC_UPDATE  1050    //czp 1042-->1044
-//#endif /* VENDOR_EDIT */
 
 /***********************************************************************/
 
