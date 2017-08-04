@@ -54,6 +54,9 @@ on boot
     chown system system /sys/devices/soc/soc:fpc_fpc1020/hw_reset
     #chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/wakeup_enable
     #chown system system /sys/devices/soc/soc:fpc_fpc1020/wakeup_enable
+    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/proximity_state
+    chown system system /sys/devices/soc/soc:fpc_fpc1020/proximity_state
+
     chmod 0666 /dev/qseecom
     #NFC, ruanbanmao add for 15801 nfc. 2015/10/19
     setprop ro.nfc.port "I2C"
@@ -257,6 +260,11 @@ on post-fs
     chown system system /dev/param
     chown system system /dev/block/mmcblk0p21
     chmod 660 /dev/block/mmcblk0p21
+    # Vibrator
+    chown system system /sys/class/timed_output/vibrator/vtg_default
+    chown system system /sys/class/timed_output/vibrator/vtg_level
+    chown system system /sys/class/timed_output/vibrator/vtg_max
+    chown system system /sys/class/timed_output/vibrator/vtg_min
     chown system system /sys/class/timed_output/vibrator/vmax
     chown system system /sys/class/timed_output/vibrator/wf_s0
     chown system system /sys/class/timed_output/vibrator/wf_s1
