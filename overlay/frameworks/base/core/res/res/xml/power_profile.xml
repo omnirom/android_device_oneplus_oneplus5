@@ -43,112 +43,130 @@
     <!-- Different CPU speeds as reported in
          /sys/devices/system/cpu/cpu0/cpufreq/stats/time_in_state -->
     <array name="cpu.speeds.cluster0">
-        <value>307200</value> <!-- 307 MHz CPU speed -->
-        <value>384000</value> <!-- 384 MHz CPU speed -->
-        <value>460800</value> <!-- 460 MHz CPU speed -->
-        <value>537600</value> <!-- 537 MHz CPU speed -->
-        <value>614400</value> <!-- 614 MHz CPU speed -->
-        <value>691200</value> <!-- 691 MHz CPU speed -->
-        <value>768000</value> <!-- 768 MHz CPU speed -->
-        <value>844800</value> <!-- 844 MHz CPU speed -->
-        <value>902600</value> <!-- 902 MHz CPU speed -->
-        <value>979200</value> <!-- 979 MHz CPU speed -->
-        <value>1056000</value> <!-- 1056 MHz CPU speed -->
-        <value>1132800</value> <!-- 1132 MHz CPU speed -->
-        <value>1209600</value> <!-- 1209 MHz CPU speed -->
-        <value>1286400</value> <!-- 1286 MHz CPU speed -->
-        <value>1363200</value> <!-- 1363 MHz CPU speed -->
-        <value>1440000</value> <!-- 1440 MHz CPU speed -->
-        <value>1516800</value> <!-- 1516 MHz CPU speed -->
-        <value>1593600</value> <!-- 1593 MHz CPU speed -->
-        <value>2188800</value> <!-- 2188 MHz CPU speed -->
+        <value>300000</value>
+        <value>364800</value>
+        <value>441600</value>
+        <value>518400</value>
+        <value>595200</value>
+        <value>672000</value>
+        <value>748800</value>
+        <value>825600</value>
+        <value>883200</value>
+        <value>960000</value>
+        <value>1036800</value>
+        <value>1094400</value>
+        <value>1171200</value>
+        <value>1248000</value>
+        <value>1324800</value>
+        <value>1401600</value>
+        <value>1478400</value>
+        <value>1555200</value>
+        <value>1670400</value>
+        <value>1747200</value>
+        <value>1824000</value>
+        <value>1900800</value>
     </array>
     <array name="cpu.speeds.cluster1">
-        <value>307200</value> <!-- 307 MHz CPU speed -->
-        <value>384000</value> <!-- 384 MHz CPU speed -->
-        <value>460800</value> <!-- 460 MHz CPU speed -->
-        <value>537600</value> <!-- 537 MHz CPU speed -->
-        <value>614400</value> <!-- 614 MHz CPU speed -->
-        <value>691200</value> <!-- 691 MHz CPU speed -->
-        <value>748800</value> <!-- 748 MHz CPU speed -->
-        <value>825600</value> <!-- 825 MHz CPU speed -->
-        <value>902400</value> <!-- 902 MHz CPU speed -->
-        <value>979200</value> <!-- 979 MHz CPU speed -->
-        <value>1056000</value> <!-- 1056 MHz CPU speed -->
-        <value>1132800</value> <!-- 1132 MHz CPU speed -->
-        <value>1209600</value> <!-- 1209 MHz CPU speed -->
-        <value>1286400</value> <!-- 1286 MHz CPU speed -->
-        <value>1363200</value> <!-- 1363 MHz CPU speed -->
-        <value>1440000</value> <!-- 1440 MHz CPU speed -->
-        <value>1516800</value> <!-- 1516 MHz CPU speed -->
-        <value>1593600</value> <!-- 1593 MHz CPU speed -->
-        <value>1670400</value> <!-- 1670 MHz CPU speed -->
-        <value>1747200</value> <!-- 1747 MHz CPU speed -->
-        <value>1824000</value> <!-- 1824 MHz CPU speed -->
-        <value>1900800</value> <!-- 1900 MHz CPU speed -->
-        <value>1977600</value> <!-- 1977 MHz CPU speed -->
-        <value>2054400</value> <!-- 2054 MHz CPU speed -->
-        <value>2150400</value> <!-- 2150 MHz CPU speed -->
-        <value>2246400</value> <!-- 2246 MHz CPU speed -->
-        <value>2342400</value> <!-- 2342 MHz CPU speed -->
+        <value>300000</value>
+        <value>345600</value>
+        <value>422400</value>
+        <value>499200</value>
+        <value>576000</value>
+        <value>652800</value>
+        <value>729600</value>
+        <value>806400</value>
+        <value>902400</value>
+        <value>979200</value>
+        <value>1056000</value>
+        <value>1132800</value>
+        <value>1190400</value>
+        <value>1267200</value>
+        <value>1344000</value>
+        <value>1420800</value>
+        <value>1497600</value>
+        <value>1574400</value>
+        <value>1651200</value>
+        <value>1728000</value>
+        <value>1804800</value>
+        <value>1881600</value>
+        <value>1958400</value>
+        <value>2035200</value>
+        <value>2112000</value>
+        <value>2208000</value>
+        <value>2265600</value>
+        <value>2323200</value>
+        <value>2342400</value>
+        <value>2361600</value>
+        <value>2457600</value>
     </array>
-    <!-- Power consumption when CPU is idle -->
-    <item name="cpu.idle">3.7694</item>
-    <item name="cpu.awake">0.727844</item>
-    <!-- Power consumption at different speeds -->
+    <item name="cpu.idle">4</item>
     <array name="cpu.active.cluster0">
-        <value>202.356</value> <!-- 307 MHz CPU speed -->
-        <value>202.356</value> <!-- 384 MHz CPU speed -->
-        <value>202.356</value> <!-- 460 MHz CPU speed -->
-        <value>202.356</value> <!-- 537 MHz CPU speed -->
-        <value>202.356</value> <!-- 614 MHz CPU speed -->
-        <value>202.356</value> <!-- 691 MHz CPU speed -->
-        <value>202.356</value> <!-- 768 MHz CPU speed -->
-        <value>202.356</value> <!-- 844 MHz CPU speed -->
-        <value>202.356</value> <!-- 902 MHz CPU speed -->
-        <value>202.356</value> <!-- 979 MHz CPU speed -->
-        <value>202.356</value> <!-- 1056 MHz CPU speed -->
-        <value>202.356</value> <!-- 1132 MHz CPU speed -->
-        <value>202.356</value> <!-- 1209 MHz CPU speed -->
-        <value>202.356</value> <!-- 1286 MHz CPU speed -->
-        <value>202.356</value> <!-- 1363 MHz CPU speed -->
-        <value>202.356</value> <!-- 1440 MHz CPU speed -->
-        <value>202.356</value> <!-- 1516 MHz CPU speed -->
-        <value>202.356</value> <!-- 1593 MHz CPU speed -->
+        <value>22</value>
+        <value>23</value>
+        <value>23</value>
+        <value>24</value>
+        <value>24</value>
+        <value>25</value>
+        <value>23</value>
+        <value>25</value>
+        <value>24</value>
+        <value>26</value>
+        <value>28</value>
+        <value>29</value>
+        <value>30</value>
+        <value>30</value>
+        <value>32</value>
+        <value>33</value>
+        <value>34</value>
+        <value>33</value>
+        <value>38</value>
+        <value>41</value>
+        <value>43</value>
+        <value>47</value>
     </array>
     <array name="cpu.active.cluster1">
-        <value>202.356</value> <!-- 307 MHz CPU speed -->
-        <value>202.356</value> <!-- 384 MHz CPU speed -->
-        <value>202.356</value> <!-- 460 MHz CPU speed -->
-        <value>202.356</value> <!-- 537 MHz CPU speed -->
-        <value>202.356</value> <!-- 614 MHz CPU speed -->
-        <value>202.356</value> <!-- 691 MHz CPU speed -->
-        <value>202.356</value> <!-- 748 MHz CPU speed -->
-        <value>202.356</value> <!-- 825 MHz CPU speed -->
-        <value>202.356</value> <!-- 902 MHz CPU speed -->
-        <value>202.356</value> <!-- 979 MHz CPU speed -->
-        <value>202.356</value> <!-- 1056 MHz CPU speed -->
-        <value>202.356</value> <!-- 1132 MHz CPU speed -->
-        <value>202.356</value> <!-- 1209 MHz CPU speed -->
-        <value>202.356</value> <!-- 1286 MHz CPU speed -->
-        <value>202.356</value> <!-- 1363 MHz CPU speed -->
-        <value>202.356</value> <!-- 1440 MHz CPU speed -->
-        <value>202.356</value> <!-- 1516 MHz CPU speed -->
-        <value>202.356</value> <!-- 1593 MHz CPU speed -->
-        <value>202.356</value> <!-- 1670 MHz CPU speed -->
-        <value>202.356</value> <!-- 1747 MHz CPU speed -->
-        <value>202.356</value> <!-- 1824 MHz CPU speed -->
-        <value>202.356</value> <!-- 1900 MHz CPU speed -->
-        <value>202.356</value> <!-- 1977 MHz CPU speed -->
-        <value>202.356</value> <!-- 2054 MHz CPU speed -->
-        <value>202.356</value> <!-- 2150 MHz CPU speed -->
+        <value>26</value>
+        <value>27</value>
+        <value>27</value>
+        <value>28</value>
+        <value>29</value>
+        <value>30</value>
+        <value>27</value>
+        <value>28</value>
+        <value>29</value>
+        <value>29</value>
+        <value>30</value>
+        <value>34</value>
+        <value>40</value>
+        <value>39</value>
+        <value>41</value>
+        <value>45</value>
+        <value>44</value>
+        <value>46</value>
+        <value>52</value>
+        <value>55</value>
+        <value>52</value>
+        <value>57</value>
+        <value>71</value>
+        <value>81</value>
+        <value>83</value>
+        <value>108</value>
+        <value>115</value>
+        <value>122</value>
+        <value>125</value>
+        <value>128</value>
+        <value>128</value>
     </array>
     <array name="cpu.clusters.cores">
-        <value>2</value> <!-- Cluster 0 has 2 cores (cpu0, cpu1) -->
-        <value>2</value> <!-- Cluster 1 has 2 cores (cpu2, cpu3) -->
+        <value>4</value>
+        <value>4</value>
     </array>
+    <!-- Power consumption when CPU is idle -->
+    <item name="cpu.awake">52.73</item>
+    <item name="cpu.idle">3.92</item>
+    <!-- Power consumption at different speeds -->
     <!-- This is the battery capacity in mAh -->
-    <item name="battery.capacity">3200</item>
+    <item name="battery.capacity">3300</item>
 
     <array name="wifi.batchedscan"> <!-- mA.  Current figures based on .0801 s/c and 75.48mA while scanning -->
         <value>0</value> <!-- 1-8/hr -->
