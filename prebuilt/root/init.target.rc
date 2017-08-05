@@ -206,7 +206,7 @@ on boot
 
 #add by likelong@camera 2017.1.5 set org.codeaurora.snapcam to camera.aux.packagelist
 #ifdef VENDOR_EDIT
-    setprop camera.aux.packagelist "org.codeaurora.snapcam,com.android.engineeringmode,com.oneplus.camera,com.example.camera"
+    setprop camera.aux.packagelist "org.omnirom.snap,org.codeaurora.snapcam,com.android.engineeringmode,com.oneplus.camera,com.example.camera"
 #endif
 
 #ifdef VENDOR_EDIT
