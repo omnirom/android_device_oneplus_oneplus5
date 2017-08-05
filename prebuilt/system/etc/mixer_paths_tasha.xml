@@ -575,12 +575,6 @@
     <ctl name="LSM8 MUX" value="None" />
     <ctl name="SLIMBUS_5_TX LSM Function" value="None" />
     <!-- listen end-->
-    <!-- split a2dp -->
-    <ctl name="BT SampleRate" value="KHZ_8" />
-    <ctl name="AFE Input Channels" value="Zero" />
-    <ctl name="SLIM7_RX ADM Channels" value="Zero" />
-    <!-- split a2dp end-->
-
 <!-- #ifdef VENDOR_EDIT -->
 <!-- /*zhiguang.su@MultiMedia.AudioDrv , 2015/11/02, quat i2s init*/  -->
     <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia1" value="0" />
