@@ -20,7 +20,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- If this is true, the screen will fade off. -->
-    <bool name="config_animateScreenLights">false</bool>
+    <bool name="config_animateScreenLights">true</bool>
 
     <!-- Default color for notification LED is blue. -->
     <color name="config_defaultNotificationColor">#ff0000ff</color>
@@ -44,13 +44,21 @@
          Zone N + 1     array[N] <= LUX < infinity
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
-        <item>1</item>
-        <item>4</item>
-        <item>45</item>
-        <item>1025</item>
-        <item>1480</item>
-        <item>2940</item>
-        <item>10000</item>
+        <item>5</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+        <item>60</item>
+        <item>100</item>
+        <item>150</item>
+        <item>210</item>
+        <item>255</item>
+        <item>500</item>
+        <item>1500</item>
+        <item>2500</item>
+        <item>3000</item>
     </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
@@ -58,13 +66,21 @@
          than the size of the config_autoBrightnessLevels array.
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>3</item>
-        <item>7</item>
-        <item>11</item>
-        <item>26</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
         <item>60</item>
-        <item>108</item>
-        <item>175</item>
+        <item>70</item>
+        <item>80</item>
+        <item>90</item>
+        <item>100</item>
+        <item>110</item>
+        <item>150</item>
+        <item>180</item>
+        <item>200</item>
+        <item>220</item>
         <item>255</item>
     </integer-array>
 
@@ -283,7 +299,7 @@
     <bool name="config_enableMultiUserUI">true</bool>
 
     <!-- Screen brightness when dozing -->
-    <integer name="config_screenBrightnessDoze">1</integer>
+    <integer name="config_screenBrightnessDoze">15</integer>
 
     <!-- Dream of notifications -->
     <string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
