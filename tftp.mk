@@ -12,6 +12,8 @@ $(shell mkdir -p $(TARGET_OUT)/etc/firmware/wcd9320; \
 
 $(shell rm -rf $(TARGET_OUT)/rfs/)
 
+$(shell ln -s $(TARGET_VENDOR_OUT)/firmware/msadp /dev/block/bootdevice/by-name/msadp)
+
 #To be enabled when prepopulation support is needed for the read_write folder
 # $(shell rm -rf  $(TARGET_OUT_DATA)/rfs/)
 # $(shell mkdir -p $(TARGET_OUT_DATA)/rfs/msm/mpss/)
