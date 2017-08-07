@@ -76,6 +76,9 @@ etc/firmware/rampatch_tlv_3.2.tlv
 etc/firmware/rampatch_tlv.img
 vendor/lib/libbtnv.so
 vendor/lib64/libbtnv.so
+lib/libbthost_if.so
+lib64/libbthost_if.so
+
 
 # CNE
 bin/cnd
