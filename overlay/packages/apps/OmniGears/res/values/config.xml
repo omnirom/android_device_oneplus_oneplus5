@@ -17,5 +17,5 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- core 1 and 3 will always have the same freq then 0 and 2 -->
-    <string name="config_cpufreq_show_cpus">0,2</string>
+    <string name="config_cpufreq_show_cpus">0,4</string>
 </resources>
