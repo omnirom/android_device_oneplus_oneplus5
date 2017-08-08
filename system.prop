@@ -174,5 +174,8 @@ ro.hwui.text_small_cache_height=2048
 ro.hwui.text_large_cache_width=3072
 ro.hwui.text_large_cache_height=2048
 
+#Camera
+camera.aux.packagelist=org.omnirom.snap,org.codeaurora.snapcam,com.oneplus.camera
+
 #re enable on O
 #persist.bt.a2dp_offload_cap=sbc-aptx-aptxhd-aac
