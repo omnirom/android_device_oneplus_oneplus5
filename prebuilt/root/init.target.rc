@@ -39,11 +39,6 @@ on init
     write /dev/stune/foreground/schedtune.colocate 0
     write /dev/stune/top-app/schedtune.colocate 1
 
-    # Setup zram options
-    write /sys/block/zram0/comp_algorithm lz4
-    write /sys/block/zram0/max_comp_streams 4
-    write /proc/sys/vm/page-cluster 0
-
 on fs
     wait /dev/block/platform/soc/1da4000.ufshc
     symlink /dev/block/platform/soc/1da4000.ufshc /dev/block/bootdevice
@@ -60,10 +55,8 @@ on fs
     mkdir /persist/data 0700 system system
     mkdir /persist/bms 0700 root system
     restorecon_recursive /persist
-#ifdef VENDOR_EDIT
 #### zhiguang.su,make adsp boot faster.
 	write /sys/kernel/boot_adsp/boot 1
-#endif
 
 
     mount ext4 /dev/block/bootdevice/by-name/dsp /dsp ro nosuid nodev barrier=1
@@ -123,14 +116,12 @@ on boot
    chown system system /persist/speccfg/vendor_persist.prop
    chown system system /persist/speccfg/submask
    chown system system /persist/speccfg/partition
-#ifdef VENDOR_EDIT
    chmod 0777 /persist/dual_camera_calibration
    chmod 0644 /persist/dual_camera_calibration/calibrationOutput.bin
    chmod 0666 /sys/devices/virtual/graphics/fb0/SRGB
    chmod 0666 /sys/devices/virtual/graphics/fb0/DCI_P3
    chmod 0666 /sys/devices/virtual/graphics/fb0/hbm
    chmod 0666 /sys/devices/virtual/graphics/fb0/night_mode
-#endif
 
 #Peripheral manager
 service per_mgr /system/bin/pm-service
@@ -200,23 +191,14 @@ on boot
     restorecon  /dev/dash
 
 #add by likelong@camera 2016.12.13 for led test in EngineeringMode, torch_0 is warm flash, and torch_1 is cold flash.
-#ifdef VENDOR_EDIT
     chown system system /sys/class/leds/led:torch_0/brightness
     chmod 666 /sys/class/leds/led:torch_0/brightness
     chown system system /sys/class/leds/led:torch_1/brightness
     chmod 666 /sys/class/leds/led:torch_1/brightness
     chown system system /sys/class/leds/led:switch_0/brightness
     chmod 666 /sys/class/leds/led:switch_0/brightness
-#endif
 
-#add by likelong@camera 2017.1.5 set org.codeaurora.snapcam to camera.aux.packagelist
-#ifdef VENDOR_EDIT
-    setprop camera.aux.packagelist "org.codeaurora.snapcam,com.android.engineeringmode,com.oneplus.camera,com.example.camera"
-#endif
-
-#ifdef VENDOR_EDIT
-     write /sys/bus/i2c/devices/5-0020/tp_fw_update 0
-#endif
+    write /sys/bus/i2c/devices/5-0020/tp_fw_update 0
 
 #fingerprint service
 service fingerprintd /system/bin/fingerprintd
@@ -499,7 +481,6 @@ service qvrd /system/vendor/bin/qvrservice
     group system camera graphics
     socket qvrservice stream 0666 system system
 
-#ifdef VENDOR_EDIT
 on property:sys.srgb=1
    write /sys/devices/virtual/graphics/fb0/SRGB 1
 on property:sys.srgb=0
@@ -519,7 +500,7 @@ on property:sys.night_mode=1
    write /sys/devices/virtual/graphics/fb0/night_mode 1
 on property:sys.night_mode=0
    write /sys/devices/virtual/graphics/fb0/night_mode 0
-#endif
+
 service smcinvoked /system/vendor/bin/smcinvoked
     class main
     user system
