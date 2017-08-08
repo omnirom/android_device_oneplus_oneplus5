@@ -55,9 +55,8 @@ on fs
     mkdir /persist/data 0700 system system
     mkdir /persist/bms 0700 root system
     restorecon_recursive /persist
-
 #### zhiguang.su,make adsp boot faster.
-    write /sys/kernel/boot_adsp/boot 1
+	write /sys/kernel/boot_adsp/boot 1
 
 
     mount ext4 /dev/block/bootdevice/by-name/dsp /dsp ro nosuid nodev barrier=1
@@ -191,9 +190,17 @@ on boot
     chmod 0666 /dev/dash/
     restorecon  /dev/dash
 
-    setprop camera.aux.packagelist "org.omnirom.snap,com.oneplus.camera"
+#add by likelong@camera 2016.12.13 for led test in EngineeringMode, torch_0 is warm flash, and torch_1 is cold flash.
+    chown system system /sys/class/leds/led:torch_0/brightness
+    chmod 666 /sys/class/leds/led:torch_0/brightness
+    chown system system /sys/class/leds/led:torch_1/brightness
+    chmod 666 /sys/class/leds/led:torch_1/brightness
+    chown system system /sys/class/leds/led:switch_0/brightness
+    chmod 666 /sys/class/leds/led:switch_0/brightness
 
-    write /sys/bus/i2c/devices/5-0020/tp_fw_update 0
+#add by likelong@camera 2017.1.5 set org.codeaurora.snapcam to camera.aux.packagelist
+
+     write /sys/bus/i2c/devices/5-0020/tp_fw_update 0
 
 #fingerprint service
 service fingerprintd /system/bin/fingerprintd
@@ -476,7 +483,6 @@ service qvrd /system/vendor/bin/qvrservice
     group system camera graphics
     socket qvrservice stream 0666 system system
 
-#ifdef VENDOR_EDIT
 on property:sys.srgb=1
    write /sys/devices/virtual/graphics/fb0/SRGB 1
 on property:sys.srgb=0
@@ -496,7 +502,7 @@ on property:sys.night_mode=1
    write /sys/devices/virtual/graphics/fb0/night_mode 1
 on property:sys.night_mode=0
    write /sys/devices/virtual/graphics/fb0/night_mode 0
-#endif
+
 service smcinvoked /system/vendor/bin/smcinvoked
     class main
     user system

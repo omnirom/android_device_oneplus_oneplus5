@@ -24,20 +24,20 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-
 import init.oem.rc
-import init.qcom.usb.rc
-import init.target.rc
 import init.qcom.power.rc
 import init.omni.rc
+import init.omni.op5.rc
+
+import init.qcom.usb.rc
+import init.msm.usb.configfs.rc
+import init.target.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
     chmod 0755 /sys/kernel/debug
 
 on init
-    export LD_SHIM_LIBS /system/lib/hw/camera.msm8998.so|libcamera_shim.so
-
     # Set permissions for persist partition
     mkdir /persist 0771 root system
 
@@ -57,20 +57,12 @@ on post-fs
     chmod 0755 /sys/kernel/debug/tracing
     restorecon /sys/kernel/debug/tracing/trace_marker
 
-on late-fs
-    # boot time fs tune
-    write /sys/block/sda/queue/iostats 0
-    write /sys/block/sda/queue/iosched/slice_idle 0
-    write /sys/block/sda/queue/read_ahead_kb 2048
-    write /sys/block/sda/queue/nr_requests 256
-    write /sys/block/dm-0/queue/read_ahead_kb 2048
-    write /sys/block/dm-1/queue/read_ahead_kb 2048
-
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
     # Allow subsystem (modem etc) debugging
     write /sys/kernel/boot_adsp/boot 1
+    write /sys/kernel/boot_cdsp/boot 1
     write /sys/kernel/boot_slpi/boot 1
     exec u:r:qti_init_shell:s0 -- /init.qcom.early_boot.sh
 
@@ -81,8 +73,12 @@ on boot
     chown bluetooth bluetooth /proc/bluetooth/sleep/proto
     chown bluetooth bluetooth /sys/module/hci_uart/parameters/ath_lpm
     chown bluetooth bluetooth /sys/module/hci_uart/parameters/ath_btwrite
-    chown system system /sys/module/sco/parameters/disable_esco
+    chown system system /sys/module/bluetooth/parameters/disable_esco
     chown bluetooth bluetooth /sys/module/hci_smd/parameters/hcismd_set
+    chown system system /sys/module/msm_core/parameters/polling_interval
+    chown system system /sys/module/msm_core/parameters/disabled
+    chown system system /sys/kernel/debug/msm_core/enable
+    chown system system /sys/kernel/debug/msm_core/ptable
     chown system system /sys/module/radio_iris_transport/parameters/fmsmd_set
     chmod 0660 /sys/module/bluetooth_power/parameters/power
     chmod 0660 /sys/module/hci_smd/parameters/hcismd_set
@@ -90,48 +86,12 @@ on boot
     chmod 0660 /sys/class/rfkill/rfkill0/state
     chmod 0660 /proc/bluetooth/sleep/proto
     chown bluetooth net_bt /dev/ttyHS0
+    chown bluetooth net_bt /dev/btpower
     chmod 0660 /sys/module/hci_uart/parameters/ath_lpm
     chmod 0660 /sys/module/hci_uart/parameters/ath_btwrite
     chmod 0660 /dev/ttyHS0
     chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
     chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
-
-    # Touchscreen
-    chown system radio /proc/touchpanel/double_tap_enable
-    chmod 0660 /proc/touchpanel/double_tap_enable
-
-    chown root system /proc/touchpanel/letter_o_enable
-    chmod 0660 /proc/touchpanel/letter_o_enable
-
-    chown root system /proc/touchpanel/music_enable
-    chmod 0660 /proc/touchpanel/music_enable
-
-    chown root system /proc/touchpanel/double_swipe_enable
-    chmod 0660 /proc/touchpanel/double_swipe_enable
-
-    chown root system /proc/touchpanel/up_arrow_enable
-    chmod 0660 /proc/touchpanel/up_arrow_enable
-
-    chown root system /proc/touchpanel/down_arrow_enable
-    chmod 0660 /proc/touchpanel/down_arrow_enable
-
-    chown root system /proc/touchpanel/left_arrow_enable
-    chmod 0660 /proc/touchpanel/left_arrow_enable
-
-    chown root system /proc/touchpanel/right_arrow_enable
-    chmod 0660 /proc/touchpanel/right_arrow_enable
-
-    chown root system /proc/touchpanel/left_swipe_enable
-    chmod 0660 /proc/touchpanel/left_swipe_enable
-
-    chown root system /proc/touchpanel/right_swipe_enable
-    chmod 0660 /proc/touchpanel/right_swipe_enable
-
-    chown root system /proc/touchpanel/up_swipe_enable
-    chmod 0660 /proc/touchpanel/up_swipe_enable
-
-    chown root system /proc/touchpanel/down_swipe_enable
-    chmod 0660 /proc/touchpanel/down_swipe_enable
 
     chmod 0660 /dev/ttyHS2
     chown bluetooth bluetooth /dev/ttyHS2
@@ -164,11 +124,15 @@ on boot
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
     setprop net.tcp.buffersize.wifi    524288,2097152,4194304,262144,524288,1048576
 
+
+    setprop ro.telephony.call_ring.multiple false
+
     #enable camera read sensors data
     setprop persist.camera.gyro.disable 0
 
     #Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip
+
 
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
 
@@ -241,14 +205,6 @@ on boot
     chown root system /sys/kernel/dload/emmc_dload
     chmod 0660 /sys/kernel/dload/emmc_dload
 
-    # Don't reset entire SoC on individual subsystem crash
-    write /sys/bus/msm_subsys/devices/subsys0/restart_level "related"
-    write /sys/bus/msm_subsys/devices/subsys1/restart_level "related"
-    write /sys/bus/msm_subsys/devices/subsys2/restart_level "related"
-    write /sys/bus/msm_subsys/devices/subsys3/restart_level "related"
-    write /sys/bus/msm_subsys/devices/subsys4/restart_level "related"
-    write /sys/bus/msm_subsys/devices/subsys5/restart_level "related"
-
 # msm specific files that need to be created on /data
 on post-fs-data
     #Create directories for Fingerprint
@@ -267,8 +223,6 @@ on post-fs-data
     chown media_rw media_rw /data/media
 
     mkdir /data/misc/ipa 0700 net_admin net_admin
-
-    mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
 
     # Create the directories used by the Wireless subsystem
     mkdir /data/misc/wifi 0770 wifi wifi
@@ -359,9 +313,6 @@ on post-fs-data
 
     setprop vold.post_fs_data_done 1
 
-    #Create a folder for SRS to be able to create a usercfg file
-    mkdir /data/data/media 0770 media media
-
     #Create FM dir for patchdownloader
     mkdir /data/misc/fm 0770 system system
     chmod 0770 /data/misc/fm
@@ -435,7 +386,6 @@ service perfd /system/vendor/bin/perfd
    group root readproc
    disabled
    socket perfd seqpacket 0666 root system
-   writepid /dev/cpuset/system-background/tasks
 
 service iop /system/bin/iop
     class main
@@ -443,7 +393,6 @@ service iop /system/bin/iop
     group root
     disabled
     socket iop seqpacket 0666 root system
-    writepid /dev/cpuset/system-background/tasks
 
 service qcomsysd /system/bin/qcom-system-daemon
     class main
@@ -484,15 +433,15 @@ on property:persist.sys.ssr.enable_ramdumps=0
     write /sys/module/subsystem_restart/parameters/enable_ramdumps 0
 
 on property:sys.boot_completed=1
+    exec u:r:qti_init_shell:s0 -- /init.qcom.crashdata.sh
     write /dev/kmsg "Boot completed "
-    # end boot time fs tune
-    write /sys/block/sda/queue/read_ahead_kb 128
-    write /sys/block/sda/queue/nr_requests 128
-    write /sys/block/dm-0/queue/read_ahead_kb 128
-    write /sys/block/dm-1/queue/read_ahead_kb 128
-    write /sys/block/sda/queue/iostats 1
+    #Reset read ahead for dm-0 and dm-1 to 512kb
+    write /sys/block/dm-0/queue/read_ahead_kb 512
+    write /sys/block/dm-1/queue/read_ahead_kb 512
     #WDSP FW boot sysfs node used by STHAL
     chown media audio /sys/kernel/wdsp0/boot
+    #CPE fw_name used by sound trigger HAL
+    chown media audio /sys/kernel/wcd_cpe0/fw_name
 
 on property:persist.radio.atfwd.start=false
     stop atfwd
@@ -505,11 +454,8 @@ on property:persist.debug.trace=1
     mkdir /data/core 0777 root root
     write /proc/sys/kernel/core_pattern "/data/core/%E.%p.%e"
 
-on property:bluetooth.sap.status=running
-    start bt-sap
-
-on property:bluetooth.sap.status=stopped
-    stop bt-sap
+on property:init.svc.wpa_supplicant=stopped
+    stop dhcpcd
 
 on property:bluetooth.dun.status=running
     start bt-dun
@@ -547,21 +493,18 @@ on property:vold.decrypt=trigger_restart_framework
     start config_bt_addr
     start config_bluetooth
     start wcnss-service
-    start cnss_diag
-
-on property:persist.env.fastdorm.enabled=true
-    setprop persist.radio.data_no_toggle 1
+#ifdef VENDOR_EDIT
+    #start cnss_diag
+#endif VENDOR_EDIT
 
 service cnd /system/bin/cnd
     class main
     socket cnd stream 660 root inet
-    writepid /dev/cpuset/system-background/tasks
 
 service dpmd /system/bin/dpmd
     class late_start
     socket dpmd stream 660 root system
     group system readproc
-    writepid /dev/cpuset/system-background/tasks
 
 service irsc_util /system/bin/irsc_util "/etc/sec_config"
     class core
@@ -571,19 +514,15 @@ service irsc_util /system/bin/irsc_util "/etc/sec_config"
 service rmt_storage /system/bin/rmt_storage
     class core
     user root
-    group root system wakelock
-    writepid /dev/cpuset/system-background/tasks
 
 service rfs_access /system/bin/rfs_access
    class core
    user root
    group system net_raw
-   writepid /dev/cpuset/system-background/tasks
 
 service tftp_server /system/bin/tftp_server
    class core
    user root
-   writepid /dev/cpuset/system-background/tasks
 
 on property:wc_transport.start_hci=true
     start start_hci_filter
@@ -607,7 +546,7 @@ service start_hci_filter /system/bin/wcnss_filter
 service fmhal_service /system/bin/fmhal_service
     class late_start
     user bluetooth
-    group bluetooth net_bt_admin net_admin
+    group bluetooth net_bt_admin
     disabled
 
 service config_bt_addr /system/bin/btnvtool -O
@@ -619,7 +558,6 @@ service config_bt_addr /system/bin/btnvtool -O
 service config_bluetooth /system/bin/sh /system/etc/init.qcom.bt.sh "onboot"
     class core
     user root
-    seclabel u:r:bluetooth_loader:s0
     oneshot
 
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
@@ -627,7 +565,6 @@ service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     user bluetooth
     group bluetooth net_bt_admin
     disabled
-    seclabel u:r:bluetooth_loader:s0
     oneshot
 
 on property:bluetooth.hciattach=true
@@ -647,13 +584,6 @@ service bt-dun /system/bin/dun-server /dev/smd7 /dev/rfcomm0
     class late_start
     user bluetooth
     group bluetooth net_bt_admin inet
-    disabled
-    oneshot
-
-service bt-sap /system/bin/sapd 15
-    user bluetooth
-    group bluetooth net_bt_admin
-    class late_start
     disabled
     oneshot
 
@@ -698,7 +628,7 @@ service qmiproxy /system/bin/qmiproxy
     disabled
 
 # QMUX must be in multiple groups to support external process connections
-# VENDOR_EDIT, yangrujin@BSP 2015-11-06, modify user from root to radio, to fix qmuxd communicate encounter permission error
+# VENDOR_EDIT, shankai@BSP 2016-11-06, modify user from root to radio, to fix qmuxd communicate encounter permission error
 service qmuxd /system/bin/qmuxd
     class main
     user radio
@@ -874,11 +804,20 @@ service wifi_ftmd /system/bin/wifi_ftmd
 on property:wifi.ftmd.load=true
     insmod /system/lib/modules/pronto/pronto_wlan.ko con_mode=5
 
-service cnss_diag /system/bin/cnss_diag -q
-    class late_start
+service cnss_diag /system/bin/cnss_diag -q -f -b 128
+    class main
     user system
     group system wifi inet net_admin sdcard_rw media_rw diag
-    oneshot
+#ifdef VENDOR_EDIT
+    disabled
+    #oneshot
+
+on property:persist.oem.wifi.cnssdiag=1
+    start cnss_diag
+
+on property:persist.oem.wifi.cnssdiag=0
+    stop cnss_diag
+#endif VENDOR_EDIT
 
 service cnss-daemon /system/bin/cnss-daemon -n -l
     class late_start
@@ -888,11 +827,20 @@ service cnss-daemon /system/bin/cnss-daemon -n -l
 on property:sys.shutdown.requested=*
     stop cnss-daemon
 
+service dhcpcd_bt-pan /system/bin/dhcpcd -BKLG
+    class late_start
+    disabled
+    oneshot
+
+service iprenew_bt-pan /system/bin/dhcpcd -n
+    class late_start
+    disabled
+    oneshot
+
 service loc_launcher /system/bin/loc_launcher
     #loc_launcher will start as root and set its uid to gps
     class late_start
     group gps inet qcom_diag wifi
-    writepid /dev/cpuset/system-background/tasks
 
 service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
     class late_start
@@ -961,7 +909,7 @@ service atfwd /system/bin/ATFWD-daemon
     user system
     group system radio
 
-service hostapd /system/bin/hostapd -dd /data/hostapd/hostapd.conf
+service hostapd /system/bin/hostapd /data/hostapd/hostapd.conf
     class late_start
     user root
     group root
@@ -1044,7 +992,6 @@ service charger /charger
     class charger
     group system graphics
     seclabel u:r:healthd:s0
-    writepid /dev/cpuset/system-background/tasks
 
 service ssr_diag /system/bin/ssr_diag
     class late_start
@@ -1078,7 +1025,7 @@ on property:sys.qbcharger.enable=true
 on property:sys.qbcharger.enable=false
     stop qbcharger
 
-service diag_mdlog_start /system/bin/diag_mdlog
+service diag_mdlog_start /system/bin/diag_mdlog -c
     class late_start
     user shell
     group system qcom_diag sdcard_rw sdcard_r media_rw
@@ -1111,7 +1058,6 @@ service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqb
     user root
     group root
     disabled
-    writepid /dev/cpuset/system-background/tasks
 
 service wfdservice /system/bin/wfdservice
     class main
@@ -1169,7 +1115,6 @@ service seemp_healthd /system/vendor/bin/seemp_healthd
     group system
 
 on charger
-    setprop persist.sys.usb.config charging
     mkdir /dev/usb-ffs 0770 shell shell
     mkdir /dev/usb-ffs/adb 0770 shell shell
     mount configfs none /config
