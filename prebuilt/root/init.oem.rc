@@ -54,9 +54,6 @@ on boot
     chown system system /sys/devices/soc/soc:fpc_fpc1020/hw_reset
     #chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/wakeup_enable
     #chown system system /sys/devices/soc/soc:fpc_fpc1020/wakeup_enable
-    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/proximity_state
-    chown system system /sys/devices/soc/soc:fpc_fpc1020/proximity_state
-
     chmod 0666 /dev/qseecom
     #NFC, ruanbanmao add for 15801 nfc. 2015/10/19
     setprop ro.nfc.port "I2C"
@@ -260,11 +257,6 @@ on post-fs
     chown system system /dev/param
     chown system system /dev/block/mmcblk0p21
     chmod 660 /dev/block/mmcblk0p21
-    # Vibrator
-    chown system system /sys/class/timed_output/vibrator/vtg_default
-    chown system system /sys/class/timed_output/vibrator/vtg_level
-    chown system system /sys/class/timed_output/vibrator/vtg_max
-    chown system system /sys/class/timed_output/vibrator/vtg_min
     chown system system /sys/class/timed_output/vibrator/vmax
     chown system system /sys/class/timed_output/vibrator/wf_s0
     chown system system /sys/class/timed_output/vibrator/wf_s1
@@ -280,27 +272,8 @@ on post-fs
     chown system log /sys/fs/pstore/console-ramoops-0
     chmod 0440 /sys/fs/pstore/console-ramoops-0
 
-#niejianan@oneplus.framework , 2015/04/25, add for mmi charging test
-on property:sys.fastcharger=true
-    write /sys/class/power_supply/battery/charging_enabled 1
-
-on property:sys.fastcharger=false
-    write /sys/class/power_supply/battery/charging_enabled 0
-
 on property:persist.sys.adbroot=1
     setprop selinux.reload_policy 1
-
-#hieu@oneplus.net, 2015/10/30, SND-10768, add service for bugreport
-service bugreport /system/bin/dumpstate -d -p -B \
-        -o /data/data/com.android.shell/files/bugreports/bugreport
-    class main
-    disabled
-    oneshot
-
-#lifei@oneplus.media, 2016/02/14,  add service for CTS and engineer app
-service oem_audio_device /system/bin/chcon u:object_r:oem_audio_device:s0 /dev/snd
-    class late_start
-    oneshot
 
 #davidliu@bsp 2017/04/14 Add OTG switch
 on property:persist.sys.oem.otg_support=true
@@ -308,29 +281,6 @@ on property:persist.sys.oem.otg_support=true
 on property:persist.sys.oem.otg_support=false
     write /sys/class/power_supply/usb/otg_switch 0
 
-#kimi, 2016/03/29, trigger systrace
-on property:persist.sys.systrace.enable=true
-    start izanami
-on property:persist.sys.systrace.enable=false
-    start stop_izanami
-service izanami /system/bin/izanami
-    class main
-    user root
-    disabled
-    oneshot
-    keycodes 115 116
-service stop_izanami /system/bin/izanami stop
-    class main
-    user root
-    disabled
-    oneshot
-
-#xiaoxiaohuan@OnePlus.MultiMediaService,2016/09/05
-#Add smartadjust daemon to control BATTERY,BALANCED and PERFORMANCE modes.
-service smartadjust /system/bin/smartadjust
-    class core
-    critical
-    socket smartadjust seqpacket 0660 system system
 
 # liuyan 2016/7/22, add ifaadaemon
 service ifaadaemon /system/bin/ifaadaemon
