@@ -12,3 +12,4 @@ allow init debugfs:dir mounton;
 
 allow init sysfs:dir rw_file_perms;
 
+allow init debugfs_trace_marker:file getattr;
