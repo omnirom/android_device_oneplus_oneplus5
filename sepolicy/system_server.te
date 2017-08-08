@@ -18,3 +18,5 @@ allow system_server proc_stat:file open;
 allow system_server proc_fingerprint:dir search;
 
 allow system_server sysfs_fpc_proximity:file rw_file_perms;
+
+allow system_server block_device:dir { read open getattr ioctl };
