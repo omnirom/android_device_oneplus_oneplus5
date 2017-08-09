@@ -1,3 +1,10 @@
+# Alipay
+bin/ifaadaemon
+lib/libteeclientjni.so
+lib64/libteeclientjni.so
+lib64/libteeclientjniv2.so
+-priv-app/IFAAService/IFAAService.apk
+
 # Audio
 etc/firmware/tfa98xx.cnt
 lib64/libstagefright_soft_flacdec.so
