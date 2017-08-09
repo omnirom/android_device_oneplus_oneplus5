@@ -168,5 +168,16 @@ special_mode_mask values:
       <A3Preview>imx398_3a_3264x2448_24fps_preview_bokeh</A3Preview>
       <A3Video>imx398_3a_3264x2448_24fps_preview_bokeh</A3Video>
     </ChromatixName>
+    <ChromatixName sensor_resolution_index="5" special_mode_mask="0">
+      <ISPPreview>imx398_isp_zsl_snapshot</ISPPreview>
+      <ISPSnapshot>imx398_isp_4656x3496_30fps_snapshot</ISPSnapshot>
+      <ISPVideo>imx398_isp_4656x2608_30fps_video</ISPVideo>
+      <CPPPreview>imx398_preview_1080p_cpp</CPPPreview>
+      <CPPSnapshot>imx398_cpp_4656x2608_30fps_video</CPPSnapshot>
+      <CPPVideo>imx398_cpp_4656x2608_30fps_video</CPPVideo>
+      <CPPLiveshot>imx398_cpp_4656x2608_30fps_video</CPPLiveshot>
+      <A3Preview>imx398_3a_wechat_preview</A3Preview>
+      <A3Video>imx398_3a_4656x2608_30fps_video</A3Video>
+    </ChromatixName>
   </ResolutionChromatixInfo>
 </ChromatixConfigurationRoot>
