@@ -107,6 +107,9 @@ vendor/lib/libSonyIMX371RmscLibrary.so
 vendor/lib/libtrueportrait.so
 vendor/lib/libubifocus.so
 vendor/lib64/libcdsprpc.so
+vendor/lib/libdualcameraddm.so
+vendor/lib/libjni_dualcamera.so
+
 
 # Camera actuators
 vendor/lib/libactuator_lc898217xc_imx350.so
