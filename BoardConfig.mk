@@ -25,7 +25,6 @@ BOARD_PATH := device/oneplus/oneplus5
 TARGET_NO_BOOTLOADER := true
 TARGET_OTA_ASSERT_DEVICE := OnePlus5,oneplus5,cheeseburger,A5000
 TARGET_BOOTLOADER_BOARD_NAME := msm8998
-TARGET_PLATFORM_DEVICE_BASE  := /devices/soc.0/
 USE_CLANG_PLATFORM_BUILD := true
 
 # Platform
