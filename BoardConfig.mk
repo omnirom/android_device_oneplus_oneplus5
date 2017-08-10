@@ -161,6 +161,7 @@ AUDIO_FEATURE_ENABLED_RAS := true
 # Camera
 USE_CAMERA_STUB := true
 TARGET_USES_MEDIA_EXTENSIONS := true
+TARGET_SPECIFIC_CAMERA_PARAMETER_LIBRARY := libcamera_parameters_ext
 
 # Disable secure discard because it's SLOW
 BOARD_SUPPRESS_SECURE_ERASE := true
