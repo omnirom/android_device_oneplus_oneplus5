@@ -78,5 +78,9 @@
             android:key="dci"
             android:summary="@string/dci_mode_summary"
             android:title="@string/dci_mode_title" />
+        <CheckBoxPreference
+            android:key="night"
+            android:summary="@string/Night_mode_summary"
+            android:title="@string/Night_mode_title" />
     </PreferenceCategory>
 </PreferenceScreen>

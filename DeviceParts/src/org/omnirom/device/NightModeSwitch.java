@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2016 The OmniROM Project
+* Copyright (C) 2017 The OmniROM Project
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -19,13 +19,14 @@ package org.omnirom.device;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.SystemProperties;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceManager;
 
-public class SRGBModeSwitch implements OnPreferenceChangeListener {
+public class NightModeSwitch implements OnPreferenceChangeListener {
 
-    private static final String FILE = "/sys/devices/virtual/graphics/fb0/SRGB";
+    private static final String FILE = "/sys/devices/virtual/graphics/fb0/night_mode";
 
     public static String getFile() {
         if (Utils.fileWritable(FILE)) {
