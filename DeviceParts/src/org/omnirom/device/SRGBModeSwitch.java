@@ -22,10 +22,11 @@ import android.content.SharedPreferences;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceManager;
+import org.omnirom.device.DeviceSettings;
 
 public class SRGBModeSwitch implements OnPreferenceChangeListener {
 
-    private static final String FILE = "/sys/devices/virtual/graphics/fb0/srgb";
+    private static final String FILE = "/sys/devices/virtual/graphics/fb0/SRGB";
 
     public static String getFile() {
         if (Utils.fileWritable(FILE)) {
@@ -46,6 +47,7 @@ public class SRGBModeSwitch implements OnPreferenceChangeListener {
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         Boolean enabled = (Boolean) newValue;
         Utils.writeValue(getFile(), enabled ? "1" : "0");
+        DeviceSettings.disableOtherModes("srgb", enabled);
         return true;
     }
 }
