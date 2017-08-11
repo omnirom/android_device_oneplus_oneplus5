@@ -121,6 +121,8 @@ vendor/lib/libdualcameraddm.so
 vendor/lib64/libblurbuster.so
 vendor/lib/libblurbuster.so
 vendor/lib/libfiltergenerator.so
+vendor/lib/libdczoom.so
+vendor/lib/libcamera_cp_wrapper.so
 
 #Camera app modules
 vendor/lib64/libjni_optizoom.so
