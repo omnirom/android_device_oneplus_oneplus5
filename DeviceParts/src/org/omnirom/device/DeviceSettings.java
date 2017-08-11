@@ -52,6 +52,7 @@ public class DeviceSettings extends PreferenceActivity implements
     public static final String KEY_HBM_SWITCH = "hbm";
     public static final String KEY_PROXI_SWITCH = "proxi";
     public static final String KEY_DCI_SWITCH = "dci";
+    public static final String KEY_NIGHT_SWITCH = "night";
 
     private VibratorStrengthPreference mVibratorStrength;
     private ListPreference mSliderModeTop;
@@ -61,6 +62,7 @@ public class DeviceSettings extends PreferenceActivity implements
     private TwoStatePreference mSRGBModeSwitch;
     private TwoStatePreference mHBMModeSwitch;
     private TwoStatePreference mDCIModeSwitch;
+    private TwoStatePreference mNightModeSwitch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -110,15 +112,15 @@ public class DeviceSettings extends PreferenceActivity implements
         mHBMModeSwitch.setOnPreferenceChangeListener(new HBMModeSwitch());
 
         mDCIModeSwitch = (TwoStatePreference) findPreference(KEY_DCI_SWITCH);
-        boolean isPanelSupported = DCIModeSwitch.isSupportedPanel();
-        if (isPanelSupported) {
-            mDCIModeSwitch.setEnabled(DCIModeSwitch.isSupported());
-            mDCIModeSwitch.setChecked(DCIModeSwitch.isCurrentlyEnabled(this));
-            mDCIModeSwitch.setOnPreferenceChangeListener(new DCIModeSwitch());
-        } else {
-            PreferenceCategory graphicsCategory = (PreferenceCategory) findPreference(KEY_CATEGORY_GRAPHICS);
-            graphicsCategory.removePreference(mDCIModeSwitch);
-        }
+        mDCIModeSwitch.setEnabled(DCIModeSwitch.isSupported());
+        mDCIModeSwitch.setChecked(DCIModeSwitch.isCurrentlyEnabled(this));
+        mDCIModeSwitch.setOnPreferenceChangeListener(new DCIModeSwitch());
+       
+        mNightModeSwitch = (TwoStatePreference) findPreference(KEY_NIGHT_SWITCH);
+        mNightModeSwitch.setEnabled(NightModeSwitch.isSupported());
+        mNightModeSwitch.setChecked(NightModeSwitch.isCurrentlyEnabled(this));
+        mNightModeSwitch.setOnPreferenceChangeListener(new NightModeSwitch());
+
     }
 
     @Override
