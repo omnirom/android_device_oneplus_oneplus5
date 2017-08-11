@@ -1,5 +1,5 @@
 /*
-* Copyright (C) 2017 The OmniROM Project
+* Copyright (C) 2016 The OmniROM Project
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -19,15 +19,14 @@ package org.omnirom.device;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.SystemProperties;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceManager;
 import org.omnirom.device.DeviceSettings;
 
-public class DCIModeSwitch implements OnPreferenceChangeListener {
+public class AdobeRGBModeSwitch implements OnPreferenceChangeListener {
 
-    private static final String FILE = "/sys/devices/virtual/graphics/fb0/DCI_P3";
+    private static final String FILE = "/sys/devices/virtual/graphics/fb0/Adobe_RGB";
 
     public static String getFile() {
         if (Utils.fileWritable(FILE)) {
@@ -48,7 +47,7 @@ public class DCIModeSwitch implements OnPreferenceChangeListener {
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         Boolean enabled = (Boolean) newValue;
         Utils.writeValue(getFile(), enabled ? "1" : "0");
-        DeviceSettings.disableOtherModes("dci", enabled);
+        DeviceSettings.disableOtherModes("argb", enabled);
         return true;
     }
 }

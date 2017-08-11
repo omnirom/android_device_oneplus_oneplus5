@@ -94,6 +94,10 @@ public class Startup extends BroadcastReceiver {
         restore(HBMModeSwitch.getFile(), enabled ? "2" : "0");
         enabled = sharedPrefs.getBoolean(DeviceSettings.KEY_DCI_SWITCH, false);
         restore(DCIModeSwitch.getFile(), enabled);
+        enabled = sharedPrefs.getBoolean(DeviceSettings.KEY_NIGHT_SWITCH, false);
+        restore(NightModeSwitch.getFile(), enabled);
+        enabled = sharedPrefs.getBoolean(DeviceSettings.KEY_ADOBERGB_SWITCH, false);
+        restore(AdobeRGBModeSwitch.getFile(), enabled);
 
         KeyHandler.setButtonDisable(context);
         VibratorStrengthPreference.restore(context);
