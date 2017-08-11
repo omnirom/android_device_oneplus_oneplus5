@@ -52,15 +52,19 @@ public class DeviceSettings extends PreferenceActivity implements
     public static final String KEY_HBM_SWITCH = "hbm";
     public static final String KEY_PROXI_SWITCH = "proxi";
     public static final String KEY_DCI_SWITCH = "dci";
+    public static final String KEY_NIGHT_SWITCH = "night";
+    public static final String KEY_ADOBERGB_SWITCH = "argb";
 
     private VibratorStrengthPreference mVibratorStrength;
     private ListPreference mSliderModeTop;
     private ListPreference mSliderModeCenter;
     private ListPreference mSliderModeBottom;
     private TwoStatePreference mSwapBackRecents;
-    private TwoStatePreference mSRGBModeSwitch;
-    private TwoStatePreference mHBMModeSwitch;
-    private TwoStatePreference mDCIModeSwitch;
+    private static TwoStatePreference mSRGBModeSwitch;
+    private static TwoStatePreference mHBMModeSwitch;
+    private static TwoStatePreference mDCIModeSwitch;
+    private static TwoStatePreference mAdobeRGBModeSwitch ;
+    private static TwoStatePreference mNightModeSwitch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -104,21 +108,26 @@ public class DeviceSettings extends PreferenceActivity implements
         mSRGBModeSwitch.setChecked(SRGBModeSwitch.isCurrentlyEnabled(this));
         mSRGBModeSwitch.setOnPreferenceChangeListener(new SRGBModeSwitch());
 
+        mAdobeRGBModeSwitch = (TwoStatePreference) findPreference(KEY_ADOBERGB_SWITCH);
+        mAdobeRGBModeSwitch.setEnabled(AdobeRGBModeSwitch.isSupported());
+        mAdobeRGBModeSwitch.setChecked(AdobeRGBModeSwitch.isCurrentlyEnabled(this));
+        mAdobeRGBModeSwitch.setOnPreferenceChangeListener(new AdobeRGBModeSwitch());
+
         mHBMModeSwitch = (TwoStatePreference) findPreference(KEY_HBM_SWITCH);
         mHBMModeSwitch.setEnabled(HBMModeSwitch.isSupported());
         mHBMModeSwitch.setChecked(HBMModeSwitch.isCurrentlyEnabled(this));
         mHBMModeSwitch.setOnPreferenceChangeListener(new HBMModeSwitch());
 
         mDCIModeSwitch = (TwoStatePreference) findPreference(KEY_DCI_SWITCH);
-        boolean isPanelSupported = DCIModeSwitch.isSupportedPanel();
-        if (isPanelSupported) {
-            mDCIModeSwitch.setEnabled(DCIModeSwitch.isSupported());
-            mDCIModeSwitch.setChecked(DCIModeSwitch.isCurrentlyEnabled(this));
-            mDCIModeSwitch.setOnPreferenceChangeListener(new DCIModeSwitch());
-        } else {
-            PreferenceCategory graphicsCategory = (PreferenceCategory) findPreference(KEY_CATEGORY_GRAPHICS);
-            graphicsCategory.removePreference(mDCIModeSwitch);
-        }
+        mDCIModeSwitch.setEnabled(DCIModeSwitch.isSupported());
+        mDCIModeSwitch.setChecked(DCIModeSwitch.isCurrentlyEnabled(this));
+        mDCIModeSwitch.setOnPreferenceChangeListener(new DCIModeSwitch());
+
+        mNightModeSwitch = (TwoStatePreference) findPreference(KEY_NIGHT_SWITCH);
+        mNightModeSwitch.setEnabled(NightModeSwitch.isSupported());
+        mNightModeSwitch.setChecked(NightModeSwitch.isCurrentlyEnabled(this));
+        mNightModeSwitch.setOnPreferenceChangeListener(new NightModeSwitch());
+
     }
 
     @Override
@@ -202,6 +211,41 @@ public class DeviceSettings extends PreferenceActivity implements
             Settings.System.putString(getContentResolver(),
                     Settings.System.BUTTON_EXTRA_KEY_MAPPING, newValue);
         } catch (Exception e) {
+        }
+    }
+
+    protected static void disableOtherModes(String mode, boolean enabled) {
+        if (mode == KEY_DCI_SWITCH) {
+            if (enabled == true) {
+                mSRGBModeSwitch.setChecked(!enabled);
+                mAdobeRGBModeSwitch.setChecked(!enabled);
+            }
+        }
+
+        if (mode == KEY_ADOBERGB_SWITCH) {
+            if (enabled == true) {
+                mSRGBModeSwitch.setChecked(!enabled);
+                mDCIModeSwitch.setChecked(!enabled);
+            }
+        }
+
+        if (mode == KEY_SRGB_SWITCH) {
+            if (enabled == true) {
+                mAdobeRGBModeSwitch.setChecked(!enabled);
+                mDCIModeSwitch.setChecked(!enabled);
+            }
+        }
+
+        if (mode == KEY_HBM_SWITCH) {
+            if (enabled == true) {
+                mNightModeSwitch.setChecked(!enabled);
+            }
+        }
+
+        if (mode == KEY_NIGHT_SWITCH) {
+            if (enabled == true) {
+                mHBMModeSwitch.setChecked(!enabled);
+            }
         }
     }
 }
