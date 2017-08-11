@@ -25,9 +25,9 @@ import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceManager;
 import org.omnirom.device.DeviceSettings;
 
-public class DCIModeSwitch implements OnPreferenceChangeListener {
+public class NightModeSwitch implements OnPreferenceChangeListener {
 
-    private static final String FILE = "/sys/devices/virtual/graphics/fb0/DCI_P3";
+    private static final String FILE = "/sys/devices/virtual/graphics/fb0/night_mode";
 
     public static String getFile() {
         if (Utils.fileWritable(FILE)) {
@@ -48,7 +48,7 @@ public class DCIModeSwitch implements OnPreferenceChangeListener {
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         Boolean enabled = (Boolean) newValue;
         Utils.writeValue(getFile(), enabled ? "1" : "0");
-        DeviceSettings.disableOtherModes("dci", enabled);
+        DeviceSettings.disableOtherModes("night", enabled);
         return true;
     }
 }

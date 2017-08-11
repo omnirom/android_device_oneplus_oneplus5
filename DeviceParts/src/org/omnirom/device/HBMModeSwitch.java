@@ -22,6 +22,7 @@ import android.content.SharedPreferences;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceManager;
+import org.omnirom.device.DeviceSettings;
 
 public class HBMModeSwitch implements OnPreferenceChangeListener {
 
@@ -46,6 +47,7 @@ public class HBMModeSwitch implements OnPreferenceChangeListener {
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         Boolean enabled = (Boolean) newValue;
         Utils.writeValue(getFile(), enabled ? "2" : "0");
+        DeviceSettings.disableOtherModes("hbm", enabled);
         return true;
     }
 }
