@@ -8,3 +8,4 @@ allow fingerprintd sysfs_fpc_irq:file rw_file_perms;
 allow fingerprintd tee_device:chr_file rw_file_perms;
 allow fingerprintd sysfs:file write;
 allow fingerprintd vfat:file r_file_perms;
+allow fingerprintd fingerprintd_service:service_manager add;
