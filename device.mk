@@ -217,7 +217,8 @@ PRODUCT_PACKAGES += \
 
 # power
 PRODUCT_PACKAGES += \
-    power.msm8998
+    power.msm8998 \
+    powerhint.qti
 
 PRODUCT_PACKAGES += \
     DeviceParts
