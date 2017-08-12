@@ -48,8 +48,8 @@ persist.bt.a2dp.aptx_hd_disable=false
 persist.bt.a2dp_offload_cap=sbc-aptx-aptxhd-aac
 qcom.bluetooth.soc=cherokee
 ro.bluetooth.a4wp=false
-ro.bluetooth.emb_wp_mode=false
-ro.bluetooth.wipower=false
+ro.bluetooth.emb_wp_mode=true
+ro.bluetooth.wipower=true
 
 # Display power reduction (FOSS)
 ro.qcom.dpps.sensortype=3
