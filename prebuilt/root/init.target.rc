@@ -78,7 +78,6 @@ on post-fs-data
     mkdir /data/tombstones/dsps 0771 system system
     mkdir /data/misc/qvop 0660 system system
     mkdir /data/misc/hbtp 0750 system system
-    mkdir /data/misc/seemp 0700 system system
     mkdir /data/misc/qvr 0770 system system
     mkdir /data/misc/camera/cp 0771 system system
     mkdir /data/misc/qdmastats 0700 system system
@@ -451,12 +450,6 @@ on property:init.svc.zygote=restarting
 #    socket vqtss stream 0660 system system
 #    user system
 #    group system
-
-service seempd /system/bin/seempd
-    class late_start
-    user system
-    group system
-    socket seempdw dgram 0666 system system
 
 service energy-awareness /system/bin/energy-awareness
     class main
