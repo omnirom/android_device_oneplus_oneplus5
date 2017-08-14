@@ -42,7 +42,14 @@ ro.cutoff_voltage_mv=3250
 
 # Bluetooth
 bt.max.hfpclient.connections=1
+persist.bt.a2dp.aac_disable=true
+persist.bt.a2dp.aptx_disable=false
+persist.bt.a2dp.aptx_hd_disable=false
+persist.bt.a2dp_offload_cap=sbc-aptx-aptxhd-aac
 qcom.bluetooth.soc=cherokee
+ro.bluetooth.a4wp=false
+ro.bluetooth.emb_wp_mode=true
+ro.bluetooth.wipower=true
 
 # Display power reduction (FOSS)
 ro.qcom.dpps.sensortype=3
@@ -148,10 +155,6 @@ ro.qti.sensors.mot_detect=true
 ro.qti.sensors.dpc=true
 ro.qti.sensors.multishake=true
 
-ro.bluetooth.a4wp=false
-ro.bluetooth.emb_wp_mode=false
-ro.bluetooth.wipower=false
-
 persist.radio.VT_CAM_INTERFACE=1
 
 #property to enable user to access Google WFD settings
@@ -175,4 +178,3 @@ ro.hwui.text_large_cache_width=3072
 ro.hwui.text_large_cache_height=2048
 
 #re enable on O
-#persist.bt.a2dp_offload_cap=sbc-aptx-aptxhd-aac
