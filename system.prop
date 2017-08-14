@@ -43,6 +43,9 @@ ro.cutoff_voltage_mv=3250
 # Bluetooth
 bt.max.hfpclient.connections=1
 qcom.bluetooth.soc=cherokee
+ro.bluetooth.a4wp=false
+ro.bluetooth.emb_wp_mode=false
+ro.bluetooth.wipower=false
 
 # Display power reduction (FOSS)
 ro.qcom.dpps.sensortype=3
@@ -147,10 +150,6 @@ ro.qti.sensors.sta_detect=true
 ro.qti.sensors.mot_detect=true
 ro.qti.sensors.dpc=true
 ro.qti.sensors.multishake=true
-
-ro.bluetooth.a4wp=false
-ro.bluetooth.emb_wp_mode=false
-ro.bluetooth.wipower=false
 
 persist.radio.VT_CAM_INTERFACE=1
 
