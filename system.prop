@@ -147,7 +147,7 @@ ro.qti.sensors.mot_detect=true
 ro.qti.sensors.dpc=true
 ro.qti.sensors.multishake=true
 
-ro.bluetooth.a4wp=false
+ro.bluetooth.a4wp=true
 ro.bluetooth.emb_wp_mode=false
 ro.bluetooth.wipower=false
 
