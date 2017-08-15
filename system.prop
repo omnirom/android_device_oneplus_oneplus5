@@ -3,7 +3,7 @@ af.fast_track_multiplier=2
 audio_hal.period_size=192
 ro.qc.sdk.audio.fluencetype=fluencepro
 persist.audio.fluence.voicecall=true
-persist.audio.fluence.voicerec=false
+persist.audio.fluence.voicerec=true
 persist.audio.fluence.speaker=true
 tunnel.audio.encode=false
 persist.audio.ras.enabled=false
@@ -43,6 +43,7 @@ ro.cutoff_voltage_mv=3250
 # Bluetooth
 bt.max.hfpclient.connections=1
 qcom.bluetooth.soc=cherokee
+persist.bt.a2dp.aac_disable=true
 
 # Display power reduction (FOSS)
 ro.qcom.dpps.sensortype=3
