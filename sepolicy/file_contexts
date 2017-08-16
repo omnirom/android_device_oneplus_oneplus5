@@ -36,6 +36,7 @@
 
 /data/misc/netmgr(/.*)?                                         u:object_r:net_data_file:s0
 /data/oemnvitems(/.*)?                                          u:object_r:nv_data_file:s0
+/cache/org\.omnirom\.device\.dex                                u:object_r:dalvikcache_data_file:s0
 
 ###################################
 # sysfs
