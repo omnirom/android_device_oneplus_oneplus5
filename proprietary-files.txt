@@ -330,6 +330,7 @@ vendor/lib/libmmcamera_isp_sub_module.so
 
 # DASH
 -sbin/dashd:rootfs
+bin/hvdcp_opti
 
 # Fingerprint sensor
 lib64/hw/fingerprint.msm8998.so
