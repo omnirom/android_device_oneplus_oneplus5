@@ -59,6 +59,8 @@ vendor/lib64/libaudcal.so
 vendor/lib64/soundfx/libqcbassboost.so
 vendor/lib64/soundfx/libqcreverb.so
 vendor/lib64/soundfx/libqcvirt.so
+vendor/lib/libhwdaphal.so
+vendor/lib64/libhwdaphal.so
 
 # Bluetooth
 bin/btnvtool
