@@ -21,11 +21,27 @@
 
 #ifndef _BDROID_BUILDCFG_H
 #define _BDROID_BUILDCFG_H
-#define BTM_DEF_LOCAL_NAME   "Oneplus5"
-// Disables read remote device feature
-#define MAX_ACL_CONNECTIONS   16
-#define MAX_L2CAP_CHANNELS    20
-#define BLE_VND_INCLUDED   TRUE
-// skips conn update at conn completion
-#define BT_CLEAN_TURN_ON_DISABLED 1
+#define BTM_DEF_LOCAL_NAME         "Oneplus5"
+
+// QCOM Config
+#define MAX_L2CAP_CHANNELS         20
+#define MAX_L2CAP_CLIENTS          19
+#define MAX_ACL_CONNECTIONS        MAX_L2CAP_CHANNELS
+#define GATT_MAX_PHY_CHANNEL       MAX_L2CAP_CHANNELS
+#define AVDT_NUM_SEPS              9
+#define AVDT_CODEC_SIZE            20
+#define HID_HOST_MAX_DEVICES       MAX_L2CAP_CHANNELS
+#define AVCT_NUM_CONN              5
+
+// AOSP
+// Wide-band speech support
+#define BTM_WBS_INCLUDED           TRUE
+#define BTIF_HF_WBS_PREFERRED      TRUE
+
+// Google VSC spec support
+#define BLE_VND_INCLUDED           TRUE
+
+// QCOM power management workaround
+#define BT_CLEAN_TURN_ON_DISABLED  TRUE
+
 #endif
