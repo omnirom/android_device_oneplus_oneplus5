@@ -216,6 +216,9 @@ PRODUCT_PACKAGES += \
     wpa_supplicant \
     wpa_supplicant.conf
 
+PRODUCT_PACKAGES += \
+    kernel_loggy.sh
+
 # Camera
 PRODUCT_PACKAGES += \
     SnapdragonCamera2 \
