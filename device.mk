@@ -21,7 +21,7 @@
 #
 
 $(call inherit-product, vendor/oneplus/oneplus5/device-vendor.mk)
-$(call inherit-product, frameworks/native/build/phone-xxhdpi-4096-dalvik-heap.mk)
+#$(call inherit-product, frameworks/native/build/phone-xxhdpi-4096-dalvik-heap.mk)
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
@@ -220,16 +220,16 @@ PRODUCT_PACKAGES += \
     power.msm8998 \
     powerhint.qti
 
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     DeviceParts
 
 # ANT+
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     AntHalService \
     com.dsi.ant.antradio_library \
     libantradio
 
-PRODUCT_COPY_FILES += \
+#PRODUCT_COPY_FILES += \
     external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:system/etc/permissions/com.dsi.ant.antradio_library.xml
 
 # For android_filesystem_config.h

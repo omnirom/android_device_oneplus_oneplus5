@@ -21,24 +21,12 @@
     "remote": "omnirom",
     "repository": "android_packages_apps_SnapdragonCamera2",
     "target_path": "packages/apps/SnapdragonCamera2",
-    "revision": "android-7.1"
+    "revision": "android-8.0"
   },
   {
     "remote": "omnirom",
     "repository": "vendor_qcom_opensource_dataservices",
     "target_path": "vendor/qcom/opensource/dataservices",
-    "revision": "android-7.1"
-  },
-  {
-    "remote": "omnirom",
-    "repository": "android_external_libnfnetlink",
-    "target_path": "external/libnfnetlink",
-    "revision": "android-7.1"
-  },
-  {
-    "remote": "omnirom",
-    "repository": "android_external_libnetfilter_conntrack",
-    "target_path": "external/libnetfilter_conntrack",
     "revision": "android-7.1"
   },
   {
@@ -86,7 +74,7 @@
     "remote": "omnirom",
     "repository": "android_kernel_oneplus_msm8998",
     "target_path": "kernel/oneplus/msm8998",
-    "revision": "android-7.1"
+    "revision": "android-8.0"
   },
   {
     "remote": "omnirom",
