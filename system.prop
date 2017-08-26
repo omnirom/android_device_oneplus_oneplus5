@@ -176,3 +176,5 @@ ro.hwui.text_large_cache_height=2048
 
 #re enable on O
 #persist.bt.a2dp_offload_cap=sbc-aptx-aptxhd-aac
+
+ro.sys.sdcardfs=true
