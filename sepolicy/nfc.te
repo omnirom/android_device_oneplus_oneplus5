@@ -1,0 +1,2 @@
+allow nfc storage_stub_file:dir getattr;
+
