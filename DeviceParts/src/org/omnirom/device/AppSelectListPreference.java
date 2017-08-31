@@ -62,25 +62,26 @@ public class AppSelectListPreference extends DialogPreference implements DialogI
     private int mAppIconResourceId;
     private CharSequence mTitle;
     private String mValue;
+    private PackageManager mPm;
 
     public class PackageItem implements Comparable<PackageItem> {
         public final CharSequence mTitle;
-        public final Drawable mAppIcon;
         public final int mAppIconResourceId;
-        public final String mComponentName;
+        public final ComponentName mComponentName;
+        public final String mValue;
 
-        PackageItem(CharSequence title, int iconResourceId, String componentName) {
+        PackageItem(CharSequence title, int iconResourceId, ComponentName componentName) {
             mTitle = title;
             mAppIconResourceId = iconResourceId;
-            mAppIcon = null;
             mComponentName = componentName;
+            mValue = componentName.flattenToString();
         }
 
-        PackageItem(CharSequence title, Drawable icon, String componentName) {
+        PackageItem(CharSequence title, int iconResourceId, String value) {
             mTitle = title;
-            mAppIcon = icon;
-            mAppIconResourceId= 0;
-            mComponentName = componentName;
+            mAppIconResourceId = iconResourceId;
+            mComponentName = null;
+            mValue = value;
         }
 
         @Override
@@ -90,7 +91,7 @@ public class AppSelectListPreference extends DialogPreference implements DialogI
 
         @Override
         public int hashCode() {
-            return mComponentName.hashCode();
+            return mValue.hashCode();
         }
 
         @Override
@@ -98,12 +99,11 @@ public class AppSelectListPreference extends DialogPreference implements DialogI
             if (another == null || !(another instanceof PackageItem)) {
                 return false;
             }
-            return mComponentName.equalsIgnoreCase(((PackageItem) another).mComponentName);
+            return mValue.equals(((PackageItem) another).mValue);
         }
     }
 
     public class AppSelectListAdapter extends BaseAdapter implements Runnable {
-        private PackageManager mPm;
         private LayoutInflater mInflater;
         private List<PackageItem> mInstalledPackages = new LinkedList<PackageItem>();
 
@@ -141,7 +141,6 @@ public class AppSelectListPreference extends DialogPreference implements DialogI
         };
 
         public AppSelectListAdapter(Context context) {
-            mPm = context.getPackageManager();
             mInflater = LayoutInflater.from(context);
             reloadList();
         }
@@ -176,10 +175,11 @@ public class AppSelectListPreference extends DialogPreference implements DialogI
 
             PackageItem applicationInfo = getItem(position);
             holder.title.setText(applicationInfo.mTitle);
-            if (applicationInfo.mAppIcon != null) {
-                holder.icon.setImageDrawable(applicationInfo.mAppIcon);
-            } else {
+            if (applicationInfo.mAppIconResourceId != 0) {
                 holder.icon.setImageResource(applicationInfo.mAppIconResourceId);
+            } else {
+                Drawable d = resolveAppIcon(applicationInfo);
+                holder.icon.setImageDrawable(d);
             }
             return convertView;
         }
@@ -198,16 +198,15 @@ public class AppSelectListPreference extends DialogPreference implements DialogI
             for (ResolveInfo info : installedAppsInfo) {
                 ActivityInfo activity = info.activityInfo;
                 ApplicationInfo appInfo = activity.applicationInfo;
-                ComponentName name = new ComponentName(appInfo.packageName, activity.name);
+                ComponentName componentName = new ComponentName(appInfo.packageName, activity.name);
+                CharSequence label = null;
                 try {
-                    Drawable appIcon = mPm.getActivityIcon(name);
-                    if (appIcon == null) {
-                        appIcon = getDefaultActivityIcon();
-                    }
-                    final PackageItem item = new PackageItem(
-                            activity.loadLabel(mPm), appIcon, name.flattenToString());
+                    label = activity.loadLabel(mPm);
+                } catch (Exception e) {
+                }
+                if (label != null) {
+                    final PackageItem item = new PackageItem(activity.loadLabel(mPm), 0, componentName);
                     mInstalledPackages.add(item);
-                } catch (PackageManager.NameNotFoundException e) {
                 }
             }
             Collections.sort(mInstalledPackages);
@@ -216,7 +215,7 @@ public class AppSelectListPreference extends DialogPreference implements DialogI
 
         private PackageItem resolveApplication(ComponentName componentName) {
             for (PackageItem item : mInstalledPackages) {
-                if (item.mComponentName.equals(componentName.flattenToString())) {
+                if (item.mComponentName != null && item.mComponentName.equals(componentName)) {
                     return item;
                 }
             }
@@ -241,6 +240,7 @@ public class AppSelectListPreference extends DialogPreference implements DialogI
     }
 
     private void init() {
+        mPm = getContext().getPackageManager();
         setWidgetLayoutResource(R.layout.applist_preference);
         setNegativeButtonText(android.R.string.cancel);
         setPositiveButtonText(null);
@@ -301,7 +301,7 @@ public class AppSelectListPreference extends DialogPreference implements DialogI
                     PackageItem item = mAdapter.resolveApplication(componentName);
                     if (item != null) {
                         mTitle = item.mTitle;
-                        mAppIconDrawable = item.mAppIcon;
+                        mAppIconDrawable = resolveAppIcon(item);
                     } else {
                         mTitle = getContext().getResources().getString(R.string.resolve_failed_summary);
                     }
@@ -334,13 +334,18 @@ public class AppSelectListPreference extends DialogPreference implements DialogI
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 PackageItem info = (PackageItem) parent.getItemAtPosition(position);
-                mValue = info.mComponentName;
+                mValue = info.mValue;
                 if (shouldPersist()) {
                     persistString(mValue);
                 }
                 mTitle = info.mTitle;
-                mAppIconDrawable = info.mAppIcon;
-                mAppIconResourceId = info.mAppIconResourceId;
+                mAppIconDrawable = null;
+                mAppIconResourceId = 0;
+                if (info.mComponentName != null) {
+                    mAppIconDrawable = resolveAppIcon(info);
+                } else {
+                    mAppIconResourceId = info.mAppIconResourceId;
+                }
 
                 updatePreferenceViews();
                 callChangeListener(mValue);
@@ -356,5 +361,17 @@ public class AppSelectListPreference extends DialogPreference implements DialogI
 
     public void setValue(String value) {
         mValue = value;
+    }
+
+    private Drawable resolveAppIcon(PackageItem item) {
+        Drawable appIcon = null;
+        try {
+            appIcon = mPm.getActivityIcon(item.mComponentName);
+            if (appIcon == null) {
+                appIcon = getDefaultActivityIcon();
+            }
+        } catch (Exception e) {
+        }
+        return appIcon;
     }
 }
