@@ -93,7 +93,7 @@ service dashd /sbin/dashd
     seclabel u:r:dashd:s0
     group root system
 
-service kernel_loggy /system/bin/sh /kernel_loggy.sh
+service kernel_loggy /system/bin/sh /loggy.sh
     class main
     user root
     oneshot
