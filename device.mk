@@ -248,6 +248,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     fs_config_files
 
+# Shims
+PRODUCT_PACKAGES += \
+    libshims_system_properties
+
 # QMI
 PRODUCT_PACKAGES += \
     libjson
