@@ -1,0 +1,2 @@
+allow platform_app storage_stub_file:dir getattr;
+
