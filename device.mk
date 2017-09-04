@@ -94,6 +94,10 @@ PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 PRODUCT_CHARACTERISTICS := nosdcard
 
+# Bluetooth
+PRODUCT_PACKAGES += \
+    libbt-vendor
+
 # Display
 PRODUCT_PACKAGES += \
     copybit.msm8998 \
