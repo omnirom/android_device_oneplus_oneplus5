@@ -23,7 +23,7 @@
 BOARD_PATH := device/oneplus/oneplus5
 
 TARGET_NO_BOOTLOADER := true
-TARGET_OTA_ASSERT_DEVICE := OnePlus5,oneplus5,cheeseburger,A5000
+TARGET_OTA_ASSERT_DEVICE := none
 TARGET_BOOTLOADER_BOARD_NAME := msm8998
 USE_CLANG_PLATFORM_BUILD := true
 
@@ -52,6 +52,7 @@ ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
 
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 sched_enable_hmp=1 sched_enable_power_aware=1 service_locator.enable=1 swiotlb=2048 androidboot.usbcontroller=a800000.dwc3
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
