@@ -2,8 +2,6 @@ ifeq ($(TARGET_HW_DISK_ENCRYPTION),true)
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
 
-LOCAL_PROPRIETARY_MODULE := true
-
 sourceFiles := \
                cryptfs_hw.c
 
@@ -11,9 +9,14 @@ commonSharedLibraries := \
                         libcutils \
                         libutils \
                         libdl \
-                        libhardware
+                        libhardware \
+                        liblog
+
 commonIncludes := \
-                  hardware/libhardware/include/hardware/
+                  hardware/libhardware/include/hardware/ \
+                  $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr/include \
+
+LOCAL_ADDITIONAL_DEPENDENCIES := $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
 
 LOCAL_C_INCLUDES := $(commonIncludes)
 LOCAL_SRC_FILES := $(sourceFiles)
