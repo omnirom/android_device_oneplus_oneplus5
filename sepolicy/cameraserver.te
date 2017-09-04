@@ -9,8 +9,8 @@ allow cameraserver sdcardfs:dir { read write open getattr add_name remove_name r
 allow cameraserver sdcardfs:file { create open read write unlink getattr };
 allow cameraserver storage_file:dir search;
 
-allow cameraserver persist_file:file { read write open create getattr create_file_perms rw_file_perms };
-allow cameraserver persist_file:dir { read write open create_file_perms rw_file_perms search add_name create };
+#allow cameraserver persist_file:file { read write open create getattr create_file_perms rw_file_perms };
+#allow cameraserver persist_file:dir { read write open create_file_perms rw_file_perms search add_name create };
 allow cameraserver fuse:file { read write open create getattr create_file_perms rw_file_perms };
 allow cameraserver fuse:dir { read write open create_file_perms rw_file_perms search add_name create };
 allow cameraserver tmpfs:file { read write open create getattr create_file_perms rw_file_perms };
@@ -31,13 +31,13 @@ allow cameraserver diag_prop:file { r_file_perms };
 allow cameraserver diag_prop:property_service set;
 
 #######
-allow cameraserver persist_file:file rw_file_perms;
-allow cameraserver persist_file:file setattr;
+#allow cameraserver persist_file:file rw_file_perms;
+#allow cameraserver persist_file:file setattr;
 allow cameraserver shell_exec:file { read open execute };
 allow cameraserver self:socket create;
-allow cameraserver camera_prop:property_service set;
+#allow cameraserver camera_prop:property_service set;
 allow cameraserver init:unix_stream_socket connectto;
-allow cameraserver sensors_persist_file:file { open read };
+#allow cameraserver sensors_persist_file:file { open read };
 allow cameraserver property_socket:sock_file write;
 allow cameraserver cameraserver:socket { { getattr read ioctl lock } { append write lock } };
 allow cameraserver shell_exec:file { execute getattr };

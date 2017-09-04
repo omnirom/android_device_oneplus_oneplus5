@@ -1,4 +1,4 @@
-r_dir_file(fingerprintd, firmware_file)
+#r_dir_file(fingerprintd, firmware_file)
 r_dir_file(fingerprintd, proc_touchpanel)
 allow fingerprintd fpc_data_file:dir rw_dir_perms;
 allow fingerprintd fpc_data_file:sock_file { create unlink };
