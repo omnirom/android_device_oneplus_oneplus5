@@ -1,3 +1,3 @@
-get_prop(dpmd, diag_prop);
+#get_prop(dpmd, diag_prop);
 
-allow dpmd diag_prop:property_service set;
+#allow dpmd diag_prop:property_service set;
