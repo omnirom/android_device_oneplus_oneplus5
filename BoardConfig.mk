@@ -243,7 +243,7 @@ BOARD_USES_QC_TIME_SERVICES := true
 # selinux
 include device/qcom/sepolicy/sepolicy.mk
 
-BOARD_SEPOLICY_DIRS += $(BOARD_PATH)/sepolicy
+#BOARD_SEPOLICY_DIRS += $(BOARD_PATH)/sepolicy
 
 BOARD_SECCOMP_POLICY += $(BOARD_PATH)/seccomp
 
