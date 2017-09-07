@@ -64,7 +64,8 @@ on early-boot
     write /sys/kernel/boot_adsp/boot 1
     write /sys/kernel/boot_cdsp/boot 1
     write /sys/kernel/boot_slpi/boot 1
-    exec u:r:qti_init_shell:s0 -- /init.qcom.early_boot.sh
+    #exec u:r:qti_init_shell:s0 -- /init.qcom.early_boot.sh
+    exec /init.qcom.early_boot.sh
 
 on boot
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
@@ -869,7 +870,7 @@ service qti-testscripts /system/bin/sh /system/etc/init.qcom.testscripts.sh
     user root
     disabled
     oneshot
-    seclabel u:r:qti-testscripts:s0
+    #seclabel u:r:qti-testscripts:s0
 
 service wifi-sdio-on /system/bin/sh /system/etc/init.qcom.sdio.sh
     class late_start
