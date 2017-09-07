@@ -356,15 +356,18 @@ on post-fs-data
     chown radio radio /data/misc/radio/db_check_done
     chmod 0660 /data/misc/radio/db_check_done
 
+    # Load WLAN driver, to satisfy wificond
+    insmod /system/lib/modules/wlan.ko
+
     # Wifi firmware reload path
     chown wifi wifi /sys/module/wlan/parameters/fwpath
 
     # qti-logkit data
     mkdir /data/misc/qti-logkit/ 0771 system system
     mkdir /data/misc/qti-logkit/shared-privileged/ 2770 system system
-    mkdir /data/misc/qti-logkit/shared-public/ 2770 system qcom_diag
+    mkdir /data/misc/qti-logkit/shared-public/ 2770 system oem_2901
     mkdir /data/misc/qti-logkit/socket-privileged/ 2770 system system
-    mkdir /data/misc/qti-logkit/socket-public/ 2750 system qcom_diag
+    mkdir /data/misc/qti-logkit/socket-public/ 2750 system oem_2901
     mkdir /data/misc/qti-logkit/logdata/ 2750 system shell
 
     #Create SWAP related dirs
@@ -384,7 +387,7 @@ service nqnfcinfo /system/vendor/bin/nqnfcinfo
     user system
     oneshot
 
-service perfd /system/vendor/bin/perfd
+#service perfd /system/vendor/bin/perfd
    class main
    user root
    group root readproc
@@ -401,7 +404,7 @@ service iop /system/bin/iop
 service qcomsysd /system/bin/qcom-system-daemon
     class main
     user root
-    group root qcom_diag
+    group root oem_2901
 
 service ssr_setup /system/bin/ssr_setup
     oneshot
@@ -501,7 +504,7 @@ on property:vold.decrypt=trigger_restart_framework
     #start cnss_diag
 #endif VENDOR_EDIT
 
-service cnd /system/bin/cnd
+#service cnd /system/bin/cnd
     class main
     socket cnd stream 660 root inet
 
@@ -543,7 +546,7 @@ on property:wc_transport.start_fmhci=false
 service start_hci_filter /system/bin/wcnss_filter
     class late_start
     user bluetooth
-    group bluetooth qcom_diag system wakelock
+    group bluetooth oem_2901 system wakelock
     disabled
 
 on property:wc_transport.start_root=true
@@ -620,14 +623,14 @@ service bt_logger /system/bin/bt_logger
 service ftmd /system/bin/logwrapper /system/bin/ftmdaemon
     class late_start
     user root
-    group bluetooth net_bt_admin misc qcom_diag net_bt
+    group bluetooth net_bt_admin misc oem_2901 net_bt
     disabled
     oneshot
 
 service bridgemgrd /system/bin/bridgemgrd
     class late_start
     user radio
-    group radio qcom_diag
+    group radio oem_2901
     disabled
 
 service port-bridge /system/bin/port-bridge
@@ -640,7 +643,7 @@ service port-bridge /system/bin/port-bridge
 service qmiproxy /system/bin/qmiproxy
     class main
     user radio
-    group radio qcom_diag
+    group radio oem_2901
     disabled
 
 # QMUX must be in multiple groups to support external process connections
@@ -648,7 +651,7 @@ service qmiproxy /system/bin/qmiproxy
 service qmuxd /system/bin/qmuxd
     class main
     user radio
-    group radio audio bluetooth gps nfc qcom_diag
+    group radio audio bluetooth gps nfc oem_2901
     disabled
 
 service netmgrd /system/bin/netmgrd
@@ -659,7 +662,7 @@ service ipacm-diag /system/bin/ipacm-diag
     class main
     user system
     socket ipacm_log_file dgram 660 system net_admin
-    group net_admin qcom_diag
+    group net_admin oem_2901
     disabled
 
 service ipacm /system/bin/ipacm
@@ -671,7 +674,7 @@ service ipacm /system/bin/ipacm
 service qti /system/vendor/bin/qti
     class main
     user radio
-    group radio net_raw qcom_diag usb net_admin
+    group radio net_raw oem_2901 usb net_admin
     disabled
 
 service sensors /system/bin/sensors.qcom
@@ -694,7 +697,7 @@ on property:sys.sysctl.tcp_adv_win_scale=*
 
 service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
         -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
-        -I/system/etc/wifi/wpa_supplicant_overlay.conf \
+        -I/vendor/etc/wifi/wpa_supplicant_overlay.conf \
         -O/data/misc/wifi/sockets \
         -m/data/misc/wifi/p2p_supplicant.conf \
         -puse_p2p_group_interface=1p2p_device=1 \
@@ -824,7 +827,7 @@ service iprenew_bt-pan /system/bin/dhcpcd -n
 service loc_launcher /system/bin/loc_launcher
     #loc_launcher will start as root and set its uid to gps
     class late_start
-    group gps inet qcom_diag wifi
+    group gps inet oem_2901 wifi
 
 service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
     class late_start
@@ -909,7 +912,7 @@ service ds_fmc_appd /system/bin/ds_fmc_appd -p "rmnet0" -D
 on property:persist.data.ds_fmc_app.mode=1
     start ds_fmc_appd
 
-service ims_regmanager /system/bin/exe-ims-regmanagerprocessnative
+#service ims_regmanager /system/bin/exe-ims-regmanagerprocessnative
     class late_start
     group net_bt_admin inet radio wifi
     disabled
@@ -929,13 +932,13 @@ service battery_monitor /system/bin/battery_monitor
 service ril-daemon /vendor/bin/hw/rild
     class main
     user radio
-    group radio cache inet misc audio log readproc wakelock qcom_diag net_raw
+    group radio cache inet misc audio log readproc wakelock oem_2901 net_raw
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
 
 service ril-daemon2 /vendor/bin/hw/rild -c 2
     class main
     user radio
-    group radio cache inet misc audio log readproc wakelock qcom_diag net_raw
+    group radio cache inet misc audio log readproc wakelock oem_2901 net_raw
     capabilities BLOCK_SUSPEND NET_ADMIN NET_RAW
 
 service usb_uicc_enable /system/bin/sh /system/etc/init.qcom.uicc.sh
@@ -1008,14 +1011,14 @@ on property:sys.qbcharger.enable=false
 service diag_mdlog_start /system/bin/diag_mdlog -c
     class late_start
     user shell
-    group system qcom_diag sdcard_rw sdcard_r media_rw
+    group system oem_2901 sdcard_rw sdcard_r media_rw
     disabled
     oneshot
 
 service diag_mdlog_stop /system/bin/diag_mdlog -k
     class late_start
     user shell
-    group system qcom_diag sdcard_rw sdcard_r media_rw
+    group system oem_2901 sdcard_rw sdcard_r media_rw
     disabled
     oneshot
 
@@ -1058,7 +1061,7 @@ service RIDL /system/vendor/bin/RIDLClient.exe
     class late_start
     oneshot
     user system
-    group system inet log sdcard_r sdcard_rw qcom_diag
+    group system inet log sdcard_r sdcard_rw oem_2901
     # removed for security team - misc bluetooth radio gps wifi diag media_rw
     # limited to 12 groups.  Unused: audio usb net_bt_admin net_bt_stac net_raw net_admin
 
@@ -1068,7 +1071,7 @@ service LKCore-dbg /system/vendor/bin/LKCore
     oneshot
     disabled
     user root
-    group root system log qcom_diag net_raw
+    group root system log oem_2901 net_raw
 
 # service for USER
 service LKCore-rel /system/vendor/bin/LKCore
@@ -1076,7 +1079,7 @@ service LKCore-rel /system/vendor/bin/LKCore
     oneshot
     disabled
     user system
-    group system log qcom_diag
+    group system log oem_2901
 
 service qseeproxydaemon /system/vendor/bin/qseeproxydaemon
     class late_start

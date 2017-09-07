@@ -12,8 +12,7 @@ LOCAL_SRC_FILES := power.c metadata-parser.c utils.c list.c hint-data.c powerhin
 LOCAL_C_INCLUDES := external/libxml2/include \
                     external/icu/icu4c/source/common
 
-# Include target-specific files.
-ifeq ($(call is-board-platform-in-list,msm8998), true)
+ifeq ($(call is-board-platform-in-list,msm8998 apq8098_latv), true)
 LOCAL_SRC_FILES += power-8998.c
 endif
 
@@ -24,29 +23,7 @@ endif
 LOCAL_MODULE := power.msm8998
 LOCAL_MODULE_TAGS := optional
 LOCAL_CFLAGS := -Wno-unused-parameter -Wno-unused-variable
-include $(BUILD_SHARED_LIBRARY)
-
-
-
-include $(CLEAR_VARS)
-
-LOCAL_SRC_FILES := powerhintparser.c
-
-LOCAL_MODULE := powerhint.qti
-
-
-LOCAL_SHARED_LIBRARIES := liblog libcutils libdl libxml2
-
-LOCAL_MODULE_TAGS := optional
-
-LOCAL_C_INCLUDES := external/libxml2/include \
-                    external/icu/icu4c/source/common
-
-
-LOCAL_CFLAGS := -Wno-unused-parameter -Wno-unused-variable
-
-LOCAL_MODULE_RELATIVE_PATH := hw
-
+LOCAL_VENDOR_MODULE := true
 include $(BUILD_SHARED_LIBRARY)
 
 endif

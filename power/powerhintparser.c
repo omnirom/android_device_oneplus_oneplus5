@@ -33,8 +33,7 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 #include "powerhintparser.h"
-#define LOG_TAG "QTI PowerHintParser"
-
+#define LOG_TAG "QCOM PowerHAL"
 
 int parsePowerhintXML() {
 
@@ -44,28 +43,12 @@ int parsePowerhintXML() {
     int opcode = 0, value = 0, type = 0;
     int numParams = 0;
     static int hintCount;
-    int fd;
-    char buf[10] = {0};
-    char path[39];
 
-    /* powerhint.xml is soc_id specific */
-    fd = open("/sys/devices/soc0/soc_id", O_RDONLY);
-    if (fd >= 0) {
-        if (read(fd, buf, sizeof(buf) - 1) == -1) {
-            ALOGW("Unable to read soc_id");
-        } else {
-            int soc_id = atoi(buf);
-            snprintf(path, MAX_LIB_PATH,"/system/etc/powerhint_soc_id_%d.xml",
-                    soc_id);
-        }
-        close(fd);
-    }
-
-    if(access(path, F_OK) < 0) {
+    if(access(POWERHINT_XML, F_OK) < 0) {
         return -1;
     }
 
-    doc = xmlReadFile(path, "UTF-8", XML_PARSE_RECOVER);
+    doc = xmlReadFile(POWERHINT_XML, "UTF-8", XML_PARSE_RECOVER);
     if(!doc) {
         ALOGE("Document not parsed successfully");
         return -1;
@@ -111,7 +94,7 @@ int parsePowerhintXML() {
                    xmlCleanupParser();
                    return -1;
                }
-               type = strtoul(type_str, NULL, 16);
+               type = strtol(type_str, NULL, 16);
             }
 
             node = node->children;
@@ -188,6 +171,8 @@ int* getPowerhint(int hint_id, int *params) {
        }
     }
 
-    ALOGI("Returning resource list with %d total resources\n",*params);
-    return result;
+    /*for (int j = 0; j < *params; j++)
+        ALOGI("Powerhal resource again%x = \n", result[j]);*/
+
+       return result;
 }

@@ -602,6 +602,7 @@ typedef struct {
 } RIL_Dial;
 
 typedef struct {
+    int cla;        /* OnePlus */
     int command;    /* one of the commands listed for TS 27.007 +CRSM*/
     int fileid;     /* EF id */
     char *path;     /* "pathid" from TS 27.007 +CRSM command.
@@ -616,6 +617,7 @@ typedef struct {
 } RIL_SIM_IO_v5;
 
 typedef struct {
+    int cla;        /* OnePlus */
     int command;    /* one of the commands listed for TS 27.007 +CRSM*/
     int fileid;     /* EF id */
     char *path;     /* "pathid" from TS 27.007 +CRSM command.
@@ -5590,6 +5592,7 @@ typedef struct {
 // "response" is a const RIL_SIM_IO_Response *
 #define RIL_REQUEST_SIM_TRANSMIT_CHANNEL 150
 
+
 //yangli@OnlineRD.AirService.Module, 2014/05/20, Add for send msg to make modem reset, {
 #define RIL_REQUEST_GO_TO_ERROR_FATAL 151
 #define RIL_REQUEST_GET_MDM_BASEBAND  152
@@ -6253,14 +6256,10 @@ typedef struct {
 #define RIL_UNSOL_MODEM_RESTART 1047
 
 //penghongyi@oem.network add for nv backup response
-//#ifdef VENDOR_EDIT
 #define RIL_UNSOL_OEM_NV_BACKUP_RESPONSE 1049
-//#endif
 
-//#ifdef VENDOR_EDIT
 //Hongyu.Bi@EXP.DataComm.Modem, 2014/02/26, Add for clearcode29/33
 #define RIL_UNSOL_RAC_UPDATE  1050    //czp 1042-->1044
-//#endif /* VENDOR_EDIT */
 
 /***********************************************************************/
 

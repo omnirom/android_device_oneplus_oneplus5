@@ -178,3 +178,6 @@ ro.hwui.text_large_cache_height=2048
 #persist.bt.a2dp_offload_cap=sbc-aptx-aptxhd-aac
 
 ro.sys.sdcardfs=true
+
+# Media
+persist.media.treble_omx=false

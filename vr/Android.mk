@@ -1,4 +1,4 @@
-# Copyright (C) 2014 The CyanogenMod Project
+# Copyright (C) 2016 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,21 +12,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-LOCAL_PATH:= $(call my-dir)
-# HAL module implemenation stored in
-# hw/<COPYPIX_HARDWARE_MODULE_ID>.<ro.board.platform>.so
+LOCAL_PATH := $(call my-dir)
+
 include $(CLEAR_VARS)
 
-LOCAL_C_INCLUDES += $(TARGET_OUT_HEADERS)/common/inc
-LOCAL_C_INCLUDES += $(TARGET_OUT_HEADERS)/qdcm/inc
-
-LOCAL_SRC_FILES := lights.c
-LOCAL_MODULE_RELATIVE_PATH    := hw
+LOCAL_C_INCLUDES := device/oneplus/oneplus5/thermal-engine
+LOCAL_MODULE := vr.msm8998
+LOCAL_MODULE_RELATIVE_PATH := hw
+LOCAL_PROPRIETARY_MODULE := true
+LOCAL_SRC_FILES := vr.c
+LOCAL_SRC_FILES += vr-8998.c
 LOCAL_SHARED_LIBRARIES := liblog libcutils
-
-LOCAL_MODULE := lights.msm8998
 LOCAL_MODULE_TAGS := optional
-LOCAL_VENDOR_MODULE := true
-LOCAL_CLANG  := true
+LOCAL_CFLAGS += -Wno-unused-parameter
 
 include $(BUILD_SHARED_LIBRARY)

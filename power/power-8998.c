@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2016-2017, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -47,7 +47,6 @@
 #include "performance.h"
 #include "power-common.h"
 #include "powerhintparser.h"
-#include "qti_power.h"
 
 #define CHECK_HANDLE(x) ((x)>0)
 #define NUM_PERF_MODES  3
@@ -65,9 +64,9 @@ typedef struct perf_mode {
     int perf_hint_id;
 }perf_mode_t;
 
-perf_mode_t perf_modes[NUM_PERF_MODES] = { { SUSTAINED_MODE, POWER_HINT_SUSTAINED_PERFORMANCE },
-                                           { VR_MODE, POWER_HINT_VR_MODE },
-                                           { VR_SUSTAINED_MODE, POWER_HINT_QTI_VR_SUSTAINED_PERFORMANCE } };
+perf_mode_t perf_modes[NUM_PERF_MODES] = { { SUSTAINED_MODE, SUSTAINED_PERF_HINT },
+                                           { VR_MODE, VR_MODE_HINT },
+                                           { VR_SUSTAINED_MODE, VR_MODE_SUSTAINED_PERF_HINT } };
 
 static pthread_mutex_t perf_mode_switch_lock = PTHREAD_MUTEX_INITIALIZER;
 static int current_mode = NORMAL_MODE;
@@ -98,10 +97,9 @@ static int switch_mode(perf_mode_type_t mode) {
     // switch to a perf mode
     hint_id = get_perfd_hint_id(mode);
     if(hint_id != 0) {
-        perfd_mode_handle = interaction_with_handle_HL(perfd_mode_handle, 0,
-                                                       hint_id);
+        perfd_mode_handle = perf_hint_enable(hint_id, 0);
         if (!CHECK_HANDLE(perfd_mode_handle)) {
-            ALOGE("Failed interaction_with_handle_HL for mode: 0x%x", mode);
+            ALOGE("Failed perf_hint_interaction for mode: 0x%x", mode);
             return -1;
         }
         ALOGD("Acquired handle 0x%x", perfd_mode_handle);
@@ -157,8 +155,7 @@ static int process_video_encode_hint(void *metadata)
 {
     char governor[80];
     struct video_encode_metadata_t video_encode_metadata;
-
-    ALOGE("Process Video encode Hint\n");
+    static int video_encode_handle = 0;
 
     if(!metadata)
        return HINT_NONE;
@@ -172,7 +169,6 @@ static int process_video_encode_hint(void *metadata)
     /* Initialize encode metadata struct fields */
     memset(&video_encode_metadata, 0, sizeof(struct video_encode_metadata_t));
     video_encode_metadata.state = -1;
-    video_encode_metadata.hint_id = POWER_HINT_VIDEO_ENCODE;
 
     if (parse_video_encode_metadata((char *)metadata, &video_encode_metadata) ==
             -1) {
@@ -180,22 +176,15 @@ static int process_video_encode_hint(void *metadata)
        return HINT_NONE;
     }
 
-    ALOGE("VIDEO ENCODE: Metadata state: %d, hint_id: %d",video_encode_metadata.state, video_encode_metadata.hint_id);
-
     if (video_encode_metadata.state == 1) {
           if (is_interactive_governor(governor)) {
-
-            int *resource_values;
-            int resources;
-
-            /* extract perflock resources */
-            perform_hint_action_HL(video_encode_metadata.hint_id);
-            ALOGI("Video Encode hint start");
-            return HINT_HANDLED;
+              video_encode_handle = perf_hint_enable(
+                       VIDEO_ENCODE_HINT, 0);
+              return HINT_HANDLED;
         }
     } else if (video_encode_metadata.state == 0) {
           if (is_interactive_governor(governor)) {
-            undo_hint_action(video_encode_metadata.hint_id);
+            release_request(video_encode_handle);
             ALOGI("Video Encode hint stop");
             return HINT_HANDLED;
         }

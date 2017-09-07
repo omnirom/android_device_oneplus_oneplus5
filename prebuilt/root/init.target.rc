@@ -98,6 +98,15 @@ on boot
     write /dev/cpuset/foreground/boost/cpus 0-7
     write /dev/cpuset/background/cpus 0-7
     write /dev/cpuset/system-background/cpus 0-7
+   # Add a cpuset for the camera daemon
+   # We want all cores for camera
+   mkdir /dev/cpuset/camera-daemon
+   write /dev/cpuset/camera-daemon/cpus 0-3
+   write /dev/cpuset/camera-daemon/mems 0
+   chown cameraserver cameraserver /dev/cpuset/camera-daemon
+   chown cameraserver cameraserver /dev/cpuset/camera-daemon/tasks
+   chmod 0660 /dev/cpuset/camera-daemon/tasks
+
    ####Regionalization config and prop files####
    chmod 0644 /persist/speccfg/spec
    chmod 0644 /persist/speccfg/devicetype
@@ -115,6 +124,7 @@ on boot
    chown system system /persist/speccfg/vendor_persist.prop
    chown system system /persist/speccfg/submask
    chown system system /persist/speccfg/partition
+
    chmod 0777 /persist/dual_camera_calibration
    chmod 0644 /persist/dual_camera_calibration/calibrationOutput.bin
    chmod 0666 /sys/devices/virtual/graphics/fb0/SRGB
@@ -251,10 +261,10 @@ service hbtp /system/vendor/bin/hbtp_daemon
     group system
     disabled
 
-service audiod /system/bin/audiod
-   class late_start
-   user system
-   group system
+#service audiod /system/vendor/bin/audiod
+#   class late_start
+#   user system
+#   group system
 
 #service usf_tester /system/bin/usf_tester
 #    user system
@@ -317,13 +327,13 @@ service audiod /system/bin/audiod
 #    chown system drmrpc /sys/devices/f9966000.i2c/i2c-1/1-0020/secure_touch
 #
 #
-service imsqmidaemon /system/bin/imsqmidaemon
+#service imsqmidaemon /system/bin/imsqmidaemon
     class main
     user system
     socket ims_qmid stream 0660 system radio
     group radio log diag
 
-service imsdatadaemon /system/bin/imsdatadaemon
+#service imsdatadaemon /system/bin/imsdatadaemon
     class main
     user system
     socket ims_datad stream 0660 system radio
@@ -389,14 +399,14 @@ service pd_mapper /system/vendor/bin/pd-mapper
 on property:sys.ims.QMI_DAEMON_STATUS=1
     start imsdatadaemon
 
-service ims_rtp_daemon /system/bin/ims_rtp_daemon
+#service ims_rtp_daemon /system/bin/ims_rtp_daemon
    class main
    user system
    socket ims_rtpd stream 0660 system radio
    group radio diag inet log
    disabled
 
-service imscmservice /system/bin/imscmservice
+#service imscmservice /system/bin/imscmservice
    class main
    user system
    group radio diag inet log
@@ -407,7 +417,7 @@ on property:sys.ims.DATA_DAEMON_STATUS=1
     start imscmservice
 #
 
-service ppd /system/vendor/bin/mm-pp-dpps
+#service ppd /system/vendor/bin/mm-pp-dpps
     class late_start
     user system
     group system graphics

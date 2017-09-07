@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012-2013,2015-2016, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2012-2013,2015-2017, The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -44,12 +44,4 @@ void perform_hint_action(int hint_id, int resource_values[],
 void undo_hint_action(int hint_id);
 void release_request(int lock_handle);
 int interaction_with_handle(int lock_handle, int duration, int num_args, int opt_list[]);
-
-
-void perform_hint_action_HL(int hint_id);
-
-
-int interaction_with_handle_HL(int lock_handle, int duration, int hint_id);
-
-
-void interaction_HL(int duration, int hint_id);
+int perf_hint_enable(int hint_id, int duration);

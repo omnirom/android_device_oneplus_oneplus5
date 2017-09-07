@@ -1,5 +1,5 @@
 on init
-    export LD_SHIM_LIBS /system/lib/hw/camera.msm8998.so|libcamera_shim.so
+    #export LD_SHIM_LIBS /system/lib/hw/camera.msm8998.so|libcamera_shim.so
 
     # Set permissions for dsp partition
     mkdir /dsp 0771 media media
