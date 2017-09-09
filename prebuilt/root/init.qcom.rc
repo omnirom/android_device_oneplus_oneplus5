@@ -208,6 +208,12 @@ on boot
     chown root system /sys/kernel/dload/emmc_dload
     chmod 0660 /sys/kernel/dload/emmc_dload
 
+    # Load WLAN driver, to satisfy wificond
+    insmod /system/lib/modules/wlan.ko
+
+    # Wifi firmware reload path
+    chown wifi wifi /sys/module/wlan/parameters/fwpath
+
 # msm specific files that need to be created on /data
 on post-fs-data
     #Create directories for Fingerprint
@@ -357,12 +363,6 @@ on post-fs-data
     write /data/misc/radio/db_check_done 0
     chown radio radio /data/misc/radio/db_check_done
     chmod 0660 /data/misc/radio/db_check_done
-
-    # Load WLAN driver, to satisfy wificond
-    insmod /system/lib/modules/wlan.ko
-
-    # Wifi firmware reload path
-    chown wifi wifi /sys/module/wlan/parameters/fwpath
 
     # qti-logkit data
     mkdir /data/misc/qti-logkit/ 0771 system system
