@@ -12,7 +12,7 @@ PRODUCT_PACKAGES += \
 # Camera configuration file. Shared by passthrough/binderized camera HAL
 PRODUCT_PACKAGES += camera.device@3.2-impl
 PRODUCT_PACKAGES += camera.device@1.0-impl
-PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-impl
+#PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-impl
 # Enable binderized camera HAL
 #PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-service
 
@@ -54,7 +54,6 @@ PRODUCT_PACKAGES += \
 #Nfc
 PRODUCT_PACKAGES += \
     android.hardware.nfc@1.0-impl \
-    vendor.nxp.hardware.nfc@1.0-service \
     vendor.nxp.hardware.nfc@1.0-impl
 
 #Omx
