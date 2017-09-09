@@ -48,6 +48,8 @@
 #include "performance.h"
 #include "power-common.h"
 
+#define DOUBLE_TAP_FILE "/proc/touchpanel/double_tap_enable"
+
 static int saved_dcvs_cpu0_slack_max = -1;
 static int saved_dcvs_cpu0_slack_min = -1;
 static int saved_mpdecision_slack_max = -1;
@@ -453,6 +455,13 @@ void set_interactive(struct power_module *module, int on)
     saved_interactive_mode = !!on;
 }
 
+void set_feature(struct power_module __unused *module, feature_t feature, int state) {
+    if (feature == POWER_FEATURE_DOUBLE_TAP_TO_WAKE) {
+        ALOGI("%s POWER_FEATURE_DOUBLE_TAP_TO_WAKE %s", __func__, (state ? "ON" : "OFF"));
+        sysfs_write(DOUBLE_TAP_FILE, state ? "1" : "0");
+    }
+}
+
 static int power_device_open(const hw_module_t* module, const char* name,
         hw_device_t** device)
 {
@@ -505,4 +514,5 @@ struct power_module HAL_MODULE_INFO_SYM = {
     .init = power_init,
     .powerHint = power_hint,
     .setInteractive = set_interactive,
+    .setFeature = set_feature
 };
