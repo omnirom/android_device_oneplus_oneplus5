@@ -271,16 +271,6 @@
     <!-- Disable lockscreen translucent decor by default -->
     <bool name="config_enableLockScreenTranslucentDecor">true</bool>
 
-    <string-array translatable="false" name="config_globalActionsList">
-        <item>power</item>
-        <item>reboot</item>
-        <item>airplane</item>
-        <item>screenshot</item>
-        <item>screenrecord</item>
-        <item>users</item>
-        <item>dnd</item>
-    </string-array>
-
     <!-- The list absolute paths of jar/apk files containing the device specific handlers,
         delimited by File.pathSeparator, which defaults to ":" on Android 
     <string name="config_deviceKeyHandlerLib" translatable="false">/system/priv-app/DeviceParts/DeviceParts.apk</string> -->
