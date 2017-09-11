@@ -241,4 +241,14 @@
             <instance>default</instance>
         </interface>
     </hal>
+    <!-- gnss -->
+    <hal format="hidl">
+        <name>android.hardware.gnss</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>IGnss</name>
+            <instance>msm8998</instance>
+        </interface>
+    </hal>
 </manifest>
