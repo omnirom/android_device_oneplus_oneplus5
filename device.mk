@@ -120,6 +120,13 @@ PRODUCT_PACKAGES += \
     libvolumelistener \
     tinymix
 
+#mediaextensions
+PRODUCT_PACKAGES += \
+    libavmediaserviceextensions \
+    mediametrics \
+    libmediametrics \
+    libregistermsext
+
 PRODUCT_COPY_FILES += \
     $(TOPDIR)frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
     $(TOPDIR)frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
@@ -235,7 +242,7 @@ PRODUCT_PACKAGES += \
     power.msm8998 \
     powerhint.qti
 
-#PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES += \
     DeviceParts
 
 # ANT+
