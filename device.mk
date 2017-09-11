@@ -21,7 +21,7 @@
 #
 $(call inherit-product, device/oneplus/oneplus5/hidl.mk)
 $(call inherit-product, vendor/oneplus/oneplus5/device-vendor.mk)
-#$(call inherit-product, frameworks/native/build/phone-xxhdpi-4096-dalvik-heap.mk)
+$(call inherit-product, vendor/omni/config/phone-xxhdpi-4096-dalvik-heap.mk)
 
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
