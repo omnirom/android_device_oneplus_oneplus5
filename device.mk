@@ -229,9 +229,6 @@ PRODUCT_PACKAGES += \
     fstman \
     fstman.ini
 
-PRODUCT_PACKAGES += \
-    kernel_loggy.sh
-
 # Camera
 PRODUCT_PACKAGES += \
     SnapdragonCamera2 \
