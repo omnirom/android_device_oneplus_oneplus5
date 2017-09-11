@@ -242,15 +242,15 @@ public class KeyHandler implements DeviceKeyHandler {
             switch(event.getScanCode()) {
                 case KEY_SLIDER_TOP:
                     if (DEBUG) Log.i(TAG, "KEY_SLIDER_TOP");
-                    doHandleSliderAction(0);
+                    //doHandleSliderAction(0);
                     return true;
                 case KEY_SLIDER_CENTER:
                     if (DEBUG) Log.i(TAG, "KEY_SLIDER_CENTER");
-                    doHandleSliderAction(1);
+                    //doHandleSliderAction(1);
                     return true;
                 case KEY_SLIDER_BOTTOM:
                     if (DEBUG) Log.i(TAG, "KEY_SLIDER_BOTTOM");
-                    doHandleSliderAction(2);
+                    //doHandleSliderAction(2);
                     return true;
             }
         }
@@ -404,7 +404,7 @@ public class KeyHandler implements DeviceKeyHandler {
         return 0;
     }
 
-    private void doHandleSliderAction(int position) {
+/*    private void doHandleSliderAction(int position) {
         int action = getSliderAction(position);
         if ( action == 0) {
             mNoMan.setZenMode(Global.ZEN_MODE_OFF_ONLY, null, TAG);
@@ -423,7 +423,7 @@ public class KeyHandler implements DeviceKeyHandler {
             mNoMan.setZenMode(Global.ZEN_MODE_NO_INTERRUPTIONS, null, TAG);
         }
     }
-
+*/
     private Intent createIntent(String value) {
         ComponentName componentName = ComponentName.unflattenFromString(value);
         Intent intent = new Intent(Intent.ACTION_MAIN);
