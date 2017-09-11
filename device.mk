@@ -230,7 +230,7 @@ PRODUCT_PACKAGES += \
     fstman.ini
 
 PRODUCT_PACKAGES += \
-    loggy.sh
+    kernel_loggy.sh
 
 # Camera
 PRODUCT_PACKAGES += \
