@@ -251,6 +251,11 @@ PRODUCT_PACKAGES += \
 #PRODUCT_COPY_FILES += \
     external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:system/etc/permissions/com.dsi.ant.antradio_library.xml
 
+# Seccomp policy
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/seccomp_policy/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
+    $(LOCAL_PATH)/seccomp_policy/mediaextractor-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy \
+
 # For android_filesystem_config.h
 PRODUCT_PACKAGES += \
     fs_config_files
@@ -274,10 +279,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vr.msm8998 \
     thermal.msm8998
-
-# Seccomp policy
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/seccomp/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy
 
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
