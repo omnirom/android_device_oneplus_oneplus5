@@ -13,7 +13,7 @@ endif
 LOCAL_MODULE_RELATIVE_PATH := hw
 LOCAL_SHARED_LIBRARIES := liblog libcutils
 LOCAL_CFLAGS += -Wno-unused-parameter -Wno-unused-variable
-LOCAL_MODULE := thermal.$(TARGET_DEVICE)
+LOCAL_MODULE := thermal.msm8998
 LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_SHARED_LIBRARY)
