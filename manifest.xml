@@ -5,7 +5,7 @@
         <version>2.1</version>
         <interface>
             <name>IBiometricsFingerprint</name>
-            <instance>default</instance>
+            <instance>msm8998</instance>
         </interface>
     </hal>
     <hal format="hidl">
