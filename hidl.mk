@@ -11,8 +11,7 @@ PRODUCT_PACKAGES += \
 
 # Camera configuration file. Shared by passthrough/binderized camera HAL
 PRODUCT_PACKAGES += camera.device@3.2-impl
-PRODUCT_PACKAGES += camera.device@1.0-impl
-#PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-impl
+PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-impl
 # Enable binderized camera HAL
 #PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-service
 
@@ -22,8 +21,13 @@ PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-service \
     android.hardware.graphics.mapper@2.0-impl \
     android.hardware.graphics.composer@2.1-impl \
+    android.hardware.graphics.composer@2.1-service \
     android.hardware.memtrack@1.0-impl \
-    android.hardware.light@2.0-impl
+    android.hardware.memtrack@1.0-service \
+    android.hardware.light@2.0-impl \
+    android.hardware.light@2.0-service \
+    android.hardware.configstore@1.0-service \
+    android.hardware.broadcastradio@1.0-impl
 
 #PRODUCT_PACKAGES += \
     vendor.display.color@1.0-service \
@@ -31,7 +35,8 @@ PRODUCT_PACKAGES += \
 
 # DRM
 PRODUCT_PACKAGES += \
-    android.hardware.drm@1.0-impl
+    android.hardware.drm@1.0-impl \
+    android.hardware.drm@1.0-service
 
 PRODUCT_PACKAGES += android.hidl.manager@1.0-java
 
@@ -54,15 +59,17 @@ PRODUCT_PACKAGES += \
 #Nfc
 PRODUCT_PACKAGES += \
     android.hardware.nfc@1.0-impl \
-    vendor.nxp.hardware.nfc@1.0-impl
-
+    vendor.nxp.hardware.nfc@1.0-impl \
+    vendor.nxp.hardware.nfc@1.0-service
+ 
 #Omx
-#PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES += \
     android.hardware.media.omx@1.0-impl
  
 # Power
 PRODUCT_PACKAGES += \
     android.hardware.power@1.0-impl
+
 
 # RenderScript HAL
 PRODUCT_PACKAGES += \
@@ -83,10 +90,20 @@ PRODUCT_PACKAGES += \
     android.hardware.vibrator@1.0-service
 
 #VR
-PRODUCT_PACKAGES += android.hardware.vr@1.0-impl
+PRODUCT_PACKAGES += \
+    android.hardware.vr@1.0-impl \
+    android.hardware.vr@1.0-service
+
 #Thermal
-PRODUCT_PACKAGES += android.hardware.thermal@1.0-impl
+PRODUCT_PACKAGES += \
+    android.hardware.thermal@1.0-impl
 
 # Wifi
 PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service
+    android.hardware.wifi@1.0-service \
+    android.hardware.wifi@1.0-supplicant
+
+#RIL
+#PRODUCT_PACKAGES += \
+    android.hardware.radio@1.0 \
+    android.hardware.radio.deprecated@1.0
