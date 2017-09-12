@@ -64,7 +64,7 @@ PRODUCT_PACKAGES += \
  
 #Omx
 PRODUCT_PACKAGES += \
-    android.hardware.media.omx@1.0-impl
+    android.hardware.media.omx@1.0
  
 # Power
 PRODUCT_PACKAGES += \
