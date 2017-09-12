@@ -260,4 +260,29 @@
             <instance>msm8998</instance>
         </interface>
     </hal>
+    <!-- WFD HAL Service -->
+    <hal format="hidl">
+        <name>com.qualcomm.qti.wifidisplayhal</name>
+        <transport>hwbinder</transport>
+        <impl level="generic"></impl>
+        <version>1.0</version>
+        <interface>
+            <name>IHDCPSession</name>
+            <instance>wifidisplayhdcphal</instance>
+        </interface>
+        <interface>
+            <name>IDSManager</name>
+            <instance>wifidisplaydshal</instance>
+        </interface>
+    </hal>
+    <!-- WIGIG HAL service -->
+    <hal format="hidl">
+        <name>vendor.qti.hardware.wigig.supptunnel</name>
+        <transport>hwbinder</transport>
+        <version>1.0</version>
+        <interface>
+            <name>ISuppTunnelProvider</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
 </manifest>
