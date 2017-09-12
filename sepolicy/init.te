@@ -6,10 +6,76 @@ allow init sysfs:file rw_file_perms;
 allow init input_device:chr_file r_file_perms;
 allow init proc_touchpanel:file write;
 domain_trans(init, rootfs, dashd)
-
 allow init debugfs:file { rw_file_perms };
 allow init debugfs:dir mounton;
-
 allow init sysfs:dir rw_file_perms;
-
 allow init debugfs_trace_marker:file getattr;
+
+
+allow init qdsp_device:chr_file ioctl;
+allow init self:capability2 block_suspend;
+allow init self:netlink_generic_socket { read write };
+allow init self:netlink_kobject_uevent_socket read;
+allow init self:netlink_route_socket { bind create getattr nlmsg_read nlmsg_write read setopt write };
+allow init self:netlink_socket read;
+allow init self:socket { read write };
+allow init self:udp_socket ioctl;
+allow init sensors_device:chr_file ioctl;
+allow init serial_device:chr_file ioctl;
+allow init sg_device:chr_file { ioctl write };
+allow init tee_device:chr_file ioctl;
+
+
+allow init bluetooth_data_file:file append;
+allow init debugfs_rmts:file write;
+#allow init default_android_service:service_manager { add find };
+allow init gpu_device:chr_file getattr;
+allow init input_device:chr_file write;
+allow init ion_device:chr_file ioctl;
+allow init modem_efs_partition_device:blk_file write;
+allow init netd:unix_stream_socket connectto;
+allow init netd_socket:sock_file write;
+allow init rfs_file:file rename;
+allow init rfs_system_file:lnk_file read;
+#allow init self:binder call;
+allow init self:capability net_bind_service;
+allow init self:netlink_socket { bind create write };
+allow init self:netlink_xfrm_socket { bind create getattr nlmsg_write read setopt write };
+allow init self:rawip_socket { create getopt setopt };
+#allow init self:socket { bind connect create ioctl };
+allow init self:tcp_socket { bind create ioctl setopt };
+#allow init self:udp_socket ioctl;
+allow init servicemanager:binder { call transfer };
+allow init ssd_device:blk_file write;
+allow init system_data_file:file lock;
+allow init system_file:system module_load;
+allow init tee_device:chr_file write;
+allow init vfat:dir search;
+
+
+allow init diag_device:chr_file { ioctl write };
+allow init node:tcp_socket node_bind;
+allow init node:udp_socket node_bind;
+allow init proc_interrupts:file getattr;
+allow init self:netlink_generic_socket { bind create getattr setopt };
+allow init self:netlink_kobject_uevent_socket { bind create setopt };
+allow init self:netlink_socket setopt;
+allow init self:tcp_socket { getattr listen };
+allow init sensors_device:chr_file getattr;
+allow init serial_device:chr_file write;
+allow init system_data_file:sock_file write;
+#allow init system_file:file execute_no_trans;
+allow init uio_device:chr_file write;
+allow init vfat:file getattr;
+
+#allow init hal_drm_hwservice:hwservice_manager add;
+allow init hidl_base_hwservice:hwservice_manager add;
+
+
+# Run "ifup lo" to bring up the localhost interface
+allowxperm init self:udp_socket ioctl { SIOCSIFFLAGS };
+
+allow init rootfs:file r_file_perms;
+
+allow init mediadrmserver:binder transfer;
+
