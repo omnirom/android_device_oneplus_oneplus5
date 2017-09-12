@@ -156,10 +156,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/apdr.conf:system/vendor/etc/apdr.conf \
     $(LOCAL_PATH)/gps/etc/xtwifi.conf:system/vendor/etc/xtwifi.conf
 
-# Vehicle network (for slim_daemon)
-PRODUCT_PACKAGES += \
-    libvehiclenetwork-native
-
 # IPv6
 PRODUCT_PACKAGES += \
     ebtables \
