@@ -23,3 +23,17 @@ LOCAL_MODULE_CLASS := SHARED_LIBRARIES
 LOCAL_32_BIT_ONLY := true
 
 include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES := DisplayEventReceiver.c
+LOCAL_MODULE := libcamera_shim_display
+LOCAL_MODULE_TAGS := optional
+include $(BUILD_SHARED_LIBRARY)
+
+# Camera
+include $(CLEAR_VARS)
+LOCAL_SRC_FILES := GraphicBuffer.cpp
+LOCAL_SHARED_LIBRARIES := libui
+LOCAL_MODULE := libcamera_shim_buffer
+LOCAL_MODULE_TAGS := optional
+include $(BUILD_SHARED_LIBRARY)
