@@ -11,9 +11,13 @@ PRODUCT_PACKAGES += \
 
 # Camera configuration file. Shared by passthrough/binderized camera HAL
 PRODUCT_PACKAGES += camera.device@3.2-impl
+#PRODUCT_PACKAGES += camera.device@1.0-impl
 PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-impl
 # Enable binderized camera HAL
 #PRODUCT_PACKAGES += android.hardware.camera.provider@2.4-service
+
+PRODUCT_PACKAGES += \
+    vendor.qti.hardware.camera.device@1.0
 
 # Display/Graphics
 PRODUCT_PACKAGES += \
@@ -45,8 +49,11 @@ PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.1-service
 
 #Enable AOSP KEYMASTER and GATEKEEPER HIDLs
-PRODUCT_PACKAGES += android.hardware.gatekeeper@1.0-impl \
-                    android.hardware.keymaster@3.0-impl
+PRODUCT_PACKAGES += \
+    android.hardware.gatekeeper@1.0-impl \
+    android.hardware.gatekeeper@1.0-sevice \
+    android.hardware.keymaster@3.0-impl \
+    android.hardware.keymaster@3.0-service
 
 # GPS
 PRODUCT_PACKAGES += \
@@ -65,6 +72,7 @@ PRODUCT_PACKAGES += \
 #Omx
 PRODUCT_PACKAGES += \
     android.hardware.media.omx@1.0
+
  
 # Power
 PRODUCT_PACKAGES += \
@@ -105,6 +113,11 @@ PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-supplicant
 
 #RIL
-#PRODUCT_PACKAGES += \
-    android.hardware.radio@1.0 \
-    android.hardware.radio.deprecated@1.0
+PRODUCT_PACKAGES += \
+    android.hardware.radio@1.0
+
+#Healthd packages
+PRODUCT_PACKAGES += android.hardware.health@1.0-impl \
+		    android.hardware.health@1.0-convert \
+		    android.hardware.health@1.0-service \
+		    libhealthd.default
