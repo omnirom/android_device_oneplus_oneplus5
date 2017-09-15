@@ -41,3 +41,5 @@ extern "C" void _ZN7android19IGraphicBufferAllocD0Ev(
 }
 
 extern "C" void _ZN7android19IGraphicBufferAlloc10descriptorE() {}
+extern "C" void _ZN7android13GraphicBuffer10reallocateEjjij() {}
+extern "C" void _ZN7android13GraphicBufferC1EjjijjP13native_handleb() {}

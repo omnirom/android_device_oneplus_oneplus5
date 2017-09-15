@@ -230,7 +230,8 @@ PRODUCT_PACKAGES += \
     SnapdragonCamera2 \
     libcamera_shim \
     libcamera_shim_display \
-    libcamera_shim_buffer
+    libcamera_shim_buffer \
+    libcamera_shim_native
 
 # power
 PRODUCT_PACKAGES += \
