@@ -483,6 +483,7 @@ service qvrd /system/vendor/bin/qvrservice
     user system
     group system camera graphics
     socket qvrservice stream 0666 system system
+    capabilities SYS_NICE
 
 on property:sys.srgb=1
    write /sys/devices/virtual/graphics/fb0/SRGB 1

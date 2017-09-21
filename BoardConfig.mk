@@ -172,7 +172,7 @@ AUDIO_FEATURE_ENABLED_SND_MONITOR := true
 USE_CAMERA_STUB := true
 TARGET_USES_MEDIA_EXTENSIONS := true
 BOARD_USES_SNAPDRAGONCAMERA_VERSION := 2
-#TARGET_USES_NON_TREBLE_CAMERA := true
+TARGET_USES_NON_TREBLE_CAMERA := true
 
 # Disable secure discard because it's SLOW
 BOARD_SUPPRESS_SECURE_ERASE := true
@@ -185,6 +185,7 @@ QCOM_BT_USE_BTNV := true
 TARGET_QCOM_BLUETOOTH_VARIANT := caf-msm8998
 
 # Wifi
+TARGET_USES_QCOM_WCNSS_QMI       := false
 BOARD_HAS_QCOM_WLAN              := true
 BOARD_WLAN_DEVICE                := qcwcn
 WPA_SUPPLICANT_VERSION           := VER_0_8_X
@@ -195,8 +196,7 @@ BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 WIFI_DRIVER_FW_PATH_STA          := "sta"
 WIFI_DRIVER_FW_PATH_AP           := "ap"
 WIFI_DRIVER_FW_PATH_P2P          := "p2p"
-WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wlan.ko"
-WIFI_DRIVER_MODULE_NAME          := "wlan"
+
 
 # charger
 BOARD_CHARGER_ENABLE_SUSPEND := true
