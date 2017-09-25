@@ -96,7 +96,8 @@ PRODUCT_CHARACTERISTICS := nosdcard
 
 # Bluetooth
 PRODUCT_PACKAGES += \
-    libbt-vendor
+    libbt-vendor \
+    libbthost_if
 
 # Display
 PRODUCT_PACKAGES += \
@@ -285,6 +286,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vr.msm8998 \
     thermal.msm8998
+
+PRODUCT_PACKAGES += \
+    mkshrc_vendor \
+    sh_vendor
 
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \
