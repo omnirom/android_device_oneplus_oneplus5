@@ -72,3 +72,11 @@ $(shell ln -s /persist/rfs/apq/gnss $(TARGET_OUT)/rfs/apq/gnss/readwrite)
 $(shell ln -s /persist/rfs/shared $(TARGET_OUT)/rfs/apq/gnss/shared)
 $(shell ln -s /persist/hlos_rfs/shared $(TARGET_OUT)/rfs/apq/gnss/hlos)
 $(shell ln -s /firmware $(TARGET_OUT)/rfs/apq/gnss/readonly/firmware)
+
+##############
+# OP5 CAMERA Binaries
+#########
+$(shell ln -s /data/misc/camera/cp/CPCalibrationData.bin $(TARGET_OUT_ETC)/camera/cp/CPCalibrationData.bin)
+$(shell ln -s /data/misc/camera/cp/FusionCalibrationParams.bin $(TARGET_OUT_ETC)/camera/cp/FusionCalibrationParams.bin)
+$(shell ln -s /data/misc/camera/cp/SystemParamsBokeh.bin $(TARGET_OUT_ETC)/camera/cp/SystemParamsBokeh.bin)
+$(shell ln -s /data/misc/camera/cp/SystemParamsFusion.bin $(TARGET_OUT_ETC)/camera/cp/SystemParamsFusion.bin)
