@@ -170,7 +170,7 @@
         <version>1.0</version>
         <interface>
             <name>ISensors</name>
-            <instance>msm8998</instance>
+            <instance>default</instance>
         </interface>
     </hal>
     <hal format="hidl">
