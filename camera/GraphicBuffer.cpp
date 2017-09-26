@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include <string>
+//#include <string>
 
 // GraphicBuffer(uint32_t inWidth, uint32_t inHeight, PixelFormat inFormat,
 //               uint32_t inUsage, std::string requestorName = "<Unknown>");
@@ -43,3 +43,5 @@
 extern "C" void _ZN7android19IGraphicBufferAlloc10descriptorE() {}
 extern "C" void _ZN7android13GraphicBuffer10reallocateEjjij() {}
 extern "C" void _ZN7android13GraphicBufferC1EjjijjP13native_handleb() {}
+extern "C" void _ZN7android20DisplayEventReceiverC1Ev() {}
+

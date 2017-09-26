@@ -196,6 +196,7 @@ PRODUCT_PACKAGES += \
 # OMX
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
+    libhypv_intercept \
     libextmedia_jni \
     libOmxAacEnc \
     libOmxAmrEnc \
@@ -226,8 +227,6 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf
 
 PRODUCT_PACKAGES += \
-    fstman \
-    fstman.ini \
     libwifi-hal-qcom \
     wcnss_service \
     libcld80211 \
@@ -235,11 +234,8 @@ PRODUCT_PACKAGES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    SnapdragonCamera2 \
-    libcamera_shim \
-    libcamera_shim_display \
-    libcamera_shim_buffer \
-    libcamera_shim_native
+    SnapdragonCamera \
+    libcamera_shim
 
 # power
 PRODUCT_PACKAGES += \
