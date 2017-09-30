@@ -31,7 +31,9 @@ public class Startup extends BroadcastReceiver {
         if (file == null) {
             return;
         }
-        Utils.writeValue(file, enabled ? "1" : "0");
+        if (enabled) {
+            Utils.writeValue(file, "1");
+        }
     }
 
     private void restore(String file, String value) {
@@ -91,7 +93,9 @@ public class Startup extends BroadcastReceiver {
         enabled = sharedPrefs.getBoolean(DeviceSettings.KEY_SRGB_SWITCH, false);
         restore(SRGBModeSwitch.getFile(), enabled);
         enabled = sharedPrefs.getBoolean(DeviceSettings.KEY_HBM_SWITCH, false);
-        restore(HBMModeSwitch.getFile(), enabled ? "2" : "0");
+        if (enabled) {
+            restore(HBMModeSwitch.getFile(), "2");
+        }
         enabled = sharedPrefs.getBoolean(DeviceSettings.KEY_DCI_SWITCH, false);
         restore(DCIModeSwitch.getFile(), enabled);
         enabled = sharedPrefs.getBoolean(DeviceSettings.KEY_NIGHT_SWITCH, false);
