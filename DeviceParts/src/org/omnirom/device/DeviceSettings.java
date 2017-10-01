@@ -54,6 +54,8 @@ public class DeviceSettings extends PreferenceActivity implements
     public static final String KEY_DCI_SWITCH = "dci";
     public static final String KEY_NIGHT_SWITCH = "night";
 
+    public static final String SLIDER_DEFAULT_VALUE = "4,2,0";
+
     private VibratorStrengthPreference mVibratorStrength;
     private ListPreference mSliderModeTop;
     private ListPreference mSliderModeCenter;
@@ -172,7 +174,7 @@ public class DeviceSettings extends PreferenceActivity implements
     private int getSliderAction(int position) {
         String value = Settings.System.getString(getContentResolver(),
                     Settings.System.BUTTON_EXTRA_KEY_MAPPING);
-        final String defaultValue = "5,3,0";
+        final String defaultValue = SLIDER_DEFAULT_VALUE;
 
         if (value == null) {
             value = defaultValue;
@@ -190,7 +192,7 @@ public class DeviceSettings extends PreferenceActivity implements
     private void setSliderAction(int position, int action) {
         String value = Settings.System.getString(getContentResolver(),
                     Settings.System.BUTTON_EXTRA_KEY_MAPPING);
-        final String defaultValue = "5,3,0";
+        final String defaultValue = SLIDER_DEFAULT_VALUE;
 
         if (value == null) {
             value = defaultValue;
