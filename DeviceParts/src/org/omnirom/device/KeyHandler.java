@@ -242,15 +242,15 @@ public class KeyHandler implements DeviceKeyHandler {
             switch(event.getScanCode()) {
                 case KEY_SLIDER_TOP:
                     if (DEBUG) Log.i(TAG, "KEY_SLIDER_TOP");
-                    //doHandleSliderAction(0);
+                    doHandleSliderAction(0);
                     return true;
                 case KEY_SLIDER_CENTER:
                     if (DEBUG) Log.i(TAG, "KEY_SLIDER_CENTER");
-                    //doHandleSliderAction(1);
+                    doHandleSliderAction(1);
                     return true;
                 case KEY_SLIDER_BOTTOM:
                     if (DEBUG) Log.i(TAG, "KEY_SLIDER_BOTTOM");
-                    //doHandleSliderAction(2);
+                    doHandleSliderAction(2);
                     return true;
             }
         }
@@ -389,7 +389,7 @@ public class KeyHandler implements DeviceKeyHandler {
         String value = Settings.System.getStringForUser(mContext.getContentResolver(),
                     Settings.System.BUTTON_EXTRA_KEY_MAPPING,
                     UserHandle.USER_CURRENT);
-        final String defaultValue = "5,3,0";
+        final String defaultValue = DeviceSettings.SLIDER_DEFAULT_VALUE;
 
         if (value == null) {
             value = defaultValue;
@@ -404,7 +404,7 @@ public class KeyHandler implements DeviceKeyHandler {
         return 0;
     }
 
-/*    private void doHandleSliderAction(int position) {
+    private void doHandleSliderAction(int position) {
         int action = getSliderAction(position);
         if ( action == 0) {
             mNoMan.setZenMode(Global.ZEN_MODE_OFF_ONLY, null, TAG);
@@ -413,17 +413,14 @@ public class KeyHandler implements DeviceKeyHandler {
             mNoMan.setZenMode(Global.ZEN_MODE_OFF_ONLY, null, TAG);
             mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_VIBRATE);
         } else if (action == 2) {
-            mNoMan.setZenMode(Global.ZEN_MODE_OFF_ONLY, null, TAG);
-            mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_SILENT);
-        } else if (action == 3) {
             mNoMan.setZenMode(Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, null, TAG);
-        } else if (action == 4) {
+        } else if (action == 3) {
             mNoMan.setZenMode(Global.ZEN_MODE_ALARMS, null, TAG);
-        } else if (action == 5) {
+        } else if (action == 4) {
             mNoMan.setZenMode(Global.ZEN_MODE_NO_INTERRUPTIONS, null, TAG);
         }
     }
-*/
+
     private Intent createIntent(String value) {
         ComponentName componentName = ComponentName.unflattenFromString(value);
         Intent intent = new Intent(Intent.ACTION_MAIN);
