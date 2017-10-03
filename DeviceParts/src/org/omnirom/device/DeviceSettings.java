@@ -99,9 +99,9 @@ public class DeviceSettings extends PreferenceActivity implements
         mSliderModeBottom.setValueIndex(valueIndex);
         mSliderModeBottom.setSummary(mSliderModeBottom.getEntries()[valueIndex]);
 
-        //mSwapBackRecents = (TwoStatePreference) findPreference(KEY_SWAP_BACK_RECENTS);
-        //mSwapBackRecents.setChecked(Settings.System.getInt(getContentResolver(),
-         //           Settings.System.BUTTON_SWAP_BACK_RECENTS, 0) != 0);
+        mSwapBackRecents = (TwoStatePreference) findPreference(KEY_SWAP_BACK_RECENTS);
+        mSwapBackRecents.setChecked(Settings.System.getInt(getContentResolver(),
+                   Settings.System.BUTTON_SWAP_BACK_RECENTS, 0) != 0);
 
         mSRGBModeSwitch = (TwoStatePreference) findPreference(KEY_SRGB_SWITCH);
         mSRGBModeSwitch.setEnabled(SRGBModeSwitch.isSupported());
@@ -140,8 +140,8 @@ public class DeviceSettings extends PreferenceActivity implements
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == mSwapBackRecents) {
-            //Settings.System.putInt(getContentResolver(),
-             //       Settings.System.BUTTON_SWAP_BACK_RECENTS, mSwapBackRecents.isChecked() ? 1 : 0);
+            Settings.System.putInt(getContentResolver(),
+                    Settings.System.BUTTON_SWAP_BACK_RECENTS, mSwapBackRecents.isChecked() ? 1 : 0);
             return true;
         }
         return super.onPreferenceTreeClick(preferenceScreen, preference);
