@@ -47,6 +47,8 @@ on charger
     write /d/clk/cnoc_a_clk/enable 0
     write /d/clk/snoc_clk/enable 0
     write /d/clk/snoc_a_clk/enable 0
+    enable qcom-usb-sh
+    start qcom-usb-sh
     start dashd
 
 on boot
@@ -87,11 +89,13 @@ on boot
     symlink /config/usb_gadget/g1/configs/b.1 /config/usb_gadget/g1/os_desc/b.1
     mount functionfs adb /dev/usb-ffs/adb uid=2000,gid=2000
     #write /sys/class/android_usb/android0/f_ffs/aliases adb
+    enable qcom-usb-sh
 
-service qcom-usb-sh /system/bin/sh /init.qcom.usb.sh
+service qcom-usb-sh /vendor/bin/init.qcom.usb.sh
     class core
     user root
     oneshot
+    disabled
 
 # Following are the parameters required for usb functionality. They provide configurable options like
 # product_id/vendor id and allows specifying required functions:

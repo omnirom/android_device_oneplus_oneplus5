@@ -13,11 +13,11 @@
 
 
 #erik.yang, 2015/3/20, add for property self-adaptive
-service self-init /sbin/self-init
-    class core
-    user root
-    oneshot
-    seclabel u:r:self-init:s0
+#service self-init /sbin/self-init
+#    class core
+#    user root
+#    oneshot
+#    seclabel u:r:self-init:s0
 
 #service oem_early_boot /system/bin/sh /init.oem.early_boot.sh
 #    class core
@@ -132,10 +132,10 @@ on property:sys.usb.ffs.ready=1 && property:oem.sys.usb.config=adb && property:s
     write /config/usb_gadget/g1/UDC ${sys.usb.controller}
     setprop sys.usb.state ${oem.sys.usb.config}
 
-service qseeproxysd /system/vendor/bin/qseeproxysampledaemon
-    class core
-    user system
-    group nfc
+#service qseeproxysd /system/vendor/bin/qseeproxysampledaemon
+#    class core
+#    user system
+#    group nfc
 
 #/* Liyu.Tan, 2015.10.26, wifi ftm shell */
 #service wififtmserver /system/bin/sh system/bin/wifi_ftm
@@ -211,13 +211,13 @@ on property:wlan.WifiSgle=0
 #    stop nfctransmitstop
 
 
-service OPNetlinkService /sbin/OPNetlinkService
-    class core
-    oneshot
-    seclabel u:r:OPNetlinkService:s0
+#service OPNetlinkService /sbin/OPNetlinkService
+#    class core
+#    oneshot
+#    seclabel u:r:OPNetlinkService:s0
 
-on charger
-    start OPNetlinkService
+#on charger
+#    start OPNetlinkService
 
 #added by wuaijun@system
 #service deleteXml /system/bin/rm data/system/packages.xml
