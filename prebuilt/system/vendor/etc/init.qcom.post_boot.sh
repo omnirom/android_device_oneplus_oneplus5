@@ -1,4 +1,4 @@
-#! /vendor/bin/sh
+#! /system/vendor/bin/sh
 
 # Copyright (c) 2012-2013, 2016, The Linux Foundation. All rights reserved.
 #
@@ -26,6 +26,9 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+
+PATH=/sbin:/system/sbin:/system/bin:/system/xbin:/system/vendor/bin
+export PATH
 
 target=`getprop ro.board.platform`
 
