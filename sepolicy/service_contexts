@@ -1,6 +1,3 @@
-ifaadaemon                           u:object_r:ifaadaemon_service:s0
-android.samsung.IRemosaicDaemon      u:object_r:remosaic_service:s0
-
 # fingerprint
 com.fingerprints.extension.sensortest.IFingerprintSensorTest     u:object_r:fingerprintd_service:s0
 com.fingerprints.extension.navigation.IFingerprintNavigation     u:object_r:fingerprintd_service:s0
