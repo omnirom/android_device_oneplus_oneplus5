@@ -1,0 +1,3 @@
+allow pd_mapper vfat:dir { open read };
+allow pd_mapper vfat:file { open read };
+
