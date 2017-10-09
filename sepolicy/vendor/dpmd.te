@@ -1,0 +1,14 @@
+get_prop(dpmd, diag_prop);
+allow dpmd diag_prop:property_service set;
+
+
+allow dpmd sysfs:file { open read };
+
+allow dpmd self:capability { chown dac_override fsetid };
+#allow dpmd self:socket ioctl;
+allow dpmd self:udp_socket ioctl;
+allow dpmd socket_device:dir { add_name write };
+allow dpmd socket_device:sock_file { create setattr };
+
+allowxperm dpmd self:udp_socket ioctl { SIOCSIFFLAGS };
+

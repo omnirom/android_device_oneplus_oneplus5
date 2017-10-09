@@ -1,0 +1,5 @@
+set_prop(bluetooth, bluetooth_prop)
+
+# Allow access to net_admin ioctls
+allowxperm bluetooth self:udp_socket ioctl priv_sock_ioctls;
+

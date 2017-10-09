@@ -1,0 +1,4 @@
+set_prop(qti, diag_prop)
+
+allow qti shell_exec:file { execute execute_no_trans getattr open read };
+

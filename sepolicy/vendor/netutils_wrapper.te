@@ -1,0 +1,2 @@
+allow netutils_wrapper self:capability sys_module;
+
