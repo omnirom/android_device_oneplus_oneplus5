@@ -1,0 +1,11 @@
+allow hal_fingerprint_default sysfs:file write;
+allow hal_fingerprint_default sysfs_fpc_irq:file { open read write };
+allow hal_fingerprint_default tee_device:chr_file ioctl;
+
+#allow hal_fingerprint_default fingerprintd_service:service_manager add;
+allow hal_fingerprint_default servicemanager:binder { call  transfer };
+allow hal_fingerprint_default tee_device:chr_file { open read write };
+allow hal_fingerprint_default vfat:file { getattr open read };
+
+
+binder_call(fingerprintd_service,servicemanager)

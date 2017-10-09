@@ -1,0 +1,7 @@
+binder_call(mediadrmserver, mediacodec)
+binder_use(mediadrmserver)
+
+#private/qti-testscripts.te:  allow surfaceflinger qti-testscripts:binder { transfer call };
+allow init mediadrmserver:binder { transfer call };
+
+binder_call(mediadrmserver, servicemanager)
