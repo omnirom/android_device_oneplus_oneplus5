@@ -1,2 +1,2 @@
-type ifaadaemon_service,          service_manager_type;
-type remosaic_service, service_manager_type;
+type qseeproxy_service_old,           service_manager_type;
+type per_mgr_service_old,           service_manager_type;
