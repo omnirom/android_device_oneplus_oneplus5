@@ -1,7 +1,7 @@
-ifaadaemon                           u:object_r:ifaadaemon_service:s0
-android.samsung.IRemosaicDaemon      u:object_r:remosaic_service:s0
-
 # fingerprint
-com.fingerprints.extension.sensortest.IFingerprintSensorTest     u:object_r:fingerprintd_service:s0
-com.fingerprints.extension.navigation.IFingerprintNavigation     u:object_r:fingerprintd_service:s0
-com.fingerprints.extension.engineering.IFingerprintEngineering   u:object_r:fingerprintd_service:s0
+#com.fingerprints.extension.sensortest.IFingerprintSensorTest     u:object_r:fingerprintd_service:s0
+#com.fingerprints.extension.navigation.IFingerprintNavigation     u:object_r:fingerprintd_service:s0
+#com.fingerprints.extension.engineering.IFingerprintEngineering   u:object_r:fingerprintd_service:s0
+
+com.qualcomm.qti.qseeproxy                     u:object_r:qseeproxy_service_old:s0
+vendor.qcom.PeripheralManager                     u:object_r:per_mgr_service_old:s0
