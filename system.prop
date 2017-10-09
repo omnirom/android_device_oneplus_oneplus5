@@ -178,6 +178,8 @@ ro.sys.sdcardfs=true
 
 # Media
 persist.media.treble_omx=true
+mm.enable.qcom_parser=13631487
+persist.mm.enable.prefetch=true
 
 vendor.display.enable_default_color_mode=1
 
