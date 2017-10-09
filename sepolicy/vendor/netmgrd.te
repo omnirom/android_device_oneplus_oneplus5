@@ -1,0 +1,5 @@
+allow netmgrd diag_prop:property_service set;
+allow netmgrd net_data_file:file create_file_perms;
+get_prop(netmgrd, diag_prop);
+
+allow netmgrd net_data_file:dir { add_name rw_file_perms };

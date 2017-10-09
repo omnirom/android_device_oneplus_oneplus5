@@ -1,0 +1,5 @@
+set_prop(dataservice_app, diag_prop);
+
+
+allow dataservice_app qtitetherservice_service:service_manager add;
+

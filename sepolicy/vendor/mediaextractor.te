@@ -1,0 +1,5 @@
+allow mediaextractor sdcardfs:file { r_file_perms };
+
+allow mediaextractor system_server:fifo_file { append write };
+
+

@@ -1,0 +1,1 @@
+allow kernel mediaprovider:fd use;

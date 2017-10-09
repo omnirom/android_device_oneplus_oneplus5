@@ -1,0 +1,2 @@
+allow adbd ctl_mdnsd_prop:property_service set;
+
