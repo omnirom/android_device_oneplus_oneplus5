@@ -1,0 +1,6 @@
+r_dir_file(netd, firmware_file)
+allow netd vfat:file r_file_perms;
+
+allow netd priv_app:unix_stream_socket { read write };
+
+allow netd priv_app:unix_stream_socket { getopt setopt };

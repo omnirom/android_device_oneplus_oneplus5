@@ -1,0 +1,30 @@
+allow priv_app device:dir r_file_perms;
+allow priv_app storage_stub_file:dir r_dir_perms;
+allow priv_app storage_stub_file:file r_file_perms;
+allow priv_app rfs_system_file:dir r_dir_perms;
+
+
+allow priv_app hal_memtrack_default:binder call;
+allow priv_app hal_memtrack_hwservice:hwservice_manager find;
+
+
+#allow priv_app firstboot_prop:file { getattr open };
+#allow priv_app init:unix_stream_socket connectto;
+allow priv_app proc_interrupts:file { open read };
+allow priv_app proc_modules:file { getattr open read };
+#allow priv_app property_socket:sock_file write;
+
+allowxperm priv_app self:udp_socket ioctl { SIOCGIWESSID };
+
+r_dir_file(priv_app, sysfs_type)
+
+#allow priv_app ffs_prop:property_service set;
+
+
+allow priv_app wifi_prop:file read;
+
+allow priv_app firmware_file:dir read;
+allow priv_app persist_file:dir search;
+allow priv_app radio_data_file:dir getattr;
+allow priv_app vendor_tombstone_data_file:dir search;
+

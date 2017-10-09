@@ -1,0 +1,10 @@
+binder_call(rild, servicemanager);
+binder_call(rild, audioserver_service);
+binder_call(rild, per_mgr_service);
+allow rild per_mgr_service:service_manager find;
+get_prop(rild, diag_prop);
+allow rild nv_data_file:dir rw_dir_perms;
+allow rild nv_data_file:file create_file_perms;
+
+allow rild diag_prop:property_service set;
+allow rild audioserver_service:service_manager find;

@@ -1,0 +1,64 @@
+type perfd, domain;
+type perfd_exec, exec_type, vendor_file_type, file_type;
+
+init_daemon_domain(perfd)
+
+r_dir_file(perfd, sysfs_msm_perf)
+
+# perfd uses kill(pid, 0) to determine if a process exists.
+# Determining if a process exists does not require the kill capability
+# since a permission denied indicates the process exists.
+dontaudit perfd self:capability kill;
+
+allow perfd mediacodec:process signull;
+allow perfd hal_power_default:process signull;
+
+allow perfd cgroup:file r_file_perms;
+#allow perfd post_boot_prop:file r_file_perms;
+
+allow perfd proc:file rw_file_perms;
+#allow perfd sysfs_clkscale:file r_file_perms;
+allow perfd sysfs_graphics:dir search;
+allow perfd sysfs_graphics:file r_file_perms;
+allow perfd sysfs_socinfo:dir search;
+allow perfd sysfs_socinfo:file r_file_perms;
+allow perfd sysfs_graphics:dir search;
+allow perfd sysfs_graphics:file r_file_perms;
+allow perfd sysfs_msm_perf:file w_file_perms;
+allow perfd sysfs_devices_system_cpu:file w_file_perms;
+
+allow perfd perfd_socket:sock_file write;
+
+allow perfd device_latency:chr_file w_file_perms;
+
+
+allow perfd sysfs_devfreq:dir search;
+allow perfd sysfs_devfreq:file { open read write };
+
+
+allow perfd freq_prop:file read;
+allow perfd mpctl_data_file:dir search;
+allow perfd sysfs:dir read;
+allow perfd sysfs_kgsl:lnk_file read;
+allow perfd sysfs_scsi_host:file read;
+
+
+allow perfd freq_prop:file open;
+allow perfd sysfs:dir open;
+allow perfd sysfs_kgsl:file read;
+allow perfd sysfs_scsi_host:file open;
+
+
+allow perfd freq_prop:file getattr;
+allow perfd mpctl_data_file:file { append read };
+allow perfd sysfs_kgsl:file open;
+
+allow perfd mpctl_data_file:file open;
+
+
+allow perfd mpctl_data_file:file getattr;
+allow perfd sysfs_kgsl:file write;
+allow perfd sysfs_msm_power:dir search;
+allow perfd sysfs_scsi_host:file write;
+
+allow perfd sysfs_msm_power:file { write open getattr };

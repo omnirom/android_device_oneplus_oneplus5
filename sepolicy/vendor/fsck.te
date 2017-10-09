@@ -1,0 +1,7 @@
+#allow fsck persist_block_device:blk_file { getattr open read write ioctl };
+allow fsck persist_file:dir getattr;
+allow fsck persist_block_device:blk_file read;
+
+
+allow fsck persist_block_device:blk_file { open write getattr };
+

@@ -1,0 +1,4 @@
+set_prop(sensors, diag_prop)
+
+allow sensors proc:file { getattr open read };
+
