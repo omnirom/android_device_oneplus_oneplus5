@@ -1,0 +1,2 @@
+allow mediaextractor sdcardfs:file { r_file_perms };
+
