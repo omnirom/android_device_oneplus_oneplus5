@@ -1,1 +1,1 @@
-allow qvop proc_stat:file read;
+allow qvop-daemon proc_stat:file read;

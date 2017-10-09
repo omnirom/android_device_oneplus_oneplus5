@@ -1,0 +1,2 @@
+allow bt_firmware_file rootfs:filesystem associate;
+
