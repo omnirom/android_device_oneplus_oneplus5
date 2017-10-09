@@ -1,15 +1,33 @@
-allow init vfat:file { read open };
-allow init socket_device:sock_file { create setattr unlink };
-allow init property_socket:sock_file write;
-allow init sysfs:dir rw_file_perms;
-allow init sysfs:file rw_file_perms;
-allow init input_device:chr_file r_file_perms;
-allow init proc_touchpanel:file write;
-domain_trans(init, rootfs, dashd)
+#allow init bt_firmware_file:dir { create setattr };
+#allow init btnvtool_exec:file execute_no_trans;
+allow init dashd:process { rlimitinh siginh transition };
+allow init debugfs_rmts:file write;
+#allow init firmware_file:dir { create setattr };
+allow init modem_efs_partition_device:blk_file write;
+allow init node:tcp_socket node_bind;
+allow init node:udp_socket node_bind;
+#allow init property_socket:sock_file write;
+#allow init qvrd_data_file:file lock;
+#allow init self:binder call;
+allow init self:capability net_bind_service;
+allow init self:netlink_generic_socket { bind create getattr read setopt write };
+allow init self:netlink_route_socket { bind create getattr nlmsg_read nlmsg_write read setopt write };
+allow init self:netlink_socket { bind create read setopt write };
+allow init self:netlink_xfrm_socket { bind create };
+allow init self:rawip_socket { create getopt setopt };
+allow init self:socket { bind create read write };
+allow init self:tcp_socket { bind create getattr listen setopt };
 
-allow init debugfs:file { rw_file_perms };
-allow init debugfs:dir mounton;
 
-allow init sysfs:dir rw_file_perms;
+allow init dashd:process noatsecure;
+allow init functionfs:dir mounton;
+allow init input_device:chr_file getattr;
+#allow init shell_exec:file execute_no_trans;
+#allow init system_file:file execute_no_trans;
+#allow init vendor_file:file execute_no_trans;
 
-allow init debugfs_trace_marker:file getattr;
+allow init diag_device:chr_file { ioctl write };
+allow init netd:unix_stream_socket connectto;
+allow init netd_socket:sock_file write;
+allow init self:netlink_xfrm_socket { getattr nlmsg_write read setopt write };
+

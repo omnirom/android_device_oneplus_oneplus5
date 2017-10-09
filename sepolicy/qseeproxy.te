@@ -1,0 +1,2 @@
+#allow qseeproxy default_android_service:service_manager add;
+allow qseeproxy servicemanager:binder { call transfer };

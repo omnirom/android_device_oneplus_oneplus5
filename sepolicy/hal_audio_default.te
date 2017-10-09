@@ -1,0 +1,2 @@
+allow hal_audio_default diag_prop:file { getattr open read };
+
