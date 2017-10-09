@@ -180,3 +180,5 @@ ro.sys.sdcardfs=true
 persist.media.treble_omx=true
 
 vendor.display.enable_default_color_mode=1
+
+ro.sf.lcd_density=420

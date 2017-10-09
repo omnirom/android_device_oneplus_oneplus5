@@ -90,7 +90,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/twrp/twrp.fstab:recovery/root/etc/twrp.fstab
 
-PRODUCT_AAPT_CONFIG := normal
+PRODUCT_AAPT_CONFIG := xxhdpi
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 PRODUCT_CHARACTERISTICS := nosdcard
 
@@ -195,7 +195,6 @@ PRODUCT_PACKAGES += \
 
 # OMX
 PRODUCT_PACKAGES += \
-    libc2dcolorconvert \
     libhypv_intercept \
     libextmedia_jni \
     libOmxAacEnc \
