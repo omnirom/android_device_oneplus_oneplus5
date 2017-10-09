@@ -432,3 +432,7 @@ lib/sensors.hal.tof.so
 etc/firmware/tp/fw_synaptics_15801.img
 etc/firmware/tp/fw_synaptics_15801b.img
 etc/firmware/tp/fw_synaptics_16859.img
+
+#openmobile
+-priv-app/SmartcardService/SmartcardService.apk
+

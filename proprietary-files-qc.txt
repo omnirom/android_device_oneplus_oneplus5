@@ -524,6 +524,3 @@ vendor/etc/qvr/qvrservice_6dof_config.xml
 vendor/etc/qvr/qvrservice_config.txt
 vendor/lib/libqvr_adsp_driver_stub.so
 vendor/lib/rfsa/adsp/libqvr_adsp_driver_skel.so
-
-#openmobile
--vendor/app/SmartcardService/SmartcardService.apk
