@@ -436,3 +436,16 @@ etc/firmware/tp/fw_synaptics_16859.img
 #openmobile
 -priv-app/SmartcardService/SmartcardService.apk
 
+#firmwares
+etc/firmware/wcd9320/wcd9320_mbhc.bin
+etc/firmware/wcd9320/wcd9320_mad_audio.bin
+etc/firmware/wcd9320/wcd9320_anc.bin
+etc/camera/cp/CPCalibrationData.bin
+etc/camera/cp/FusionCalibrationParams.bin
+etc/camera/cp/SystemParamsFusion.bin
+etc/camera/cp/SystemParamsBokeh.bin
+etc/qvop/noisesample.bin
+etc/qvop/cmudict.bin
+etc/qvop/antispoofing.bin
+etc/qvop/poc_64_hmm.gmm
+
