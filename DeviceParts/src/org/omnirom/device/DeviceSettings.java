@@ -54,6 +54,8 @@ public class DeviceSettings extends PreferenceActivity implements
     public static final String KEY_DCI_SWITCH = "dci";
     public static final String KEY_NIGHT_SWITCH = "night";
 
+    public static final String KEY_OTG_SWITCH = "otg_switch";
+
     public static final String SLIDER_DEFAULT_VALUE = "4,2,0";
 
     private VibratorStrengthPreference mVibratorStrength;
@@ -65,6 +67,7 @@ public class DeviceSettings extends PreferenceActivity implements
     private static TwoStatePreference mHBMModeSwitch;
     private static TwoStatePreference mDCIModeSwitch;
     private static TwoStatePreference mNightModeSwitch;
+    private static TwoStatePreference mOtgSwitch;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -122,6 +125,12 @@ public class DeviceSettings extends PreferenceActivity implements
         mNightModeSwitch.setEnabled(NightModeSwitch.isSupported());
         mNightModeSwitch.setChecked(NightModeSwitch.isCurrentlyEnabled(this));
         mNightModeSwitch.setOnPreferenceChangeListener(new NightModeSwitch());
+
+        mOtgSwitch = (TwoStatePreference) findPreference(KEY_OTG_SWITCH);
+        mOtgSwitch.setEnabled(UsbOtgSwitch.isSupported());
+        mOtgSwitch.setChecked(UsbOtgSwitch.isCurrentlyEnabled(this));
+        mOtgSwitch.setOnPreferenceChangeListener(new UsbOtgSwitch());
+
 
     }
 
