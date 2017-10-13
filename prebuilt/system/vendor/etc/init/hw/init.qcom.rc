@@ -73,12 +73,13 @@ on boot
     chown bluetooth bluetooth /proc/bluetooth/sleep/proto
     chown bluetooth bluetooth /sys/module/hci_uart/parameters/ath_lpm
     chown bluetooth bluetooth /sys/module/hci_uart/parameters/ath_btwrite
-    chown system system /sys/module/bluetooth/parameters/disable_esco
+    chown system system /sys/module/sco/parameters/disable_esco
     chown bluetooth bluetooth /sys/module/hci_smd/parameters/hcismd_set
     chown system system /sys/module/msm_core/parameters/polling_interval
     chown system system /sys/module/msm_core/parameters/disabled
     chown system system /sys/kernel/debug/msm_core/enable
     chown system system /sys/kernel/debug/msm_core/ptable
+    chown system system /sys/kernel/boot_slpi/ssr
     chown system system /sys/module/radio_iris_transport/parameters/fmsmd_set
     chmod 0660 /sys/module/bluetooth_power/parameters/power
     chmod 0660 /sys/module/hci_smd/parameters/hcismd_set
@@ -86,7 +87,6 @@ on boot
     chmod 0660 /sys/class/rfkill/rfkill0/state
     chmod 0660 /proc/bluetooth/sleep/proto
     chown bluetooth net_bt /dev/ttyHS0
-    chown bluetooth net_bt /dev/btpower
     chmod 0660 /sys/module/hci_uart/parameters/ath_lpm
     chmod 0660 /sys/module/hci_uart/parameters/ath_btwrite
     chmod 0660 /dev/ttyHS0
@@ -114,6 +114,7 @@ on boot
     mkdir /persist/misc 0770 system system
     mkdir /persist/alarm 0770 system system
     mkdir /persist/time 0770 system system
+    mkdir /persist/secnvm 0770 system system
 
     #Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
@@ -304,19 +305,10 @@ on post-fs-data
     mkdir /data/misc/fm 0770 system system
     chmod 0770 /data/misc/fm
 
-    # RIDL data
-    mkdir /data/misc/SelfHost/ 0710 system shell
-    mkdir /data/misc/SelfHost/QCLogs/ 2750 system shell
-    mkdir /data/misc/SelfHost/QCLogs/temp/ 0700 system shell
-    mkdir /data/misc/SelfHost/storage/ 0700 system shell
-    mkdir /data/misc/SelfHost/Running/ 2750 system shell
-    mkdir /data/misc/SelfHost/socket/ 2770 system system
-
     #Create PERFD deamon related dirs
-    mkdir /data/system/perfd 0770 root system
-    chmod 2770 /data/system/perfd
-    rm /data/system/perfd/default_values
-    start perfd
+    mkdir /data/vendor/perfd 0770 root system
+    chmod 2770 /data/vendor/perfd
+    rm /data/vendor/perfd/default_values
 
     # NFC local data and nfcee xml storage
     mkdir /data/nfc 0770 nfc nfc
@@ -368,11 +360,11 @@ service nqnfcinfo /system/vendor/bin/nqnfcinfo
     oneshot
 
 #service perfd /system/vendor/bin/perfd
-   class main
-   user root
-   group root readproc
-   disabled
-   socket perfd seqpacket 0666 root system
+#   class main
+#   user root
+#   group root readproc
+#   disabled
+#   socket perfd seqpacket 0666 root system
 
 service iop /system/bin/iop
     class main
@@ -532,18 +524,6 @@ service start_hci_filter /system/vendor/bin/wcnss_filter
     user bluetooth
     group bluetooth diag system wakelock
     seclabel u:r:bluetooth:s0
-    disabled
-
-on property:wc_transport.start_root=true
-    start hci_filter_root
-
-on property:wc_transport.start_root=false
-    stop hci_filter_root
-
-service hci_filter_root /system/vendor/bin/wcnss_filter
-    class late_start
-    user bluetooth
-    group bluetooth oem_2901 system
     disabled
 
 #net_admin capability needed to write rfkill sysfs entry
@@ -1028,3 +1008,8 @@ service time_daemon /system/vendor/bin/time_daemon
     class main
     user root
     group root
+
+# Set vendor-ril lib path based on Meta version
+on property:vendor.rild.libpath=*
+    setprop rild.libpath ${vendor.rild.libpath}
+
