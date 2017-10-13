@@ -101,6 +101,9 @@ public class Startup extends BroadcastReceiver {
         enabled = sharedPrefs.getBoolean(DeviceSettings.KEY_NIGHT_SWITCH, false);
         restore(NightModeSwitch.getFile(), enabled);
 
+        enabled = sharedPrefs.getBoolean(DeviceSettings.KEY_OTG_SWITCH, false);
+        restore(UsbOtgSwitch.getFile(), enabled);
+
         KeyHandler.setButtonDisable(context);
         VibratorStrengthPreference.restore(context);
     }
