@@ -1,5 +1,5 @@
-#!/system/bin/sh
-# Copyright (c) 2012, The Linux Foundation. All rights reserved.
+#!/vendor/bin/sh
+# Copyright (c) 2015, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -26,63 +26,25 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-LOG_TAG="qcom-bluetooth"
-LOG_NAME="${0}:"
-
-hciattach_pid=""
-
-loge ()
+#
+# Function to start sensors for SSC enabled platforms
+#
+start_sensors()
 {
-  /system/bin/log -t $LOG_TAG -p e "$LOG_NAME $@"
+    if [ -c /dev/msm_dsps -o -c /dev/sensors ]; then
+        chmod -h 775 /persist/sensors
+        chmod -h 664 /persist/sensors/sensors_settings
+        chown -h system.root /persist/sensors/sensors_settings
+        # ifdef VENDOR_EDIT
+        #qiuchangping@BSP 2015-11-24 add for gyro sensitity calibration
+        chmod -h 664 /persist/sensors/gyro_sensitity_cal
+        chown -h system.root /persist/sensors/gyro_sensitity_cal
+        # endif
+        mkdir -p /data/misc/sensors
+        chmod -h 775 /data/misc/sensors
+
+        start sensors
+    fi
 }
 
-logi ()
-{
-  /system/bin/log -t $LOG_TAG -p i "$LOG_NAME $@"
-}
-
-failed ()
-{
-  loge "$1: exit code $2"
-  exit $2
-}
-
-start_hciattach ()
-{
-  /system/bin/hciattach -n /dev/ttyHS2 ath3k 3000000 &
-  hciattach_pid=$!
-  logi "start_hciattach: pid = $hciattach_pid"
-}
-
-kill_hciattach ()
-{
-  logi "kill_hciattach: pid = $hciattach_pid"
-  ## careful not to kill zero or null!
-  kill -TERM $hciattach_pid
-  # this shell doesn't exit now -- wait returns for normal exit
-}
-
-# mimic hciattach options parsing -- maybe a waste of effort
-USAGE="hciattach [-n] [-p] [-b] [-t timeout] [-s initial_speed] <tty> <type | id> [speed] [flow|noflow] [bdaddr]"
-
-while getopts "blnpt:s:" f
-do
-  case $f in
-  b | l | n | p)  opt_flags="$opt_flags -$f" ;;
-  t)      timeout=$OPTARG;;
-  s)      initial_speed=$OPTARG;;
-  \?)     echo $USAGE; exit 1;;
-  esac
-done
-shift $(($OPTIND-1))
-
-# init does SIGTERM on ctl.stop for service
-trap "kill_hciattach" TERM INT
-
-logi "start hciattach"
-start_hciattach
-
-wait $hciattach_pid
-logi "Bluetooth stopped"
-
-exit 0
+start_sensors
