@@ -120,7 +120,10 @@ PRODUCT_PACKAGES += \
     libqcomvisualizer \
     libqcomvoiceprocessing \
     libvolumelistener \
-    tinymix
+    tinymix \
+    libqahw \
+    libOmxG711Enc \
+    libhwacceffectswrapper
 
 #mediaextensions
 PRODUCT_PACKAGES += \
