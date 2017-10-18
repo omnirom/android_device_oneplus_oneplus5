@@ -22,7 +22,7 @@ endif
 
 LOCAL_MODULE := power.msm8998
 LOCAL_MODULE_TAGS := optional
-LOCAL_CFLAGS := -Wno-unused-parameter -Wno-unused-variable
+LOCAL_CFLAGS += -Wno-unused-parameter -Wno-unused-variable
 LOCAL_VENDOR_MODULE := true
 include $(BUILD_SHARED_LIBRARY)
 
