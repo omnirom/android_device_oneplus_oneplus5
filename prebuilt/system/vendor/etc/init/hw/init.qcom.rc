@@ -24,6 +24,7 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+import /system/vendor/etc/init/hw/init.qcom.factory.rc
 import /system/vendor/etc/init/init.oem.rc
 import /system/vendor/etc/init/init.qcom.power.rc
 import /system/vendor/etc/init/init.omni.rc
@@ -552,18 +553,18 @@ service hci_filter_root /system/vendor/bin/wcnss_filter
 #    group bluetooth net_bt_admin
 #    disabled
 
-service config_bt_addr /system/vendor/bin/btnvtool -O
-    class core
-    user bluetooth
-    group bluetooth radio
-    oneshot
+#service config_bt_addr /system/vendor/bin/btnvtool -O
+#    class core
+#    user bluetooth
+#    group bluetooth radio
+#    oneshot
 
-service config_bluetooth /system/bin/sh /system/etc/init.qcom.bt.sh "onboot"
+service config_bluetooth /system/vendor/bin/init.qcom.bt.sh "onboot"
     class core
     user root
     oneshot
 
-service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
+service hciattach /system/vendor/bin/init.qcom.bt.sh
     class late_start
     user bluetooth
     group bluetooth net_bt_admin
