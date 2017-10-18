@@ -59,8 +59,11 @@ static int slack_node_rw_failed = 0;
 static int display_hint_sent;
 int display_boost;
 
+static int power_device_open(const hw_module_t* module, const char* name,
+        hw_device_t** device);
+
 static struct hw_module_methods_t power_module_methods = {
-    .open = NULL,
+    .open = power_device_open,
 };
 
 static void power_init(struct power_module *module)
@@ -220,7 +223,7 @@ static void power_hint(struct power_module *module, power_hint_t hint,
         case POWER_HINT_INTERACTION:
         {
             int resources[] = {0x702, 0x20F, 0x30F};
-            int duration = 2000;
+            int duration = 3000;
 
             interaction(duration, sizeof(resources)/sizeof(resources[0]), resources);
         }
@@ -457,6 +460,44 @@ void set_feature(struct power_module __unused *module, feature_t feature, int st
         ALOGI("%s POWER_FEATURE_DOUBLE_TAP_TO_WAKE %s", __func__, (state ? "ON" : "OFF"));
         sysfs_write(DOUBLE_TAP_FILE, state ? "1" : "0");
     }
+}
+
+static int power_device_open(const hw_module_t* module, const char* name,
+        hw_device_t** device)
+{
+    int status = -EINVAL;
+    if (module && name && device) {
+        if (!strcmp(name, POWER_HARDWARE_MODULE_ID)) {
+            power_module_t *dev = (power_module_t *)malloc(sizeof(*dev));
+
+            if(dev) {
+                memset(dev, 0, sizeof(*dev));
+
+                if(dev) {
+                    /* initialize the fields */
+                    dev->common.module_api_version = POWER_MODULE_API_VERSION_0_2;
+                    dev->common.tag = HARDWARE_DEVICE_TAG;
+                    dev->init = power_init;
+                    dev->powerHint = power_hint;
+                    dev->setInteractive = set_interactive;
+                    /* At the moment we support 0.2 APIs */
+                    dev->setFeature = NULL,
+                        dev->get_number_of_platform_modes = NULL,
+                        dev->get_platform_low_power_stats = NULL,
+                        dev->get_voter_list = NULL,
+                        *device = (hw_device_t*)dev;
+                    status = 0;
+                } else {
+                    status = -ENOMEM;
+                }
+            }
+            else {
+                status = -ENOMEM;
+            }
+        }
+    }
+
+    return status;
 }
 
 struct power_module HAL_MODULE_INFO_SYM = {
