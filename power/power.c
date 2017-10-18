@@ -481,7 +481,7 @@ static int power_device_open(const hw_module_t* module, const char* name,
                     dev->powerHint = power_hint;
                     dev->setInteractive = set_interactive;
                     /* At the moment we support 0.2 APIs */
-                    dev->setFeature = NULL,
+                    dev->setFeature = set_feature,
                         dev->get_number_of_platform_modes = NULL,
                         dev->get_platform_low_power_stats = NULL,
                         dev->get_voter_list = NULL,
