@@ -136,6 +136,10 @@ vendor/lib/libblurbuster.so
 vendor/lib/libfiltergenerator.so
 vendor/lib/libdczoom.so
 vendor/lib/libcamera_cp_wrapper.so
+vendor/lib64/libscvePanorama.so
+vendor/lib/libscvePanorama.so
+vendor/lib64/libscveObjectTracker.so
+vendor/lib/libscveObjectTracker.so
 
 #Camera app modules
 vendor/lib64/libjni_optizoom.so
