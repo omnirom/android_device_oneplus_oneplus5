@@ -143,15 +143,15 @@ PRODUCT_COPY_FILES += \
 
 # GPS
 PRODUCT_PACKAGES += \
-    gps.msm8998 \
     gps.conf \
+    liblocation_api \
     libgps.utils \
     libloc_core \
-    libloc_eng \
-    libloc_pla \
     libloc_stub \
+    libloc_pla \
     libcurl \
-    libgnsspps
+    libgnsspps \
+    libgnss
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/etc/flp.conf:system/vendor/etc/flp.conf \

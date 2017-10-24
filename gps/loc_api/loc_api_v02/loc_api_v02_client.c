@@ -276,7 +276,7 @@ static const locClientEventIndTableStructT locClientEventIndTable[]= {
   // SRN Ap data inject request
   { QMI_LOC_EVENT_INJECT_SRN_AP_DATA_REQ_IND_V02,
     sizeof(qmiLocEventInjectSrnApDataReqIndMsgT_v02),
-    QMI_LOC_EVENT_MASK_INJECT_SRN_AP_DATA_REQ_V02}
+    QMI_LOC_EVENT_MASK_INJECT_SRN_AP_DATA_REQ_V02},
 };
 
 /* table to relate the respInd Id with its size */
@@ -639,7 +639,17 @@ static const locClientRespIndTableStructT locClientRespIndTable[]= {
 
    // SRN Ap data inject
    { QMI_LOC_INJECT_SRN_AP_DATA_IND_V02,
-     sizeof(qmiLocInjectSrnApDataIndMsgT_v02) }
+     sizeof(qmiLocInjectSrnApDataIndMsgT_v02) },
+
+   //xtra config data
+   { QMI_LOC_QUERY_XTRA_INFO_IND_V02,
+     sizeof(qmiLocQueryXtraInfoIndMsgT_v02) },
+
+   { QMI_LOC_START_OUTDOOR_TRIP_BATCHING_IND_V02,
+     sizeof(qmiLocStartOutdoorTripBatchingIndMsgT_v02) },
+
+   { QMI_LOC_QUERY_OTB_ACCUMULATED_DISTANCE_IND_V02,
+     sizeof(qmiLocQueryOTBAccumulatedDistanceIndMsgT_v02) }
 };
 
 
@@ -851,6 +861,7 @@ static void locClientErrorCb
   void *err_cb_data
 )
 {
+  (void)user_handle;
   locClientCallbackDataType* pCallbackData =
         (locClientCallbackDataType *)err_cb_data;
   locClientErrorCbType localErrorCallback = NULL;
@@ -1382,7 +1393,7 @@ static bool validateRequest(
       break;
     }
 
-    case QMI_LOC_INJECT_SUBSCRIBER_ID_IND_V02:
+    case QMI_LOC_INJECT_SUBSCRIBER_ID_REQ_V02:
     {
       *pOutLen = sizeof(qmiLocInjectSubscriberIDReqMsgT_v02);
       break;
@@ -1569,6 +1580,18 @@ static bool validateRequest(
         *pOutLen = sizeof(qmiLocInjectSrnApDataReqMsgT_v02);
         break;
     }
+    // Query Xtra config data
+    case QMI_LOC_QUERY_XTRA_INFO_REQ_V02 :
+    {
+        *pOutLen = sizeof(qmiLocQueryXtraInfoReqMsgT_v02);
+        break;
+    }
+
+    case QMI_LOC_START_OUTDOOR_TRIP_BATCHING_REQ_V02:
+    {
+        *pOutLen = sizeof(qmiLocStartOutdoorTripBatchingReqMsgT_v02);
+        break;
+    }
 
     // ALL requests with no payload
     case QMI_LOC_GET_SERVICE_REVISION_REQ_V02:
@@ -1590,6 +1613,7 @@ static bool validateRequest(
     case QMI_LOC_WWAN_OUT_OF_SERVICE_NOTIFICATION_REQ_V02:
     case QMI_LOC_GET_SUPPORTED_MSGS_REQ_V02:
     case QMI_LOC_GET_SUPPORTED_FIELDS_REQ_V02:
+    case QMI_LOC_QUERY_OTB_ACCUMULATED_DISTANCE_REQ_V02:
     {
       noPayloadFlag = true;
       break;
@@ -1903,9 +1927,6 @@ locClientStatusEnumType locClientOpen (
   case GNSS_GSS:
     instanceId = eLOC_CLIENT_INSTANCE_ID_GSS;
     break;
-  case GNSS_QCA1530:
-    instanceId = eLOC_CLIENT_INSTANCE_ID_QCA1530;
-    break;
   case GNSS_MSM:
     instanceId = eLOC_CLIENT_INSTANCE_ID_MSM;
     break;
@@ -2217,7 +2238,7 @@ locClientStatusEnumType locClientSupportMsgCheck(
   }
 
   // map the QCCI response to Loc API v02 status
-  status = convertQmiResponseToLocStatus(&resp);
+  status = convertQmiResponseToLocStatus((qmiLocGenRespMsgT_v02*)&resp);
 
   if(eLOC_CLIENT_SUCCESS == status)
   {
@@ -2254,7 +2275,7 @@ bool locClientGetSizeByRespIndId(uint32_t respIndId, size_t *pRespIndSize)
   // Validate input arguments
   if(pRespIndSize == NULL)
   {
-    LOC_LOGE("%s:%d]: size argument NULL !");
+    LOC_LOGE("%s:%d]: size argument NULL !", __func__, __LINE__);
     return false;
   }
 
@@ -2291,7 +2312,7 @@ bool locClientGetSizeByEventIndId(uint32_t eventIndId, size_t *pEventIndSize)
   // Validate input arguments
   if(pEventIndSize == NULL)
   {
-    LOC_LOGE("%s:%d]: size argument NULL !");
+    LOC_LOGE("%s:%d]: size argument NULL !", __func__, __LINE__);
     return false;
   }
 
