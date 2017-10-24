@@ -30,7 +30,15 @@
 
 #include <LocNetIface.h>
 #include <gps_extended_c.h>
-#include <loc_eng.h>
+
+/* these declarations will be moved inside api file */
+/* Constructs for interaction with loc_net_iface library */
+typedef void (*LocAgpsOpenResultCb)(
+        bool isSuccess, AGpsExtType agpsType, const char* apn,
+        AGpsBearerType bearerType, void* userDataPtr);
+
+typedef void (*LocAgpsCloseResultCb)(
+        bool isSuccess, AGpsExtType agpsType, void* userDataPtr);
 
 /*--------------------------------------------------------------------
  * CLASS LocNetIfaceAgps

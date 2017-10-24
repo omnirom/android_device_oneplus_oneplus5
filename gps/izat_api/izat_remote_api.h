@@ -40,8 +40,7 @@ typedef void (*locationUpdateCb)(UlpLocation *location,
                                  GpsLocationExtended *locExtended,
                                  void* clientData);
 
-typedef void (*svRptUpdateCb)(LocGnssSvStatus *svStatus,
-                                 GpsLocationExtended *locExtended,
+typedef void (*svRptUpdateCb)(GnssSvNotification *svNotify,
                                  void* clientData);
 
 typedef void (*nmeaUpdateCb)(UlpNmea *nmea,  void* clientData);
