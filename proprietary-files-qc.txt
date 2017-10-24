@@ -182,6 +182,7 @@ vendor/bin/xtwifi-client
 vendor/bin/slim_daemon
 vendor/bin/xtwifi-inet-agent
 vendor/bin/loc_launcher
+vendor/bin/lowi-server
 framework/com.qti.location.sdk.jar
 framework/izat.xt.srv.jar
 -priv-app/com.qualcomm.location/com.qualcomm.location.apk
@@ -475,6 +476,8 @@ vendor/lib/libsensor_user_cal.so
 vendor/lib/libsensor1.so
 vendor/lib/sensor_calibrate.so
 vendor/lib/sensors.ssc.so
+vendor/lib/sensors.hal.tof.so
+vendor/lib64/sensors.hal.tof.so
 vendor/lib64/hw/activity_recognition.msm8998.so
 vendor/lib64/libsensor1.so
 vendor/lib64/libsensor_reg.so
