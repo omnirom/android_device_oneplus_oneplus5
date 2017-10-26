@@ -31,7 +31,7 @@
 #define __POWERHINTPARSER__
 
 #define POWERHINT_XML      "/vendor/etc/powerhint.xml"
-#define MAX_HINT 6
+#define MAX_HINT 8
 #define MAX_PARAM 30
 
 typedef struct perflock_param_t {
@@ -43,6 +43,15 @@ typedef struct perflock_param_t {
 static perflock_param_t powerhint[MAX_HINT];
 
 int parsePowerhintXML();
-int *getPowerhint(int, int*);
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+int *getPowerhint(int, int *);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __POWERHINTPARSER__ */
