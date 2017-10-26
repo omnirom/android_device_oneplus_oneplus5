@@ -303,9 +303,8 @@ on post-fs-data
     chmod 0770 /data/misc/fm
 
     #Create PERFD deamon related dirs
-    mkdir /data/vendor/perfd 0770 root system
-    chmod 2770 /data/vendor/perfd
-    rm /data/vendor/perfd/default_values
+    mkdir /data/system/perfd 0770 root system
+    chmod 2770 /data/system/perfd
 
     # NFC local data and nfcee xml storage
     mkdir /data/nfc 0770 nfc nfc
@@ -356,12 +355,12 @@ service nqnfcinfo /system/vendor/bin/nqnfcinfo
     user system
     oneshot
 
-#service perfd /system/vendor/bin/perfd
-#   class main
-#   user root
-#   group root readproc
-#   disabled
-#   socket perfd seqpacket 0666 root system
+service perfd /system/vendor/bin/perfd
+   class main
+   user root
+   group root readproc system
+   socket perfd seqpacket 0666 root system
+   disabled
 
 service iop /system/bin/iop
     class main
@@ -407,6 +406,9 @@ on property:persist.sys.ssr.enable_ramdumps=1
 
 on property:persist.sys.ssr.enable_ramdumps=0
     write /sys/module/subsystem_restart/parameters/enable_ramdumps 0
+
+on property:sys.post_boot.parsed=1
+    start perfd
 
 on property:sys.boot_completed=1
     #exec u:r:qti_init_shell:s0 -- /init.qcom.crashdata.sh

@@ -35,12 +35,6 @@ extern "C" {
 #define SUCCESS                 0
 #define INDEFINITE_DURATION     0
 
-/* Hints sent to perf HAL from power HAL
- * These have to be kept in sync with Perf HAL side definitions
- */
-#define VENDOR_HINT_DISPLAY_OFF      0x00001040
-#define VENDOR_HINT_DISPLAY_ON       0x00001041
-
 enum SCREEN_DISPLAY_TYPE {
     DISPLAY_OFF = 0x00FF,
 };
@@ -213,6 +207,11 @@ enum SCREEN_PWR_CLPS_LVL {
 
 enum THREAD_MIGRATION_LVL {
     THREAD_MIGRATION_SYNC_OFF = 0x1400,
+};
+
+enum SCHED_GUIDED_LVL {
+    INTERACTIVE_USE_SCHED_LOAD_OFF = 0x5201,
+    INTERACTIVE_USE_MIGRATION_NOTIF_OFF = 0x5301
 };
 
 enum INTERACTIVE_IO_BUSY_LVL {

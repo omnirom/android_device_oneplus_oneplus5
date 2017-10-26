@@ -240,7 +240,7 @@ PRODUCT_PACKAGES += \
     libcamera_shim
 
 # power
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     power.msm8998 \
     powerhint.qti
 
