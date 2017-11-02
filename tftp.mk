@@ -76,6 +76,8 @@ $(shell ln -s /firmware $(TARGET_OUT)/rfs/apq/gnss/readonly/firmware)
 ##############
 # OP5 CAMERA Binaries
 #########
+$(shell mkdir -p $(TARGET_OUT)/etc/camera/cp)
+
 $(shell ln -s /data/misc/camera/cp/CPCalibrationData.bin $(TARGET_OUT_ETC)/camera/cp/CPCalibrationData.bin)
 $(shell ln -s /data/misc/camera/cp/FusionCalibrationParams.bin $(TARGET_OUT_ETC)/camera/cp/FusionCalibrationParams.bin)
 $(shell ln -s /data/misc/camera/cp/SystemParamsBokeh.bin $(TARGET_OUT_ETC)/camera/cp/SystemParamsBokeh.bin)
