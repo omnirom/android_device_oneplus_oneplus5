@@ -163,6 +163,10 @@ vendor/lib/libjni_dualcamera.so
 vendor/lib/libjni_filtergenerator.so
 vendor/lib/libjni_stillmore.so
 vendor/lib/libjni_sharpshooter.so
+vendor/lib/libscveCommon.so
+vendor/lib64/libscveCommon.so
+vendor/lib/libscveCommon_stub.so
+vendor/lib64/libscveCommon_stub.so
 
 # Camera actuators
 vendor/lib/libactuator_lc898217xc_imx350.so
