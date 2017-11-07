@@ -1,4 +1,4 @@
-# Copyright (c) 2012-2015, The Linux Foundation. All rights reserved.
+# Copyright (c) 2012-2015, 2017, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -53,6 +53,8 @@
 /dev/smd11                0660   radio      radio
 
 #permsissions for BT/FM
+/dev/smd2                 0660   bluetooth  bluetooth
+/dev/smd3                 0660   bluetooth  bluetooth
 /dev/btpower              0660   bluetooth  system
 
 #permissions for pta
@@ -118,13 +120,11 @@
 /dev/qseecom              0660   system     drmrpc
 /dev/smcinvoke            0660   system     system
 /dev/qsee_ipc_irq_spss    0660   system     drmrpc
+/dev/seemplog             0660   system     system
 /dev/pft                  0660   system     drmrpc
 /dev/spcom                0660   system     system
-/dev/splog                0660   system     system
 /dev/sp_kernel            0660   system     system
 /dev/sp_ssr               0660   system     system
-/dev/sec_nvm_sampleapp    0660   system     system
-/dev/sec_nvm_jcos         0660   system     system
 /dev/sp_keymaster         0660   system     system
 /dev/cryptoapp            0660   system     system
 /dev/gemini0              0660   system     camera
@@ -140,9 +140,7 @@
 /dev/wcnss_ctrl           0660   system     system
 /sys/devices/soc/a000000.qcom,wcnss-wlan/net/wlan0/queues/rx-* rps_cpus           0660   system     system
 /sys/devices/soc/a000000.qcom,wcnss-wlan/net/p2p0/queues/rx-* rps_cpus            0660   system     system
-/sys/devices/soc/18800000.qcom,icnss/net/wlan0/queues/rx-* rps_cpus   0660   system     system
-/sys/devices/soc/18800000.qcom,icnss/net/p2p0/queues/rx-* rps_cpus    0660   system     system
-/sys/devices/soc/18800000.qcom,icnss/net/softap0/queues/rx-* rps_cpus 0660   system     system
+/dev/spidev0.0            0660   system     audio
 /dev/msm_camera/*         0660   system     camera
 /dev/gemini/              0660   system     camera
 /dev/mercury0             0660   system     camera
@@ -234,12 +232,11 @@
 /sys/devices/soc/78b7000.i2c/i2c-3/3-004b/input/input*    secure_touch_enable  0660   system  drmrpc
 /sys/devices/soc/c179000.i2c/i2c-5/5-0020/input/input*    secure_touch         0440   system  drmrpc
 /sys/devices/soc/c179000.i2c/i2c-5/5-0020/input/input*    secure_touch_enable  0660   system  drmrpc
-/sys/devices/soc/c178000.i2c/i2c-4/4-0020/input/input*    secure_touch         0440   system  drmrpc
-/sys/devices/soc/c178000.i2c/i2c-4/4-0020/input/input*    secure_touch_enable  0660   system  drmrpc
 
 # laser sensor access
-/sys/devices/virtual/input/input*                   enable_ps_sensor 0660  system   system
-/sys/devices/virtual/input/input*                   set_delay_ms     0660  system   system
+/sys/devices/virtual/input/input*                   enable_ps_sensor 0660  system   input
+/sys/devices/virtual/input/input*                   set_delay_ms     0660  system   input
+/sys/devices/virtual/input/input*                   do_flush         0660  system   input
 
 # vm_bms
 /dev/vm_bms               0660   system     system
@@ -251,8 +248,14 @@
 /sys/devices/soc/600000.qcom,pcie/pci0000:00/0000:00:00.0/0000:01:00.0/net/wlan0/queues/rx-* rps_cpus 0660 system system
 /sys/devices/soc/600000.qcom,pcie/pci0000:00/0000:00:00.0/0000:01:00.0/net/p2p0/queues/rx-* rps_cpus 0660 system system
 
+# wigig
+/sys/bus/pci/drivers/wil6210* 0000:01:00.0/wil6210/fst_link_loss 0660 wifi wifi
+/sys/bus/pci/drivers/wil6210* 0000:01:00.0/wil6210/thermal_throttling 0660 system system
+/sys/bus/pci/drivers/wil6210* 0000:01:00.0/net/wigig0/queues/rx-0/rps_cpus 0660 system system
+/sys/bus/pci/drivers/wil6210* 0000:01:00.0/net/wigig0/gro_flush_timeout 0660 system system
+/sys/devices/virtual/net/bond0 queues/rx-0/rps_cpus 0660 system system
+
 #nfc permissions
-/dev/pn544                0660    nfc         nfc
 /dev/nfc-nci              0660    nfc         nfc
 /dev/nq-nci               0660    nfc         nfc
 /dev/assd                 0660    nfc         nfc
@@ -284,6 +287,7 @@
 /dev/block/platform/soc/624000.ufshc/by-name/frp        0600   system     system
 /dev/block/platform/soc/1da4000.ufshc/by-name/frp       0600   system     system
 /dev/block/platform/soc/c0c4000.sdhci/by-name/frp       0600   system     system
+/dev/block/platform/soc/1d84000.ufshc/by-name/frp       0600   system     system
 
 # Kmsg device
 /dev/kmsg                                               0620   root       system

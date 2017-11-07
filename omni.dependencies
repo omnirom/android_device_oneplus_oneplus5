@@ -3,7 +3,7 @@
     "remote": "omnirom",
     "repository": "android_hardware_qcom_display-caf-msm8998",
     "target_path": "hardware/qcom/display-caf-msm8998",
-    "revision": "android-8.0-old"
+    "revision": "android-8.0"
   },
   {
     "remote": "omnirom",
