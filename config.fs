@@ -43,6 +43,12 @@ user: AID_SYSTEM
 group: AID_SYSTEM
 caps: NET_BIND_SERVICE
 
+[system/vendor/bin/cnss-daemon]
+mode: 0755
+user: AID_SYSTEM
+group: AID_SYSTEM
+caps: NET_BIND_SERVICE
+
 [system/bin/ims_rtp_daemon]
 mode: 0755
 user: AID_SYSTEM
@@ -61,7 +67,13 @@ user: AID_CAMERA
 group: AID_SHELL
 caps: SYS_NICE
 
-[system/bin/pm-service]
+[system/vendor/bin/pm-service]
+mode: 0755
+user: AID_SYSTEM
+group: AID_SYSTEM
+caps: NET_BIND_SERVICE
+
+[system/vendor/bin/pd-mapper]
 mode: 0755
 user: AID_SYSTEM
 group: AID_SYSTEM
@@ -72,12 +84,6 @@ mode: 0755
 user: AID_BLUETOOTH
 group: AID_BLUETOOTH
 caps: BLOCK_SUSPEND
-
-[system/vendor/bin/slim_daemon]
-mode: 0755
-user:  AID_GPS
-group: AID_GPS
-caps: NET_BIND_SERVICE
 
 [system/vendor/bin/qvrservice]
 mode: 0755
@@ -103,6 +109,12 @@ user: AID_SYSTEM
 group: AID_SYSTEM
 caps: NET_BIND_SERVICE
 
+[system/vendor/bin/imsrcsd]
+mode: 0755
+user: AID_SYSTEM
+group: AID_RADIO
+caps: WAKE_ALARM
+
 [system/vendor/bin/slim_daemon]
 mode: 0755
 user:  AID_GPS
@@ -114,3 +126,9 @@ mode: 0755
 user: AID_BLUETOOTH
 group: AID_BLUETOOTH
 caps: BLOCK_SUSPEND
+
+[vendor/bin/xtwifi-client]
+mode: 0755
+user:  AID_GPS
+group: AID_GPS
+caps: NET_BIND_SERVICE BLOCK_SUSPEND

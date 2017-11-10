@@ -54,11 +54,12 @@ ENABLE_SCHEDBOOST := true
 
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 sched_enable_hmp=1 sched_enable_power_aware=1 service_locator.enable=1 swiotlb=2048 androidboot.usbcontroller=a800000.dwc3
 BOARD_KERNEL_CMDLINE += androidboot.configfs=true
-BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+#BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
 BOARD_RAMDISK_OFFSET     := 0x02000000
+BOARD_ROOT_EXTRA_FOLDERS := bt_firmware firmware firmware/radio persist
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
@@ -100,6 +101,8 @@ VSYNC_EVENT_PHASE_OFFSET_NS := 2000000
 SF_VSYNC_EVENT_PHASE_OFFSET_NS := 6000000
 TARGET_USES_COLOR_METADATA := true
 TARGET_USES_HWC_DIM_LAYER_COLOR := true
+TARGET_USES_HWC2 := true
+TARGET_USES_GRALLOC1 := true
 
 # Audio/media
 TARGET_QCOM_AUDIO_VARIANT := caf-msm8998
@@ -200,7 +203,15 @@ BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 WIFI_DRIVER_FW_PATH_STA          := "sta"
 WIFI_DRIVER_FW_PATH_AP           := "ap"
 WIFI_DRIVER_FW_PATH_P2P          := "p2p"
+WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wlan.ko"
+WIFI_DRIVER_MODULE_NAME          := "wlan"
+WIFI_DRIVER_MODULE_ARG           := ""
+WIFI_DRIVER_BUILT                := qca_cld3
+WIFI_DRIVER_DEFAULT              := qca_cld3
+#WIFI_HIDL_FEATURE_AWARE          := true
 
+CONFIG_ACS := true
+CONFIG_IEEE80211AC := true
 
 # charger
 BOARD_CHARGER_ENABLE_SUSPEND := true

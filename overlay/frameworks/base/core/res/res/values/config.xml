@@ -433,4 +433,7 @@
 
     <!-- Shutdown if the battery temperature exceeds (this value * 0.1) Celsius. -->
     <integer name="config_shutdownBatteryTemperature">680</integer>
+
+   <bool name="config_dynamic_bind_ims">false</bool>
+   <string name="config_ims_package">org.codeaurora.ims</string>
 </resources>

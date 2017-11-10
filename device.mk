@@ -104,6 +104,9 @@ PRODUCT_PACKAGES += \
     copybit.msm8998 \
     gralloc.msm8998 \
     hwcomposer.msm8998 \
+    libhwc2on1adapter \
+    libdisplayconfig \
+    libqdMetaData.system \
     memtrack.msm8998 \
     libgenlock \
     liboverlay \
@@ -216,11 +219,12 @@ PRODUCT_PACKAGES += \
     libprotobuf-cpp-full \
     rild_socket
 
-#PRODUCT_PACKAGES += \
+PRODUCT_PACKAGES += \
     ipacm \
     IPACM_cfg.xml
 
 PRODUCT_PACKAGES += \
+    libwifi-hal-qcom \
     wificond \
     wifilogd \
     libwpa_client \
@@ -229,15 +233,13 @@ PRODUCT_PACKAGES += \
     wpa_supplicant.conf
 
 PRODUCT_PACKAGES += \
-    libwifi-hal-qcom \
     wcnss_service \
     libcld80211 \
     lib_driver_cmd_qcwcn
 
 # Camera
 PRODUCT_PACKAGES += \
-    SnapdragonCamera2 \
-    libcamera_shim
+    SnapdragonCamera2
 
 # power
 #PRODUCT_PACKAGES += \
@@ -266,16 +268,28 @@ PRODUCT_PACKAGES += \
     fs_config_files
 
 # Shims
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     libshims_system_properties
 
 # QMI
 PRODUCT_PACKAGES += \
     libjson
 
+PRODUCT_PACKAGES += \
+    ims-ext-common \
+    ConfURIDialer \
+    qtiImsInCallUi
+
+PRODUCT_BOOT_JARS += \
+    tcmiface \
+    ims-ext-common
+
 # Sensors
 #PRODUCT_PACKAGES += \
     sensors.msm8998
+
+PRODUCT_PACKAGES += \
+    tcmiface
 
 # Netutils
 PRODUCT_PACKAGES += \

@@ -44,17 +44,21 @@ on boot
     chown system system /sys/devices/soc/soc:fpc_fpc1020/irq
     chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/report_home
     chown system system /sys/devices/soc/soc:fpc_fpc1020/report_home
+    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/report_key
+    chown system system /sys/devices/soc/soc:fpc_fpc1020/report_key
     chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/update_info
     chown system system /sys/devices/soc/soc:fpc_fpc1020/update_info
     chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/screen_state
     chown system system /sys/devices/soc/soc:fpc_fpc1020/screen_state
-    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/sensor_version
-    chown system system /sys/devices/soc/soc:fpc_fpc1020/sensor_version
+    chmod 0660 /sys/devices/soc/soc:fingerprint_detect/sensor_version
+    chown system system /sys/devices/soc/soc:fingerprint_detect/sensor_version
     chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/hw_reset
     chown system system /sys/devices/soc/soc:fpc_fpc1020/hw_reset
     #chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/wakeup_enable
     #chown system system /sys/devices/soc/soc:fpc_fpc1020/wakeup_enable
     chmod 0666 /dev/qseecom
+    #liuyan 2017/7/27 add for goodix fp
+    chmod 0666 /dev/goodix_fp
     #NFC, ruanbanmao add for 15801 nfc. 2015/10/19
     setprop ro.nfc.port "I2C"
     chmod 0666 /dev/pn544
@@ -63,19 +67,6 @@ on boot
     chown spi spi /dev/p61
     chmod 0666 /dev/dash/
     restorecon  /dev/dash
-
-    #wulaibin@bsp , 2015/11/18, Modify for RGB light support
-    chown system system /sys/class/leds/red/pause_lo
-    chown system system /sys/class/leds/blue/pause_lo
-    chown system system /sys/class/leds/green/pause_lo
-
-    chown system system /sys/class/leds/red/pause_hi
-    chown system system /sys/class/leds/blue/pause_hi
-    chown system system /sys/class/leds/green/pause_hi
-
-    chown system system /sys/class/leds/red/blink
-    chown system system /sys/class/leds/blue/blink
-    chown system system /sys/class/leds/green/blink
 
     # camera. enable mobicat
     setprop persist.camera.mobicat 2

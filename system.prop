@@ -22,7 +22,7 @@ vendor.audio.offload.gapless.enabled=true
 vendor.audio.safx.pbe.enabled=true
 vendor.audio.parser.ip.buffer.size=0
 vendor.audio.flac.sw.decoder.24bit=true
-persist.vendor.bt.a2dp_offload_cap=sbc-aptx-aptxhd-aac
+persist.vendor.bt.a2dp_offload_cap=sbc-aptx-aptxhd-ldac-aac
 vendor.audio.use.sw.alac.decoder=true
 vendor.audio.use.sw.ape.decoder=true
 vendor.audio.hw.aac.encoder=true
@@ -50,7 +50,6 @@ config.foss.path=/system/etc/FOSSConfig.xml
 
 # CNE
 persist.cne.feature=1
-persist.dpm.feature=11
 
 # Data modules
 ro.use_data_netmgrd=true
@@ -71,7 +70,6 @@ debug.gralloc.enable_fb_ubwc=1
 ro.opengles.version=196610
 sdm.perf_hint_window=50
 persist.hwc.enable_vds=1
-sdm.perf_hint_window=50
 
 # IMS
 persist.volte_enabled_by_hw=1
@@ -84,10 +82,11 @@ ro.am.reschedule_service=true
 ro.vendor.extension_library=libqti-perfd-client.so
 ro.min_freq_0=307200
 ro.min_freq_4=307200
-ro.sys.fw.bg_apps_limit=60
+#Increase cached app limit
+ro.vendor.qti.sys.fw.bg_apps_limit=60
 
 # QCOM
-ro.frp.pst=/dev/block/platform/soc/1da4000.ufshc/by-name
+ro.frp.pst=/dev/block/bootdevice/by-name/config
 drm.service.enabled=true
 
 # RIL
@@ -138,6 +137,7 @@ wifi.interface=wlan0
 ro.build.selinux=1
 
 # Sensors
+audio.offload.min.duration.secs=30
 ro.qti.sensors.dev_ori=true
 ro.qti.sensors.pmd=true
 ro.qti.sensors.sta_detect=true
@@ -181,6 +181,42 @@ persist.media.treble_omx=true
 mm.enable.qcom_parser=13631487
 persist.mm.enable.prefetch=true
 
-vendor.display.enable_default_color_mode=1
+vendor.display.enable_default_color_mode=0
 
 ro.sf.lcd_density=420
+
+persist.camera.mobicat=2
+persist.camera.stats.debugexif=3080192
+persist.ts.rtmakeup=false
+
+#Disable Skip Validate
+sdm.debug.disable_skip_validate=1
+
+#dpm
+persist.sys.dpmd.tcm=2
+persist.vendor.dpm.feature=3
+persist.vendor.dpm.nsrm=3
+persist.vendor.dpm.tcm=2
+
+#lifei@OnLineRD.MultiMediaService, 2016/03/22, Modify for support Dirac Audio source
+persist.dirac.acs.controller=qem
+ro.dirac.acs.storeSettings=1
+ro.dirac.ignore_error=1
+
+#enable IZat OptInApp overlay
+persist.vendor.overlay.izat.optin=rro
+
+
+#Disable face beautification
+persist.ts.rtmakeup=false
+
+# Property to enable sched colocation, app trigger, game trigger
+sched.colocate.enable=1
+ro.vendor.gt_library=libqti-gt.so
+ro.vendor.at_library=libqti-at.so
+sys.games.gt.prof=1
+
+ro.qualcomm.cabl=0
+
+# Additional buffers shared between Camera and Video
+vidc.enc.dcvs.extra-buff-count=2
