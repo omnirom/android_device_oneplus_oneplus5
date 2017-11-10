@@ -96,6 +96,12 @@
   },
   {
     "remote": "omnirom",
+    "repository": "android_vendor_qcom_opensource_dpm",
+    "target_path": "vendor/qcom/opensource/dpm",
+    "revision": "android-8.0"
+  },
+  {
+    "remote": "omnirom",
     "repository": "android_vendor_qcom_opensource_bluetooth",
     "target_path": "vendor/qcom/opensource/bluetooth",
     "revision": "android-8.0"
