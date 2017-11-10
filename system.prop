@@ -87,7 +87,7 @@ ro.min_freq_4=307200
 ro.sys.fw.bg_apps_limit=60
 
 # QCOM
-ro.frp.pst=/dev/block/platform/soc/1da4000.ufshc/by-name
+ro.frp.pst=/dev/block/bootdevice/by-name/frp
 drm.service.enabled=true
 
 # RIL
@@ -184,3 +184,10 @@ persist.mm.enable.prefetch=true
 vendor.display.enable_default_color_mode=1
 
 ro.sf.lcd_density=420
+
+persist.camera.mobicat=2
+persist.camera.stats.debugexif=3080192
+persist.ts.rtmakeup=false
+
+#Disable Skip Validate
+sdm.debug.disable_skip_validate=1

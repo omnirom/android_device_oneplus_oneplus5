@@ -32,17 +32,15 @@
 start_sensors()
 {
     if [ -c /dev/msm_dsps -o -c /dev/sensors ]; then
+        if [ ! -e "/persist/sensors/sensors_settings" ]; then
+            touch /persist/sensors/sensors_settings
+            echo 1 > /persist/sensors/sensors_settings
+        fi
         chmod -h 775 /persist/sensors
         chmod -h 664 /persist/sensors/sensors_settings
+        mkdir -p /persist/sensors/registry/registry
         chown -h system.root /persist/sensors/sensors_settings
-        # ifdef VENDOR_EDIT
-        #qiuchangping@BSP 2015-11-24 add for gyro sensitity calibration
-        chmod -h 664 /persist/sensors/gyro_sensitity_cal
-        chown -h system.root /persist/sensors/gyro_sensitity_cal
-        # endif
-        mkdir -p /data/misc/sensors
-        chmod -h 775 /data/misc/sensors
-
+        echo 1 > /persist/sensors/sensors_settings
         start sensors
     fi
 }

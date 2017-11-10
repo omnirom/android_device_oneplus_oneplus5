@@ -1,27 +1,14 @@
 # Perf
-bin/iop
-vendor/bin/perfd
-vendor/etc/perf-profile0.conf
-vendor/etc/perf-profile1.conf
-vendor/etc/perf-profile2.conf
-vendor/etc/perf-profile3.conf
-vendor/etc/perf-profile4.conf
-vendor/etc/perf-profile5.conf
-vendor/etc/perf-profile6.conf
+vendor/bin/perfd|df6236fe2907ce52880c08194ed80dcc3ee9a391
 vendor/lib64/libqti-utils.so
-vendor/lib64/libqti-iop-client.so
-vendor/lib64/libqti-iop.so
-vendor/lib64/libqti-util.so
-vendor/lib64/libqti_performance.so
-vendor/lib64/libqti-perfd-client.so
-vendor/lib64/libqti-at.so
+vendor/lib64/libqti-util.so|df073d33419f1f8b2933ebdd684c4ced8d934d77
+vendor/lib64/libqti-perfd-client.so|2527dac7c927e579435d31f01c1babccc821bf16
 vendor/lib64/libqtigef.so
 vendor/lib/libqti-utils.so
-vendor/lib/libqti-iop-client.so
-vendor/lib/libqti-iop.so
-vendor/lib/libqti-util.so
-vendor/lib/libqti_performance.so
-vendor/lib/libqti-perfd-client.so
-vendor/lib/libqti-at.so
+vendor/lib/libqti-perfd-client.so|745c0986272216020eb6ed512d07b08eabee2ee3
 vendor/lib/libqtigef.so
+vendor/lib64/vendor.qti.hardware.perf@1.0_vendor.so
+vendor/lib/vendor.qti.hardware.perf@1.0_vendor.so
+vendor/lib64/libperfgluelayer.so
+vendor/lib/libperfgluelayer.so
 

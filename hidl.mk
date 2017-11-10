@@ -36,6 +36,9 @@ PRODUCT_PACKAGES += \
     vendor.display.color@1.0-service \
     vendor.display.color@1.0-impl
 
+PRODUCT_PACKAGES += \
+    vendor.display.config@1.0 \
+
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
@@ -108,7 +111,8 @@ PRODUCT_PACKAGES += android.hardware.thermal@1.0-impl \
 
 # Wifi
 PRODUCT_PACKAGES += \
-    android.hardware.wifi@1.0-service
+    android.hardware.wifi@1.0-service \
+    android.hardware.wifi.supplicant@1.0
 
 #RIL
 PRODUCT_PACKAGES += \
