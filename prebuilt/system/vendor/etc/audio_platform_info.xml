@@ -28,7 +28,7 @@
     <acdb_ids>
         <device name="SND_DEVICE_OUT_SPEAKER" acdb_id="15"/>
         <device name="SND_DEVICE_OUT_SPEAKER_PROTECTED" acdb_id="124"/>
-        <device name="SND_DEVICE_IN_VOICE_REC_QMIC_FLUENCE" acdb_id="131"/>
+        <device name="SND_DEVICE_IN_VOICE_REC_QMIC_FLUENCE" acdb_id="4"/> <!-- stock 131 -->
         <device name="SND_DEVICE_IN_VOICE_REC_TMIC" acdb_id="131"/>
         <device name="SND_DEVICE_IN_VOICE_REC_DMIC_FLUENCE" acdb_id="132"/>
         <device name="SND_DEVICE_OUT_VOICE_SPEAKER_2_PROTECTED" acdb_id="150"/>
@@ -122,5 +122,8 @@
         <device name="SND_DEVICE_OUT_VOICE_SPEAKER_PROTECTED_VBAT" backend="voice-speaker-protected-vbat" interface="SLIMBUS_0_RX" />
         <device name="SND_DEVICE_OUT_VOICE_SPEAKER_2_PROTECTED_VBAT" backend="voice-speaker-2-protected-vbat" interface="SLIMBUS_0_RX" />
     </backend_names>
+    <device_names>
+        <device name="SND_DEVICE_IN_VOICE_REC_QMIC_FLUENCE" alias="voice-speaker-dmic-ef" />
+    </device_names>
 </audio_platform_info>
 
