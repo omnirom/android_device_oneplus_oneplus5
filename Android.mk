@@ -117,6 +117,24 @@ $(BT_FIRMWARE_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
 
 ALL_DEFAULT_INSTALLED_MODULES += $(BT_FIRMWARE_SYMLINKS)
 
+CAM_BIN := CPCalibrationData.bin systemParams.bin SystemParamsBokeh.bin SystemParamsFusion.bin
+CAM_BIN_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/camera/cp/,$(notdir $(CAM_BIN)))
+$(CAM_BIN_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "Creating CAM data symlink: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /data/misc/camera/cp/$(notdir $@) $@
+ALL_DEFAULT_INSTALLED_MODULES += $(CAM_BIN_SYMLINKS)
+
+CAM_ASHDR := ncf_pack.ncf iso617_4608x3456.ncf
+CAM_ASHDR_SYMLINKS := $(addprefix $(TARGET_OUT_ETC)/camera/ashdr/,$(notdir $(CAM_ASHDR)))
+$(CAM_ASHDR_SYMLINKS): $(LOCAL_INSTALLED_MODULE)
+	@echo "Creating CAM data symlink: $@"
+	@mkdir -p $(dir $@)
+	@rm -rf $@
+	$(hide) ln -sf /data/misc/camera/ashdr/$(notdir $@) $@
+ALL_DEFAULT_INSTALLED_MODULES += $(CAM_ASHDR_SYMLINKS)
+
 $(shell mkdir -p $(TARGET_OUT_VENDOR)/etc/firmware/wcd9320; \
         ln -sf /data/vendor/misc/audio/wcd9320_anc.bin \
                 $(TARGET_OUT_VENDOR)/etc/firmware/wcd9320/wcd9320_anc.bin;\
@@ -126,3 +144,4 @@ $(shell mkdir -p $(TARGET_OUT_VENDOR)/etc/firmware/wcd9320; \
                 $(TARGET_OUT_VENDOR)/etc/firmware/wcd9320/wcd9320_mad_audio.bin)
 
 endif
+
