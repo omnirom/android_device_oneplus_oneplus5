@@ -100,6 +100,8 @@ VSYNC_EVENT_PHASE_OFFSET_NS := 2000000
 SF_VSYNC_EVENT_PHASE_OFFSET_NS := 6000000
 TARGET_USES_COLOR_METADATA := true
 TARGET_USES_HWC_DIM_LAYER_COLOR := true
+TARGET_USES_HWC2 := true
+TARGET_USES_GRALLOC1 := true
 
 # Audio/media
 TARGET_QCOM_AUDIO_VARIANT := caf-msm8998
@@ -200,7 +202,15 @@ BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
 WIFI_DRIVER_FW_PATH_STA          := "sta"
 WIFI_DRIVER_FW_PATH_AP           := "ap"
 WIFI_DRIVER_FW_PATH_P2P          := "p2p"
+WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wlan.ko"
+WIFI_DRIVER_MODULE_NAME          := "wlan"
+WIFI_DRIVER_MODULE_ARG           := ""
+WIFI_DRIVER_BUILT                := qca_cld3
+WIFI_DRIVER_DEFAULT              := qca_cld3
+#WIFI_HIDL_FEATURE_AWARE          := true
 
+CONFIG_ACS := true
+CONFIG_IEEE80211AC := true
 
 # charger
 BOARD_CHARGER_ENABLE_SUSPEND := true
