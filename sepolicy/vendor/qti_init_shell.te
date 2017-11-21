@@ -16,4 +16,6 @@ allow qti_init_shell sensors_persist_file:file write;
 
 
 #allow qti_init_shell default_prop:property_service set;
+allow qti_init_shell proc_modules:file { read open getattr };
+
 

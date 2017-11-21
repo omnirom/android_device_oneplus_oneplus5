@@ -1,4 +1,5 @@
 persist.sys.diag.max.size  u:object_r:diag_prop:s0
+persist.sys.media.traces   u:object_r:diag_prop:s0
 oem.device.imeicache       u:object_r:diag_prop:s0
 net.lte.ims.data.enabled   u:object_r:qcom_ims_prop:s0
 persist.oem.dump           u:object_r:oem_prop:s0
@@ -8,6 +9,8 @@ camera.use_perf_logger     u:object_r:camera_prop:s0
 persist.camera.use_perf_logger     u:object_r:camera_prop:s0
 camera.use_local_logger     u:object_r:camera_prop:s0
 persist.camera.use_local_logger     u:object_r:camera_prop:s0
+persist.camera.cfa.packagelist     u:object_r:camera_prop:s0
+
 wlan.daemon.version        u:object_r:wifi_prop:s0
 wlan.daemon.status         u:object_r:wifi_prop:s0
 

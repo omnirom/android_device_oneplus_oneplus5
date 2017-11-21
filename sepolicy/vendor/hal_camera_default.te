@@ -10,6 +10,7 @@ allow hal_camera camera_data_file:sock_file write;
 binder_use(hal_camera_default)
 binder_call(hal_camera_default, binderservicedomain)
 binder_call(hal_camera_default, appdomain)
+binder_call(hal_camera_default, servicemanager)
 binder_service(hal_camera_default)
 allow hal_camera_default sensorservice_service:service_manager find;
 allow hal_camera_default system_server:unix_stream_socket { read write };
@@ -18,7 +19,6 @@ allow hal_camera_default sdcardfs:dir { search };
 allow hal_camera_default sdcardfs:file { open read getattr };
 allow hal_camera_default media_rw_data_file:file { open read getattr };
 allow hal_camera_default storage_file:dir { search };
-
 
 allow hal_camera_default persist_file:file read;
 allow hal_camera_default serialno_prop:file { open read getattr };

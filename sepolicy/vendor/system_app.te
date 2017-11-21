@@ -11,3 +11,7 @@ allow system_app proc_fingerprint:file rw_file_perms;
 allow system_app sysfs_fpc_proximity:file rw_file_perms;
 
 allow system_app sysfs_usb_supply:file write;
+
+
+allow system_app wificond:binder call;
+
