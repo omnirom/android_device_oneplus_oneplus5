@@ -1,8 +1,8 @@
 ###################################
 # Dev nodes
 #
-/dev/dash                                                       u:object_r:input_device:s0
-/dev/fpc1020                                                    u:object_r:fpc1020_device:s0
+/dev/dash                                                       u:object_r:sysfs:s0
+/dev/fpc1020                                                    u:object_r:fingerprintd_device:s0
 
 ###################################
 # Dev block nodes

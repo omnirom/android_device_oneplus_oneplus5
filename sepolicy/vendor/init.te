@@ -1,4 +1,6 @@
-allow init dashd:process { rlimitinh siginh transition };
+#dashd
+allow init input_device:chr_file { getattr };
+domain_trans(init, rootfs, dashd)
 allow init debugfs_rmts:file write;
 allow init modem_efs_partition_device:blk_file write;
 allow init node:tcp_socket node_bind;
@@ -28,3 +30,8 @@ allow init firmware_file:filesystem { associate };
 get_prop(init, vendor_rild_libpath_prop);
 
 allow init firmware_file:dir mounton;
+domain_trans(init, rootfs, dashd)
+
+
+allow init sysfs:chr_file getattr;
+

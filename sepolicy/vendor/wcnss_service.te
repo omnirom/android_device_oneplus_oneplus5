@@ -31,3 +31,5 @@ dontaudit wcnss_service firmware_file:dir search;
 
 allow wcnss_service perfd_socket:sock_file write;
 
+allow wcnss_service perfd:unix_stream_socket connectto;
+

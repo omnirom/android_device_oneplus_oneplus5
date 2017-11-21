@@ -9,3 +9,6 @@ allow radio system_app_data_file:dir getattr;
 allow radio qmuxd_socket:dir search;
 allow radio qmuxd_socket:sock_file write;
 
+get_prop(radio, qcom_ims_prop)
+
+

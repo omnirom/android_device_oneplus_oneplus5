@@ -5,3 +5,5 @@ allow ueventd device:chr_file { relabelfrom relabelto };
 
 allow ueventd vfat:file getattr;
 
+allow ueventd sysfs:chr_file { setattr create };
+
