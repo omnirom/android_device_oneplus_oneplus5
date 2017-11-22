@@ -1,4 +1,4 @@
-#!/vendor/bin/sh
+#! /vendor/bin/sh
 
 # Copyright (c) 2012-2013,2016 The Linux Foundation. All rights reserved.
 #
@@ -26,6 +26,8 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
+
+export PATH=/vendor/bin
 
 # Set platform variables
 if [ -f /sys/devices/soc0/hw_platform ]; then
@@ -245,7 +247,9 @@ case "$target" in
     "msm8998" | "apq8098_latv")
         case "$soc_hwplatform" in
             *)
-                setprop ro.sf.lcd_density 560
+                #modify by Leo Jia 560 to 420
+                #setprop ro.sf.lcd_density 560
+                setprop ro.sf.lcd_density 420
                 if [ ! -e /dev/kgsl-3d0 ]; then
                     setprop persist.sys.force_sw_gles 1
                     setprop sdm.idle_time 0

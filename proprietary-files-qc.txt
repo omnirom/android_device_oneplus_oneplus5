@@ -400,7 +400,6 @@ vendor/lib64/vendor.display.color@1.0_vendor.so
 vendor/lib64/vendor.display.postproc@1.0_vendor.so
 
 # QMI
-etc/permissions/qti_libpermissions.xml
 vendor/bin/irsc_util
 vendor/bin/pd-mapper
 vendor/lib/libdiag.so
