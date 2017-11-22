@@ -441,4 +441,5 @@
          in hardware. -->
     <bool name="config_setColorTransformAccelerated">true</bool>
 
+    <integer translatable="false" name="config_wifi_wakeup_available">1</integer>
 </resources>
