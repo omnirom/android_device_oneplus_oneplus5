@@ -1,4 +1,4 @@
-#!/vendor/bin/sh
+#! /vendor/bin/sh
 
 # Copyright (c) 2012-2013, 2016, The Linux Foundation. All rights reserved.
 #
@@ -1181,6 +1181,8 @@ case "$target" in
                 # Apply inter-cluster load balancer restrictions
                 echo 1 > /proc/sys/kernel/sched_restrict_cluster_spill
 
+                # set sync wakee policy tunable
+                echo 1 > /proc/sys/kernel/sched_prefer_sync_wakee_to_waker
 
                 for devfreq_gov in /sys/class/devfreq/qcom,mincpubw*/governor
                 do
@@ -1687,6 +1689,7 @@ case "$target" in
             echo 5 > /proc/sys/kernel/sched_spill_nr_run
             echo 1 > /proc/sys/kernel/sched_restrict_cluster_spill
             echo 100000 > /proc/sys/kernel/sched_short_burst_ns
+            echo 1 > /proc/sys/kernel/sched_prefer_sync_wakee_to_waker
 
             # cpuset settings
             echo 0-3 > /dev/cpuset/background/cpus
@@ -2262,7 +2265,8 @@ case "$target" in
         bcl_soc_hotplug_mask=`cat /sys/devices/soc/soc:qcom,bcl/hotplug_soc_mask`
         echo 0 > /sys/devices/soc/soc:qcom,bcl/hotplug_soc_mask
         echo -n enable > /sys/devices/soc/soc:qcom,bcl/mode
-
+        # set sync wakee policy tunable
+        echo 1 > /proc/sys/kernel/sched_prefer_sync_wakee_to_waker
         # configure governor settings for little cluster
         echo "interactive" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
         echo 1 > /sys/devices/system/cpu/cpu0/cpufreq/interactive/use_sched_load
@@ -2502,6 +2506,11 @@ case "$target" in
 	echo 1 > /sys/devices/system/cpu/cpu4/core_ctl/is_big_cluster
 	echo 4 > /sys/devices/system/cpu/cpu4/core_ctl/task_thres
 
+	# Enable Adaptive LMK
+        echo 1 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
+        echo "18432,23040,27648,51256,150296,200640" > /sys/module/lowmemorykiller/parameters/minfree
+        echo 162500 > /sys/module/lowmemorykiller/parameters/vmpressure_file_min
+
 	# Setting b.L scheduler parameters
 	echo 1 > /proc/sys/kernel/sched_migration_fixup
 	echo 95 > /proc/sys/kernel/sched_upmigrate
@@ -2643,6 +2652,22 @@ case "$target" in
         echo 0-3 > /dev/cpuset/background/cpus
         echo 0-3 > /dev/cpuset/system-background/cpus
         echo 0 > /proc/sys/kernel/sched_boost
+	if [ -f "/defrag_aging.ko" ]; then
+		insmod /defrag_aging.ko
+	else
+		insmod /system/lib/modules/defrag.ko
+	fi
+#OPChain
+        if [ -f "/opchain_aging.ko" ]; then
+                insmod /opchain_aging.ko
+        else
+                insmod /system/lib/modules/opchain.ko
+        fi
+    sleep 1
+	lsmod | grep defrag
+	if [ $? != 0 ]; then
+		echo 1 > /sys/module/defrag_helper/parameters/disable
+	fi
     ;;
 esac
 

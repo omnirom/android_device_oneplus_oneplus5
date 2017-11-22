@@ -30,7 +30,7 @@ import /system/vendor/etc/init/init.qcom.power.rc
 import /system/vendor/etc/init/init.omni.rc
 import /system/vendor/etc/init/init.omni.op5.rc
 
-import /system/vendor/etc/init/init.qcom.usb.rc
+import /system/vendor/etc/init/hw/init.qcom.usb.rc
 import /system/vendor/etc/init/init.msm.usb.configfs.rc
 import /system/vendor/etc/init/hw/init.target.rc
 
@@ -223,12 +223,6 @@ on post-fs-data
     # create QDMA dropbox
     mkdir /data/vendor/qdmastats 0700 system system
     mkdir /data/vendor/qdma 0770 system system
-
-    #Create directories for Fingerprint
-    mkdir /data/misc/stargate 0770 system system
-    mkdir /data/misc/stargate/bg_estimation 0770 system system
-    mkdir /data/misc/stargate/calib_test 0770 system system
-    mkdir /data/misc/stargate/database 0770 system system
 
     # Create directory for TZ Apps
     mkdir /data/misc/qsee 0770 system system
@@ -795,7 +789,7 @@ service sensor-sh /system/vendor/bin/init.qcom.sensors.sh
     user root
     oneshot
 
-service qcom-post-boot /system/vendor/bin/sh /system/vendor/bin/init.qcom.post_boot.sh
+service qcom-post-boot /system/vendor/bin/init.qcom.post_boot.sh
     class late_start
     user root
     disabled

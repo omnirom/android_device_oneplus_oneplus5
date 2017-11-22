@@ -71,16 +71,13 @@ on post-fs
     write /dev/ipa 1
 
 on post-fs-data
-    mkdir /data/tombstones/modem 0771 system system
-    mkdir /data/tombstones/lpass 0771 system system
-    mkdir /data/tombstones/wcnss 0771 system system
-    mkdir /data/tombstones/dsps 0771 system system
-    mkdir /data/misc/qvop 0660 system system
-    mkdir /data/misc/hbtp 0750 system system
+    mkdir /data/tombstones 0771 system system
+    mkdir /tombstones/modem 0771 system system
+    mkdir /tombstones/lpass 0771 system system
+    mkdir /tombstones/wcnss 0771 system system
+    mkdir /tombstones/dsps 0771 system system
+    mkdir /data/vendor/hbtp 0750 system system
     mkdir /data/misc/qvr 0770 system system
-    mkdir /data/misc/camera/cp 0771 system system
-    mkdir /data/misc/qdmastats 0700 system system
-    mkdir /data/misc/qdma 0770 system system
 
 # For cpusets initialize for Silver Only first and then Silver + Gold
 # Silver Only configuration cannot work with 0-7
@@ -194,15 +191,6 @@ service qseecomd /system/vendor/bin/qseecomd
    group root
 
 on boot
-    #NFC, ruanbanmao add for 15801 nfc. 2015/10/19
-    setprop ro.nfc.port "I2C"
-    chmod 0666 /dev/pn544
-    chown nfc nfc /dev/pn544
-    chmod 0666 /dev/p61
-    chown spi spi /dev/p61
-    chmod 0666 /dev/dash/
-    restorecon  /dev/dash
-
 #add by likelong@camera 2016.12.13 for led test in EngineeringMode, torch_0 is warm flash, and torch_1 is cold flash.
     chown system system /sys/class/leds/led:torch_0/brightness
     chmod 666 /sys/class/leds/led:torch_0/brightness
@@ -405,7 +393,7 @@ service ims_rtp_daemon /system/vendor/bin/ims_rtp_daemon
    group radio diag inet log
    disabled
 
-service imsrcsservice /system/vendor/bin/imsrcsd
+service vendor.imsrcsservice /system/vendor/bin/imsrcsd
    class main
    user system
    group radio diag inet log
@@ -413,7 +401,7 @@ service imsrcsservice /system/vendor/bin/imsrcsd
 
 on property:vendor.ims.DATA_DAEMON_STATUS=1
     start ims_rtp_daemon
-    start imsrcsservice
+    start vendor.imsrcsservice
 
 service ppd /vendor/bin/mm-pp-dpps
     class late_start
@@ -422,22 +410,13 @@ service ppd /vendor/bin/mm-pp-dpps
     socket pps stream 0660 system system
     disabled
 
-on property:init.svc.surfaceflinger=stopped
+on property:init.svc.hwcomposer-2-1=stopped
     stop ppd
 
-on property:init.svc.surfaceflinger=running
+on property:init.svc.hwcomposer-2-1=running
     start ppd
 
-on property:init.svc.surfaceflinger=restarting
-    stop ppd
-
-on property:init.svc.zygote=stopped
-    stop ppd
-
-on property:init.svc.zygote=running
-    start ppd
-
-on property:init.svc.zygote=restarting
+on property:init.svc.hwcomposer-2-1=restarting
     stop ppd
 
 #

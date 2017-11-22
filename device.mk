@@ -277,12 +277,10 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     ims-ext-common \
-    ConfURIDialer \
-    qtiImsInCallUi
+    telephony-ext
 
 PRODUCT_BOOT_JARS += \
-    tcmiface \
-    ims-ext-common
+    tcmiface
 
 # Sensors
 #PRODUCT_PACKAGES += \
