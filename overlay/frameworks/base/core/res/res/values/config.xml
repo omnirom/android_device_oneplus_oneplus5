@@ -431,7 +431,7 @@
     <!-- Shutdown if the battery temperature exceeds (this value * 0.1) Celsius. -->
     <integer name="config_shutdownBatteryTemperature">680</integer>
 
-   <bool name="config_dynamic_bind_ims">false</bool>
+   <bool name="config_dynamic_bind_ims">true</bool>
    <string name="config_ims_package">org.codeaurora.ims</string>
 
     <!-- True if Unprocessed audio source supports the required frequency range and level -->
