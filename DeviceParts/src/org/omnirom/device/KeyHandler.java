@@ -35,6 +35,7 @@ import android.hardware.SensorManager;
 import android.media.IAudioService;
 import android.media.AudioManager;
 import android.media.session.MediaSessionLegacyHelper;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.os.Handler;
 import android.os.Message;
@@ -43,9 +44,12 @@ import android.os.PowerManager.WakeLock;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemClock;
+import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.provider.Settings.Global;
+import android.telephony.SubscriptionInfo;
+import android.telephony.SubscriptionManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.WindowManagerGlobal;
@@ -162,11 +166,51 @@ public class KeyHandler implements DeviceKeyHandler {
             mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(
                     Settings.System.DEVICE_PROXI_CHECK_ENABLED),
                     false, this);
+            mContext.getContentResolver().registerContentObserver(Settings.Global.getUriFor(
+                    Settings.Global.MULTI_SIM_VOICE_CALL_SUBSCRIPTION),
+                    false, this);
+            mContext.getContentResolver().registerContentObserver(Settings.Global.getUriFor(
+                    Settings.Global.MULTI_SIM_DATA_CALL_SUBSCRIPTION),
+                    false, this);
             update();
         }
 
         @Override
         public void onChange(boolean selfChange) {
+            update();
+        }
+
+        @Override
+        public void onChange(boolean selfChange, Uri uri) {
+            if (uri.equals(Settings.Global.getUriFor(
+                    Settings.Global.MULTI_SIM_VOICE_CALL_SUBSCRIPTION))){
+                int value = Settings.Global.getInt(mContext.getContentResolver(),
+                        Settings.Global.MULTI_SIM_VOICE_CALL_SUBSCRIPTION,
+                        SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+                if (value != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                    if (DEBUG) Log.i(TAG, "MULTI_SIM_VOICE_CALL_SUBSCRIPTION changed = " + value);
+                    SystemProperties.set("persist.sys.phone_account", String.valueOf(value));
+                }
+                return;
+            }
+            if (uri.equals(Settings.Global.getUriFor(
+                    Settings.Global.MULTI_SIM_DATA_CALL_SUBSCRIPTION))){
+                int value = Settings.Global.getInt(mContext.getContentResolver(),
+                        Settings.Global.MULTI_SIM_DATA_CALL_SUBSCRIPTION,
+                        SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+                if (value != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                    if (DEBUG) Log.i(TAG, "MULTI_SIM_DATA_CALL_SUBSCRIPTION changed = " + value);
+
+                    SubscriptionInfo subsInfo = SubscriptionManager.from(mContext).getActiveSubscriptionInfo(value);
+                    if (subsInfo != null) {
+                        String iccId = subsInfo.getIccId(); 
+                        Settings.Global.putInt(mContext.getContentResolver(), "config_current_primary_sub", subsInfo.getSimSlotIndex());
+                        SystemProperties.set("persist.radio.bksim.iccid", iccId);
+                        SystemProperties.set("persist.radio.ddssim.iccid", iccId);
+                    }
+                }
+                return;
+            }
             update();
         }
 
