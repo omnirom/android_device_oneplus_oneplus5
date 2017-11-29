@@ -184,30 +184,43 @@ public class KeyHandler implements DeviceKeyHandler {
         public void onChange(boolean selfChange, Uri uri) {
             if (uri.equals(Settings.Global.getUriFor(
                     Settings.Global.MULTI_SIM_VOICE_CALL_SUBSCRIPTION))){
-                int value = Settings.Global.getInt(mContext.getContentResolver(),
-                        Settings.Global.MULTI_SIM_VOICE_CALL_SUBSCRIPTION,
-                        SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-                if (value != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-                    if (DEBUG) Log.i(TAG, "MULTI_SIM_VOICE_CALL_SUBSCRIPTION changed = " + value);
-                    SystemProperties.set("persist.sys.phone_account", String.valueOf(value));
+                try {
+                    int value = Settings.Global.getInt(mContext.getContentResolver(),
+                            Settings.Global.MULTI_SIM_VOICE_CALL_SUBSCRIPTION,
+                            SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+                    if (value != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                        Integer oldValue = Integer.valueOf(SystemProperties.get("persist.sys.phone_account", "-1"));
+                        if (oldValue != value) {
+                            if (DEBUG) Log.i(TAG, "MULTI_SIM_VOICE_CALL_SUBSCRIPTION changed = " + value);
+                            SystemProperties.set("persist.sys.phone_account", String.valueOf(value));
+                        }
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "MULTI_SIM_VOICE_CALL_SUBSCRIPTION change handling failed");
                 }
                 return;
             }
             if (uri.equals(Settings.Global.getUriFor(
                     Settings.Global.MULTI_SIM_DATA_CALL_SUBSCRIPTION))){
-                int value = Settings.Global.getInt(mContext.getContentResolver(),
-                        Settings.Global.MULTI_SIM_DATA_CALL_SUBSCRIPTION,
-                        SubscriptionManager.INVALID_SUBSCRIPTION_ID);
-                if (value != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-                    if (DEBUG) Log.i(TAG, "MULTI_SIM_DATA_CALL_SUBSCRIPTION changed = " + value);
-
-                    SubscriptionInfo subsInfo = SubscriptionManager.from(mContext).getActiveSubscriptionInfo(value);
-                    if (subsInfo != null) {
-                        String iccId = subsInfo.getIccId(); 
-                        Settings.Global.putInt(mContext.getContentResolver(), "config_current_primary_sub", subsInfo.getSimSlotIndex());
-                        SystemProperties.set("persist.radio.bksim.iccid", iccId);
-                        SystemProperties.set("persist.radio.ddssim.iccid", iccId);
+                try {
+                    int value = Settings.Global.getInt(mContext.getContentResolver(),
+                            Settings.Global.MULTI_SIM_DATA_CALL_SUBSCRIPTION,
+                            SubscriptionManager.INVALID_SUBSCRIPTION_ID);
+                    if (value != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
+                        int oldValue = Settings.Global.getInt(mContext.getContentResolver(), "config_current_primary_sub", -1);
+                        if (oldValue != value) {
+                        if (DEBUG) Log.i(TAG, "MULTI_SIM_DATA_CALL_SUBSCRIPTION changed = " + value);
+                            SubscriptionInfo subsInfo = SubscriptionManager.from(mContext).getActiveSubscriptionInfo(value);
+                            if (subsInfo != null) {
+                                String iccId = subsInfo.getIccId(); 
+                                Settings.Global.putInt(mContext.getContentResolver(), "config_current_primary_sub", subsInfo.getSimSlotIndex());
+                                SystemProperties.set("persist.radio.bksim.iccid", iccId);
+                                SystemProperties.set("persist.radio.ddssim.iccid", iccId);
+                            }
+                        }
                     }
+                } catch (Exception e) {
+                    Log.e(TAG, "MULTI_SIM_DATA_CALL_SUBSCRIPTION change handling failed");
                 }
                 return;
             }
