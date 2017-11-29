@@ -106,6 +106,9 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm8998 \
     libhwc2on1adapter \
     libdisplayconfig \
+    libsdmcore \
+    libqservice \
+    libgpu_tonemapper \
     libqdMetaData.system \
     memtrack.msm8998 \
     libgenlock \
