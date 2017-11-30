@@ -39,3 +39,6 @@ allow system_server block_device:dir { getattr ioctl open read };
 allow system_server hal_audio_default:file write;
 
 allow system_server cameraserver:file write;
+
+set_prop(system_server, qti_telephony_prop);
+

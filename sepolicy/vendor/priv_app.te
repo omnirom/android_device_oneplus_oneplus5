@@ -28,3 +28,6 @@ allow priv_app persist_file:dir search;
 allow priv_app radio_data_file:dir getattr;
 allow priv_app vendor_tombstone_data_file:dir search;
 
+
+attribute priv_app_property_placeholder;
+
