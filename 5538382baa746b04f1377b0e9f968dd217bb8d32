@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ffafa17_5b04f2f5",
+        "filename": "DeviceParts/src/org/omnirom/device/KeyHandler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2017-11-30T22:55:35Z",
+      "side": 1,
+      "message": "This is about DATA call and not VOICE - thats above",
+      "revId": "5538382baa746b04f1377b0e9f968dd217bb8d32",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7106c714_80973676",
+        "filename": "DeviceParts/src/org/omnirom/device/KeyHandler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2017-11-30T22:55:35Z",
+      "side": 1,
+      "message": "this line is wrong here - just remove it",
+      "revId": "5538382baa746b04f1377b0e9f968dd217bb8d32",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    }
+  ]
+}
