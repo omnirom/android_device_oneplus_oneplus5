@@ -204,8 +204,7 @@ public class KeyHandler implements DeviceKeyHandler {
                             Settings.Global.MULTI_SIM_DATA_CALL_SUBSCRIPTION,
                             SubscriptionManager.INVALID_SUBSCRIPTION_ID);
                     if (value != SubscriptionManager.INVALID_SUBSCRIPTION_ID) {
-                        if (DEBUG) Log.i(TAG, "MULTI_SIM_VOICE_CALL_SUBSCRIPTION changed = " + value);
-                        SystemProperties.set("persist.sys.phone_account", String.valueOf(value));
+                        if (DEBUG) Log.i(TAG, "MULTI_SIM_DATA_CALL_SUBSCRIPTION changed = " + value);
                         SubscriptionInfo subsInfo = SubscriptionManager.from(mContext).getActiveSubscriptionInfo(value);
                         if (subsInfo != null) {
                             String iccId = subsInfo.getIccId();
