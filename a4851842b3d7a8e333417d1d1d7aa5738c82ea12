@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "279cf59a_2cec51ca",
+        "filename": "DeviceParts/src/org/omnirom/device/KeyHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2017-11-30T14:31:02Z",
+      "side": 1,
+      "message": "WROOONG",
+      "revId": "a4851842b3d7a8e333417d1d1d7aa5738c82ea12",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    }
+  ]
+}
