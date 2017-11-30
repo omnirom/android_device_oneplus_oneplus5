@@ -11,4 +11,5 @@ allow radio qmuxd_socket:sock_file write;
 
 get_prop(radio, qcom_ims_prop)
 
+set_prop(radio, qti_telephony_prop);
 

@@ -17,3 +17,7 @@ wlan.daemon.status         u:object_r:wifi_prop:s0
 ro.vendor.ril.svlte1x          u:object_r:radio_prop:s0
 ro.vendor.ril.svdo          u:object_r:radio_prop:s0
 ro.ril.supportLTE          u:object_r:radio_prop:s0
+
+persist.sys.phone_account u:object_r:qti_telephony_prop:s0
+persist.radio.bksim.iccid u:object_r:qti_telephony_prop:s0
+persist.radio.ddssim.iccid u:object_r:qti_telephony_prop:s0
