@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "b7145dcf_cc4775d2",
+        "filename": "DeviceParts/src/org/omnirom/device/KeyHandler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1001070
+      },
+      "writtenOn": "2017-11-30T23:15:09Z",
+      "side": 1,
+      "message": "who reads logs ?!?!?!",
+      "parentUuid": "0ffafa17_5b04f2f5",
+      "revId": "5538382baa746b04f1377b0e9f968dd217bb8d32",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7106c714_80973676",
         "filename": "DeviceParts/src/org/omnirom/device/KeyHandler.java",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2017-11-30T22:55:35Z",
       "side": 1,
       "message": "this line is wrong here - just remove it",
+      "revId": "5538382baa746b04f1377b0e9f968dd217bb8d32",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c1f0f7ec_a9c61dd9",
+        "filename": "DeviceParts/src/org/omnirom/device/KeyHandler.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1001070
+      },
+      "writtenOn": "2017-11-30T23:15:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7106c714_80973676",
       "revId": "5538382baa746b04f1377b0e9f968dd217bb8d32",
       "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
       "unresolved": false
