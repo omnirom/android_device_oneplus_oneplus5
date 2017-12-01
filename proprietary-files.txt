@@ -347,7 +347,7 @@ vendor/lib/libchromatix_imx398_cpp_4656x2608_30fps_preview.so
 
 # Camera postprocessing
 lib/lib_oneplus_facebeauty.so
-lib/lib_oneplus_md.so
+#lib/lib_oneplus_md.so
 lib/lib_oneplus_watermark.so
 lib/libmms_gyro_vstab_auth.so
 lib/libmms_gyro_vstab.so
