@@ -103,6 +103,7 @@ TARGET_USES_COLOR_METADATA := true
 TARGET_USES_HWC2 := true
 TARGET_USES_GRALLOC1 := true
 TARGET_USES_QCOM_DISPLAY_BSP := true
+TARGET_USES_HWC_DIM_LAYER_COLOR := true
 
 # Audio/media
 TARGET_QCOM_AUDIO_VARIANT := caf-msm8998
@@ -281,16 +282,16 @@ TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_EXCLUDE_SUPERSU := true
 TW_EXTRA_LANGUAGES := true
 TW_INCLUDE_CRYPTO := true
+#TW_CRYPTO_USE_SYSTEM_VOLD := qseecomd hwservicemanager keymaster-3-0
 TW_INCLUDE_NTFS_3G := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_MAX_BRIGHTNESS := 255
 TW_NO_USB_STORAGE := false
-TW_USE_TOOLBOX := true
 TW_SCREEN_BLANK_ON_BOOT := true
 TW_THEME := portrait_hdpi
 # Workaround for error copying vendor files to recovery ramdisk
 #BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
-TARGET_COPY_OUT_VENDOR := system/vendor
+#TARGET_COPY_OUT_VENDOR := vendor
 
 WITH_DEXPREOPT := true
 WITH_DEXPREOPT_PIC := true
