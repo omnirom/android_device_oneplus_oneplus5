@@ -24,11 +24,6 @@
                 android:targetClass="org.omnirom.device.GestureSettings" />
     </PreferenceScreen>
 
-    <CheckBoxPreference
-        android:key="otg_switch"
-        android:summary="@string/otg_switch_summary"
-        android:title="@string/otg_switch_title" />
-
     <PreferenceScreen
         android:key="doze_category"
         android:title="@string/doze_category_title"
