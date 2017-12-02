@@ -70,4 +70,14 @@
     <string name="category_up_swipe_gesture">Up swipe</string>
     <string name="category_left_swipe_gesture">Left swipe</string>
     <string name="category_right_swipe_gesture">Right swipe</string>
+
+    <string name="doze_category_title">Ambient display</string>
+    <string name="doze_category_summary">Wake screen when you receive notifications</string>
+    <string name="wave_check_summary">Pulse notifications on hand wave</string>
+    <string name="wave_check_title">Hand wave</string>
+    <string name="tilt_check_summary">Pulse notifications when device is picked up</string>
+    <string name="tilt_check_title">Pick up</string>
+    <string name="pocket_check_summary">Pulse notifications on removal from pocket</string>
+    <string name="pocket_check_title">Pocket</string>
+    <string name="ambient_display_enable">Ambient display must be enabled in display settings</string>
 </resources>
