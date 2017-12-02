@@ -286,7 +286,6 @@ vendor/lib/libllvm-glnext.so
 vendor/lib/libllvm-qcom.so
 vendor/lib/libllvm-qgl.so
 vendor/lib/libmm-disp-apis.so
-vendor/lib/libmm-qdcm.so
 vendor/lib/libOpenCL.so
 vendor/lib/libqseed3.so
 vendor/lib/librs_adreno_sha1.so
@@ -316,7 +315,6 @@ vendor/lib64/libllvm-glnext.so
 vendor/lib64/libllvm-qcom.so
 vendor/lib64/libllvm-qgl.so
 vendor/lib64/libmm-disp-apis.so
-vendor/lib64/libmm-qdcm.so
 vendor/lib64/libOpenCL.so
 vendor/lib64/libqseed3.so
 vendor/lib64/librs_adreno_sha1.so
@@ -391,18 +389,11 @@ vendor/lib64/libperipheral_client.so
 
 # Postprocessing
 framework/com.qti.snapdragon.sdk.display.jar
--vendor/app/colorservice/colorservice.apk
 vendor/bin/mm-pp-dpps
 vendor/lib64/libdisp-aba.so
-vendor/bin/hw/vendor.display.color@1.0-service
-vendor/etc/init/vendor.display.color@1.0-service.rc
-lib/vendor.display.color@1.0.so
 lib/vendor.display.postproc@1.0.so
-lib64/vendor.display.color@1.0.so
 lib64/vendor.display.postproc@1.0.so
-vendor/lib/vendor.display.color@1.0_vendor.so
 vendor/lib/vendor.display.postproc@1.0_vendor.so
-vendor/lib64/vendor.display.color@1.0_vendor.so
 vendor/lib64/vendor.display.postproc@1.0_vendor.so
 
 # QMI
