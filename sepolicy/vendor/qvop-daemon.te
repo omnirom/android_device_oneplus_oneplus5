@@ -1,0 +1,2 @@
+allow qvop-daemon diag_prop:file read;
+

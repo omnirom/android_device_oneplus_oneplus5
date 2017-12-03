@@ -1,0 +1,2 @@
+allow mediametrics diag_prop:file read;
+
