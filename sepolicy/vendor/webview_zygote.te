@@ -1,2 +1,4 @@
 allow webview_zygote mnt_expand_file:dir getattr;
 
+allow webview_zygote diag_prop:file read;
+

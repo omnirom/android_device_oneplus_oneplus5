@@ -1,0 +1,2 @@
+allow drmserver diag_prop:file read;
+

@@ -232,10 +232,10 @@
     </Capability>
 
     <!--
- 	     Enabling Rtcp
+        Enabling Rtcp
     -->
-    <RTCP> 
-        <RtcpRRNotificationEnabled>1</RtcpRRNotificationEnabled> 
+    <RTCP>
+        <RtcpRRNotificationEnabled>1</RtcpRRNotificationEnabled>
     </RTCP>
 
     <!--
@@ -699,7 +699,7 @@
         To disable/enable audio stream playback
         support during power suspend - 0 or 1
     -->
-    <AudioStreamInSuspend>0</AudioStreamInSuspend>
+    <AudioStreamInSuspend>1</AudioStreamInSuspend>
 
     <!--
         Compensation delay for audio

@@ -5,3 +5,5 @@ allow mediaserver camera_data_file:dir search;
 
 #allow mediadrmserver init:binder { call transfer };
 
+allow mediaserver diag_prop:file read;
+
