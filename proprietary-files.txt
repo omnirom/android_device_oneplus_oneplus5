@@ -443,6 +443,8 @@ vendor/lib/vendor.qti.hardware.fingerprint@1.0.so
 framework/vendor.qti.hardware.fingerprint-V1.0-java.jar
 etc/permissions/com.fingerprints.extension.xml
 framework/com.fingerprints.extension.jar
+etc/firmware/tp/fw_synaptics_17801.img|f2066955014e74a49e29b80686c2f4854c3db89d
+
 
 # IPA
 vendor/bin/ipacm-diag
