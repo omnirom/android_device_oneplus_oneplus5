@@ -18,8 +18,6 @@
 # device-specific aspects (drivers) with a device-agnostic
 # product configuration (apps).
 #
--include vendor/oneplus/oneplus5/BoardConfigVendor.mk
-
 BOARD_PATH := device/oneplus/oneplus5
 
 TARGET_NO_BOOTLOADER := true

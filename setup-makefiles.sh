@@ -41,7 +41,7 @@ fi
 setup_vendor "$DEVICE" "$VENDOR" "$CM_ROOT"
 
 # Copyright headers and guards
-write_headers
+write_headers "oneplus5 oneplus5t"
 
 # The standard blobs
 write_makefiles "$MY_DIR"/proprietary-files.txt

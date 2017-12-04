@@ -23,7 +23,7 @@ $(call inherit-product, device/oneplus/oneplus5/hidl.mk)
 $(call inherit-product, vendor/oneplus/oneplus5/device-vendor.mk)
 $(call inherit-product, vendor/omni/config/phone-xxhdpi-4096-dalvik-heap.mk)
 
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
+DEVICE_PACKAGE_OVERLAYS += device/oneplus/oneplus5/overlay/common
 
 PRODUCT_PACKAGES += \
     omni_charger_res_images
@@ -88,7 +88,7 @@ PRODUCT_COPY_FILES += \
 
 # Ramdisk
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/twrp/twrp.fstab:recovery/root/etc/twrp.fstab
+    device/oneplus/oneplus5/twrp/twrp.fstab:recovery/root/etc/twrp.fstab
 
 PRODUCT_AAPT_CONFIG := xxhdpi
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
@@ -160,12 +160,12 @@ PRODUCT_PACKAGES += \
     libgnss
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/gps/etc/flp.conf:system/vendor/etc/flp.conf \
-    $(LOCAL_PATH)/gps/etc/izat.conf:system/vendor/etc/izat.conf \
-    $(LOCAL_PATH)/gps/etc/lowi.conf:system/vendor/etc/lowi.conf \
-    $(LOCAL_PATH)/gps/etc/sap.conf:system/vendor/etc/sap.conf \
-    $(LOCAL_PATH)/gps/etc/apdr.conf:system/vendor/etc/apdr.conf \
-    $(LOCAL_PATH)/gps/etc/xtwifi.conf:system/vendor/etc/xtwifi.conf
+    device/oneplus/oneplus5/gps/etc/flp.conf:system/vendor/etc/flp.conf \
+    device/oneplus/oneplus5/gps/etc/izat.conf:system/vendor/etc/izat.conf \
+    device/oneplus/oneplus5/gps/etc/lowi.conf:system/vendor/etc/lowi.conf \
+    device/oneplus/oneplus5/gps/etc/sap.conf:system/vendor/etc/sap.conf \
+    device/oneplus/oneplus5/gps/etc/apdr.conf:system/vendor/etc/apdr.conf \
+    device/oneplus/oneplus5/gps/etc/xtwifi.conf:system/vendor/etc/xtwifi.conf
 
 # IPv6
 PRODUCT_PACKAGES += \
@@ -174,9 +174,9 @@ PRODUCT_PACKAGES += \
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/keylayout/fpc1020.kl:system/usr/keylayout/fpc1020.kl \
-    $(LOCAL_PATH)/keylayout/synaptics.kl:system/usr/keylayout/synaptics.kl \
-    $(LOCAL_PATH)/keylayout/synaptics.kl:system/usr/keylayout/synaptics_s3320.kl
+    device/oneplus/oneplus5/keylayout/fpc1020.kl:system/usr/keylayout/fpc1020.kl \
+    device/oneplus/oneplus5/keylayout/synaptics.kl:system/usr/keylayout/synaptics.kl \
+    device/oneplus/oneplus5/keylayout/synaptics.kl:system/usr/keylayout/synaptics_s3320.kl
 
 # Lights
 PRODUCT_PACKAGES += \
@@ -250,9 +250,6 @@ PRODUCT_PACKAGES += \
     power.msm8998 \
     powerhint.qti
 
-PRODUCT_PACKAGES += \
-    DeviceParts
-
 # ANT+
 #PRODUCT_PACKAGES += \
     AntHalService \
@@ -264,8 +261,8 @@ PRODUCT_PACKAGES += \
 
 # Seccomp policy
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/seccomp_policy/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
-    $(LOCAL_PATH)/seccomp_policy/mediaextractor-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy \
+    device/oneplus/oneplus5/seccomp_policy/mediacodec-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy \
+    device/oneplus/oneplus5/seccomp_policy/mediaextractor-seccomp.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediaextractor.policy \
 
 # For android_filesystem_config.h
 PRODUCT_PACKAGES += \
@@ -315,7 +312,7 @@ PRODUCT_PACKAGE_OVERLAYS += vendor/omni/overlay/CarrierConfig
 # does not exist as they are mutually exclusive.  Once all target's android_filesystem_config.h
 # have been removed, TARGET_FS_CONFIG_GEN should be made unconditional.
 DEVICE_CONFIG_DIR := $(dir $(firstword $(subst ]],, $(word 2, $(subst [[, ,$(_node_import_context))))))
-ifeq ($(wildcard $(LOCAL_PATH)/android_filesystem_config.h),)
+ifeq ($(wildcard device/oneplus/oneplus5/android_filesystem_config.h),)
   TARGET_FS_CONFIG_GEN := device/oneplus/oneplus5/config.fs
 else
   $(warning **********)
