@@ -42,9 +42,11 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += android.hidl.manager-V1.0-java
 
+ifeq ($(TARGET_DEVICE),oneplus5)
 # Fingerprint sensor
 PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.1-service
+endif
 
 #Enable AOSP KEYMASTER and GATEKEEPER HIDLs
 PRODUCT_PACKAGES += \

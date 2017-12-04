@@ -40,6 +40,9 @@ $(call inherit-product, device/oneplus/oneplus5/device.mk)
 
 PRODUCT_PROPERTY_OVERRIDES += ro.hardware.nfc_nci=nqx.default
 
+PRODUCT_PACKAGES += \
+    DeviceParts
+
 # Discard inherited values and use our own instead.
 PRODUCT_NAME := omni_oneplus5
 PRODUCT_DEVICE := oneplus5

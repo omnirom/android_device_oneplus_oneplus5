@@ -6,3 +6,5 @@ allow hal_audio_default socket_device:sock_file write;
 allow hal_audio_default perfd:unix_stream_socket connectto;
 allow hal_audio_default perfd_socket:sock_file write;
 
+allow hal_audio_default media_rw_data_file:file { read open getattr };
+
