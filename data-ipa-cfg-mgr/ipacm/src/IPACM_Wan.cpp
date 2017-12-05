@@ -1254,7 +1254,16 @@ void IPACM_Wan::event_callback(ipa_cm_event_id event, void *param)
 				}
 			}
 			break;
-
+#ifdef FEATURE_IPACM_HAL
+		/* WA for WLAN to clean up NAT instance during SSR */
+		case IPA_SSR_NOTICE: //sky
+			IPACMDBG_H("Received IPA_SSR_NOTICE event.\n");
+			if(m_is_sta_mode == WLAN_WAN)
+			{
+				IPACM_Iface::ipacmcfg->DelNatIfaces(dev_name); // delete NAT-iface
+			}
+		break;
+#endif
 	default:
 		break;
 	}
@@ -6054,12 +6063,12 @@ int IPACM_Wan::handle_network_stats_update(ipa_get_apn_data_stats_resp_msg_v01 *
 	{
 		if(data->apn_data_stats_list[apn_index].mux_id == ext_prop->ext[0].mux_id)
 		{
-			IPACMDBG_H("Received IPA_TETHERING_STATS_UPDATE_NETWORK_STATS, MUX ID %d TX (P%lu/B%lu) RX (P%lu/B%lu)\n",
+			IPACMDBG_H("Received IPA_TETHERING_STATS_UPDATE_NETWORK_STATS, MUX ID %d TX (P%llu/B%llu) RX (P%llu/B%llu)\n",
 				data->apn_data_stats_list[apn_index].mux_id,
-					data->apn_data_stats_list[apn_index].num_ul_packets,
-						data->apn_data_stats_list[apn_index].num_ul_bytes,
-							data->apn_data_stats_list[apn_index].num_dl_packets,
-								data->apn_data_stats_list[apn_index].num_dl_bytes);
+					(long long)data->apn_data_stats_list[apn_index].num_ul_packets,
+						(long long)data->apn_data_stats_list[apn_index].num_ul_bytes,
+							(long long)data->apn_data_stats_list[apn_index].num_dl_packets,
+								(long long)data->apn_data_stats_list[apn_index].num_dl_bytes);
 			fp = fopen(IPA_NETWORK_STATS_FILE_NAME, "w");
 			if ( fp == NULL )
 			{
@@ -6070,10 +6079,10 @@ int IPACM_Wan::handle_network_stats_update(ipa_get_apn_data_stats_resp_msg_v01 *
 
 			fprintf(fp, NETWORK_STATS,
 				dev_name,
-					data->apn_data_stats_list[apn_index].num_ul_packets,
-						data->apn_data_stats_list[apn_index].num_ul_bytes,
-							data->apn_data_stats_list[apn_index].num_dl_packets,
-								data->apn_data_stats_list[apn_index].num_dl_bytes);
+					(long long)data->apn_data_stats_list[apn_index].num_ul_packets,
+						(long long)data->apn_data_stats_list[apn_index].num_ul_bytes,
+							(long long)data->apn_data_stats_list[apn_index].num_dl_packets,
+								(long long)data->apn_data_stats_list[apn_index].num_dl_bytes);
 			fclose(fp);
 			break;
 		};

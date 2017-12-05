@@ -225,6 +225,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     ipacm \
+    liboffloadhal \
     IPACM_cfg.xml
 
 PRODUCT_PACKAGES += \

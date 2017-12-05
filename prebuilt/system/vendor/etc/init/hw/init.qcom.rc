@@ -120,8 +120,6 @@ on boot
     #Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
 
-    setprop wifi.interface wlan0
-
 #   Define TCP buffer sizes for various networks
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
     setprop net.tcp.buffersize.wifi    524288,2097152,4194304,262144,524288,1048576
@@ -263,6 +261,10 @@ on post-fs-data
     #create netmgr log dir
     mkdir /data/vendor/netmgr 0770 radio radio
     chmod 0770 /data/vendor/netmgr
+
+    #create ipacm log dir
+    mkdir /data/vendor/ipa 0770 radio radio
+    chmod 0770 /data/vendor/ipa
 
     # Create directory for radio
     mkdir /data/vendor/radio 0770 system radio
@@ -665,11 +667,11 @@ service netmgrd /system/vendor/bin/netmgrd
 #    group diag
 #    disabled
 
-#service ipacm /system/vendor/bin/ipacm
-#    class main
-#    user radio
-#    group inet
-#    disabled
+service ipacm /system/vendor/bin/ipacm
+    class main
+    user radio
+    group inet
+    disabled
 
 service qti /system/vendor/bin/qti
     class main

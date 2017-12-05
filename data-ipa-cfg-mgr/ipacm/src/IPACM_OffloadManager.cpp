@@ -135,7 +135,7 @@ RET IPACM_OffloadManager::provideFd(int fd, unsigned int groups)
 	/* check socket name */
 	memset(&local, 0, sizeof(struct sockaddr_nl));
 	addr_len = sizeof(local);
-	getsockname(fd, (struct sockaddr *)&local, &addr_len);
+	getsockname(fd, (struct sockaddr *)&local, (socklen_t *)&addr_len);
 	IPACMDBG_H(" FD %d, nl_pad %d nl_pid %u\n", fd, local.nl_pad, local.nl_pid);
 
 	/* add the check if getting FDs already or not */
@@ -444,8 +444,14 @@ RET IPACM_OffloadManager::setUpstream(const char *upstream_name, const Prefix& g
 			if (upstream_v6_up == false) {
 				IPACMDBG_H("IPV6 gateway: %08x:%08x:%08x:%08x \n",
 						gw_addr_v6.v6Addr[0], gw_addr_v6.v6Addr[1], gw_addr_v6.v6Addr[2], gw_addr_v6.v6Addr[3]);
-				post_route_evt(IPA_IP_v6, index, IPA_WAN_UPSTREAM_ROUTE_ADD_EVENT, gw_addr_v6);
-				upstream_v6_up = true;
+				/* check v6-address valid or not */
+				if((gw_addr_v6.v6Addr[0] == 0) && (gw_addr_v6.v6Addr[1] ==0) && (gw_addr_v6.v6Addr[2] == 0) && (gw_addr_v6.v6Addr[3] == 0))
+				{
+					IPACMDBG_H("Invliad ipv6-address, ignored v6-setupstream\n");
+				} else {
+					post_route_evt(IPA_IP_v6, index, IPA_WAN_UPSTREAM_ROUTE_ADD_EVENT, gw_addr_v6);
+					upstream_v6_up = true;
+				}
 			} else {
 				IPACMDBG_H("already setupstream iface(%s) ipv6 previously\n", upstream_name);
 			}
@@ -479,8 +485,14 @@ RET IPACM_OffloadManager::setUpstream(const char *upstream_name, const Prefix& g
 			if (upstream_v6_up == false) {
 				IPACMDBG_H("IPV6 gateway: %08x:%08x:%08x:%08x \n",
 						gw_addr_v6.v6Addr[0], gw_addr_v6.v6Addr[1], gw_addr_v6.v6Addr[2], gw_addr_v6.v6Addr[3]);
-				post_route_evt(IPA_IP_v6, index, IPA_WAN_UPSTREAM_ROUTE_ADD_EVENT, gw_addr_v6);
-				upstream_v6_up = true;
+				/* check v6-address valid or not */
+				if((gw_addr_v6.v6Addr[0] == 0) && (gw_addr_v6.v6Addr[1] ==0) && (gw_addr_v6.v6Addr[2] == 0) && (gw_addr_v6.v6Addr[3] == 0))
+				{
+					IPACMDBG_H("Invliad ipv6-address, ignored v6-setupstream\n");
+				} else {
+					post_route_evt(IPA_IP_v6, index, IPA_WAN_UPSTREAM_ROUTE_ADD_EVENT, gw_addr_v6);
+					upstream_v6_up = true;
+				}
 			} else {
 				IPACMDBG_H("already setupstream iface(%s) ipv6 previously\n", upstream_name);
 				result = SUCCESS_DUPLICATE_CONFIG;
@@ -535,7 +547,7 @@ RET IPACM_OffloadManager::setQuota(const char * upstream_name /* upstream */, ui
 		return FAIL_INPUT_CHECK;
 	}
 
-	IPACMDBG_H("SET_DATA_QUOTA %s %lu", quota.interface_name, mb);
+	IPACMDBG_H("SET_DATA_QUOTA %s %llu", quota.interface_name, (long long)mb);
 
 	if (ioctl(fd, WAN_IOC_SET_DATA_QUOTA, &quota) < 0) {
         IPACMERR("IOCTL WAN_IOCTL_SET_DATA_QUOTA call failed: %s", strerror(errno));
@@ -576,7 +588,7 @@ RET IPACM_OffloadManager::getStats(const char * upstream_name /* upstream */,
 	offload_stats.tx = stats.tx_bytes;
 	offload_stats.rx = stats.rx_bytes;
 
-	IPACMDBG_H("send getStats tx:%lu rx:%lu \n", offload_stats.tx, offload_stats.rx);
+	IPACMDBG_H("send getStats tx:%llu rx:%llu \n", (long long)offload_stats.tx, (long long)offload_stats.rx);
 	close(fd);
 	return SUCCESS;
 }
@@ -638,7 +650,7 @@ int IPACM_OffloadManager::ipa_get_if_index(const char * if_name, int * if_index)
 	}
 
 	memset(&ifr, 0, sizeof(struct ifreq));
-	(void)strncpy(ifr.ifr_name, if_name, sizeof(ifr.ifr_name));
+	(void)strlcpy(ifr.ifr_name, if_name, sizeof(ifr.ifr_name));
 	IPACMDBG_H("interface name (%s)\n", if_name);
 
 	if(ioctl(fd,SIOCGIFINDEX , &ifr) < 0)
