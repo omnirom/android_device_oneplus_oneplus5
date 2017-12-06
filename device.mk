@@ -289,7 +289,8 @@ PRODUCT_BOOT_JARS += \
     sensors.msm8998
 
 PRODUCT_PACKAGES += \
-    tcmiface
+    tcmiface \
+    qti-telephony-common
 
 # Netutils
 PRODUCT_PACKAGES += \
