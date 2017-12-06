@@ -104,9 +104,7 @@ PRODUCT_PACKAGES += android.hardware.thermal@1.0-impl \
 # Wifi
 PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
-    android.hardware.wifi.supplicant@1.0 \
-    android.hardware.tetheroffload.config@1.0 \
-    android.hardware.tetheroffload.control@1.0
+    android.hardware.wifi.supplicant@1.0
 
 #RIL
 PRODUCT_PACKAGES += \
