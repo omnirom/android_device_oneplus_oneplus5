@@ -43,7 +43,6 @@ PRODUCT_PROPERTY_OVERRIDES += ro.hardware.nfc_nci=nqx.default
 DEVICE_PACKAGE_OVERLAYS += device/oneplus/oneplus5/overlay/device
 
 PRODUCT_PACKAGES += \
-    DeviceParts \
     android.hardware.biometrics.fingerprint@2.1-service
 
 # Discard inherited values and use our own instead.

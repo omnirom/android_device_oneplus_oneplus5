@@ -1,4 +1,5 @@
 LOCAL_PATH := $(call my-dir)
+ifeq ($(TARGET_DEVICE),oneplus5)
 include $(CLEAR_VARS)
 
 LOCAL_MODULE_TAGS := optional
@@ -16,3 +17,4 @@ LOCAL_DEX_PREOPT := false
 include $(BUILD_PACKAGE)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
+endif
