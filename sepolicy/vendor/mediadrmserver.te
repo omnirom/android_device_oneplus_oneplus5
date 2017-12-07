@@ -6,5 +6,5 @@ allow init mediadrmserver:binder { transfer call };
 
 binder_call(mediadrmserver, servicemanager)
 
-allow mediadrmserver diag_prop:file read;
+allow mediadrmserver debug_prop:file read;
 

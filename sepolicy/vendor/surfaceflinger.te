@@ -1,4 +1,4 @@
-get_prop(surfaceflinger, diag_prop);
+get_prop(surfaceflinger, debug_prop);
 
 allow surfaceflinger hal_perf_default:binder call;
 

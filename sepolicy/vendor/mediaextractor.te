@@ -2,5 +2,5 @@ allow mediaextractor sdcardfs:file { r_file_perms };
 
 allow mediaextractor system_server:fifo_file { append write };
 
-allow mediaextractor diag_prop:file read;
+allow mediaextractor debug_prop:file read;
 

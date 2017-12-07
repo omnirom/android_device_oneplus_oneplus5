@@ -1,2 +1,2 @@
-allow hal_drm_default diag_prop:file read;
+allow hal_drm_default debug_prop:file read;
 

@@ -1,4 +1,4 @@
-set_prop(thermal-engine, diag_prop)
+set_prop(thermal-engine, debug_prop)
 allow thermal-engine sysfs_kgsl:file { getattr open read };
 allow thermal-engine sysfs_batteryinfo:file r_file_perms;
 

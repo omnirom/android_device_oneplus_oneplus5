@@ -1,5 +1,5 @@
-get_prop(dpmd, diag_prop);
-allow dpmd diag_prop:property_service set;
+get_prop(dpmd, debug_prop);
+allow dpmd debug_prop:property_service set;
 
 
 allow dpmd sysfs:file { open read };

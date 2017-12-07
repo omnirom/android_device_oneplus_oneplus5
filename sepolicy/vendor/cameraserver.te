@@ -27,8 +27,8 @@ allow cameraserver sysfs:file { open write };
 allow cameraserver cameraserver:process { execmem };
 
 ####
-allow cameraserver diag_prop:file { r_file_perms };
-allow cameraserver diag_prop:property_service set;
+allow cameraserver debug_prop:file { r_file_perms };
+allow cameraserver debug_prop:property_service set;
 
 #######
 #allow cameraserver persist_file:file rw_file_perms;

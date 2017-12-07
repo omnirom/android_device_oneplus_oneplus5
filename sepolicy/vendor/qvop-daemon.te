@@ -1,2 +1,2 @@
-allow qvop-daemon diag_prop:file read;
+allow qvop-daemon debug_prop:file read;
 

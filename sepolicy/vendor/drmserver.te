@@ -1,2 +1,2 @@
-allow drmserver diag_prop:file read;
+allow drmserver debug_prop:file read;
 

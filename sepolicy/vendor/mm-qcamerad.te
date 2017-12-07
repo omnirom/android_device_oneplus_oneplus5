@@ -1,6 +1,6 @@
 allow mm-qcamerad camera_prop:property_service set;
 allow mm-qcamerad mpctl_socket:sock_file write;
-get_prop(mm-qcamerad, diag_prop);
+get_prop(mm-qcamerad, debug_prop);
 
 allow mm-qcamerad hal_graphics_allocator_default:fd use;
 allow mm-qcamerad { hal_camera }:fd use;

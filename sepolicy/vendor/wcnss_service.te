@@ -1,4 +1,4 @@
-#get_prop(wcnss_service, diag_prop);
+#get_prop(wcnss_service, debug_prop);
 #allow servicemanager wcnss_service:dir search;
 #allow servicemanager wcnss_service:file { open read };
 #allow servicemanager wcnss_service:process getattr;

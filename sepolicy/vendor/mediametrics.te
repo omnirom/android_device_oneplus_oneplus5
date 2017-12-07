@@ -1,2 +1,2 @@
-allow mediametrics diag_prop:file read;
+allow mediametrics debug_prop:file read;
 

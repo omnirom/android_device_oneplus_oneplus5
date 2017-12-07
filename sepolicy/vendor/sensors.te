@@ -1,4 +1,4 @@
-set_prop(sensors, diag_prop)
+set_prop(sensors, debug_prop)
 
 allow sensors proc:file { getattr open read };
 
