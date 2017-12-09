@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a992225d_079d104c",
+        "filename": "BoardConfig.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1001711
+      },
+      "writtenOn": "2017-12-09T15:53:26Z",
+      "side": 1,
+      "message": "This breaks build for me: \nsystem/core/libutils/include/utils/StrongPointer.h:135:11: error: cannot initialize a member subobject of type \u0027android::CameraProviderManager *\u0027 with an lvalue of type \u0027android::CameraModule *\u0027\n\nIs another pick needed?",
+      "revId": "af31b732a91167d68973cac1a40b8949029e3bdd",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    }
+  ]
+}
