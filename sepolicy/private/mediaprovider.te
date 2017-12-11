@@ -3,12 +3,12 @@
 ### MediaProvider and DownloadProvider and associated services.
 ###
 
-type mediaprovider, domain;
-typeattribute mediaprovider coredomain;
-app_domain(mediaprovider)
+#type mediaprovider, domain;
+#typeattribute mediaprovider coredomain;
+#app_domain(mediaprovider)
 
 # DownloadProvider accesses the network.
-net_domain(mediaprovider)
+#net_domain(mediaprovider)
 
 # DownloadProvider uses /cache.
 allow mediaprovider cache_file:dir create_dir_perms;

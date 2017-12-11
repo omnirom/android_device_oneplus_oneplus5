@@ -195,7 +195,8 @@ PRODUCT_PACKAGES += \
     com.nxp.nfc.nq.xml \
     libnqnfc-nci \
     libnqnfc_nci_jnia \
-    nfc_nci.nqx.default \
+    nfc_nci.msm8998 \
+    NfcNci \
     libp61-jcop-kit \
     NQNfcNci \
     nqnfcinfo \
@@ -277,7 +278,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libjson
 
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     ims-ext-common \
     telephony-ext
 
@@ -289,8 +290,7 @@ PRODUCT_BOOT_JARS += \
     sensors.msm8998
 
 PRODUCT_PACKAGES += \
-    tcmiface \
-    qti-telephony-common
+    tcmiface
 
 # Netutils
 PRODUCT_PACKAGES += \
@@ -300,6 +300,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vr.msm8998 \
     thermal.msm8998
+
+PRODUCT_PACKAGES += \
+    DeviceParts
 
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_google_audio.xml \

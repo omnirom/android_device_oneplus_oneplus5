@@ -8,3 +8,5 @@ allow rild nv_data_file:file create_file_perms;
 
 allow rild debug_prop:property_service set;
 allow rild audioserver_service:service_manager find;
+allow rild vendor_file:file ioctl;
+

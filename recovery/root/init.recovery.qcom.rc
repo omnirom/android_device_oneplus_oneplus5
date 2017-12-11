@@ -44,7 +44,9 @@ on init
     write /sys/class/leds/red/trigger "battery-charging"
     write /sys/class/leds/green/trigger "battery-full"
 
-on boot
+    # Disable hw keys backlight
+    write /sys/class/leds/button-backlight/brightness 0
+
     # Update foreground and background cpusets
     write /dev/cpuset/foreground/cpus 0-7
     write /dev/cpuset/foreground/boost/cpus 0-7
@@ -53,15 +55,11 @@ on boot
     write /dev/cpuset/top-app/cpus 0-7
 
     # Enable sched boost
-    write /proc/sys/kernel/sched_boost 1 
+    write /proc/sys/kernel/sched_boost 1
 
 on fs
     wait /dev/block/platform/soc/1da4000.ufshc
     symlink /dev/block/platform/soc/1da4000.ufshc /dev/block/bootdevice
-    chown root shell /proc/touchpanel/double_tap_enable
-    write /proc/touchpanel/double_tap_enable 1
-    
-    # encryption support
     chmod 0660 /dev/qseecom
     chown system drmrpc /dev/qseecom
     chmod 0664 /dev/ion
@@ -71,21 +69,31 @@ on fs
 
     # enable USB OTG support
     write /sys/class/power_supply/usb/otg_switch 1
-	
+
+# Separate copy needed to use /sbin/linker64 instead of /system/bin/linker64
+service sbinqseecomd /sbin/qseecomd
+    disabled
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
+on boot
+    start sbinqseecomd
+
 on property:sys.boot_completed=1
     # Tweak IO performance after boot complete
-    write /sys/block/dm-0/queue/scheduler "cfq"
-    write /sys/block/dm-1/queue/scheduler "cfq"
-    write /sys/block/sda/queue/scheduler "cfq"
-    write /sys/block/sde/queue/scheduler "cfq"
-    write /sys/block/dm-0/queue/read_ahead_kb 512
-    write /sys/block/dm-1/queue/read_ahead_kb 512
-    write /sys/block/sda/queue/read_ahead_kb 512
+    write /sys/block/dm-0/queue/scheduler "zen"
+    write /sys/block/dm-1/queue/scheduler "zen"
+    write /sys/block/sda/queue/scheduler "zen"
+    write /sys/block/sde/queue/scheduler "zen"
+    write /sys/block/dm-0/queue/read_ahead_kb 128
+    write /sys/block/dm-1/queue/read_ahead_kb 128
+    write /sys/block/sda/queue/read_ahead_kb 128
 	write /sys/block/sda/queue/iostats 1
-	write /sys/block/sda/queue/nr_requests 512
-    write /sys/block/sde/queue/read_ahead_kb 512
-	write /sys/block/sde/queue/iostats 1
-	write /sys/block/sde/queue/nr_requests 512
+	write /sys/block/sda/queue/nr_requests 128
+    write /sys/block/sde/queue/read_ahead_kb 128
+    write /sys/block/sde/queue/iostats 1
+    write /sys/block/sde/queue/nr_requests 128
 
     # Enable Adaptive LMK
     write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 0
@@ -97,15 +105,15 @@ on property:sys.boot_completed=1
     write /dev/cpuset/system-background/cpus 0-7
     write /dev/cpuset/top-app/cpus 0-7
 
-	# Disable sched boost
+    # Disable sched boost
     write /proc/sys/kernel/sched_boost 0
 
     # Input boost configuration
     write /sys/module/cpu_boost/parameters/input_boost_freq "0:1036800"
     write /sys/module/cpu_boost/parameters/input_boost_ms 500
 
-	# Disable thermal hotplug to switch governor
-	write /sys/module/msm_thermal/core_control/enabled 0
+    # Disable thermal hotplug to switch governor
+    write /sys/module/msm_thermal/core_control/enabled 0
     write /sys/module/msm_thermal/core_control/enabled 0
     write /sys/devices/soc/soc:qcom,bcl/mode "disable"
     write /sys/devices/soc/soc:qcom,bcl/hotplug_mask 0
@@ -113,32 +121,32 @@ on property:sys.boot_completed=1
     write /sys/devices/soc/soc:qcom,bcl/mode "enable"
 
     # Configure governor settings for little cluster
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/above_hispeed_delay 20000
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/go_hispeed_load 90
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_rate 20000
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/hispeed_freq 1248000
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/io_is_busy 0
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/align_windows 1
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/target_loads "83 1804800:95"
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/min_sample_time 40000
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/timer_slack 20000
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/fastlane 1
-    write /sys/devices/system/cpu/cpu0/cpufreq/interactive/fastlane_threshold 50
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "blu_active"
+    write /sys/devices/system/cpu/cpu0/cpufreq/blu_active/above_hispeed_delay 20000
+    write /sys/devices/system/cpu/cpu0/cpufreq/blu_active/go_hispeed_load 90
+    write /sys/devices/system/cpu/cpu0/cpufreq/blu_active/timer_rate 20000
+    write /sys/devices/system/cpu/cpu0/cpufreq/blu_active/hispeed_freq 1248000
+    write /sys/devices/system/cpu/cpu0/cpufreq/blu_active/io_is_busy 0
+    write /sys/devices/system/cpu/cpu0/cpufreq/blu_active/align_windows 1
+    write /sys/devices/system/cpu/cpu0/cpufreq/blu_active/target_loads "83 1804800:95"
+    write /sys/devices/system/cpu/cpu0/cpufreq/blu_active/min_sample_time 40000
+    write /sys/devices/system/cpu/cpu0/cpufreq/blu_active/timer_slack 20000
+    write /sys/devices/system/cpu/cpu0/cpufreq/blu_active/fastlane 1
+    write /sys/devices/system/cpu/cpu0/cpufreq/blu_active/fastlane_threshold 50
 
     # Configure governor settings for big cluster
     write /sys/devices/system/cpu/cpu4/cpufreq/scaling_governor "blu_active"
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/above_hispeed_delay 20000
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/go_hispeed_load 90
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_rate 20000
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/hispeed_freq 1574400
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/io_is_busy 0
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/align_windows 1
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/target_loads "83 1939200:90 2016000:95"
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/min_sample_time 40000
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/timer_slack 20000
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/fastlane 1
-    write /sys/devices/system/cpu/cpu4/cpufreq/interactive/fastlane_threshold 50
+    write /sys/devices/system/cpu/cpu4/cpufreq/blu_active/above_hispeed_delay 20000
+    write /sys/devices/system/cpu/cpu4/cpufreq/blu_active/go_hispeed_load 90
+    write /sys/devices/system/cpu/cpu4/cpufreq/blu_active/timer_rate 20000
+    write /sys/devices/system/cpu/cpu4/cpufreq/blu_active/hispeed_freq 1574400
+    write /sys/devices/system/cpu/cpu4/cpufreq/blu_active/io_is_busy 0
+    write /sys/devices/system/cpu/cpu4/cpufreq/blu_active/align_windows 1
+    write /sys/devices/system/cpu/cpu4/cpufreq/blu_active/target_loads "83 1939200:90 2016000:95"
+    write /sys/devices/system/cpu/cpu4/cpufreq/blu_active/min_sample_time 40000
+    write /sys/devices/system/cpu/cpu4/cpufreq/blu_active/timer_slack 20000
+    write /sys/devices/system/cpu/cpu4/cpufreq/blu_active/fastlane 1
+    write /sys/devices/system/cpu/cpu4/cpufreq/blu_active/fastlane_threshold 50
 
     # Re-enable thermal hotplug
     write /sys/module/msm_thermal/core_control/enabled 1
@@ -146,16 +154,3 @@ on property:sys.boot_completed=1
     write /sys/devices/soc/soc:qcom,bcl/hotplug_mask 0
     write /sys/devices/soc/soc:qcom,bcl/hotplug_soc_mask 0
     write /sys/devices/soc/soc:qcom,bcl/mode "enable"
-
-    # Disable hw keys backlight
-	write /sys/class/leds/button-backlight/brightness 0
-
-# Separate copy needed to use /sbin/linker64 instead of /system/bin/linker64
-service sbinqseecomd /sbin/qseecomd
-    disabled
-    user root
-    group root
-    seclabel u:r:recovery:s0
-
-on boot
-    start sbinqseecomd

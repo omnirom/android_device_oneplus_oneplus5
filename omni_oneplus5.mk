@@ -40,6 +40,8 @@ $(call inherit-product, device/oneplus/oneplus5/device.mk)
 
 PRODUCT_PROPERTY_OVERRIDES += ro.hardware.nfc_nci=nqx.default
 
+ALLOW_MISSING_DEPENDENCIES := true
+
 DEVICE_PACKAGE_OVERLAYS += device/oneplus/oneplus5/overlay/device
 
 PRODUCT_PACKAGES += \
