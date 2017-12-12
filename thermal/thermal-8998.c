@@ -32,11 +32,11 @@
 
 #define TEMPERATURE_FILE_FORMAT       "/sys/class/thermal/thermal_zone%d/temp"
 
-#define BATTERY_SENSOR_NUM            29
-#define GPU_SENSOR_NUM                16
+#define BATTERY_SENSOR_NUM            0
+#define GPU_SENSOR_NUM                17
 #define SKIN_SENSOR_NUM               5
 
-const int CPU_SENSORS[] = {7, 8, 9, 10, 11, 12, 13, 14};
+const int CPU_SENSORS[] = {8, 9, 10, 11, 12, 13, 14,15};
 
 #define CPU_NUM                       (sizeof(CPU_SENSORS) / sizeof(int))
 // Sum of CPU_NUM + 3 for GPU, BATTERY, and SKIN.
@@ -86,7 +86,9 @@ size_t get_num_cpus() {
  */
 static ssize_t read_temperature(int sensor_num, int type, const char *name, float mult,
         float throttling_threshold, float shutdown_threshold, float vr_throttling_threshold,
-        temperature_t *out) {
+        temperature_t *out) 
+{
+    ALOGD("Entering %s",__func__);
     FILE *file;
     char file_name[MAX_LENGTH];
     float temp;
@@ -117,9 +119,10 @@ static ssize_t read_temperature(int sensor_num, int type, const char *name, floa
     return 0;
 }
 
-static ssize_t get_cpu_temperatures(temperature_t *list, size_t size) {
+static ssize_t get_cpu_temperatures(temperature_t *list, size_t size) 
+{
+    ALOGD("Entering %s",__func__);
     size_t cpu;
-
     for (cpu = 0; cpu < CPU_NUM; cpu++) {
         if (cpu >= size) {
             break;
@@ -132,10 +135,12 @@ static ssize_t get_cpu_temperatures(temperature_t *list, size_t size) {
             return result;
         }
     }
+
     return cpu;
 }
 
 ssize_t get_temperatures(thermal_module_t *module, temperature_t *list, size_t size) {
+    ALOGD("Entering %s",__func__);
     ssize_t result = 0;
     size_t current_index = 0;
 

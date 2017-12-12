@@ -35,12 +35,13 @@
 #define CPU_PRESENT_FILE              "/sys/devices/system/cpu/present"
 
 const char * __attribute__ ((weak)) get_cpu_label(unsigned int cpu_num) {
+    ALOGD("Entering %s",__func__);
     static const char * cpu_label = "cpu";
     return cpu_label;
 }
 
 size_t __attribute__ ((weak)) get_num_cpus() {
-
+    ALOGD("Entering %s",__func__);
     FILE *file;
     char *line = NULL;
     size_t len = 0;
@@ -71,10 +72,12 @@ size_t __attribute__ ((weak)) get_num_cpus() {
 }
 
 ssize_t __attribute__ ((weak)) get_temperatures(thermal_module_t *module, temperature_t *list, size_t size) {
+    ALOGD("Entering %s",__func__);
     return 0;
 }
 
 static ssize_t get_cpu_usages(thermal_module_t *module, cpu_usage_t *list) {
+    ALOGD("Entering %s",__func__);
     int vals, cpu_num, online;
     ssize_t read;
     uint64_t user, nice, system, idle, active, total;
@@ -176,7 +179,7 @@ thermal_module_t HAL_MODULE_INFO_SYM = {
         .hal_api_version = HARDWARE_HAL_API_VERSION,
         .id = THERMAL_HARDWARE_MODULE_ID,
         .name = "Thermal HAL",
-        .author = "Code Aurora Forum",
+        .author = "The Android Open Source Project",
         .methods = &thermal_module_methods,
     },
     .getTemperatures = get_temperatures,

@@ -210,16 +210,6 @@
             <instance>msm8998</instance>
         </interface>
     </hal>
-    <!-- Thermal HAL Service -->
-    <hal format="hidl">
-        <name>android.hardware.thermal</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IThermal</name>
-            <instance>msm8998</instance>
-        </interface>
-    </hal>
     <!-- gnss -->
     <hal format="hidl">
         <name>android.hardware.gnss</name>
