@@ -16,7 +16,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_C_INCLUDES := device/oneplus/oneplus5/thermal-engine
+LOCAL_C_INCLUDES := hardware/qcom/msm8998/thermal-engine
 LOCAL_MODULE := vr.msm8998
 LOCAL_MODULE_RELATIVE_PATH := hw
 LOCAL_PROPRIETARY_MODULE := true
