@@ -22,3 +22,7 @@ ro.ril.supportLTE          u:object_r:radio_prop:s0
 persist.sys.phone_account u:object_r:qti_telephony_prop:s0
 persist.radio.bksim.iccid u:object_r:qti_telephony_prop:s0
 persist.radio.ddssim.iccid u:object_r:qti_telephony_prop:s0
+
+sys.qcom.thermalcfg        u:object_r:thermal_prop:s0
+ctl.thermal-engine         u:object_r:thermal_prop:s0
+

@@ -207,7 +207,7 @@
         <version>1.0</version>
         <interface>
             <name>IVr</name>
-            <instance>msm8998</instance>
+            <instance>default</instance>
         </interface>
     </hal>
     <!-- gnss -->
