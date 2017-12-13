@@ -20,3 +20,5 @@ allow qti_init_shell proc_modules:file { read open getattr };
 
 allow qti_init_shell sensors_persist_file:dir write;
 
+allow qti_init_shell vendor_file:file execute_no_trans;
+
