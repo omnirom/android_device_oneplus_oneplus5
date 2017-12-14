@@ -40,7 +40,7 @@ PRODUCT_PACKAGES += \
     android.hardware.drm@1.0-impl \
     android.hardware.drm@1.0-service
 
-PRODUCT_PACKAGES += android.hidl.manager-V1.0-java
+PRODUCT_PACKAGES += android.hidl.manager@1.0
 
 #Enable AOSP KEYMASTER and GATEKEEPER HIDLs
 PRODUCT_PACKAGES += \
