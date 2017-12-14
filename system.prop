@@ -114,6 +114,7 @@ persist.radio.enhance_ecall=true
 persist.radio.apm_sim_not_pwdn=1
 persist.radio.sib16_support=1
 persist.radio.custom_ecc=1
+ro.telephony.default_cdma_sub=0
 ril.ecclist=112,911,999,*911,#911
 ril.ecclist1=911,112,999,*911,#911,991,994
 

@@ -1,0 +1,3 @@
+com.qualcomm.qti.ims.radio::IImsRadio                           u:object_r:vnd_ims_radio_hwservice:s0
+com.qualcomm.qti.imsrtpservice::IRTPService                     u:object_r:hal_imsrtp_hwservice:s0
+

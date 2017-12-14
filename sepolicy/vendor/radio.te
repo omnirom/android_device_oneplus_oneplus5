@@ -13,3 +13,5 @@ get_prop(radio, qcom_ims_prop)
 
 set_prop(radio, qti_telephony_prop);
 
+allow radio vnd_ims_radio_hwservice:hwservice_manager find;
+

@@ -36,4 +36,8 @@
 
     <!-- Allows the telephony HFA logic to run even if we're not in setup wizard. -->
     <bool name="config_allow_hfa_outside_of_setup_wizard">false</bool>
+
+    <!-- Allow handover from telephony calls to another ConnectionService. -->
+    <bool name="config_support_handover_from">true</bool>
+
 </resources>
