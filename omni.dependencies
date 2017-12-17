@@ -3,19 +3,19 @@
     "remote": "omnirom",
     "repository": "android_hardware_qcom_display-caf-msm8998",
     "target_path": "hardware/qcom/display-caf-msm8998",
-    "revision": "android-8.0"
+    "revision": "android-8.1"
   },
   {
     "remote": "omnirom",
     "repository": "android_hardware_qcom_audio-caf-msm8998",
     "target_path": "hardware/qcom/audio-caf-msm8998",
-    "revision": "android-8.0"
+    "revision": "android-8.1"
   },
   {
     "remote": "omnirom",
     "repository": "android_hardware_qcom_media-caf-msm8998",
     "target_path": "hardware/qcom/media-caf-msm8998",
-    "revision": "android-8.0"
+    "revision": "android-8.1"
   },
   {
     "remote": "omnirom",
@@ -33,7 +33,7 @@
     "remote": "omnirom",
     "repository": "android_device_qcom_caf-sepolicy",
     "target_path": "device/qcom/sepolicy",
-    "revision": "android-8.0"
+    "revision": "android-8.1"
   },
   {
     "repository": "android_external_ant-wireless_antradio-library",
@@ -56,7 +56,7 @@
     "remote": "omnirom",
     "repository": "android_kernel_oneplus_msm8998",
     "target_path": "kernel/oneplus/msm8998",
-    "revision": "android-8.0"
+    "revision": "android-8.1"
   },
   {
     "remote": "omnirom",
@@ -74,6 +74,6 @@
     "remote": "omnirom",
     "repository": "android_vendor_qcom_opensource_bluetooth",
     "target_path": "vendor/qcom/opensource/bluetooth",
-    "revision": "android-8.0"
+    "revision": "android-8.1"
   }
 ]
