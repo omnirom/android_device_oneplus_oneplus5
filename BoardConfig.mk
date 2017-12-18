@@ -249,6 +249,10 @@ DEVICE_MATRIX_FILE := $(BOARD_PATH)/compatibility_matrix.xml
 TARGET_HW_DISK_ENCRYPTION := true
 TARGET_CRYPTFS_HW_PATH := $(BOARD_PATH)/cryptfs_hw
 
+#vold
+TARGET_KERNEL_HAVE_NTFS := true
+TARGET_KERNEL_HAVE_EXFAT := true
+
 # CNE and DPM
 #TARGET_LDPRELOAD := libNimsWrap.so
 BOARD_USES_QCNE := true
