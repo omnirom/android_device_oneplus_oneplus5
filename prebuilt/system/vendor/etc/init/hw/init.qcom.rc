@@ -31,7 +31,7 @@ import /system/vendor/etc/init/init.omni.rc
 import /system/vendor/etc/init/init.omni.op5.rc
 
 import /system/vendor/etc/init/hw/init.qcom.usb.rc
-import /system/vendor/etc/init/init.msm.usb.configfs.rc
+import /system/vendor/etc/init/hw/init.msm.usb.configfs.rc
 import /system/vendor/etc/init/hw/init.target.rc
 
 on early-init
