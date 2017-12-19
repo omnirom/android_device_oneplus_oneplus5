@@ -37,6 +37,7 @@ allow hal_fingerprint_default uhid_device:chr_file { open read ioctl write };
 
 #allow for find fingerprint service
 allow hal_fingerprint_default fingerprint_service:service_manager { find };
+allow hal_fingerprint_default fingerprintd_service:service_manager { add };
 
 #allow for servicemanager
 allow servicemanager  hal_fingerprint_default:dir {  search read open  };
