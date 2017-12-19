@@ -814,6 +814,9 @@ vendor/lib/libwfdcommonutils_proprietary.so
 vendor/lib/libwfdmodulehdcpsession.so
 vendor/lib/libwfdmmservice.so
 bin/wfdservice
+etc/init/wfdservice.rc
+etc/wfdconfig.xml
+etc/wfdconfigsink.xml
 vendor/bin/wifidisplayhalservice
 vendor/etc/init/com.qualcomm.qti.wifidisplayhal@1.0-service.rc
 lib/com.qualcomm.qti.wifidisplayhal@1.0.so

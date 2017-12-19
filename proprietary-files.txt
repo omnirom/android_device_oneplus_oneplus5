@@ -40,7 +40,7 @@ lib64/libtrueportrait.so
 lib/libtrueportrait.so
 vendor/lib/libcamera_oneplus_bokeh_wrapper.so
 vendor/lib/libVDDualCameraBlurlessAPI.so
-vendor/lib/libarcsoft_dualcam_refocus.so
+#vendor/lib/libarcsoft_dualcam_refocus.so
 vendor/lib64/libcdsprpc.so
 vendor/lib/libcdsprpc.so
 vendor/lib/libchromaflash.so
@@ -124,9 +124,8 @@ vendor/lib/libqomx_jpegenc_pipe.so
 vendor/lib/libqomx_jpegenc.so
 vendor/lib/libseemore.so
 vendor/lib64/libseemore.so
-vendor/lib/libst_disp.so
 vendor/lib/libStDualCam.so
-vendor/lib/libStereoblur.so
+#vendor/lib/libStereoblur.so
 vendor/lib/libSonyIMX350PdafLibrary.so
 vendor/lib/libSonyIMX371RmscLibrary.so
 vendor/lib/libubifocus.so
@@ -135,7 +134,7 @@ lib64/libfiltergenerator.so
 lib/libfiltergenerator.so
 vendor/lib/libdczoom.so
 vendor/lib/libcamera_cp_wrapper.so
-vendor/lib/libcamera_bokeh_wrapper.so
+#vendor/lib/libcamera_bokeh_wrapper.so
 vendor/lib/libcamera_cp_bokeh.so
 vendor/bin/hw/android.hardware.camera.provider@2.4-service
 vendor/etc/init/android.hardware.camera.provider@2.4-service.rc
