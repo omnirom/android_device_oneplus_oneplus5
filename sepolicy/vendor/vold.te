@@ -7,3 +7,6 @@ allow vold proc_fingerprint:dir { read open };
 
 allow vold system_block_device:blk_file r_file_perms;
 #allow vold block_device:blk_file { open read write getattr ioctl };
+
+allow vold persist_file:dir ioctl;
+
