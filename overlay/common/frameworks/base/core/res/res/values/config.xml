@@ -248,7 +248,7 @@
          This flag controls whether the {@link Display#FLAG_SUPPORTS_PROTECTED_BUFFERS}
          flag is set for wifi displays.
     -->
-    <bool name="config_wifiDisplaySupportsProtectedBuffers">false</bool>
+    <bool name="config_wifiDisplaySupportsProtectedBuffers">true</bool>
 
 
     <!-- Flag indicating if the speed up audio on mt call code should be executed -->
@@ -441,4 +441,5 @@
     <bool name="config_setColorTransformAccelerated">true</bool>
 
     <integer translatable="false" name="config_wifi_wakeup_available">1</integer>
+
 </resources>
