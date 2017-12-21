@@ -26,7 +26,6 @@
 #
 import /system/vendor/etc/init/hw/init.qcom.factory.rc
 import /system/vendor/etc/init/init.oem.rc
-import /system/vendor/etc/init/init.qcom.power.rc
 import /system/vendor/etc/init/init.omni.rc
 import /system/vendor/etc/init/init.omni.op5.rc
 
