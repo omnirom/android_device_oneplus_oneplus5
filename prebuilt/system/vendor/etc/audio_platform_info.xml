@@ -124,6 +124,7 @@
     </backend_names>
     <device_names>
         <device name="SND_DEVICE_IN_VOICE_REC_QMIC_FLUENCE" alias="voice-speaker-dmic-ef" />
+        <device name="SND_DEVICE_OUT_VOICE_SPEAKER" alias="voice-speaker-2-protected" />
     </device_names>
 </audio_platform_info>
 
