@@ -31,3 +31,4 @@ allow priv_app vendor_tombstone_data_file:dir search;
 
 attribute priv_app_property_placeholder;
 
+allow priv_app mkfs_exec:lnk_file getattr;
