@@ -8,8 +8,6 @@
     <uses-permission android:name="android.permission.INJECT_EVENTS" />
     <uses-permission android:name="android.permission.CAMERA" />
 
-    <protected-broadcast android:name="com.android.systemui.doze.pulse" />
-
     <uses-sdk
         android:targetSdkVersion="26" />
     <application
@@ -31,15 +29,6 @@
         <activity
             android:name="org.omnirom.device.GestureSettings"
             android:label="@string/category_gestures_title"
-            android:launchMode="singleTask" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name="org.omnirom.device.DozeSettings"
-            android:label="@string/doze_category_title"
             android:launchMode="singleTask" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
