@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b7aaa389_f8aca269",
+        "filename": "overlay/common/frameworks/base/packages/SystemUI/res/values/config.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2017-12-21T20:00:57Z",
+      "side": 1,
+      "message": "thats actually already the default",
+      "revId": "3ff5d1b0a232f59b1deae7a64f27480e9b6df5a6",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    }
+  ]
+}
