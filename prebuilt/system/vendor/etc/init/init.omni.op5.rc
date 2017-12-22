@@ -115,6 +115,7 @@ on boot
     chmod 660 /sys/class/leds/blue/start_idx
 
     setprop vendor.camera.aux.packagelist "org.omnirom.snap"
+    setprop camera.hal1.packagelist "com.instagram.android,com.tencent.mm,com.whatsapp"
 
 on post-fs
     # Vibrator

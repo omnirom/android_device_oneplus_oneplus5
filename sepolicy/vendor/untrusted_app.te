@@ -1,0 +1,2 @@
+allow untrusted_app camera_prop:file { getattr open read };
+
