@@ -28,7 +28,8 @@ import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.DialogPreference;
+import android.support.v7.preference.PreferenceViewHolder;
+import android.support.v14.preference.PreferenceDialogFragment;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -45,7 +46,9 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class AppSelectListPreference extends DialogPreference implements DialogInterface.OnDismissListener {
+import com.android.settingslib.CustomDialogPreference;
+
+public class AppSelectListPreference extends CustomDialogPreference {
 
     private static String TAG = "AppSelectListPreference";
 
@@ -56,7 +59,6 @@ public class AppSelectListPreference extends DialogPreference implements DialogI
     public static final String MUSIC_PREV_ENTRY = "music_prev";
     public static final String MUSIC_NEXT_ENTRY = "music_next";
 
-    private ImageView mAppIcon;
     private AppSelectListAdapter mAdapter;
     private Drawable mAppIconDrawable;
     private int mAppIconResourceId;
@@ -241,7 +243,8 @@ public class AppSelectListPreference extends DialogPreference implements DialogI
 
     private void init() {
         mPm = getContext().getPackageManager();
-        setWidgetLayoutResource(R.layout.applist_preference);
+        setDialogLayoutResource(R.layout.preference_dialog_applist);
+        setLayoutResource(R.layout.preference_app_select);
         setNegativeButtonText(android.R.string.cancel);
         setPositiveButtonText(null);
         setDialogTitle(R.string.choose_app);
@@ -250,20 +253,45 @@ public class AppSelectListPreference extends DialogPreference implements DialogI
     }
 
     @Override
-    protected View onCreateView(ViewGroup parent) {
-        View v = super.onCreateView(parent);
-        mAppIcon = (ImageView) v.findViewById(R.id.app_icon);
+    protected void onSetInitialValue(boolean restorePersistedValue, Object defaultValue) {
+        super.onSetInitialValue(restorePersistedValue, defaultValue);
         if (mTitle != null) {
             setSummary(mTitle);
         } else {
             setSummary(getContext().getResources().getString(R.string.not_ready_summary));
         }
-        if (mAppIconDrawable != null) {
-            mAppIcon.setImageDrawable(mAppIconDrawable);
-        } else {
-            mAppIcon.setImageResource(mAppIconResourceId);
-        }
-        return v;
+        mAppIconResourceId = R.drawable.ic_disabled;
+        setIcon(mAppIconResourceId);
+    }
+
+    @Override
+    protected void onBindDialogView(View view) {
+        super.onBindDialogView(view);
+
+        final ListView list = (ListView) view.findViewById(R.id.applist);
+        list.setAdapter(mAdapter);
+        list.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                PackageItem info = (PackageItem) parent.getItemAtPosition(position);
+                mValue = info.mValue;
+                if (shouldPersist()) {
+                    persistString(mValue);
+                }
+                mTitle = info.mTitle;
+                mAppIconDrawable = null;
+                mAppIconResourceId = 0;
+                if (info.mComponentName != null) {
+                    mAppIconDrawable = resolveAppIcon(info);
+                } else {
+                    mAppIconResourceId = info.mAppIconResourceId;
+                }
+
+                updatePreferenceViews();
+                callChangeListener(mValue);
+                getDialog().dismiss();
+            }
+        });
     }
 
     private void updatePreferenceViews() {
@@ -312,47 +340,16 @@ public class AppSelectListPreference extends DialogPreference implements DialogI
             mAppIconResourceId = R.drawable.ic_disabled;
         }
 
-        if (mAppIcon != null) {
-            setSummary(mTitle);
-            if (mAppIconDrawable != null) {
-                mAppIcon.setImageDrawable(mAppIconDrawable);
-            } else {
-                mAppIcon.setImageResource(mAppIconResourceId);
-            }
+        setSummary(mTitle);
+        if (mAppIconDrawable != null) {
+            setIcon(mAppIconDrawable);
+        } else {
+            setIcon(mAppIconResourceId);
         }
     }
 
     private Drawable getDefaultActivityIcon() {
         return getContext().getResources().getDrawable(android.R.drawable.sym_def_app_icon);
-    }
-
-    @Override
-    protected View onCreateDialogView() {
-        final ListView list = new ListView(getContext());
-        list.setAdapter(mAdapter);
-        list.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                PackageItem info = (PackageItem) parent.getItemAtPosition(position);
-                mValue = info.mValue;
-                if (shouldPersist()) {
-                    persistString(mValue);
-                }
-                mTitle = info.mTitle;
-                mAppIconDrawable = null;
-                mAppIconResourceId = 0;
-                if (info.mComponentName != null) {
-                    mAppIconDrawable = resolveAppIcon(info);
-                } else {
-                    mAppIconResourceId = info.mAppIconResourceId;
-                }
-
-                updatePreferenceViews();
-                callChangeListener(mValue);
-                getDialog().dismiss();
-            }
-        });
-        return list;
     }
 
     public String getValue() {
@@ -373,5 +370,13 @@ public class AppSelectListPreference extends DialogPreference implements DialogI
         } catch (Exception e) {
         }
         return appIcon;
+    }
+
+    public static class AppSelectListPreferenceDialogFragment
+            extends CustomDialogPreference.CustomPreferenceDialogFragment {
+        public static CustomDialogPreference.CustomPreferenceDialogFragment
+                newInstance(String key) {
+            return CustomDialogPreference.CustomPreferenceDialogFragment.newInstance(key);
+        }
     }
 }

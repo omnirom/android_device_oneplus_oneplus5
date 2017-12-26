@@ -22,12 +22,12 @@ import android.app.Dialog;
 import android.content.res.Resources;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceScreen;
-import android.preference.TwoStatePreference;
+import android.support.v14.preference.PreferenceFragment;
+import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceScreen;
+import android.support.v7.preference.TwoStatePreference;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -37,7 +37,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.util.Log;
 
-public class DozeSettings extends PreferenceActivity  {
+public class DozeSettings extends PreferenceFragment  {
 
     private static final String KEY_WAVE_CHECK = "wave_check";
     private static final String KEY_POCKET_CHECK = "pocket_check";
@@ -49,11 +49,8 @@ public class DozeSettings extends PreferenceActivity  {
     private boolean mUsePocketCheck;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
-        addPreferencesFromResource(R.xml.doze_settings);
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.doze_settings, rootKey);
 
         getDozeSettings();
 
@@ -93,20 +90,8 @@ public class DozeSettings extends PreferenceActivity  {
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        case android.R.id.home:
-            finish();
-            return true;
-        default:
-            break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     private void getDozeSettings() {
-        String value = Settings.System.getString(getContentResolver(),
+        String value = Settings.System.getString(getContext().getContentResolver(),
                     Settings.System.DEVICE_FEATURE_SETTINGS);
         if (!TextUtils.isEmpty(value)) {
             String[] parts = value.split(":");
@@ -118,10 +103,10 @@ public class DozeSettings extends PreferenceActivity  {
 
     private void setDozeSettings() {
         String newValue = String.valueOf(mUseWaveCheck) + ":" + String.valueOf(mUsePocketCheck) + ":" + String.valueOf(mUseTiltCheck);
-        Settings.System.putString(getContentResolver(), Settings.System.DEVICE_FEATURE_SETTINGS, newValue);
+        Settings.System.putString(getContext().getContentResolver(), Settings.System.DEVICE_FEATURE_SETTINGS, newValue);
     }
 
     private boolean isAmbientDisplayEnabled() {
-        return Settings.Secure.getInt(getContentResolver(), Settings.Secure.DOZE_ENABLED, 1) == 1;
+        return Settings.Secure.getInt(getContext().getContentResolver(), Settings.Secure.DOZE_ENABLED, 1) == 1;
     }
 }
