@@ -22,12 +22,12 @@ import android.app.Dialog;
 import android.content.res.Resources;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceCategory;
-import android.preference.PreferenceScreen;
-import android.preference.TwoStatePreference;
+import android.support.v14.preference.PreferenceFragment;
+import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceScreen;
+import android.support.v7.preference.TwoStatePreference;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -37,7 +37,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.util.Log;
 
-public class DeviceSettings extends PreferenceActivity implements
+public class DeviceSettings extends PreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
     public static final String KEY_VIBSTRENGTH = "vib_strength";
@@ -67,11 +67,8 @@ public class DeviceSettings extends PreferenceActivity implements
     private static TwoStatePreference mNightModeSwitch;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
-        addPreferencesFromResource(R.xml.main);
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        setPreferencesFromResource(R.xml.main, rootKey);
 
         mVibratorStrength = (VibratorStrengthPreference) findPreference(KEY_VIBSTRENGTH);
         if (mVibratorStrength != null) {
@@ -100,51 +97,39 @@ public class DeviceSettings extends PreferenceActivity implements
         mSliderModeBottom.setSummary(mSliderModeBottom.getEntries()[valueIndex]);
 
         mSwapBackRecents = (TwoStatePreference) findPreference(KEY_SWAP_BACK_RECENTS);
-        mSwapBackRecents.setChecked(Settings.System.getInt(getContentResolver(),
-                   Settings.System.BUTTON_SWAP_BACK_RECENTS, 0) != 0);
+        mSwapBackRecents.setChecked(Settings.System.getInt(getContext().getContentResolver(),
+                    Settings.System.BUTTON_SWAP_BACK_RECENTS, 0) != 0);
 
         mSRGBModeSwitch = (TwoStatePreference) findPreference(KEY_SRGB_SWITCH);
         mSRGBModeSwitch.setEnabled(SRGBModeSwitch.isSupported());
-        mSRGBModeSwitch.setChecked(SRGBModeSwitch.isCurrentlyEnabled(this));
+        mSRGBModeSwitch.setChecked(SRGBModeSwitch.isCurrentlyEnabled(this.getContext()));
         mSRGBModeSwitch.setOnPreferenceChangeListener(new SRGBModeSwitch());
 
         mHBMModeSwitch = (TwoStatePreference) findPreference(KEY_HBM_SWITCH);
         mHBMModeSwitch.setEnabled(HBMModeSwitch.isSupported());
-        mHBMModeSwitch.setChecked(HBMModeSwitch.isCurrentlyEnabled(this));
+        mHBMModeSwitch.setChecked(HBMModeSwitch.isCurrentlyEnabled(this.getContext()));
         mHBMModeSwitch.setOnPreferenceChangeListener(new HBMModeSwitch());
 
         mDCIModeSwitch = (TwoStatePreference) findPreference(KEY_DCI_SWITCH);
         mDCIModeSwitch.setEnabled(DCIModeSwitch.isSupported());
-        mDCIModeSwitch.setChecked(DCIModeSwitch.isCurrentlyEnabled(this));
+        mDCIModeSwitch.setChecked(DCIModeSwitch.isCurrentlyEnabled(this.getContext()));
         mDCIModeSwitch.setOnPreferenceChangeListener(new DCIModeSwitch());
 
         mNightModeSwitch = (TwoStatePreference) findPreference(KEY_NIGHT_SWITCH);
         mNightModeSwitch.setEnabled(NightModeSwitch.isSupported());
-        mNightModeSwitch.setChecked(NightModeSwitch.isCurrentlyEnabled(this));
+        mNightModeSwitch.setChecked(NightModeSwitch.isCurrentlyEnabled(this.getContext()));
         mNightModeSwitch.setOnPreferenceChangeListener(new NightModeSwitch());
 
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-        case android.R.id.home:
-            finish();
-            return true;
-        default:
-            break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+    public boolean onPreferenceTreeClick(Preference preference) {
         if (preference == mSwapBackRecents) {
-            Settings.System.putInt(getContentResolver(),
+            Settings.System.putInt(getContext().getContentResolver(),
                     Settings.System.BUTTON_SWAP_BACK_RECENTS, mSwapBackRecents.isChecked() ? 1 : 0);
             return true;
         }
-        return super.onPreferenceTreeClick(preferenceScreen, preference);
+        return super.onPreferenceTreeClick(preference);
     }
 
     @Override
@@ -172,7 +157,7 @@ public class DeviceSettings extends PreferenceActivity implements
     }
 
     private int getSliderAction(int position) {
-        String value = Settings.System.getString(getContentResolver(),
+        String value = Settings.System.getString(getContext().getContentResolver(),
                     Settings.System.BUTTON_EXTRA_KEY_MAPPING);
         final String defaultValue = SLIDER_DEFAULT_VALUE;
 
@@ -190,7 +175,7 @@ public class DeviceSettings extends PreferenceActivity implements
     }
 
     private void setSliderAction(int position, int action) {
-        String value = Settings.System.getString(getContentResolver(),
+        String value = Settings.System.getString(getContext().getContentResolver(),
                     Settings.System.BUTTON_EXTRA_KEY_MAPPING);
         final String defaultValue = SLIDER_DEFAULT_VALUE;
 
@@ -203,7 +188,7 @@ public class DeviceSettings extends PreferenceActivity implements
             String[] parts = value.split(",");
             parts[position] = String.valueOf(action);
             String newValue = TextUtils.join(",", parts);
-            Settings.System.putString(getContentResolver(),
+            Settings.System.putString(getContext().getContentResolver(),
                     Settings.System.BUTTON_EXTRA_KEY_MAPPING, newValue);
         } catch (Exception e) {
         }

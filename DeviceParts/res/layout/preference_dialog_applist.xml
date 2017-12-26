@@ -20,19 +20,8 @@
         android:gravity="center_horizontal"
         android:padding="24dip">
 
-        <ImageView android:id="@android:id/icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:contentDescription="@null" />
+     <ListView android:id="@+id/applist"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"/>
 
-        <SeekBar android:id="@*android:id/seekbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        <Button android:id="@+id/vib_test"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/vib_test"
-                android:layout_marginTop="10dip" />
 </LinearLayout>

@@ -14,25 +14,25 @@
      limitations under the License.
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceScreen
+    <Preference
         android:key="gesture_category"
         android:title="@string/category_gestures_title"
         android:summary="@string/category_gestures_summary"
         android:persistent="false" >
         <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="org.omnirom.device"
-                android:targetClass="org.omnirom.device.GestureSettings" />
-    </PreferenceScreen>
+                android:targetClass="org.omnirom.device.GestureSettingsActivity" />
+    </Preference>
 
-    <PreferenceScreen
+    <Preference
         android:key="doze_category"
         android:title="@string/doze_category_title"
         android:summary="@string/doze_category_summary"
         android:persistent="false" >
         <intent android:action="android.intent.action.MAIN"
                 android:targetPackage="org.omnirom.device"
-                android:targetClass="org.omnirom.device.DozeSettings" />
-    </PreferenceScreen>
+                android:targetClass="org.omnirom.device.DozeSettingsActivity" />
+    </Preference>
 
     <PreferenceCategory
         android:title="@string/category_vibrator">
@@ -66,7 +66,7 @@
 
     <PreferenceCategory
         android:title="@string/buttons_title">
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="swap_back_recents"
             android:summary="@string/swap_back_recents_summary"
             android:title="@string/swap_back_recents_title"
@@ -76,19 +76,19 @@
     <PreferenceCategory
         android:key="graphics"
         android:title="@string/graphics_title">
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="srgb"
             android:summary="@string/srgb_mode_summary"
             android:title="@string/srgb_mode_title" />
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="dci"
             android:summary="@string/dci_mode_summary"
             android:title="@string/dci_mode_title" />
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="hbm"
             android:summary="@string/hbm_mode_summary"
             android:title="@string/hbm_mode_title" />
-        <CheckBoxPreference
+        <SwitchPreference
             android:key="night"
             android:summary="@string/Night_mode_summary"
             android:title="@string/Night_mode_title" />
