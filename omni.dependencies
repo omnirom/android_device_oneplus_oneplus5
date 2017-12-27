@@ -66,12 +66,6 @@
   },
   {
     "remote": "omnirom",
-    "repository": "android_vendor_codeaurora_telephony",
-    "target_path": "vendor/codeaurora/telephony",
-    "revision": "android-8.1"
-  },
-  {
-    "remote": "omnirom",
     "repository": "android_vendor_qcom_opensource_dpm",
     "target_path": "vendor/qcom/opensource/dpm",
     "revision": "android-8.0"
