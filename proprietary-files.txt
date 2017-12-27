@@ -128,10 +128,9 @@ vendor/lib/libStDualCam.so
 #vendor/lib/libStereoblur.so
 vendor/lib/libSonyIMX350PdafLibrary.so
 vendor/lib/libSonyIMX371RmscLibrary.so
-vendor/lib/libubifocus.so
-vendor/lib/libdualcameraddm.so
+vendor/lib64/libubifocus.so
+vendor/lib64/libdualcameraddm.so
 lib64/libfiltergenerator.so
-lib/libfiltergenerator.so
 vendor/lib/libdczoom.so
 vendor/lib/libcamera_cp_wrapper.so
 #vendor/lib/libcamera_bokeh_wrapper.so
@@ -176,10 +175,10 @@ lib64/libjni_dualcamera.so
 lib64/libjni_filtergenerator.so
 lib64/libjni_truescanner_v2.so
 lib64/libjni_seestraight.so
-lib64/libjni_pacprocessor.so
 lib64/libjni_stillmore.so
 lib64/libjni_trueportrait.so
 lib64/libjni_clearsight.so
+lib64/libclearsight.so
 lib64/libjni_sharpshooter.so
 lib/libjni_optizoom.so
 lib/libjni_trackingfocus.so
@@ -188,11 +187,15 @@ lib/libjni_makeupV2.so
 lib/libjni_panorama.so
 lib/libjni_ubifocus.so
 lib/libjni_blurbuster.so
+lib64/libblurbuster.so
 lib/libjni_hazebuster.so
+lib64/libhazebuster.so
 lib/libjni_dualcamera.so
 lib/libjni_filtergenerator.so
 lib/libjni_truescanner_v2.so
+lib64/libtruescanner.so
 lib/libjni_seestraight.so
+lib64/libseestraight.so
 lib/libjni_stillmore.so
 lib/libjni_trueportrait.so
 lib/libjni_sharpshooter.so
@@ -253,7 +256,6 @@ vendor/lib/libscveObjectTracker_stub.so
 vendor/lib/libscveObjectSegmentation.so
 lib64/libblurbuster.so
 lib/libblurbuster.so
-
 
 # Camera actuators
 vendor/lib/libactuator_lc898217xc_imx376k.so
