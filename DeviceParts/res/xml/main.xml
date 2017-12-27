@@ -24,6 +24,16 @@
                 android:targetClass="org.omnirom.device.GestureSettings" />
     </PreferenceScreen>
 
+    <PreferenceScreen
+        android:key="doze_category"
+        android:title="@string/doze_category_title"
+        android:summary="@string/doze_category_summary"
+        android:persistent="false" >
+        <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="org.omnirom.device"
+                android:targetClass="org.omnirom.device.DozeSettings" />
+    </PreferenceScreen>
+
     <PreferenceCategory
         android:title="@string/category_vibrator">
         <org.omnirom.device.VibratorStrengthPreference
