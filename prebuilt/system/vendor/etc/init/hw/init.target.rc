@@ -129,9 +129,12 @@ on boot
    chmod 0666 /sys/devices/virtual/graphics/fb0/night_mode
 
    # Load WLAN driver, to satisfy wificond
+   setprop wifi.interface wlan0
    insmod /system/lib/modules/wlan.ko
    chown wifi wifi /sys/module/wlan/parameters/fwpath
    setprop wlan.driver.status "ok"
+   # default country code
+   setprop ro.boot.wificountrycode 00
 
 #Peripheral manager
 service per_mgr /system/vendor/bin/pm-service
