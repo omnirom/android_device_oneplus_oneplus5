@@ -131,7 +131,7 @@ service dashd /sbin/dashd
     class core
     critical
     seclabel u:r:dashd:s0
-    group root system
+    group root system wakelock
 
 # adb over network
 on property:service.adb.tcp.port=5555
