@@ -15,7 +15,7 @@
      limitations under the License.
 -->
 <resources>
-  <string name="app_name">Oneplus 3</string>
+  <string name="app_name">Oneplus 5</string>
   <string name="category_vibrator">Vibrator</string>
   <string name="vib_strength_title_head">Styrka</string>
   <string name="vib_strength_summary_head">Definiera styrkan på vibratorn</string>
@@ -33,15 +33,7 @@
   <string name="slider_mode_title_top">Topp-placering</string>
   <string name="slider_mode_title_bottom">Bottenläget</string>
   <string name="choose_app">Välj app</string>
-  <string name="gesture_enable_title">Aktivera</string>
   <string name="gesture_app_title">Starta app</string>
-  <string name="category_camera_gesture">O-gest</string>
-  <string name="music_gesture_control_title">Musikkontroll</string>
-  <string name="camera_gesture_control_title">Kamera</string>
-  <string name="camera_gesture_control_summary">Starta kamera</string>
-  <string name="category_torch_gesture">V-gest</string>
-  <string name="torch_gesture_control_title">Ficklampa</string>
-  <string name="torch_gesture_control_summary">Växla ficklampa</string>
   <string name="category_up_arrow_gesture">En gest</string>
   <string name="category_left_arrow_gesture">&lt; gest</string>
   <string name="category_right_arrow_gesture">&gt; gest</string>

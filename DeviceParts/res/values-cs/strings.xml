@@ -15,7 +15,7 @@
      limitations under the License.
 -->
 <resources>
-  <string name="app_name">Oneplus 3</string>
+  <string name="app_name">Oneplus 5</string>
   <string name="category_gestures_title">Gesta mimo obrazovku</string>
   <string name="category_vibrator">Vibrace</string>
   <string name="vib_strength_title_head">Intenzita</string>
@@ -40,19 +40,36 @@
   <string name="slider_mode_title_top">Pozice nahoře</string>
   <string name="slider_mode_title_center">Pozice uprostřed</string>
   <string name="slider_mode_title_bottom">Pozice dole</string>
+  <string name="dci_mode_title">Režim širokého spektra barev</string>
+  <string name="Night_mode_title">Noční režim</string>
   <string name="choose_app">Vybrat aplikaci</string>
-  <string name="category_music_gesture">Gesto II</string>
-  <string name="gesture_enable_title">Zapnout</string>
+  <string name="category_double_swipe_gesture">Gesto II</string>
   <string name="gesture_app_title">Spustit aplikaci</string>
-  <string name="category_camera_gesture">Gesto O</string>
-  <string name="music_gesture_control_title">Ovládání hudby</string>
-  <string name="music_gesture_control_summary">Přehrát / pozastavit hudbu a \u003C / \u003E přeskakovat skladby vpřed a zpět</string>
-  <string name="camera_gesture_control_title">Fotoaparát</string>
-  <string name="camera_gesture_control_summary">Spustit fotoaparát</string>
-  <string name="category_torch_gesture">Gesto V</string>
-  <string name="torch_gesture_control_title">Svítilna</string>
-  <string name="torch_gesture_control_summary">Přepínání svítilny</string>
+  <string name="category_circle_gesture">Gesto O</string>
+  <string name="category_down_arrow_gesture">Gesto V</string>
   <string name="category_up_arrow_gesture">Gesto A</string>
   <string name="category_left_arrow_gesture">Gesto &lt;</string>
   <string name="category_right_arrow_gesture">Gesto &gt;</string>
+  <string name="category_gestures_summary">Konfigurace gesta při vypnuté obrazovce</string>
+  <string name="torch_entry">Svítilna</string>
+  <string name="disabled_entry">Zakázáno</string>
+  <string name="camera_entry">Fotoaparát</string>
+  <string name="music_play_entry">Přehrát / Pozastavit hudbu</string>
+  <string name="music_prev_entry">Předchozí skladba</string>
+  <string name="music_next_entry">Další skladba</string>
+  <string name="not_ready_summary">Řešení...</string>
+  <string name="resolve_failed_summary">Řešení aplikace selhalo</string>
+  <string name="category_down_swipe_gesture">Tah dolů</string>
+  <string name="category_up_swipe_gesture">Tah nahoru</string>
+  <string name="category_left_swipe_gesture">Tah doleva</string>
+  <string name="category_right_swipe_gesture">Tah doprava</string>
+  <string name="doze_category_title">Ambientní displej</string>
+  <string name="doze_category_summary">Probudí obrazovku při příjmu oznámění</string>
+  <string name="wave_check_summary">Pulzní oznámení při mávnutí rukou</string>
+  <string name="wave_check_title">Mávnutí rukou</string>
+  <string name="tilt_check_summary">Pulzní oznámení při zvednutí zařízení</string>
+  <string name="tilt_check_title">Vyzvednutí</string>
+  <string name="pocket_check_summary">Pulzní oznámení při vyjmutí z kapsy</string>
+  <string name="pocket_check_title">Kapsa</string>
+  <string name="ambient_display_enable">Ambientní display musí být povolen v nastavení obrazovky</string>
 </resources>

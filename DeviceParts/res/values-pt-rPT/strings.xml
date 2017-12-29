@@ -14,4 +14,62 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources></resources>
+<resources>
+  <string name="app_name">Oneplus 5</string>
+  <string name="category_gestures_title">Desligar gestos do ecrã</string>
+  <string name="category_vibrator">Vibração</string>
+  <string name="vib_strength_title_head">Intensidade</string>
+  <string name="vib_strength_summary_head">Definir a intensidade da vibração</string>
+  <string name="vib_test">Testar</string>
+  <string name="advanced_settings">Preferências Avançadas</string>
+  <string name="category_slider">Menu deslizante</string>
+  <string name="slider_mode_title">Modo menu deslizante</string>
+  <string name="buttons_title">Botões</string>
+  <string name="swap_back_recents_title">Trocar o botão de voltar e recentes</string>
+  <string name="graphics_title">Gráficos</string>
+  <string name="srgb_mode_title">modo sRGB</string>
+  <string name="hbm_mode_title">Modo de brilho alto</string>
+  <string name="proxi_summary_head">Verifique o sensor de proximidade para a manipulação de gesto e sensor de impressão digital</string>
+  <string name="proxi_title_head">Verificação de proximidade</string>
+  <string name="slider_mode_off">Desligado</string>
+  <string name="slider_mode_vibrate">Vibração</string>
+  <string name="slider_mode_silent">Silêncio</string>
+  <string name="slider_mode_priority">Apenas prioridade</string>
+  <string name="slider_mode_alarm">Só alarmes</string>
+  <string name="slider_mode_dnd">Silêncio total</string>
+  <string name="slider_mode_title_top">Posição superior</string>
+  <string name="slider_mode_title_center">Posição central</string>
+  <string name="slider_mode_title_bottom">Posição inferior</string>
+  <string name="dci_mode_title">Modo de cor (DCI-P3)</string>
+  <string name="Night_mode_title">Modo nocturno</string>
+  <string name="choose_app">Escolher aplicação</string>
+  <string name="category_double_swipe_gesture">II gesto</string>
+  <string name="gesture_app_title">Iniciar aplicação</string>
+  <string name="category_circle_gesture">O gesto</string>
+  <string name="category_down_arrow_gesture">V gesto</string>
+  <string name="category_up_arrow_gesture">A gesto</string>
+  <string name="category_left_arrow_gesture">&lt; gesto</string>
+  <string name="category_right_arrow_gesture">&gt; gesto</string>
+  <string name="category_gestures_summary">Configurar ações de gesto de ecrã desligado</string>
+  <string name="torch_entry">Lanterna</string>
+  <string name="disabled_entry">Desligado</string>
+  <string name="camera_entry">Câmara</string>
+  <string name="music_play_entry">Reproduzir/pausar música</string>
+  <string name="music_prev_entry">Faixa anterior</string>
+  <string name="music_next_entry">Próxima faixa</string>
+  <string name="not_ready_summary">A resolver...</string>
+  <string name="resolve_failed_summary">Resolver aplicação falhou</string>
+  <string name="category_down_swipe_gesture">Deslizar para baixo</string>
+  <string name="category_up_swipe_gesture">Deslizar para cima</string>
+  <string name="category_left_swipe_gesture">Deslizar para a esquerda</string>
+  <string name="category_right_swipe_gesture">Deslizar para a direita</string>
+  <string name="doze_category_title">Ambient Display</string>
+  <string name="doze_category_summary">Acordar o ecrã quando receber notificações</string>
+  <string name="wave_check_summary">Mostrar notificações ao passar a mão</string>
+  <string name="wave_check_title">Passar a mão</string>
+  <string name="tilt_check_summary">Mostrar notificações quando se levanta o dispositivo</string>
+  <string name="tilt_check_title">Levantamento</string>
+  <string name="pocket_check_summary">Mostrar notificações ao retirar do bolso</string>
+  <string name="pocket_check_title">Bolso</string>
+  <string name="ambient_display_enable">Ambient display deve ser habilitada nas configurações de exibição</string>
+</resources>
