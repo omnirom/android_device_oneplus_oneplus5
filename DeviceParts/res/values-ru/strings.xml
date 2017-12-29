@@ -14,4 +14,62 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources></resources>
+<resources>
+  <string name="app_name">OnePlus 3</string>
+  <string name="category_gestures_title">Жесты на выключенном экране</string>
+  <string name="category_vibrator">Вибрация</string>
+  <string name="vib_strength_title_head">Сила</string>
+  <string name="vib_strength_summary_head">Настройте силу вибрации</string>
+  <string name="vib_test">Проверить</string>
+  <string name="advanced_settings">Дополнительно</string>
+  <string name="category_slider">Слайдер</string>
+  <string name="slider_mode_title">Режим ползунка</string>
+  <string name="buttons_title">Кнопки</string>
+  <string name="swap_back_recents_title">Поменять кнопку \"назад\" и кнопку \"недавние\"</string>
+  <string name="graphics_title">Оформление</string>
+  <string name="srgb_mode_title">режим sRGB</string>
+  <string name="hbm_mode_title">Режим повышенной яркости</string>
+  <string name="proxi_summary_head">Проверить датчики жестов и отпечатков пальцев</string>
+  <string name="proxi_title_head">Проверка датчика приближения</string>
+  <string name="slider_mode_off">Выкл</string>
+  <string name="slider_mode_vibrate">Вибрация</string>
+  <string name="slider_mode_silent">Без звука</string>
+  <string name="slider_mode_priority">Только важные</string>
+  <string name="slider_mode_alarm">Только будильник</string>
+  <string name="slider_mode_dnd">Полная тишина</string>
+  <string name="slider_mode_title_top">Верхнее положение</string>
+  <string name="slider_mode_title_center">Среднее положение</string>
+  <string name="slider_mode_title_bottom">Нижнее положение</string>
+  <string name="dci_mode_title">Режим широкой цветовой гаммы</string>
+  <string name="Night_mode_title">Ночной режим</string>
+  <string name="choose_app">Выберите приложение</string>
+  <string name="category_double_swipe_gesture">II жест</string>
+  <string name="gesture_app_title">Запустить приложение</string>
+  <string name="category_circle_gesture">O жест</string>
+  <string name="category_down_arrow_gesture">V жест</string>
+  <string name="category_up_arrow_gesture">А жест</string>
+  <string name="category_left_arrow_gesture">&lt; жест</string>
+  <string name="category_right_arrow_gesture">&gt; жест</string>
+  <string name="category_gestures_summary">Настройка жестов на выключенном экране</string>
+  <string name="torch_entry">Фонарик</string>
+  <string name="disabled_entry">Выключено</string>
+  <string name="camera_entry">Камера</string>
+  <string name="music_play_entry">Воспр./Пауза</string>
+  <string name="music_prev_entry">Предыдущий трек</string>
+  <string name="music_next_entry">Следующий трек</string>
+  <string name="not_ready_summary">Получение разрешения...</string>
+  <string name="resolve_failed_summary">Ошибка получения разрешения приложения</string>
+  <string name="category_down_swipe_gesture">Свайп вниз</string>
+  <string name="category_up_swipe_gesture">Свайп вверх</string>
+  <string name="category_left_swipe_gesture">Свайп влево</string>
+  <string name="category_right_swipe_gesture">Свайп вправо</string>
+  <string name="doze_category_title">Активный экран</string>
+  <string name="doze_category_summary">Включать экран, при получении уведомлений</string>
+  <string name="wave_check_summary">Пульсирующие уведомления при проведении рукой над телефоном</string>
+  <string name="wave_check_title">Провести рукой над телефоном</string>
+  <string name="tilt_check_summary">Пульсирующие уведомления при поднятии телефона</string>
+  <string name="tilt_check_title">Поднятие</string>
+  <string name="pocket_check_summary">Пульсирующие уведомления при извлечении из кармана</string>
+  <string name="pocket_check_title">Карман</string>
+  <string name="ambient_display_enable">Активный экран должен быть включен в настройках экрана</string>
+</resources>

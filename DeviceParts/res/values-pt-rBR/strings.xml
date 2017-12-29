@@ -41,17 +41,7 @@
   <string name="slider_mode_title_center">Posição central</string>
   <string name="slider_mode_title_bottom">Posição inferior</string>
   <string name="choose_app">Selecionar aplicativo</string>
-  <string name="category_music_gesture">Gesto II</string>
-  <string name="gesture_enable_title">Ativado</string>
   <string name="gesture_app_title">Iniciar aplicativo</string>
-  <string name="category_camera_gesture">Gesto O</string>
-  <string name="music_gesture_control_title">Controle de música</string>
-  <string name="music_gesture_control_summary">Tocar/pausar a música e \u003C para recuar ou \u003E para a avançar a música</string>
-  <string name="camera_gesture_control_title">Câmera</string>
-  <string name="camera_gesture_control_summary">Iniciar Câmera</string>
-  <string name="category_torch_gesture">Gesto V</string>
-  <string name="torch_gesture_control_title">Lanterna</string>
-  <string name="torch_gesture_control_summary">(Des)Ligar Lanterna</string>
   <string name="category_up_arrow_gesture">Gesto A</string>
   <string name="category_left_arrow_gesture">Gesto &lt;</string>
   <string name="category_right_arrow_gesture">Gesto &gt;</string>

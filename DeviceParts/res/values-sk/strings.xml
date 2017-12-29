@@ -41,17 +41,7 @@
   <string name="slider_mode_title_center">Stredná pozícia</string>
   <string name="slider_mode_title_bottom">Spodná pozícia</string>
   <string name="choose_app">Zvoliť aplikáciu</string>
-  <string name="category_music_gesture">Gesto II</string>
-  <string name="gesture_enable_title">Povoliť</string>
   <string name="gesture_app_title">Spustiť aplikáciu</string>
-  <string name="category_camera_gesture">Gesto O</string>
-  <string name="music_gesture_control_title">Ovládanie hudby</string>
-  <string name="music_gesture_control_summary">Prehranie / pozastavenie hudby a \u003C / \u003E na preskočenie skladby dopredu a dozadu</string>
-  <string name="camera_gesture_control_title">Fotoaparát</string>
-  <string name="camera_gesture_control_summary">Spustenie fotoaparátu</string>
-  <string name="category_torch_gesture">Gesto V</string>
-  <string name="torch_gesture_control_title">Svietidlo</string>
-  <string name="torch_gesture_control_summary">Prepnutie svietidla</string>
   <string name="category_up_arrow_gesture">Gesto A</string>
   <string name="category_left_arrow_gesture">Gesto &lt;</string>
   <string name="category_right_arrow_gesture">Gesto &gt;</string>

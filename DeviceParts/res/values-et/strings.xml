@@ -14,4 +14,62 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources></resources>
+<resources>
+  <string name="app_name">OnePlus 5</string>
+  <string name="category_gestures_title">Väljas ekraani žestid</string>
+  <string name="category_vibrator">Vibraator</string>
+  <string name="vib_strength_title_head">Tugevus</string>
+  <string name="vib_strength_summary_head">Määra vibraatori tugevus</string>
+  <string name="vib_test">Proovi</string>
+  <string name="advanced_settings">Täpsemad</string>
+  <string name="category_slider">Liugur</string>
+  <string name="slider_mode_title">Liuguri režiim</string>
+  <string name="buttons_title">Nupud</string>
+  <string name="swap_back_recents_title">Vaheta tagasi ja viimatiste nupud</string>
+  <string name="graphics_title">Graafika</string>
+  <string name="srgb_mode_title">sRGB-režiim</string>
+  <string name="hbm_mode_title">Kõrge heleduse režiim</string>
+  <string name="proxi_summary_head">Kontrolli lähedussensorit, haldamaks žeste ja sõrmejäljelugejat</string>
+  <string name="proxi_title_head">Läheduskontroll</string>
+  <string name="slider_mode_off">Väljas</string>
+  <string name="slider_mode_vibrate">Vibreeri</string>
+  <string name="slider_mode_silent">Hääletu</string>
+  <string name="slider_mode_priority">Ainult prioriteetsed</string>
+  <string name="slider_mode_alarm">Ainult alarmid</string>
+  <string name="slider_mode_dnd">Täielik vaikus</string>
+  <string name="slider_mode_title_top">Ülapositsioon</string>
+  <string name="slider_mode_title_center">Keskpositsioon</string>
+  <string name="slider_mode_title_bottom">Allpositsioon</string>
+  <string name="dci_mode_title">Laia värviskaala režiim</string>
+  <string name="Night_mode_title">Öörežiim</string>
+  <string name="choose_app">Vali rakendus</string>
+  <string name="category_double_swipe_gesture">II žest</string>
+  <string name="gesture_app_title">Käivita rakendus</string>
+  <string name="category_circle_gesture">O žest</string>
+  <string name="category_down_arrow_gesture">V žest</string>
+  <string name="category_up_arrow_gesture">A žest</string>
+  <string name="category_left_arrow_gesture">&lt; žest</string>
+  <string name="category_right_arrow_gesture">&gt; žest</string>
+  <string name="category_gestures_summary">Seadista väljas ekraani žestitegevusi</string>
+  <string name="torch_entry">Taskulamp</string>
+  <string name="disabled_entry">Keelatud</string>
+  <string name="camera_entry">Kaamera</string>
+  <string name="music_play_entry">Mängi/peata muusikat</string>
+  <string name="music_prev_entry">Eelmine lugu</string>
+  <string name="music_next_entry">Järgmine lugu</string>
+  <string name="not_ready_summary">Lahendan...</string>
+  <string name="resolve_failed_summary">Rakenduse lahendamine ebaõnnestus</string>
+  <string name="category_down_swipe_gesture">Alla libistamine</string>
+  <string name="category_up_swipe_gesture">Üles libistamine</string>
+  <string name="category_left_swipe_gesture">Vasakule libistamine</string>
+  <string name="category_right_swipe_gesture">Paremale libistamine</string>
+  <string name="doze_category_title">Ambientne ekraan</string>
+  <string name="doze_category_summary">Ärata ekraan, kui saad teateid</string>
+  <string name="wave_check_summary">Pulseeri teateid käeviibutusel</string>
+  <string name="wave_check_title">Käeviibutus</string>
+  <string name="tilt_check_summary">Pulseeri teateid, kui seade tõstetakse</string>
+  <string name="tilt_check_title">Tõstmine</string>
+  <string name="pocket_check_summary">Pulseeri teateid, kui seade võetakse taskust välja</string>
+  <string name="pocket_check_title">Tasku</string>
+  <string name="ambient_display_enable">Ambientne ekraan peab olema lubatud kuvaseadetes</string>
+</resources>
