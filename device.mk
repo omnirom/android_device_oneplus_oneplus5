@@ -191,18 +191,9 @@ PRODUCT_COPY_FILES += \
 # NFC
 PRODUCT_PACKAGES += \
     com.android.nfc_extras \
-    com.gsma.services.nfc \
-    com.nxp.nfc.nq \
-    com.nxp.nfc.nq.xml \
-    libnqnfc-nci \
-    libnqnfc_nci_jnia \
     nfc_nci.msm8998 \
     NfcNci \
     libp61-jcop-kit \
-    NQNfcNci \
-    nqnfcinfo \
-    nqnfcee_access.xml \
-    nqnfcse_access.xml \
     Tag
 
 # OMX
