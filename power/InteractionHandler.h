@@ -34,7 +34,7 @@ struct InteractionHandler {
     bool Init();
     void Exit();
     void Acquire(int32_t duration);
-
+    bool isEnabled() { return mEnabled; }
  private:
     void Release();
     void WaitForIdle(int32_t wait_ms, int32_t timeout_ms);
@@ -61,6 +61,8 @@ struct InteractionHandler {
     std::unique_ptr<std::thread> mThread;
     std::mutex mLock;
     std::condition_variable mCond;
+
+    bool mEnabled;
 };
 
 #endif //INTERACTIONHANDLER_H

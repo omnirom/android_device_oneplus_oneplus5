@@ -43,8 +43,8 @@
 InteractionHandler::InteractionHandler()
     : mState(INTERACTION_STATE_UNINITIALIZED),
       mWaitMs(100),
-      mMinDurationMs(1400),
-      mMaxDurationMs(5650),
+      mMinDurationMs(1000),
+      mMaxDurationMs(2000),
       mDurationMs(0) {
 }
 
@@ -75,6 +75,7 @@ bool InteractionHandler::Init() {
     mThread = std::unique_ptr<std::thread>(
         new std::thread(&InteractionHandler::Routine, this));
 
+    mEnabled = get_touchboost_enabled();
     return true;
 }
 
@@ -100,7 +101,7 @@ void InteractionHandler::PerfLock() {
 
     resource_values = getPowerhint(INTERACTION_HINT_ID, &num_resources);
     if (resource_values != NULL) {
-        ALOGV("%s: acquiring perf lock", __func__);
+        ALOGD("%s: acquiring perf lock", __func__);
         perform_hint_action(INTERACTION_HINT_ID,
                             resource_values, num_resources);
 
@@ -109,7 +110,7 @@ void InteractionHandler::PerfLock() {
 }
 
 void InteractionHandler::PerfRel() {
-    ALOGV("%s: releasing perf lock", __func__);
+    ALOGD("%s: releasing perf lock", __func__);
     undo_hint_action(INTERACTION_HINT_ID);
     ATRACE_INT("interaction_lock", 0);
 }

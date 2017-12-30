@@ -54,7 +54,7 @@ int interaction_with_handle(int lock_handle,
                             int duration,
                             int num_args,
                             int opt_list[]);
-
+bool get_touchboost_enabled();
 #ifdef __cplusplus
 }
 #endif
