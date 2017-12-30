@@ -47,7 +47,7 @@ using ::android::hardware::Void;
 
 Power::Power() {
     power_init();
-    mInteractionHandler.Init();
+    //mInteractionHandler.Init();
 }
 
 // Methods from ::android::hardware::power::V1_0::IPower follow.
@@ -69,10 +69,10 @@ Return<void> Power::powerHint(PowerHint hint, int32_t data) {
     if (!isSupportedGovernor()) {
         return Void();
     }
-    if (h == POWER_HINT_INTERACTION) {
+    /*if (h == POWER_HINT_INTERACTION) {
         mInteractionHandler.Acquire(data);
         return Void();
-    }
+    }*/
     power_hint(h, data ? &data : NULL);
     return Void();
 }
