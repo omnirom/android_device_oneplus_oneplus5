@@ -325,3 +325,8 @@ void undo_initial_hint_action()
         }
     }
 }
+
+bool get_touchboost_enabled()
+{
+    return property_get_bool("ro.vendor.power.touchboost_enabled", true);
+}
