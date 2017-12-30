@@ -48,6 +48,7 @@
 #include "performance.h"
 #include "power-common.h"
 #include "power-helper.h"
+#include "utils.h"
 
 #ifndef RPM_SYSTEM_STAT
 #define RPM_SYSTEM_STAT "/d/system_stats"
@@ -100,10 +101,13 @@ static int saved_mpdecision_slack_min = -1;
 static int saved_interactive_mode = -1;
 static int slack_node_rw_failed = 0;
 static int display_hint_sent;
+bool is_touchboost_enabled;
 
 void power_init(void)
 {
     ALOGI("QCOM power HAL initing.");
+    is_touchboost_enabled = get_touchboost_enabled();
+    ALOGI("is_touchboost_enabled = %d", is_touchboost_enabled);
 }
 
 int __attribute__ ((weak)) power_hint_override(power_hint_t UNUSED(hint),
@@ -133,12 +137,7 @@ void power_hint(power_hint_t hint, void *data)
             ALOGD("VR mode power hint not handled in power_hint_override");
             break;
         case POWER_HINT_INTERACTION:
-        {
-            int resources[] = {0x702, 0x20F, 0x30F};
-            int duration = 3000;
-
-            interaction(duration, sizeof(resources)/sizeof(resources[0]), resources);
-        }
+            ALOGD("interaction hint not handled in power_hint_override");
             break;
         default:
         break;
