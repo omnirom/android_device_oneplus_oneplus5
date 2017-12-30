@@ -100,10 +100,13 @@ static int saved_mpdecision_slack_min = -1;
 static int saved_interactive_mode = -1;
 static int slack_node_rw_failed = 0;
 static int display_hint_sent;
+static bool is_touchboost_enabled;
 
 void power_init(void)
 {
     ALOGI("QCOM power HAL initing.");
+    is_touchboost_enabled = get_touchboost_enabled();
+    ALOGI("is_touchboost_enabled = %d", is_touchboost_enabled);
 }
 
 int __attribute__ ((weak)) power_hint_override(power_hint_t UNUSED(hint),
@@ -132,13 +135,14 @@ void power_hint(power_hint_t hint, void *data)
         case POWER_HINT_VR_MODE:
             ALOGD("VR mode power hint not handled in power_hint_override");
             break;
-        case POWER_HINT_INTERACTION:
-        {
-            int resources[] = {0x702, 0x20F, 0x30F};
-            int duration = 3000;
-
-            interaction(duration, sizeof(resources)/sizeof(resources[0]), resources);
-        }
+        case POWER_HINT_INTERACTION: {
+                int resources[] = {0x702, 0x20F, 0x30F};
+                int duration = 1000;
+                if (!is_touchboost_enabled) {
+                    return;
+                }
+                interaction(duration, sizeof(resources)/sizeof(resources[0]), resources);
+            }
             break;
         default:
         break;
