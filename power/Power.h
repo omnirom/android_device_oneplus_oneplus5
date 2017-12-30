@@ -54,7 +54,7 @@ struct Power : public IPower {
     // Methods from ::android::hidl::base::V1_0::IBase follow.
 
  private:
-    InteractionHandler mInteractionHandler;
+    //InteractionHandler mInteractionHandler;
     static bool isSupportedGovernor();
 };
 

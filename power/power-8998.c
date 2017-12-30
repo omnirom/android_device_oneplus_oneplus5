@@ -56,7 +56,14 @@ static int launch_handle = 0;
 static int sustained_performance_mode = 0;
 static int vr_mode = 0;
 static int launch_mode = 0;
+extern bool is_touchboost_enabled;
+static struct timespec s_previous_boost_timespec;
+static int s_previous_duration;
+static int interactive_handle = 0;
+
 #define CHECK_HANDLE(x) (((x)>0) && ((x)!=-1))
+#define USINSEC 1000000L
+#define NSINUS 1000L
 
 int is_perf_hint_active(int hint)
 {
@@ -260,6 +267,56 @@ static int process_activity_launch_hint(void *data)
     return HINT_NONE;
 }
 
+static long long calc_timespan_us(struct timespec start, struct timespec end) {
+    long long diff_in_us = 0;
+    diff_in_us += (end.tv_sec - start.tv_sec) * USINSEC;
+    diff_in_us += (end.tv_nsec - start.tv_nsec) / NSINUS;
+    return diff_in_us;
+}
+
+static int process_interaction_hint(void *data)
+{
+    int *resource_values;
+    int resources;
+
+    if (!is_touchboost_enabled) {
+        return HINT_HANDLED;
+    }
+    if (sustained_performance_mode || vr_mode) {
+        return HINT_HANDLED;
+    }
+    int duration = 500; // 500ms by default
+    if (data) {
+        int input_duration = *((int*)data) + 500;
+        if (input_duration > duration) {
+            duration = (input_duration > 1000) ? 1000 : input_duration;
+        }
+    }
+
+    struct timespec cur_boost_timespec;
+    clock_gettime(CLOCK_MONOTONIC, &cur_boost_timespec);
+
+    long long elapsed_time = calc_timespan_us(s_previous_boost_timespec, cur_boost_timespec);
+    // don't hint if previous hint's duration covers this hint's duration
+    if ((s_previous_duration * 1000) > (elapsed_time + duration * 1000)) {
+        return HINT_HANDLED;
+    }
+    s_previous_boost_timespec = cur_boost_timespec;
+    s_previous_duration = duration;
+
+    resource_values = getPowerhint(INTERACTION_HINT_ID, &resources);
+    if (resource_values != NULL) {
+        ALOGV("%s: acquiring perf lock", __func__);
+        interactive_handle = interaction_with_handle(interactive_handle, duration, resources, resource_values);
+        if (!CHECK_HANDLE(interactive_handle)) {
+            ALOGE("Failed interaction_with_handle for interactive_handle");
+            return HINT_NONE;
+        }
+    }
+
+    return HINT_HANDLED;
+}
+
 int power_hint_override(power_hint_t hint, void *data)
 {
     int ret_val = HINT_NONE;
@@ -275,6 +332,9 @@ int power_hint_override(power_hint_t hint, void *data)
             break;
         case POWER_HINT_LAUNCH:
             ret_val = process_activity_launch_hint(data);
+            break;
+        case POWER_HINT_INTERACTION:
+            ret_val = process_interaction_hint(data);
             break;
         default:
             break;
