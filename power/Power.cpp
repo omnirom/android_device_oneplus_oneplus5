@@ -70,7 +70,9 @@ Return<void> Power::powerHint(PowerHint hint, int32_t data) {
         return Void();
     }
     if (h == POWER_HINT_INTERACTION) {
-        mInteractionHandler.Acquire(data);
+        if (mInteractionHandler.isEnabled()) {
+            mInteractionHandler.Acquire(data);
+        }
         return Void();
     }
     power_hint(h, data ? &data : NULL);

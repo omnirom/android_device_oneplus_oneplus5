@@ -132,13 +132,8 @@ void power_hint(power_hint_t hint, void *data)
         case POWER_HINT_VR_MODE:
             ALOGD("VR mode power hint not handled in power_hint_override");
             break;
-        case POWER_HINT_INTERACTION:
-        {
-            int resources[] = {0x702, 0x20F, 0x30F};
-            int duration = 3000;
-
-            interaction(duration, sizeof(resources)/sizeof(resources[0]), resources);
-        }
+        case POWER_HINT_INTERACTION: {
+            ALOGD("interaction hint not handled in power_hint_override");
             break;
         default:
         break;
