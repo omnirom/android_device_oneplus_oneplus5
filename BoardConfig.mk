@@ -295,10 +295,3 @@ TW_THEME := portrait_hdpi
 # Workaround for error copying vendor files to recovery ramdisk
 #BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 #TARGET_COPY_OUT_VENDOR := vendor
-
-WITH_DEXPREOPT := true
-WITH_DEXPREOPT_PIC := true
-ifneq ($(TARGET_BUILD_VARIANT),user)
-  # Retain classes.dex in APK's for non-user builds
-  DEX_PREOPT_DEFAULT := nostripping
-endif
