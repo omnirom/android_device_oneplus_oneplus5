@@ -256,9 +256,6 @@ TARGET_KERNEL_HAVE_EXFAT := true
 #TARGET_LDPRELOAD := libNimsWrap.so
 BOARD_USES_QCNE := true
 
-# Timeservice
-BOARD_USES_QC_TIME_SERVICES := true
-
 # selinux
 include device/qcom/sepolicy/sepolicy.mk
 include vendor/omni/sepolicy/sepolicy.mk
