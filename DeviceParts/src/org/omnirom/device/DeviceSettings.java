@@ -46,7 +46,7 @@ public class DeviceSettings extends PreferenceFragment implements
     private static final String KEY_SLIDER_MODE_CENTER = "slider_mode_center";
     private static final String KEY_SLIDER_MODE_BOTTOM = "slider_mode_bottom";
     private static final String KEY_SWAP_BACK_RECENTS = "swap_back_recents";
-    public static final String KEY_BUTTON_CATEGORY = "buttons_category";
+    private static final String KEY_BUTTON_CATEGORY = "buttons_category";
     private static final String KEY_CATEGORY_GRAPHICS = "graphics";
 
     public static final String KEY_SRGB_SWITCH = "srgb";
