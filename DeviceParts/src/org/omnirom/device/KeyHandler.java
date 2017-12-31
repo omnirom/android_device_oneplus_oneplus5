@@ -93,6 +93,11 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final String DOZE_INTENT = "com.android.systemui.doze.pulse";
     private static final int HANDWAVE_MAX_DELTA_MS = 1000;
     private static final int POCKET_MIN_DELTA_MS = 5000;
+    private static final int FP_GESTURE_SWIPE_DOWN = 108;
+    private static final int FP_GESTURE_SWIPE_UP = 103;
+    private static final int FP_GESTURE_SWIPE_LEFT = 105;
+    private static final int FP_GESTURE_SWIPE_RIGHT = 106;
+
 
     private static final int[] sSupportedGestures = new int[]{
         GESTURE_II_SCANCODE,
@@ -131,6 +136,13 @@ public class KeyHandler implements DeviceKeyHandler {
         KEY_DOUBLE_TAP
     };
 
+    private static final int[] sSupportedFPGestures = new int[]{
+        FP_GESTURE_SWIPE_DOWN,
+        FP_GESTURE_SWIPE_UP,
+        FP_GESTURE_SWIPE_LEFT,
+        FP_GESTURE_SWIPE_RIGHT
+    };
+
     protected final Context mContext;
     private final PowerManager mPowerManager;
     private EventHandler mEventHandler;
@@ -154,6 +166,8 @@ public class KeyHandler implements DeviceKeyHandler {
     private long mProxySensorTimestamp;
     private boolean mUseWaveCheck;
     private boolean mUsePocketCheck;
+    private boolean mFPcheck;
+    private boolean mDispOn;
 
     private SensorEventListener mProximitySensor = new SensorEventListener() {
         @Override
@@ -192,7 +206,7 @@ public class KeyHandler implements DeviceKeyHandler {
         }
     };
 
-	private SensorEventListener mTiltSensorListener = new SensorEventListener() {
+    private SensorEventListener mTiltSensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
             long delta = SystemClock.elapsedRealtime() - mTiltSensorTimestamp;
@@ -316,8 +330,10 @@ public class KeyHandler implements DeviceKeyHandler {
          @Override
          public void onReceive(Context context, Intent intent) {
              if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
+                 mDispOn = true;
                  onDisplayOn();
              } else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
+                 mDispOn = false;
                  onDisplayOff();
              }
          }
@@ -373,6 +389,18 @@ public class KeyHandler implements DeviceKeyHandler {
                     return true;
             }
         }
+
+        if (DEBUG) Log.i(TAG, "nav_code=" + event.getScanCode());
+        int fpcode = event.getScanCode();
+        mFPcheck = ArrayUtils.contains(sSupportedFPGestures, event.getScanCode());
+        String value = getGestureValueForFPScanCode(fpcode);
+        if (mFPcheck && mDispOn && !TextUtils.isEmpty(value)){
+            if (!launchSpecialActions(value) && !isCameraLaunchEvent(event)) {
+                    Intent intent = createIntent(value);
+                    if (DEBUG) Log.i(TAG, "intent = " + intent);
+                    mContext.startActivity(intent);
+            }
+        }
         return isKeySupported;
     }
 
@@ -408,8 +436,13 @@ public class KeyHandler implements DeviceKeyHandler {
         if (event.getAction() != KeyEvent.ACTION_UP) {
             return false;
         }
-        String value = getGestureValueForScanCode(event.getScanCode());
-        return !TextUtils.isEmpty(value) && value.equals(AppSelectListPreference.CAMERA_ENTRY);
+        if (mFPcheck) {
+            String value = getGestureValueForFPScanCode(event.getScanCode());
+            return !TextUtils.isEmpty(value) && value.equals(AppSelectListPreference.CAMERA_ENTRY);
+        } else {
+            String value = getGestureValueForScanCode(event.getScanCode());
+            return !TextUtils.isEmpty(value) && value.equals(AppSelectListPreference.CAMERA_ENTRY);
+        }
     }
 
     @Override
@@ -624,6 +657,24 @@ public class KeyHandler implements DeviceKeyHandler {
             case GESTURE_RIGHT_SWIPE_SCANCODE:
                 return Settings.System.getStringForUser(mContext.getContentResolver(),
                     GestureSettings.DEVICE_GESTURE_MAPPING_9, UserHandle.USER_CURRENT);
+        }
+        return null;
+    }
+
+    private String getGestureValueForFPScanCode(int scanCode) {
+        switch(scanCode) {
+            case FP_GESTURE_SWIPE_DOWN:
+                return Settings.System.getStringForUser(mContext.getContentResolver(),
+                    GestureSettings.DEVICE_GESTURE_MAPPING_10, UserHandle.USER_CURRENT);
+            case FP_GESTURE_SWIPE_UP:
+                return Settings.System.getStringForUser(mContext.getContentResolver(),
+                    GestureSettings.DEVICE_GESTURE_MAPPING_11, UserHandle.USER_CURRENT);
+            case FP_GESTURE_SWIPE_LEFT:
+                return Settings.System.getStringForUser(mContext.getContentResolver(),
+                    GestureSettings.DEVICE_GESTURE_MAPPING_12, UserHandle.USER_CURRENT);
+            case FP_GESTURE_SWIPE_RIGHT:
+                return Settings.System.getStringForUser(mContext.getContentResolver(),
+                    GestureSettings.DEVICE_GESTURE_MAPPING_13, UserHandle.USER_CURRENT);
         }
         return null;
     }
