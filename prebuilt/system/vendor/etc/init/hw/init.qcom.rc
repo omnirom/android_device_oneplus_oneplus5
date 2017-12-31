@@ -326,7 +326,7 @@ on post-fs-data
     mkdir /data/hostapd 0770 system wifi
 
     # Create /data/vendor/time folder for time-services
-    mkdir /data/vendor/time/ 0700 system system
+    mkdir /data/time/ 0700 system system
 
     mkdir /data/audio/ 0770 media audio
 
