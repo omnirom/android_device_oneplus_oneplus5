@@ -21,7 +21,7 @@
 BOARD_PATH := device/oneplus/oneplus5
 
 TARGET_NO_BOOTLOADER := true
-TARGET_OTA_ASSERT_DEVICE := none
+TARGET_OTA_ASSERT_DEVICE := oneplus5,oneplus5t,cheeseburger,dumpling
 TARGET_KERNEL_VERSION := 4.4
 TARGET_BOOTLOADER_BOARD_NAME := msm8998
 USE_CLANG_PLATFORM_BUILD := true
