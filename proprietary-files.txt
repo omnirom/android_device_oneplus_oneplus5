@@ -40,7 +40,13 @@ lib64/libtrueportrait.so
 lib/libtrueportrait.so
 vendor/lib/libcamera_oneplus_bokeh_wrapper.so
 vendor/lib/libVDDualCameraBlurlessAPI.so
-#vendor/lib/libarcsoft_dualcam_refocus.so
+lib/libarcsoft_high_dynamic_range.so
+lib/libarcsoft_hdr_denoise_api.so
+lib/libarcsoft_smart_denoise.so
+vendor/lib/libarcsoft_dualcam_bokeh_api.so
+vendor/lib/libarcsoft_dualcam_refocus_right.so
+vendor/lib/libarcsoft_dualcam_refocus_left.so
+vendor/lib/libarcsoft_dualcam_refocus_preview.so
 vendor/lib64/libcdsprpc.so
 vendor/lib/libcdsprpc.so
 vendor/lib/libchromaflash.so
@@ -125,7 +131,6 @@ vendor/lib/libqomx_jpegenc.so
 vendor/lib/libseemore.so
 vendor/lib64/libseemore.so
 vendor/lib/libStDualCam.so
-#vendor/lib/libStereoblur.so
 vendor/lib/libSonyIMX350PdafLibrary.so
 vendor/lib/libSonyIMX371RmscLibrary.so
 vendor/lib64/libubifocus.so
