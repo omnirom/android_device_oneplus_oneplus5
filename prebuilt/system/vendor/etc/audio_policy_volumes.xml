@@ -30,9 +30,9 @@ volume index from 0 to 100.
         <point>100,0</point>
     </volume>
     <volume stream="AUDIO_STREAM_VOICE_CALL" deviceCategory="DEVICE_CATEGORY_SPEAKER">
-        <point>0,-3000</point>
-        <point>33,-1600</point>
-        <point>66,-800</point>
+        <point>0,-4000</point>
+        <point>33,-2000</point>
+        <point>66,-1200</point>
         <point>100,0</point>
     </volume>
     <volume stream="AUDIO_STREAM_VOICE_CALL" deviceCategory="DEVICE_CATEGORY_EARPIECE">
@@ -69,16 +69,10 @@ volume index from 0 to 100.
                                        ref="DEFAULT_DEVICE_CATEGORY_EXT_MEDIA_VOLUME_CURVE"/>
     <volume stream="AUDIO_STREAM_MUSIC" deviceCategory="DEVICE_CATEGORY_HEADSET">
     <!-- Default is headset Media Volume Curve -->
-    <!--#ifdef VENDOR_EDIT
-        <point>1,-6100</point>
-        <point>20,-4300</point>
-        <point>60,-1400</point>
-        <point>100,-150</point-->
         <point>1,-6100</point>
         <point>20,-4300</point>
         <point>60,-1400</point>
         <point>100,0</point>
-        <!--#endif /*VENDOR_EDIT*/-->
     </volume>
     <volume stream="AUDIO_STREAM_MUSIC" deviceCategory="DEVICE_CATEGORY_SPEAKER"
                                         ref="DEFAULT_DEVICE_CATEGORY_SPEAKER_VOLUME_CURVE"/>
