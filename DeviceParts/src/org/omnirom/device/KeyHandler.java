@@ -48,6 +48,8 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.provider.Settings.Global;
+import android.telecom.PhoneAccountHandle;
+import android.telecom.TelecomManager;
 import android.telephony.SubscriptionInfo;
 import android.telephony.SubscriptionManager;
 import android.util.Log;
@@ -226,6 +228,9 @@ public class KeyHandler implements DeviceKeyHandler {
             mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(
                     Settings.System.DEVICE_FEATURE_SETTINGS),
                     false, this);
+            mContext.getContentResolver().registerContentObserver(Settings.Global.getUriFor(
+                    Settings.Global.VOICE_CALL_DEFAULT_CHANGED),
+                    false, this);
             update();
             updateDozeSettings();
         }
@@ -270,6 +275,19 @@ public class KeyHandler implements DeviceKeyHandler {
                     }
                 } catch (Exception e) {
                     Log.e(TAG, "MULTI_SIM_DATA_CALL_SUBSCRIPTION change handling failed");
+                }
+                return;
+            }
+            if (uri.equals(Settings.Global.getUriFor(
+                    Settings.Global.VOICE_CALL_DEFAULT_CHANGED))){
+                try {
+                    final TelecomManager telecomManager = TelecomManager.from(mContext);
+                    final PhoneAccountHandle phoneAccount = telecomManager.getUserSelectedOutgoingPhoneAccount();
+                    if (phoneAccount == null) {
+                        SystemProperties.set("persist.sys.phone_account", String.valueOf("-1"));
+                    }
+                } catch (Exception e) {
+                    Log.e(TAG, "VOICE_CALL_DEFAULT_CHANGED change handling failed");
                 }
                 return;
             }
