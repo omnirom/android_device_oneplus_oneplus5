@@ -237,6 +237,11 @@ on post-fs-data
     mkdir /data/vendor/bluetooth 0770 bluetooth bluetooth
     mkdir /data/vendor/ramdump/bluetooth 0770 bluetooth bluetooth
 
+    #for nv items and mac
+    mkdir /data/oemnvitems  0771 radio radio
+    # Generate wifi mac
+    start wifi-mac-generator
+
     # Create the directories used by the Wireless subsystem
     mkdir /data/vendor/wifi 0770 wifi wifi
     mkdir /data/vendor/wifi/sockets 0770 wifi wifi
@@ -1046,3 +1051,10 @@ service time_daemon /system/vendor/bin/time_daemon
 on property:vendor.rild.libpath=*
     setprop rild.libpath ${vendor.rild.libpath}
 
+service wifi-mac-generator /vendor/bin/wifi-mac-generator
+    class main
+    user wifi
+    group wifi
+    oneshot
+    disabled
+    seclabel u:r:wifi_mac_generator:s0

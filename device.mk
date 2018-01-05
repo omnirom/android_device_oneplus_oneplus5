@@ -234,7 +234,8 @@ PRODUCT_PACKAGES += \
     libwpa_client \
     hostapd \
     wpa_supplicant \
-    wpa_supplicant.conf
+    wpa_supplicant.conf \
+    wifi-mac-generator
 
 PRODUCT_PACKAGES += \
     wcnss_service \
