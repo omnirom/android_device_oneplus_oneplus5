@@ -729,7 +729,7 @@
 
     <path name="deep-buffer-playback speaker-and-usb-headphones">
         <path name="deep-buffer-playback usb-headphones" />
-        <path name="deep-buffer-playback" />
+        <path name="deep-buffer-playback quat_i2s" />
     </path>
 
     <path name="deep-buffer-playback headphones">
@@ -803,7 +803,7 @@
 
     <path name="low-latency-playback speaker-and-usb-headphones">
         <path name="low-latency-playback usb-headphones" />
-        <path name="low-latency-playback" />
+        <path name="low-latency-playback quat_i2s" />
     </path>
 
     <path name="low-latency-playback headphones">
@@ -964,7 +964,7 @@
 
     <path name="compress-offload-playback speaker-and-usb-headphones">
         <path name="compress-offload-playback usb-headphones" />
-        <path name="compress-offload-playback" />
+        <path name="compress-offload-playback quat_i2s" />
     </path>
 
     <path name="compress-offload-playback headphones">
@@ -1038,7 +1038,7 @@
 
     <path name="compress-offload-playback2 speaker-and-usb-headphones">
         <path name="compress-offload-playback2 usb-headphones" />
-        <path name="compress-offload-playback2" />
+        <path name="compress-offload-playback2 quat_i2s" />
     </path>
 
     <path name="compress-offload-playback2 headphones">
@@ -1111,7 +1111,7 @@
 
     <path name="compress-offload-playback3 speaker-and-usb-headphones">
         <path name="compress-offload-playback3 usb-headphones" />
-        <path name="compress-offload-playback3" />
+        <path name="compress-offload-playback3 quat_i2s" />
     </path>
 
     <path name="compress-offload-playback3 headphones">
@@ -1186,7 +1186,7 @@
 
     <path name="compress-offload-playback4 speaker-and-usb-headphones">
         <path name="compress-offload-playback4 usb-headphones" />
-        <path name="compress-offload-playback4" />
+        <path name="compress-offload-playback4 quat_i2s" />
     </path>
 
     <path name="compress-offload-playback4 headphones">
@@ -1259,7 +1259,7 @@
 
     <path name="compress-offload-playback5 speaker-and-usb-headphones">
         <path name="compress-offload-playback5 usb-headphones" />
-        <path name="compress-offload-playback5" />
+        <path name="compress-offload-playback5 quat_i2s" />
     </path>
 
     <path name="compress-offload-playback5 headphones">
@@ -1332,7 +1332,7 @@
 
     <path name="compress-offload-playback6 speaker-and-usb-headphones">
         <path name="compress-offload-playback6 usb-headphones" />
-        <path name="compress-offload-playback6" />
+        <path name="compress-offload-playback6 quat_i2s" />
     </path>
 
     <path name="compress-offload-playback6 headphones">
@@ -1405,7 +1405,7 @@
 
     <path name="compress-offload-playback7 speaker-and-usb-headphones">
         <path name="compress-offload-playback7 usb-headphones" />
-        <path name="compress-offload-playback7" />
+        <path name="compress-offload-playback7 quat_i2s" />
     </path>
 
     <path name="compress-offload-playback7 headphones">
@@ -1478,7 +1478,7 @@
 
     <path name="compress-offload-playback8 speaker-and-usb-headphones">
         <path name="compress-offload-playback8 usb-headphones" />
-        <path name="compress-offload-playback8" />
+        <path name="compress-offload-playback8 quat_i2s" />
     </path>
 
     <path name="compress-offload-playback8 headphones">
@@ -1551,7 +1551,7 @@
 
     <path name="compress-offload-playback9 speaker-and-usb-headphones">
         <path name="compress-offload-playback9 usb-headphones" />
-        <path name="compress-offload-playback9" />
+        <path name="compress-offload-playback9 quat_i2s" />
     </path>
 
     <path name="compress-offload-playback9 headphones">
