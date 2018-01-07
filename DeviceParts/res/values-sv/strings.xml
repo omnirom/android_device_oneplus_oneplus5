@@ -15,7 +15,6 @@
      limitations under the License.
 -->
 <resources>
-  <string name="app_name">Oneplus 5</string>
   <string name="category_vibrator">Vibrator</string>
   <string name="vib_strength_title_head">Styrka</string>
   <string name="vib_strength_summary_head">Definiera styrkan på vibratorn</string>

@@ -15,7 +15,6 @@
      limitations under the License.
 -->
 <resources>
-  <string name="app_name">OnePlus 5</string>
   <string name="category_gestures_title">Väljas ekraani žestid</string>
   <string name="category_vibrator">Vibraator</string>
   <string name="vib_strength_title_head">Tugevus</string>
@@ -35,7 +34,7 @@
   <string name="slider_mode_vibrate">Vibreeri</string>
   <string name="slider_mode_silent">Hääletu</string>
   <string name="slider_mode_priority">Ainult prioriteetsed</string>
-  <string name="slider_mode_alarm">Ainult alarmid</string>
+  <string name="slider_mode_alarm">Ainult äratused</string>
   <string name="slider_mode_dnd">Täielik vaikus</string>
   <string name="slider_mode_title_top">Ülapositsioon</string>
   <string name="slider_mode_title_center">Keskpositsioon</string>

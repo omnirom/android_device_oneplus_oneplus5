@@ -14,4 +14,62 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources></resources>
+<resources>
+  <string name="app_name">OnePlus 5</string>
+  <string name="category_gestures_title">Gesten bei ausgeschaltetem Bildschirm</string>
+  <string name="category_vibrator">Vibrator</string>
+  <string name="vib_strength_title_head">Stärke</string>
+  <string name="vib_strength_summary_head">Vibrationsstärke festlegen</string>
+  <string name="vib_test">Test</string>
+  <string name="advanced_settings">Erweitert</string>
+  <string name="category_slider">Regler</string>
+  <string name="slider_mode_title">Regler-Modus</string>
+  <string name="buttons_title">Tasten</string>
+  <string name="swap_back_recents_title">Zurück- und Verlauf-Taste tauschen</string>
+  <string name="graphics_title">Grafik</string>
+  <string name="srgb_mode_title">sRGB-Modus</string>
+  <string name="hbm_mode_title">Modus für max. Helligkeit</string>
+  <string name="proxi_summary_head">Näherungssensor für die Nutzung von Gesten und des Fingerabdrucksensors überprüfen</string>
+  <string name="proxi_title_head">Näherungssensor überprüfen</string>
+  <string name="slider_mode_off">Aus</string>
+  <string name="slider_mode_vibrate">Vibrieren</string>
+  <string name="slider_mode_silent">Lautlos</string>
+  <string name="slider_mode_priority">Nur Wichtige</string>
+  <string name="slider_mode_alarm">Nur Wecker</string>
+  <string name="slider_mode_dnd">Vollständige Stille</string>
+  <string name="slider_mode_title_top">Position oben</string>
+  <string name="slider_mode_title_center">Position in der Mitte</string>
+  <string name="slider_mode_title_bottom">Position unten</string>
+  <string name="dci_mode_title">Breite Farbskala-Modus</string>
+  <string name="Night_mode_title">Nachtmodus</string>
+  <string name="choose_app">App wählen</string>
+  <string name="category_double_swipe_gesture">II-Geste</string>
+  <string name="gesture_app_title">App starten</string>
+  <string name="category_circle_gesture">O-Geste</string>
+  <string name="category_down_arrow_gesture">V-Geste</string>
+  <string name="category_up_arrow_gesture">A-Geste</string>
+  <string name="category_left_arrow_gesture">&lt;-Geste</string>
+  <string name="category_right_arrow_gesture">&gt;-Geste</string>
+  <string name="category_gestures_summary">Gesten bei ausgeschaltetem Bildschirm konfigurieren</string>
+  <string name="torch_entry">Taschenlampe</string>
+  <string name="disabled_entry">Deaktiviert</string>
+  <string name="camera_entry">Kamera</string>
+  <string name="music_play_entry">Musik abspielen / pausieren</string>
+  <string name="music_prev_entry">Vorheriger Titel</string>
+  <string name="music_next_entry">Nächster Titel</string>
+  <string name="not_ready_summary">Lösen...</string>
+  <string name="resolve_failed_summary">App lösen fehlgeschlagen</string>
+  <string name="category_down_swipe_gesture">Runter wischen</string>
+  <string name="category_up_swipe_gesture">Hoch wischen</string>
+  <string name="category_left_swipe_gesture">Links wischen</string>
+  <string name="category_right_swipe_gesture">Rechts wischen</string>
+  <string name="doze_category_title">Inaktivitätsdisplay</string>
+  <string name="doze_category_summary">Das Display einschalten, wenn eine Benachrichtigung empfangen wurde</string>
+  <string name="wave_check_summary">Benachrichtigungen pulsieren, wenn mit der Hand gewunken wird</string>
+  <string name="wave_check_title">Winken</string>
+  <string name="tilt_check_summary">Benachrichtigungen pulsieren, wenn das Gerät hochgenommen wird</string>
+  <string name="tilt_check_title">Aufheben</string>
+  <string name="pocket_check_summary">Benachrichtigungen pulsiren, wenn das Gerät aus der Tasche genommen wird</string>
+  <string name="pocket_check_title">Tasche</string>
+  <string name="ambient_display_enable">Inaktivitätsdisplay muss in den Display-Einstellungen aktiviert sein</string>
+</resources>

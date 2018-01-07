@@ -15,7 +15,6 @@
      limitations under the License.
 -->
 <resources>
-  <string name="app_name">Oneplus 5</string>
   <string name="category_gestures_title">Gestos de la pantalla apagada</string>
   <string name="category_vibrator">Vibrador</string>
   <string name="vib_strength_title_head">Intensidad</string>
