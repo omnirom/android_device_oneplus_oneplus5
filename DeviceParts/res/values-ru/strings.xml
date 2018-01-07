@@ -15,7 +15,7 @@
      limitations under the License.
 -->
 <resources>
-  <string name="app_name">OnePlus 3</string>
+  <string name="app_name">OnePlus 5</string>
   <string name="category_gestures_title">Жесты на выключенном экране</string>
   <string name="category_vibrator">Вибрация</string>
   <string name="vib_strength_title_head">Сила</string>
