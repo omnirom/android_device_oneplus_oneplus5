@@ -173,11 +173,10 @@ public class KeyHandler implements DeviceKeyHandler {
                     if (mUsePocketCheck && delta > POCKET_MIN_DELTA_MS) {
                         launchDozePulse();
                     }
-                } else {
-                    mProxySensorTimestamp = SystemClock.elapsedRealtime();
                 }
+                mProxySensorTimestamp = SystemClock.elapsedRealtime();
+                mProxyWasNear = mProxyIsNear;
             }
-            mProxyWasNear = mProxyIsNear;
         }
 
         @Override
@@ -498,6 +497,7 @@ public class KeyHandler implements DeviceKeyHandler {
             mSensorManager.registerListener(mProximitySensor, mSensor,
                     SensorManager.SENSOR_DELAY_NORMAL);
             mProxySensorTimestamp = SystemClock.elapsedRealtime();
+            mProxyWasNear = false;
         }
         if (mUseTiltCheck) {
             mSensorManager.registerListener(mTiltSensorListener, mTiltSensor,
