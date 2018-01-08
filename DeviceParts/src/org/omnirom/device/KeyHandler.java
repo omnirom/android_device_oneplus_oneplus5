@@ -69,6 +69,7 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final int GESTURE_WAKELOCK_DURATION = 2000;
     private static final String KEY_CONTROL_PATH = "/proc/touchpanel/key_disable";
     private static final String FPC_CONTROL_PATH = "/sys/devices/soc/soc:fpc_fpc1020/proximity_state";
+    private static final String GOODIX_CONTROL_PATH = "/sys/devices/soc/soc:goodix_fp/proximity_state";
 
     private static final int GESTURE_CIRCLE_SCANCODE = 250;
     private static final int GESTURE_V_SCANCODE = 255;
@@ -162,8 +163,14 @@ public class KeyHandler implements DeviceKeyHandler {
             mProxyIsNear = event.values[0] < mSensor.getMaximumRange();
             if (DEBUG_SENSOR) Log.i(TAG, "mProxyIsNear = " + mProxyIsNear);
             if (mUseProxiCheck) {
-                if(Utils.fileWritable(FPC_CONTROL_PATH)) {
-                    Utils.writeValue(FPC_CONTROL_PATH, mProxyIsNear ? "1" : "0");
+                if (android.os.Build.DEVICE.equals("OnePlus5")) {
+                    if (Utils.fileWritable(FPC_CONTROL_PATH)) {
+                        Utils.writeValue(FPC_CONTROL_PATH, mProxyIsNear ? "1" : "0");
+                    }
+                } else if (android.os.Build.DEVICE.equals("OnePlus5T")) {
+                    if (Utils.fileWritable(GOODIX_CONTROL_PATH)) {
+                    Utils.writeValue(GOODIX_CONTROL_PATH, mProxyIsNear ? "1" : "0");
+                    }
                 }
             }
             if (mUseWaveCheck || mUsePocketCheck) {
