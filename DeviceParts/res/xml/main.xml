@@ -65,7 +65,8 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="@string/buttons_title">
+        android:title="@string/buttons_title"
+        android:key="buttons_category">
         <SwitchPreference
             android:key="swap_back_recents"
             android:summary="@string/swap_back_recents_summary"
