@@ -46,6 +46,7 @@ public class DeviceSettings extends PreferenceFragment implements
     private static final String KEY_SLIDER_MODE_CENTER = "slider_mode_center";
     private static final String KEY_SLIDER_MODE_BOTTOM = "slider_mode_bottom";
     private static final String KEY_SWAP_BACK_RECENTS = "swap_back_recents";
+    public static final String KEY_BUTTON_CATEGORY = "buttons_category";
     private static final String KEY_CATEGORY_GRAPHICS = "graphics";
 
     public static final String KEY_SRGB_SWITCH = "srgb";
@@ -65,6 +66,8 @@ public class DeviceSettings extends PreferenceFragment implements
     private static TwoStatePreference mHBMModeSwitch;
     private static TwoStatePreference mDCIModeSwitch;
     private static TwoStatePreference mNightModeSwitch;
+    private PreferenceCategory buttonCategory;
+
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -96,9 +99,16 @@ public class DeviceSettings extends PreferenceFragment implements
         mSliderModeBottom.setValueIndex(valueIndex);
         mSliderModeBottom.setSummary(mSliderModeBottom.getEntries()[valueIndex]);
 
+        PreferenceCategory buttonCategory = (PreferenceCategory) findPreference(KEY_BUTTON_CATEGORY);
         mSwapBackRecents = (TwoStatePreference) findPreference(KEY_SWAP_BACK_RECENTS);
-        mSwapBackRecents.setChecked(Settings.System.getInt(getContext().getContentResolver(),
+        final boolean mSwapBackRecentsEnabled = getResources().getBoolean(R.bool.config_device_has_hw_nav_buttons);
+        if (!mSwapBackRecentsEnabled) {
+            getPreferenceScreen().removePreference(buttonCategory);
+        } else {
+             mSwapBackRecents = (TwoStatePreference) findPreference(KEY_SWAP_BACK_RECENTS);
+             mSwapBackRecents.setChecked(Settings.System.getInt(getContext().getContentResolver(),
                     Settings.System.BUTTON_SWAP_BACK_RECENTS, 0) != 0);
+        }
 
         mSRGBModeSwitch = (TwoStatePreference) findPreference(KEY_SRGB_SWITCH);
         mSRGBModeSwitch.setEnabled(SRGBModeSwitch.isSupported());

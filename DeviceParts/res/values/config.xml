@@ -17,8 +17,6 @@
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <bool name="config_has_oclick">false</bool>
-
-    <bool name="config_has_back_button">false</bool>
+    <bool name="config_device_has_hw_nav_buttons">true</bool>
 
 </resources>
