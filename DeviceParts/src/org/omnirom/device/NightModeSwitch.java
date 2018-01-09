@@ -49,7 +49,6 @@ public class NightModeSwitch implements OnPreferenceChangeListener {
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         Boolean enabled = (Boolean) newValue;
         Utils.writeValue(getFile(), enabled ? "1" : "0");
-        DeviceSettings.disableOtherModes("night", enabled);
         return true;
     }
 }
