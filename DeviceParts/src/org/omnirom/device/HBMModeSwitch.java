@@ -48,7 +48,6 @@ public class HBMModeSwitch implements OnPreferenceChangeListener {
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         Boolean enabled = (Boolean) newValue;
         Utils.writeValue(getFile(), enabled ? "2" : "0");
-        DeviceSettings.disableOtherModes("hbm", enabled);
         return true;
     }
 }

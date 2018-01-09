@@ -58,6 +58,7 @@ public class AppSelectListPreference extends CustomDialogPreference {
     public static final String MUSIC_PLAY_ENTRY = "music_play";
     public static final String MUSIC_PREV_ENTRY = "music_prev";
     public static final String MUSIC_NEXT_ENTRY = "music_next";
+    public static final String WAKE_ENTRY = "wake";
 
     private AppSelectListAdapter mAdapter;
     private Drawable mAppIconDrawable;
@@ -132,6 +133,10 @@ public class AppSelectListPreference extends CustomDialogPreference {
                 PackageItem musicPlayItem = new PackageItem(getContext().getResources().getString(R.string.music_play_entry),
                         R.drawable.ic_music_play, MUSIC_PLAY_ENTRY);
                 mInstalledPackages.add(0, musicPlayItem);
+
+                PackageItem wakeItem = new PackageItem(getContext().getResources().getString(R.string.wake_entry),
+                        R.drawable.ic_wakeup, WAKE_ENTRY);
+                mInstalledPackages.add(0, wakeItem);
 
                 PackageItem disabledItem = new PackageItem(getContext().getResources().getString(R.string.disabled_entry),
                         R.drawable.ic_disabled, DISABLED_ENTRY);
@@ -324,6 +329,9 @@ public class AppSelectListPreference extends CustomDialogPreference {
                 } else if (name.equals(MUSIC_PREV_ENTRY)) {
                     mTitle = getContext().getResources().getString(R.string.music_prev_entry);
                     mAppIconResourceId = R.drawable.ic_music_prev;
+                } else if (name.equals(WAKE_ENTRY)) {
+                    mTitle = getContext().getResources().getString(R.string.wake_entry);
+                    mAppIconResourceId = R.drawable.ic_wakeup;
                 } else {
                     ComponentName componentName = ComponentName.unflattenFromString(name);
                     PackageItem item = mAdapter.resolveApplication(componentName);
