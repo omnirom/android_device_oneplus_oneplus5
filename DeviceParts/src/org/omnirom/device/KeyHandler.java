@@ -423,6 +423,11 @@ public class KeyHandler implements DeviceKeyHandler {
         if (event.getAction() != KeyEvent.ACTION_UP) {
             return false;
         }
+        String value = getGestureValueForScanCode(event.getScanCode());
+        if (!TextUtils.isEmpty(value) && value.equals(AppSelectListPreference.WAKE_ENTRY)) {
+            if (DEBUG) Log.i(TAG, "isWakeEvent " + event.getScanCode() + value);
+            return true;
+        }
         return event.getScanCode() == KEY_DOUBLE_TAP;
     }
 

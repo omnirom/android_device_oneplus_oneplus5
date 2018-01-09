@@ -78,4 +78,11 @@
     <string name="pocket_check_summary">Pulse notifications on removal from pocket</string>
     <string name="pocket_check_title">Pocket</string>
     <string name="ambient_display_enable">Ambient display must be enabled in display settings</string>
+
+    <string name="panel_category_title">Panel modes</string>
+    <string name="panel_category_summary">Modes for panel color correction</string>
+    <string name="off_mode_title">Off</string>
+    <string name="tile_panel_mode">Panel modes</string>
+    <string name="tile_hbm_mode">High brightness modes</string>
+    <string name="wake_entry">Wakeup</string>
 </resources>

@@ -77,21 +77,30 @@
     <PreferenceCategory
         android:key="graphics"
         android:title="@string/graphics_title">
-        <SwitchPreference
+        <!--<SwitchPreference
             android:key="srgb"
             android:summary="@string/srgb_mode_summary"
             android:title="@string/srgb_mode_title" />
         <SwitchPreference
             android:key="dci"
             android:summary="@string/dci_mode_summary"
-            android:title="@string/dci_mode_title" />
+            android:title="@string/dci_mode_title" />-->
         <SwitchPreference
             android:key="hbm"
             android:summary="@string/hbm_mode_summary"
             android:title="@string/hbm_mode_title" />
-        <SwitchPreference
+        <!--<SwitchPreference
             android:key="night"
             android:summary="@string/Night_mode_summary"
-            android:title="@string/Night_mode_title" />
+            android:title="@string/Night_mode_title" />-->
+        <Preference
+            android:key="panel_category"
+            android:title="@string/panel_category_title"
+            android:summary="@string/panel_category_summary"
+            android:persistent="false" >
+            <intent android:action="android.intent.action.MAIN"
+                    android:targetPackage="org.omnirom.device"
+                    android:targetClass="org.omnirom.device.PanelSettingsActivity" />
+        </Preference>
     </PreferenceCategory>
 </PreferenceScreen>

@@ -62,10 +62,7 @@ public class DeviceSettings extends PreferenceFragment implements
     private ListPreference mSliderModeCenter;
     private ListPreference mSliderModeBottom;
     private TwoStatePreference mSwapBackRecents;
-    private static TwoStatePreference mSRGBModeSwitch;
     private static TwoStatePreference mHBMModeSwitch;
-    private static TwoStatePreference mDCIModeSwitch;
-    private static TwoStatePreference mNightModeSwitch;
     private PreferenceCategory buttonCategory;
 
 
@@ -110,26 +107,10 @@ public class DeviceSettings extends PreferenceFragment implements
                     Settings.System.BUTTON_SWAP_BACK_RECENTS, 0) != 0);
         }
 
-        mSRGBModeSwitch = (TwoStatePreference) findPreference(KEY_SRGB_SWITCH);
-        mSRGBModeSwitch.setEnabled(SRGBModeSwitch.isSupported());
-        mSRGBModeSwitch.setChecked(SRGBModeSwitch.isCurrentlyEnabled(this.getContext()));
-        mSRGBModeSwitch.setOnPreferenceChangeListener(new SRGBModeSwitch());
-
         mHBMModeSwitch = (TwoStatePreference) findPreference(KEY_HBM_SWITCH);
         mHBMModeSwitch.setEnabled(HBMModeSwitch.isSupported());
         mHBMModeSwitch.setChecked(HBMModeSwitch.isCurrentlyEnabled(this.getContext()));
         mHBMModeSwitch.setOnPreferenceChangeListener(new HBMModeSwitch());
-
-        mDCIModeSwitch = (TwoStatePreference) findPreference(KEY_DCI_SWITCH);
-        mDCIModeSwitch.setEnabled(DCIModeSwitch.isSupported());
-        mDCIModeSwitch.setChecked(DCIModeSwitch.isCurrentlyEnabled(this.getContext()));
-        mDCIModeSwitch.setOnPreferenceChangeListener(new DCIModeSwitch());
-
-        mNightModeSwitch = (TwoStatePreference) findPreference(KEY_NIGHT_SWITCH);
-        mNightModeSwitch.setEnabled(NightModeSwitch.isSupported());
-        mNightModeSwitch.setChecked(NightModeSwitch.isCurrentlyEnabled(this.getContext()));
-        mNightModeSwitch.setOnPreferenceChangeListener(new NightModeSwitch());
-
     }
 
     @Override
@@ -201,32 +182,6 @@ public class DeviceSettings extends PreferenceFragment implements
             Settings.System.putString(getContext().getContentResolver(),
                     Settings.System.BUTTON_EXTRA_KEY_MAPPING, newValue);
         } catch (Exception e) {
-        }
-    }
-
-    protected static void disableOtherModes(String mode, boolean enabled) {
-        if (mode == KEY_DCI_SWITCH) {
-            if (enabled == true) {
-                mSRGBModeSwitch.setChecked(!enabled);
-            }
-        }
-
-        if (mode == KEY_SRGB_SWITCH) {
-            if (enabled == true) {
-                mDCIModeSwitch.setChecked(!enabled);
-            }
-        }
-
-        if (mode == KEY_HBM_SWITCH) {
-            if (enabled == true) {
-                mNightModeSwitch.setChecked(!enabled);
-            }
-        }
-
-        if (mode == KEY_NIGHT_SWITCH) {
-            if (enabled == true) {
-                mHBMModeSwitch.setChecked(!enabled);
-            }
         }
     }
 }
