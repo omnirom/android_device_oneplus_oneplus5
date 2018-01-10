@@ -725,7 +725,32 @@ lib64/vendor.qti.hardware.data.latency@1.0.so
 lib/vendor.qti.hardware.data.latency@1.0.so
 vendor/lib64/vendor.qti.hardware.data.latency@1.0_vendor.so
 vendor/lib/vendor.qti.hardware.data.latency@1.0_vendor.so
+vendor/lib64/hw/android.hardware.bluetooth@1.0-impl-qti.so
+vendor/etc/init/android.hardware.bluetooth@1.0-service-qti.rc
+vendor/lib/hw/android.hardware.bluetooth@1.0-impl-qti.so
+vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti
+lib64/vendor.qti.hardware.fm@1.0.so
+lib/vendor.qti.hardware.fm@1.0.so
+vendor/lib64/hw/vendor.qti.hardware.fm@1.0-impl.so
+vendor/lib64/vendor.qti.hardware.fm@1.0_vendor.so
+vendor/lib/hw/vendor.qti.hardware.fm@1.0-impl.so
+vendor/lib/vendor.qti.hardware.fm@1.0_vendor.so
+lib64/com.qualcomm.qti.ant@1.0.so
+lib/com.qualcomm.qti.ant@1.0.so
+vendor/lib64/com.qualcomm.qti.ant@1.0_vendor.so
+vendor/lib64/hw/com.qualcomm.qti.ant@1.0-impl.so
+vendor/lib/com.qualcomm.qti.ant@1.0_vendor.so
+vendor/lib/hw/com.qualcomm.qti.ant@1.0-impl.so
 
+#ant
+lib64/libantradio.so
+lib/libantradio.so
+lib64/com.qualcomm.qti.ant@1.0.so
+lib/com.qualcomm.qti.ant@1.0.so
+vendor/lib64/com.qualcomm.qti.ant@1.0_vendor.so
+vendor/lib64/hw/com.qualcomm.qti.ant@1.0-impl.so
+vendor/lib/com.qualcomm.qti.ant@1.0_vendor.so
+vendor/lib/hw/com.qualcomm.qti.ant@1.0-impl.so
 
 #tui
 lib64/vendor.qti.hardware.tui_comm@1.0.so
@@ -820,7 +845,7 @@ vendor/lib/libwfdhdcpcp.so
 vendor/lib/libwfdcommonutils_proprietary.so
 vendor/lib/libwfdmodulehdcpsession.so
 vendor/lib/libwfdmmservice.so
-#bin/wfdservice
+bin/wfdservice
 #etc/init/wfdservice.rc
 etc/wfdconfig.xml
 etc/wfdconfigsink.xml
