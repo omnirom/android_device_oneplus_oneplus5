@@ -105,7 +105,7 @@ start_msm_irqbalance()
 {
 	if [ -f /vendor/bin/msm_irqbalance ]; then
 		case "$platformid" in
-		    "317" | "324" | "325" | "326" | "345" | "346")
+		    "292" | "317" | "324" | "325" | "326" | "345" | "346")
 			start vendor.msm_irqbalance;;
 		    "318" | "327")
 			start vendor.msm_irqbl_sdm630;;
