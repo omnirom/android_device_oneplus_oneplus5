@@ -132,7 +132,8 @@ on boot
    setprop wifi.interface wlan0
    insmod /system/lib/modules/wlan.ko
    chown wifi wifi /sys/module/wlan/parameters/fwpath
-   setprop wlan.driver.status "ok"
+   # will be set later
+   #setprop wlan.driver.status "ok"
    # default country code
    setprop ro.boot.wificountrycode 00
 
