@@ -38,6 +38,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.util.Log;
 import static android.provider.Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED;
+import android.os.UserHandle;
 
 public class GestureSettings extends PreferenceFragment implements
         Preference.OnPreferenceChangeListener {
@@ -54,6 +55,7 @@ public class GestureSettings extends PreferenceFragment implements
     public static final String KEY_LEFT_SWIPE_APP = "left_swipe_gesture_app";
     public static final String KEY_RIGHT_SWIPE_APP = "right_swipe_gesture_app";
     public static final String KEY_FP_GESTURE_CATEGORY = "key_fp_gesture_category";
+    public static final String KEY_FP_GESTURE_DEFAULT_CATEGORY = "gesture_settings";
 
     public static final String FP_GESTURE_SWIPE_DOWN_APP = "fp_down_swipe_gesture_app";
     public static final String FP_GESTURE_SWIPE_UP_APP = "fp_up_swipe_gesture_app";
@@ -165,13 +167,13 @@ public class GestureSettings extends PreferenceFragment implements
         if (android.os.Build.DEVICE.equals("OnePlus5T")) {
 
             mFPDownSwipeApp = (AppSelectListPreference) findPreference(FP_GESTURE_SWIPE_DOWN_APP);
-            mFPDownSwipeApp.setEnabled(true);
+            mFPDownSwipeApp.setEnabled(!areSystemNavigationKeysEnabled());
             value = Settings.System.getString(getContext().getContentResolver(), DEVICE_GESTURE_MAPPING_10);
             mFPDownSwipeApp.setValue(value);
             mFPDownSwipeApp.setOnPreferenceChangeListener(this);
 
             mFPUpSwipeApp = (AppSelectListPreference) findPreference(FP_GESTURE_SWIPE_UP_APP);
-            mFPUpSwipeApp.setEnabled(true);
+            mFPUpSwipeApp.setEnabled(!areSystemNavigationKeysEnabled());
             value = Settings.System.getString(getContext().getContentResolver(), DEVICE_GESTURE_MAPPING_11);
             mFPUpSwipeApp.setValue(value);
             mFPUpSwipeApp.setOnPreferenceChangeListener(this);
@@ -190,8 +192,16 @@ public class GestureSettings extends PreferenceFragment implements
         } else {
             PreferenceCategory fpGestures =
                   (PreferenceCategory) findPreference(KEY_FP_GESTURE_CATEGORY);
+            PreferenceCategory fpGesturesDefault =
+                  (PreferenceCategory) findPreference(KEY_FP_GESTURE_DEFAULT_CATEGORY);
             getPreferenceScreen().removePreference(fpGestures);
+            getPreferenceScreen().removePreference(fpGesturesDefault);
         }
+    }
+
+    private boolean areSystemNavigationKeysEnabled() {
+        return Settings.Secure.getInt(getContext().getContentResolver(),
+               Settings.Secure.SYSTEM_NAVIGATION_KEYS_ENABLED, 0) == 1;
     }
 
     @Override
@@ -306,19 +316,6 @@ public class GestureSettings extends PreferenceFragment implements
         Utils.writeValue(getGestureFile(key), enabled ? "1" : "0");
     }
 
-    /*private boolean setFpSwipeDownGestureEnable(boolean mSval){
-        if (mSval == false){
-            Settings.System.putString(getContext().getContentResolver(), 
-                DEVICE_GESTURE_MAPPING_10, AppSelectListPreference.DISABLED_ENTRY);
-            mFPDownSwipeApp.setEnabled(mSval);
-            return false;
-        }
-        Settings.System.putInt(getContext().getContentResolver(),
-                    FP_SWIPE_DOWN_SWITCH_CHECKED, !mSval ? 1:0);
-        mFPDownSwipeApp.setEnabled(mSval);
-        return mSval;
-    }*/
-
     @Override
     public void onDisplayPreferenceDialog(Preference preference) {
         if (!(preference instanceof AppSelectListPreference)) {
@@ -330,5 +327,12 @@ public class GestureSettings extends PreferenceFragment implements
                         .newInstance(preference.getKey());
         fragment.setTargetFragment(this, 0);
         fragment.show(getFragmentManager(), "dialog_preference");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+            mFPDownSwipeApp.setEnabled(!areSystemNavigationKeysEnabled());
+            mFPUpSwipeApp.setEnabled(!areSystemNavigationKeysEnabled());
     }
 }
