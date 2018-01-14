@@ -439,7 +439,7 @@
     <integer name="config_bluetooth_operating_voltage_mv">3300</integer>
 
     <!-- Boolean indicating if current platform supports HFP inband ringing -->
-    <bool name="config_bluetooth_hfp_inband_ringing_support">true</bool>
+    <!--<bool name="config_bluetooth_hfp_inband_ringing_support">true</bool>-->
 
     <!-- Enable overlay for all location components. -->
     <string name="config_networkLocationProviderPackageName" translatable="false">com.qualcomm.location</string>
