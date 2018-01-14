@@ -73,7 +73,7 @@
     <string name="category_fp_up_swipe_gesture">Fingerprint Up Swipe</string>
     <string name="category_fp_right_swipe_gesture">Fingerprint Right Swipe</string>
     <string name="category_fp_left_swipe_gesture">Fingerprint Left Swipe</string>
-    <string name="fp_swipe_down_switch_summary_head">Disable default Fingerprint notification swipe down gesture</string>
+    <string name="fp_swipe_down_switch_summary_head">Default Fingerprint notification swipe down gesture</string>
     <string name="fp_swipe_down_switch_title_head">Fingerprint Swipe down gesture</string>
 
     <string name="doze_category_title">Ambient display</string>
