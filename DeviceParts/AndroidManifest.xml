@@ -60,6 +60,16 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.android.settings.Settings$SwipeToNotificationSuggestionActivity"
+            android:exported="true"
+            android:label="@string/fp_swipe_down_switch_title_head"
+            android:launchMode="singleTask" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name="org.omnirom.device.PanelSettingsActivity"
             android:exported="true"
             android:label="@string/panel_category_title"
