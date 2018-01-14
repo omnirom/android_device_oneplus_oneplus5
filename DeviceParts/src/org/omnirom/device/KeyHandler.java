@@ -679,8 +679,10 @@ public class KeyHandler implements DeviceKeyHandler {
                        GestureSettings.DEVICE_GESTURE_MAPPING_10, UserHandle.USER_CURRENT);
                 }
             case FP_GESTURE_SWIPE_UP:
-                return Settings.System.getStringForUser(mContext.getContentResolver(),
-                    GestureSettings.DEVICE_GESTURE_MAPPING_11, UserHandle.USER_CURRENT);
+                if (areSystemNavigationKeysEnabled() == false){
+                    return Settings.System.getStringForUser(mContext.getContentResolver(),
+                       GestureSettings.DEVICE_GESTURE_MAPPING_11, UserHandle.USER_CURRENT);
+                }
             case FP_GESTURE_SWIPE_LEFT:
                 return Settings.System.getStringForUser(mContext.getContentResolver(),
                     GestureSettings.DEVICE_GESTURE_MAPPING_12, UserHandle.USER_CURRENT);
