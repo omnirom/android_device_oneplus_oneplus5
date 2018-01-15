@@ -539,13 +539,10 @@ vendor/etc/qvop/cmudict.bin
 vendor/etc/qvop/noisesample.bin
 vendor/etc/qvop/poc_64_hmm.gmm
 
-#aptx
-lib/libaptXHD_encoder.so|974c486e4ca03faa0713553d9dfe2995ac93e01c
-lib/libaptX_encoder.so|984739a0bc968e18f75ced205733fe3f51c2d4f0
-lib/libldacBT_abr.so|0b22afcc8e3b49c5af67b8957ac9e08ea158ab20
-lib/libldacBT_enc.so|7a5ced9eb3fcc5745a76ed1c94611af75abd5cd1
-lib64/libaptXHD_encoder.so|90f47f10af28b3ead143200cb4370b847c513127
-lib64/libaptX_encoder.so|0cebad28afcf29f931bdc2d24fce2730dc882ecf
-lib64/libldacBT_abr.so|26aa6bf2bac014ba80f09f835354093fbc209037
-lib64/libldacBT_enc.so|a5fb63c23a748ed3e1ddf39c6da353f3d2da88f1
+#aptx and ldac
+vendor/lib64/libaptXHD_encoder.so
+vendor/lib64/libaptX_encoder.so
+lib64/libldacBT_enc.so
+lib64/libldacBT_abr.so
+-vendor/app/aptxui/aptxui.apk
 
