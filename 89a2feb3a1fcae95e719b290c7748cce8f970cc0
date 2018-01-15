@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "54c9f3f2_73717386",
+        "filename": "DeviceParts/src/org/omnirom/device/GestureSettings.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2018-01-15T00:11:10Z",
+      "side": 1,
+      "message": "use only getInt without user here",
+      "revId": "89a2feb3a1fcae95e719b290c7748cce8f970cc0",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    }
+  ]
+}
