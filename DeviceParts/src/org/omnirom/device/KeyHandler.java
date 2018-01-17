@@ -535,10 +535,21 @@ public class KeyHandler implements DeviceKeyHandler {
         if (DEBUG) Log.i(TAG, "Display on");
         if (enableProxiSensor()) {
             mSensorManager.unregisterListener(mProximitySensor, mSensor);
+            enableGoodix();
         }
         if (mUseTiltCheck) {
             mSensorManager.unregisterListener(mTiltSensorListener, mTiltSensor);
         }
+    }
+
+    private void enableGoodix() {
+        if (mUseProxiCheck) {
+            if (android.os.Build.DEVICE.equals("OnePlus5T")) {
+                if (Utils.fileWritable(GOODIX_CONTROL_PATH)) {
+                    Utils.writeValue(GOODIX_CONTROL_PATH, mDispOn ? "0" : "1");
+                }
+            }
+         }
     }
 
     private void onDisplayOff() {
