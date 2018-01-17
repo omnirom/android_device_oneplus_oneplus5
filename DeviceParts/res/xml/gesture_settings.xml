@@ -21,6 +21,15 @@
         android:title="@string/proxi_title_head"
         android:persistent="false" />
 
+    <Preference
+        android:key="gesture_settings"
+        android:title="@string/fp_swipe_down_switch_title_head"
+        android:summary="@string/fp_swipe_down_switch_summary_head" >
+        <intent android:action="android.intent.action.MAIN"
+                android:targetPackage="com.android.settings"
+                android:targetClass="com.android.settings.Settings$SwipeToNotificationSuggestionActivity" />
+    </Preference>
+
     <PreferenceCategory
         android:title="@string/offscreen_gesture_title">
 
