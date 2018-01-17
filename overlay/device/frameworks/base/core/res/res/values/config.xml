@@ -31,4 +31,9 @@
          config to 7. -->
     <integer name="config_deviceHardwareKeys">7</integer>
 
+    <!-- Screen brightness used to dim the screen when the user activity
+         timeout expires.  May be less than the minimum allowed brightness setting
+         that can be set by the user. -->
+    <integer name="config_screenBrightnessDim">6</integer>
+
 </resources>
