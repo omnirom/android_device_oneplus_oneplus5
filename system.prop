@@ -70,6 +70,7 @@ debug.gralloc.enable_fb_ubwc=1
 ro.opengles.version=196610
 sdm.perf_hint_window=50
 persist.hwc.enable_vds=1
+debug.sf.enable_hwc_vds=1
 
 # IMS
 persist.volte_enabled_by_hw=1
