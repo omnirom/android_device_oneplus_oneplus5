@@ -16,6 +16,23 @@
       "revId": "97e73d5b17a11840d24b0a04b74592fad65793b6",
       "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d2af1162_174bf598",
+        "filename": "DeviceParts/src/org/omnirom/device/KeyHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2018-01-18T01:59:52Z",
+      "side": 1,
+      "message": "and you can always write \"0\" here right since this will only be called on display on",
+      "revId": "97e73d5b17a11840d24b0a04b74592fad65793b6",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
     }
   ]
 }
