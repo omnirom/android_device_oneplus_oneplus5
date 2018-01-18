@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ede266ad_ca63acc2",
+        "filename": "DeviceParts/src/org/omnirom/device/KeyHandler.java",
+        "patchSetId": 1
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2018-01-18T01:58:55Z",
+      "side": 1,
+      "message": "you aleady checked all needed above - this is uneeded\neven more only checking mUseProxiCheck is to less",
+      "revId": "97e73d5b17a11840d24b0a04b74592fad65793b6",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    }
+  ]
+}
