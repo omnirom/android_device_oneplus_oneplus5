@@ -15,6 +15,7 @@
      limitations under the License.
 -->
 <resources>
+  <string name="app_name">Oneplus 5</string>
   <string name="category_gestures_title">Gesta mimo obrazovku</string>
   <string name="category_vibrator">Vibrace</string>
   <string name="vib_strength_title_head">Intenzita</string>
