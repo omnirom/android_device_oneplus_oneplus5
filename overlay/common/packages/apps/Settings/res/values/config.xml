@@ -15,5 +15,5 @@
 -->
 
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <bool name="config_gesture_settings_enabled">true</bool>
+    <bool name="config_enableManualSubProvisioning">true</bool>
 </resources>
