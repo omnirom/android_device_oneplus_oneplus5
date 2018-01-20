@@ -593,6 +593,12 @@ public class KeyHandler implements DeviceKeyHandler {
                 dispatchMediaKeyWithWakeLockToAudioService(KeyEvent.KEYCODE_MEDIA_PREVIOUS);
             }
             return true;
+        } else if (value.equals(AppSelectListPreference.VOLUME_UP_ENTRY)) {
+            mAudioManager.adjustSuggestedStreamVolume(AudioManager.ADJUST_RAISE,AudioManager.USE_DEFAULT_STREAM_TYPE,AudioManager.FLAG_SHOW_UI);
+            return true;
+        } else if (value.equals(AppSelectListPreference.VOLUME_DOWN_ENTRY)) {
+            mAudioManager.adjustSuggestedStreamVolume(AudioManager.ADJUST_LOWER,AudioManager.USE_DEFAULT_STREAM_TYPE,AudioManager.FLAG_SHOW_UI);
+            return true;
         }
         return false;
     }
