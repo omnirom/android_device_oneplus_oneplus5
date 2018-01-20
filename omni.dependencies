@@ -21,7 +21,7 @@
     "remote": "omnirom",
     "repository": "android_packages_apps_SnapdragonCamera2",
     "target_path": "packages/apps/SnapdragonCamera2",
-    "revision": "android-8.0"
+    "revision": "android-8.1"
   },
   {
     "remote": "omnirom",
