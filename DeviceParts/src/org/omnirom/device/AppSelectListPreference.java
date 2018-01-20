@@ -59,6 +59,8 @@ public class AppSelectListPreference extends CustomDialogPreference {
     public static final String MUSIC_PREV_ENTRY = "music_prev";
     public static final String MUSIC_NEXT_ENTRY = "music_next";
     public static final String WAKE_ENTRY = "wake";
+    public static final String VOLUME_UP_ENTRY = "volume_up";
+    public static final String VOLUME_DOWN_ENTRY = "volume_down";
 
     private AppSelectListAdapter mAdapter;
     private Drawable mAppIconDrawable;
@@ -137,6 +139,14 @@ public class AppSelectListPreference extends CustomDialogPreference {
                 PackageItem wakeItem = new PackageItem(getContext().getResources().getString(R.string.wake_entry),
                         R.drawable.ic_wakeup, WAKE_ENTRY);
                 mInstalledPackages.add(0, wakeItem);
+
+                PackageItem volumeUpItem = new PackageItem(getContext().getResources().getString(R.string.volume_up),
+                        R.drawable.ic_settings_sound, VOLUME_UP_ENTRY);
+                mInstalledPackages.add(0, volumeUpItem);
+
+                PackageItem volumeDownItem = new PackageItem(getContext().getResources().getString(R.string.volume_down),
+                        R.drawable.ic_settings_sound, VOLUME_DOWN_ENTRY);
+                mInstalledPackages.add(0, volumeDownItem);
 
                 PackageItem disabledItem = new PackageItem(getContext().getResources().getString(R.string.disabled_entry),
                         R.drawable.ic_disabled, DISABLED_ENTRY);
@@ -332,6 +342,12 @@ public class AppSelectListPreference extends CustomDialogPreference {
                 } else if (name.equals(WAKE_ENTRY)) {
                     mTitle = getContext().getResources().getString(R.string.wake_entry);
                     mAppIconResourceId = R.drawable.ic_wakeup;
+                } else if (name.equals(VOLUME_UP_ENTRY)) {
+                    mTitle = getContext().getResources().getString(R.string.volume_up);
+                    mAppIconResourceId = R.drawable.ic_settings_sound;
+                } else if (name.equals(VOLUME_DOWN_ENTRY)) {
+                    mTitle = getContext().getResources().getString(R.string.volume_down);
+                    mAppIconResourceId = R.drawable.ic_settings_sound;
                 } else {
                     ComponentName componentName = ComponentName.unflattenFromString(name);
                     PackageItem item = mAdapter.resolveApplication(componentName);
