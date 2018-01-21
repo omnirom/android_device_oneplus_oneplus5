@@ -104,7 +104,7 @@ PRODUCT_PACKAGES += \
 
 #RIL
 PRODUCT_PACKAGES += \
-    android.hardware.radio@1.0
+    android.hardware.radio@1.1
 
 #Healthd packages
 PRODUCT_PACKAGES += \
