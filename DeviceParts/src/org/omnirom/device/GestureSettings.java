@@ -190,10 +190,8 @@ public class GestureSettings extends PreferenceFragment implements
             mFPLeftSwipeApp.setValue(value);
             mFPLeftSwipeApp.setOnPreferenceChangeListener(this);
         } else {
-            PreferenceCategory fpGestures =
-                  (PreferenceCategory) findPreference(KEY_FP_GESTURE_CATEGORY);
-            PreferenceCategory fpGesturesDefault =
-                  (PreferenceCategory) findPreference(KEY_FP_GESTURE_DEFAULT_CATEGORY);
+            Preference fpGestures = findPreference(KEY_FP_GESTURE_CATEGORY);
+            Preference fpGesturesDefault = findPreference(KEY_FP_GESTURE_DEFAULT_CATEGORY);
             getPreferenceScreen().removePreference(fpGestures);
             getPreferenceScreen().removePreference(fpGesturesDefault);
         }
@@ -332,7 +330,11 @@ public class GestureSettings extends PreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
+        if (mFPDownSwipeApp != null) {
             mFPDownSwipeApp.setEnabled(!areSystemNavigationKeysEnabled());
+        }
+        if (mFPUpSwipeApp != null) {
             mFPUpSwipeApp.setEnabled(!areSystemNavigationKeysEnabled());
+        }
     }
 }
