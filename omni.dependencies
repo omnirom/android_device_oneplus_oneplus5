@@ -60,23 +60,6 @@
     "revision": "android-8.1"
   },
   {
-    "repository": "android_external_ant-wireless_antradio-library",
-    "target_path": "external/ant-wireless/antradio-library",
-    "revision": "android-8.0"
-  },
-  {
-    "remote": "omnirom",
-    "repository": "android_external_ant-wireless_ant_service",
-    "target_path": "external/ant-wireless/ant_service",
-    "revision": "android-8.0"
-  },
-  {
-    "remote": "omnirom",
-    "repository": "android_external_ant-wireless_ant_native",
-    "target_path": "external/ant-wireless/ant_native",
-    "revision": "android-8.1"
-  },
-  {
     "remote": "omnirom",
     "repository": "android_kernel_oneplus_msm8998",
     "target_path": "kernel/oneplus/msm8998",
