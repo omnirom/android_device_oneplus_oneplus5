@@ -253,9 +253,8 @@ PRODUCT_PACKAGES += \
     powerhint.qti
 
 # ANT+
-PRODUCT_PACKAGES += \
-    AntHalService \
-    libantradio
+#PRODUCT_PACKAGES += \
+    AntHalService
 
 # Seccomp policy
 PRODUCT_COPY_FILES += \
