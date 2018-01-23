@@ -142,8 +142,11 @@ vendor/lib/libcamera_cp_wrapper.so
 vendor/lib/libcamera_cp_bokeh.so
 vendor/bin/hw/android.hardware.camera.provider@2.4-service
 vendor/etc/init/android.hardware.camera.provider@2.4-service.rc
+#lib64/android.hardware.camera.provider@2.4.so
+#lib/android.hardware.camera.provider@2.4.so
 vendor/lib64/vendor.qti.hardware.camera.device@1.0_vendor.so
 vendor/lib/vendor.qti.hardware.camera.device@1.0_vendor.so
+
 
 #5T ? camera
 vendor/lib/libmmcamera_imx376k_gt24c64_eeprom.so
@@ -217,9 +220,9 @@ lib64/libscveCommon.so
 lib64/libscveObjectTracker.so
 lib64/libscveObjectTracker_stub.so
 lib64/libscveObjectSegmentation.so
-lib/libscveBlobDescriptor_skel.so
-lib/libscveT2T_skel.so
-lib/libscveFaceLandmark_skel.so
+#lib/libscveBlobDescriptor_skel.so
+#lib/libscveT2T_skel.so
+#lib/libscveFaceLandmark_skel.so
 lib/libscveBlobDescriptor.so
 lib/libscveImageCorrection.so
 lib/libscveFaceRecognition.so
@@ -350,6 +353,10 @@ vendor/lib/libchromatix_imx398_3a_4656x2608_30fps_preview.so
 vendor/lib/libchromatix_imx398_cpp_snapshot_nomultiframe.so
 vendor/lib/libchromatix_imx398_isp_4656x2608_30fps_video.so
 vendor/lib/libchromatix_imx398_cpp_4656x2608_30fps_preview.so
+vendor/lib/libchromatix_imx398_3a_4656x3496_30fps_video.so
+vendor/lib/libchromatix_imx398_cpp_4656x3496_30fps_video.so
+vendor/lib/libchromatix_imx398_isp_4656x3496_30fps_video.so
+
 
 # Camera postprocessing
 lib/lib_oneplus_facebeauty.so
