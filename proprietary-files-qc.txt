@@ -21,8 +21,10 @@ vendor/lib/rfsa/adsp/libadsp_hvx_add_constant.so
 vendor/lib/rfsa/adsp/libadsp_hvx_skel.so
 vendor/lib/rfsa/adsp/libapps_mem_heap.so
 vendor/lib/rfsa/adsp/libCpDspFunctions_skel.so
+vendor/lib/rfsa/adsp/libdirac17801-capiv2.so
 vendor/lib/rfsa/adsp/libdirac_capiv2.so
 vendor/lib/rfsa/adsp/libdspCV_skel.so
+vendor/lib/rfsa/adsp/libexternal_dog_skel.so
 vendor/lib/rfsa/adsp/libfastcvadsp_skel.so
 vendor/lib/rfsa/adsp/libfastcvadsp.so
 vendor/lib/rfsa/adsp/libFastRPC_AUE_Forward_skel.so
@@ -35,6 +37,7 @@ vendor/lib/rfsa/adsp/libscveT2T_skel.so
 vendor/lib/rfsa/adsp/libsns_low_lat_stream_skel.so
 vendor/lib/rfsa/adsp/libvpp_frc.so
 vendor/lib/rfsa/adsp/libvpp_svc_skel.so
+
 
 # Audio
 etc/permissions/audiosphere.xml
@@ -470,7 +473,7 @@ vendor/lib64/libsettings.so
 vendor/lib64/libsystem_health_mon.so
 vendor/radio/qcril_database/qcril.db
 -app/radioconfig/radioconfig.apk
-etc/permissions/radioconfig.xml
+#etc/permissions/radioconfig.xml
 
 # Ims
 lib64/librcc.so
@@ -629,17 +632,17 @@ bin/qvrservicetest
 bin/qvrservicetest64
 vendor/etc/qvr/qvrservice_6dof_config.xml
 lib64/libqvrservice_ov7251_hvx_tuning.so
-lib64/libqvrcamera_client.so
+#lib64/libqvrcamera_client.so
 lib64/libqvrservice_hvxcameraclient.so
-lib64/libqvrservice_client.so
+#lib64/libqvrservice_client.so
 lib64/libqvrservice_ov9282_hvx_tuning.so
 lib/libqvrservice_ov7251_hvx_tuning.so
-lib/libqvrcamera_client.so
+#lib/libqvrcamera_client.so
 lib/libqvr_adsp_driver_stub.so
 lib/libqvrservice_hvxcameraclient.so
 lib/libqvrservice.so
-lib/libqvrservice_client.so
-lib/libqvr_adsp_driver_skel.so
+#lib/libqvrservice_client.so
+#lib/libqvr_adsp_driver_skel.so
 lib/libqvrservice_ov9282_hvx_tuning.so
 vendor/etc/qvr/qvrservice_6dof_config_stereo.xml
 vendor/etc/qvr/qvrservice_config.txt
@@ -662,7 +665,7 @@ lib/vendor.qti.hardware.qteeconnector@1.0.so
 lib64/vendor.qti.hardware.qteeconnector@1.0.so
 lib64/vendor.qti.hardware.vpp@1.1.so
 lib64/vendor.qti.hardware.qdutils_disp@1.0.so
-lib64/vendor.qti.hardware.iop@1.0.so
+#lib64/vendor.qti.hardware.iop@1.0.so
 lib64/vendor.qti.esepowermanager@1.0.so
 lib64/vendor.qti.hardware.perf@1.0.so
 vendor/lib64/vendor.qti.hardware.alarm@1.0.so
@@ -704,13 +707,13 @@ vendor/lib/hw/vendor.qti.esepowermanager@1.0-impl.so
 vendor/lib/hw/vendor.qti.hardware.qteeconnector@1.0-impl.so
 vendor/lib/vendor.qti.esepowermanager@1.0_vendor.so
 vendor/lib/vendor.qti.hardware.qdutils_disp@1.0_vendor.so
-vendor/bin/hw/vendor.qti.hardware.iop@1.0-service
+#vendor/bin/hw/vendor.qti.hardware.iop@1.0-service
 vendor/bin/hw/vendor.qti.esepowermanager@1.0-service
 vendor/bin/hw/vendor.qti.hardware.qteeconnector@1.0-service
 vendor/bin/hw/vendor.qti.hardware.qdutils_disp@1.0-service-qti
 vendor/bin/hw/vendor.qti.hardware.perf@1.0-service
 vendor/etc/init/vendor.qti.hardware.qdutils_disp@1.0-service-qti.rc
-vendor/etc/init/vendor.qti.hardware.iop@1.0-service.rc
+#vendor/etc/init/vendor.qti.hardware.iop@1.0-service.rc
 vendor/etc/init/vendor.qti.esepowermanager@1.0-service.rc
 vendor/etc/init/vendor.qti.hardware.qteeconnector@1.0-service.rc
 vendor/etc/init/vendor.qti.hardware.perf@1.0-service.rc
