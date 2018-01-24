@@ -741,7 +741,6 @@ vendor/lib/vendor.qti.hardware.fm@1.0_vendor.so
 
 #ant
 -app/AntHalService/AntHalService.apk
-xbin/antradio_app
 lib64/libantradio.so
 lib/libantradio.so
 lib64/com.qualcomm.qti.ant@1.0.so
