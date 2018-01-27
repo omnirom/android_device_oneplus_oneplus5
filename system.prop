@@ -231,3 +231,6 @@ persist.radio.flex_map_inactive=true
 persist.radio.flexmap_type=disabled
 
 persist.sys.oem.otg_support=true
+
+# touch optimize
+persist.vendor.qti.inputopts.enable=true
