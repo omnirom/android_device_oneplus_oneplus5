@@ -69,6 +69,7 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final int GESTURE_WAKELOCK_DURATION = 2000;
     private static final String KEY_CONTROL_PATH = "/proc/touchpanel/key_disable";
     private static final String FPC_CONTROL_PATH = "/sys/devices/soc/soc:fpc_fpc1020/proximity_state";
+    private static final String FPC_KEY_CONTROL_PATH = "/sys/devices/soc/soc:fpc_fpc1020/key_disable";
     private static final String GOODIX_CONTROL_PATH = "/sys/devices/soc/soc:goodix_fp/proximity_state";
 
     private static final int GESTURE_CIRCLE_SCANCODE = 250;
@@ -378,14 +379,21 @@ public class KeyHandler implements DeviceKeyHandler {
     }
 
     public static void setButtonDisable(Context context) {
-        mButtonDisabled = Settings.System.getIntForUser(
-                context.getContentResolver(), Settings.System.HARDWARE_KEYS_DISABLE, 0,
-                UserHandle.USER_CURRENT) == 1;
-        if (DEBUG) Log.i(TAG, "setButtonDisable=" + mButtonDisabled);
-        if(mButtonDisabled)
-            Utils.writeValue(KEY_CONTROL_PATH, "1");
-        else
-            Utils.writeValue(KEY_CONTROL_PATH, "0");
+        // we should never come here on the 5t but just to be sure
+        if (android.os.Build.DEVICE.equals("OnePlus5")) {
+            mButtonDisabled = Settings.System.getIntForUser(
+                    context.getContentResolver(), Settings.System.HARDWARE_KEYS_DISABLE, 0,
+                    UserHandle.USER_CURRENT) == 1;
+            if (DEBUG) Log.i(TAG, "setButtonDisable=" + mButtonDisabled);
+            if(mButtonDisabled) {
+                Utils.writeValue(KEY_CONTROL_PATH, "1");
+                Utils.writeValue(FPC_KEY_CONTROL_PATH, "1");
+            }
+            else {
+                Utils.writeValue(KEY_CONTROL_PATH, "0");
+                Utils.writeValue(FPC_KEY_CONTROL_PATH, "0");
+            }
+        }
     }
 
     @Override
