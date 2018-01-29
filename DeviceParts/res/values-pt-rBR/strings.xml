@@ -15,7 +15,6 @@
      limitations under the License.
 -->
 <resources>
-  <string name="category_gestures_title">Gestos de tela desligada</string>
   <string name="category_vibrator">Vibração</string>
   <string name="vib_strength_title_head">Intensidade</string>
   <string name="vib_strength_summary_head">Definir a intensidade da vibração</string>
@@ -40,7 +39,6 @@
   <string name="slider_mode_title_center">Posição central</string>
   <string name="slider_mode_title_bottom">Posição inferior</string>
   <string name="choose_app">Selecionar aplicativo</string>
-  <string name="gesture_app_title">Iniciar aplicativo</string>
   <string name="category_up_arrow_gesture">Gesto A</string>
   <string name="category_left_arrow_gesture">Gesto &lt;</string>
   <string name="category_right_arrow_gesture">Gesto &gt;</string>

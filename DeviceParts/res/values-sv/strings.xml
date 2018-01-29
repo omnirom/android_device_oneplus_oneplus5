@@ -32,7 +32,6 @@
   <string name="slider_mode_title_top">Topp-placering</string>
   <string name="slider_mode_title_bottom">Bottenläget</string>
   <string name="choose_app">Välj app</string>
-  <string name="gesture_app_title">Starta app</string>
   <string name="category_up_arrow_gesture">En gest</string>
   <string name="category_left_arrow_gesture">&lt; gest</string>
   <string name="category_right_arrow_gesture">&gt; gest</string>

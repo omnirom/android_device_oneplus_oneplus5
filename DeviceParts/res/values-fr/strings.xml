@@ -14,4 +14,8 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources></resources>
+<resources>
+  <string name="app_name">Oneplus 5</string>
+  <string name="slider_mode_off">Désactivé</string>
+  <string name="slider_mode_vibrate">Vibreur</string>
+</resources>

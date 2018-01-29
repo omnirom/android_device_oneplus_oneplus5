@@ -15,7 +15,9 @@
      limitations under the License.
 -->
 <resources>
-  <string name="category_gestures_title">Väljas ekraani žestid</string>
+  <string name="app_name">OnePlus 5</string>
+  <string name="category_gestures_title">Seadme žestid</string>
+  <string name="fp_gesture_title">Sõrmejäljelugeja žestid</string>
   <string name="category_vibrator">Vibraator</string>
   <string name="vib_strength_title_head">Tugevus</string>
   <string name="vib_strength_summary_head">Määra vibraatori tugevus</string>
@@ -43,13 +45,13 @@
   <string name="Night_mode_title">Öörežiim</string>
   <string name="choose_app">Vali rakendus</string>
   <string name="category_double_swipe_gesture">II žest</string>
-  <string name="gesture_app_title">Käivita rakendus</string>
+  <string name="offscreen_gesture_title">Väljas ekraani žestid</string>
   <string name="category_circle_gesture">O žest</string>
   <string name="category_down_arrow_gesture">V žest</string>
   <string name="category_up_arrow_gesture">A žest</string>
   <string name="category_left_arrow_gesture">&lt; žest</string>
   <string name="category_right_arrow_gesture">&gt; žest</string>
-  <string name="category_gestures_summary">Seadista väljas ekraani žestitegevusi</string>
+  <string name="category_gestures_summary">Seadista žestitegevusi</string>
   <string name="torch_entry">Taskulamp</string>
   <string name="disabled_entry">Keelatud</string>
   <string name="camera_entry">Kaamera</string>
@@ -62,6 +64,12 @@
   <string name="category_up_swipe_gesture">Üles libistamine</string>
   <string name="category_left_swipe_gesture">Vasakule libistamine</string>
   <string name="category_right_swipe_gesture">Paremale libistamine</string>
+  <string name="category_fp_down_swipe_gesture">Sõrmejälje alla libistamine</string>
+  <string name="category_fp_up_swipe_gesture">Sõrmejälje üles libistamine</string>
+  <string name="category_fp_right_swipe_gesture">Sõrmejälje paremale libistamine</string>
+  <string name="category_fp_left_swipe_gesture">Sõrmejälje vasakule libistamine</string>
+  <string name="fp_swipe_down_switch_summary_head">Vaikimisi sõrmejälje teate alla libistamise žest</string>
+  <string name="fp_swipe_down_switch_title_head">Sõrmejälje alla libistamise žest</string>
   <string name="doze_category_title">Ambientne ekraan</string>
   <string name="doze_category_summary">Ärata ekraan, kui saad teateid</string>
   <string name="wave_check_summary">Pulseeri teateid käeviibutusel</string>
@@ -71,4 +79,10 @@
   <string name="pocket_check_summary">Pulseeri teateid, kui seade võetakse taskust välja</string>
   <string name="pocket_check_title">Tasku</string>
   <string name="ambient_display_enable">Ambientne ekraan peab olema lubatud kuvaseadetes</string>
+  <string name="panel_category_title">Paneelirežiimid</string>
+  <string name="panel_category_summary">Režiimid paneeli värviparanduseks</string>
+  <string name="off_mode_title">Väljas</string>
+  <string name="tile_panel_mode">Paneelirežiimid</string>
+  <string name="tile_hbm_mode">Kõrge heleduse režiimid</string>
+  <string name="wake_entry">Äratus</string>
 </resources>

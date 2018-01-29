@@ -15,7 +15,6 @@
      limitations under the License.
 -->
 <resources>
-  <string name="category_gestures_title">Gestos de la pantalla apagada</string>
   <string name="category_vibrator">Vibrador</string>
   <string name="vib_strength_title_head">Intensidad</string>
   <string name="vib_strength_summary_head">Definir la intensidad del vibrador</string>
@@ -43,13 +42,11 @@
   <string name="Night_mode_title">Modo nocturno</string>
   <string name="choose_app">Elegir aplicación</string>
   <string name="category_double_swipe_gesture">II gesto</string>
-  <string name="gesture_app_title">Lanzar aplicación</string>
   <string name="category_circle_gesture">O gesto</string>
   <string name="category_down_arrow_gesture">V gesto</string>
   <string name="category_up_arrow_gesture">A gesto</string>
   <string name="category_left_arrow_gesture">&lt; gesto</string>
   <string name="category_right_arrow_gesture">&gt; gesto</string>
-  <string name="category_gestures_summary">Configurar acciones de gesto con pantalla apagada</string>
   <string name="torch_entry">Linterna</string>
   <string name="disabled_entry">Deshabilitado</string>
   <string name="camera_entry">Cámara</string>

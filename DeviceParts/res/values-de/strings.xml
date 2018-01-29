@@ -16,7 +16,8 @@
 -->
 <resources>
   <string name="app_name">OnePlus 5</string>
-  <string name="category_gestures_title">Gesten bei ausgeschaltetem Bildschirm</string>
+  <string name="category_gestures_title">Gerätegesten</string>
+  <string name="fp_gesture_title">Fingerabdruck-Scanner-Gesten</string>
   <string name="category_vibrator">Vibrator</string>
   <string name="vib_strength_title_head">Stärke</string>
   <string name="vib_strength_summary_head">Vibrationsstärke festlegen</string>
@@ -44,13 +45,13 @@
   <string name="Night_mode_title">Nachtmodus</string>
   <string name="choose_app">App wählen</string>
   <string name="category_double_swipe_gesture">II-Geste</string>
-  <string name="gesture_app_title">App starten</string>
+  <string name="offscreen_gesture_title">Gesten bei ausgeschaltetem Bildschirm</string>
   <string name="category_circle_gesture">O-Geste</string>
   <string name="category_down_arrow_gesture">V-Geste</string>
   <string name="category_up_arrow_gesture">A-Geste</string>
   <string name="category_left_arrow_gesture">&lt;-Geste</string>
   <string name="category_right_arrow_gesture">&gt;-Geste</string>
-  <string name="category_gestures_summary">Gesten bei ausgeschaltetem Bildschirm konfigurieren</string>
+  <string name="category_gestures_summary">Gestenaktionen konfigurieren</string>
   <string name="torch_entry">Taschenlampe</string>
   <string name="disabled_entry">Deaktiviert</string>
   <string name="camera_entry">Kamera</string>
@@ -63,6 +64,12 @@
   <string name="category_up_swipe_gesture">Hoch wischen</string>
   <string name="category_left_swipe_gesture">Links wischen</string>
   <string name="category_right_swipe_gesture">Rechts wischen</string>
+  <string name="category_fp_down_swipe_gesture">Fingerabdruck nach unten wischen</string>
+  <string name="category_fp_up_swipe_gesture">Fingerabdruck nach oben wischen</string>
+  <string name="category_fp_right_swipe_gesture">Fingerabdruck nach rechts wischen</string>
+  <string name="category_fp_left_swipe_gesture">Fingerabdruck nach links wischen</string>
+  <string name="fp_swipe_down_switch_summary_head">Standard-Fingerabdruck-Benachrichtigungswischgeste nach unten</string>
+  <string name="fp_swipe_down_switch_title_head">Fingerabdruck nach unten Wischgeste</string>
   <string name="doze_category_title">Inaktivitätsdisplay</string>
   <string name="doze_category_summary">Das Display einschalten, wenn eine Benachrichtigung empfangen wurde</string>
   <string name="wave_check_summary">Benachrichtigungen pulsieren, wenn mit der Hand gewunken wird</string>
@@ -72,4 +79,10 @@
   <string name="pocket_check_summary">Benachrichtigungen pulsiren, wenn das Gerät aus der Tasche genommen wird</string>
   <string name="pocket_check_title">Tasche</string>
   <string name="ambient_display_enable">Inaktivitätsdisplay muss in den Display-Einstellungen aktiviert sein</string>
+  <string name="panel_category_title">Panel-Modi</string>
+  <string name="panel_category_summary">Modi für die Farbkorrektur des Panel</string>
+  <string name="off_mode_title">Aus</string>
+  <string name="tile_panel_mode">Panel-Modi</string>
+  <string name="tile_hbm_mode">Modus für max. Helligkeit</string>
+  <string name="wake_entry">Aufwachen</string>
 </resources>

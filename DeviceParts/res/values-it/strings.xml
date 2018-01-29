@@ -16,7 +16,8 @@
 -->
 <resources>
   <string name="app_name">Oneplus 5</string>
-  <string name="category_gestures_title">Gesture a schermo spento</string>
+  <string name="category_gestures_title">Gesture del dispositivo</string>
+  <string name="fp_gesture_title">Gesture sul sensore d\'impronte</string>
   <string name="category_vibrator">Vibrazione</string>
   <string name="vib_strength_title_head">Intensità</string>
   <string name="vib_strength_summary_head">Definisci l\'intensità della vibrazione</string>
@@ -44,13 +45,13 @@
   <string name="Night_mode_title">Modalità notte</string>
   <string name="choose_app">Scegli app</string>
   <string name="category_double_swipe_gesture">Gesture doppio swipe</string>
-  <string name="gesture_app_title">Avvia l\'app</string>
+  <string name="offscreen_gesture_title">Gesture a schermo spento</string>
   <string name="category_circle_gesture">Gesture disegna un cerchio</string>
   <string name="category_down_arrow_gesture">Gesture disegna una V</string>
   <string name="category_up_arrow_gesture">Gesture disegna una A</string>
   <string name="category_left_arrow_gesture">&lt; gesture</string>
   <string name="category_right_arrow_gesture">&gt; gesture</string>
-  <string name="category_gestures_summary">Configura le gesture a schermo spento</string>
+  <string name="category_gestures_summary">Configura le azioni delle gesture</string>
   <string name="torch_entry">Torcia</string>
   <string name="disabled_entry">Disabilitato</string>
   <string name="camera_entry">Fotocamera</string>
@@ -63,6 +64,12 @@
   <string name="category_up_swipe_gesture">Swipe in alto</string>
   <string name="category_left_swipe_gesture">Swipe a sinistra</string>
   <string name="category_right_swipe_gesture">Swipe a destra</string>
+  <string name="category_fp_down_swipe_gesture">Scorrimento verso il basso</string>
+  <string name="category_fp_up_swipe_gesture">Scorrimento verso l\'alto</string>
+  <string name="category_fp_right_swipe_gesture">Scorrimento verso destra</string>
+  <string name="category_fp_left_swipe_gesture">Scorrimento verso sinistra</string>
+  <string name="fp_swipe_down_switch_summary_head">Scorrimento verso il basso per le notifiche</string>
+  <string name="fp_swipe_down_switch_title_head">Scorrimento verso il basso</string>
   <string name="doze_category_title">Display ambient</string>
   <string name="doze_category_summary">Riattiva lo schermo quando ricevi le notifiche</string>
   <string name="wave_check_summary">Mostra le notifiche al passaggio della mano</string>
@@ -72,4 +79,10 @@
   <string name="pocket_check_summary">Mostra le notifiche quando togli dalla tasca</string>
   <string name="pocket_check_title">Tasca</string>
   <string name="ambient_display_enable">Il display ambient deve essere abilitato dalle impostazioni del display</string>
+  <string name="panel_category_title">Modalità schermo</string>
+  <string name="panel_category_summary">Modalità per la correzione dei colori</string>
+  <string name="off_mode_title">Disattivo</string>
+  <string name="tile_panel_mode">Modalità schermo</string>
+  <string name="tile_hbm_mode">Modalità alta luminosità</string>
+  <string name="wake_entry">Sveglia</string>
 </resources>
