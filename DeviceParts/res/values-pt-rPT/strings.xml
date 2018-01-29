@@ -16,7 +16,8 @@
 -->
 <resources>
   <string name="app_name">Oneplus 5</string>
-  <string name="category_gestures_title">Desligar gestos do ecrã</string>
+  <string name="category_gestures_title">Gestos de dispositivo</string>
+  <string name="fp_gesture_title">Gestos de scanner de impressão digital</string>
   <string name="category_vibrator">Vibração</string>
   <string name="vib_strength_title_head">Intensidade</string>
   <string name="vib_strength_summary_head">Definir a intensidade da vibração</string>
@@ -44,13 +45,13 @@
   <string name="Night_mode_title">Modo nocturno</string>
   <string name="choose_app">Escolher aplicação</string>
   <string name="category_double_swipe_gesture">II gesto</string>
-  <string name="gesture_app_title">Iniciar aplicação</string>
+  <string name="offscreen_gesture_title">Gestos com ecrã desligado</string>
   <string name="category_circle_gesture">O gesto</string>
   <string name="category_down_arrow_gesture">V gesto</string>
   <string name="category_up_arrow_gesture">A gesto</string>
   <string name="category_left_arrow_gesture">&lt; gesto</string>
   <string name="category_right_arrow_gesture">&gt; gesto</string>
-  <string name="category_gestures_summary">Configurar ações de gesto de ecrã desligado</string>
+  <string name="category_gestures_summary">Configurar ações de gesto</string>
   <string name="torch_entry">Lanterna</string>
   <string name="disabled_entry">Desligado</string>
   <string name="camera_entry">Câmara</string>
@@ -63,6 +64,12 @@
   <string name="category_up_swipe_gesture">Deslizar para cima</string>
   <string name="category_left_swipe_gesture">Deslizar para a esquerda</string>
   <string name="category_right_swipe_gesture">Deslizar para a direita</string>
+  <string name="category_fp_down_swipe_gesture">Deslizar para baixo na impressão digital</string>
+  <string name="category_fp_up_swipe_gesture">Deslizar para cima na impressão digital</string>
+  <string name="category_fp_right_swipe_gesture">Deslizar para a direita na impressão digital</string>
+  <string name="category_fp_left_swipe_gesture">Deslizar para a esquerda na impressão digital</string>
+  <string name="fp_swipe_down_switch_summary_head">Notificação padrão de impressões digitais ao deslizar para baixo</string>
+  <string name="fp_swipe_down_switch_title_head">Gesto deslizante para baixo na impressão digital</string>
   <string name="doze_category_title">Ambient Display</string>
   <string name="doze_category_summary">Acordar o ecrã quando receber notificações</string>
   <string name="wave_check_summary">Mostrar notificações ao passar a mão</string>
@@ -72,4 +79,10 @@
   <string name="pocket_check_summary">Mostrar notificações ao retirar do bolso</string>
   <string name="pocket_check_title">Bolso</string>
   <string name="ambient_display_enable">Ambient display deve ser habilitada nas configurações de exibição</string>
+  <string name="panel_category_title">Modos do painel</string>
+  <string name="panel_category_summary">Correcção de côr para os modos do painel</string>
+  <string name="off_mode_title">Desligada</string>
+  <string name="tile_panel_mode">Modos do painel</string>
+  <string name="tile_hbm_mode">Modos de luminosidade alta</string>
+  <string name="wake_entry">Acordar</string>
 </resources>

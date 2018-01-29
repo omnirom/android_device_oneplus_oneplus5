@@ -16,7 +16,8 @@
 -->
 <resources>
   <string name="app_name">Oneplus 5</string>
-  <string name="category_gestures_title">Kapalı ekran hareketleri</string>
+  <string name="category_gestures_title">Cihaz hareketleri</string>
+  <string name="fp_gesture_title">Parmak izi tarayıcı hareketleri</string>
   <string name="category_vibrator">Titreşim motoru</string>
   <string name="vib_strength_title_head">Kuvvet</string>
   <string name="vib_strength_summary_head">Titreşim motorunun kuvvetini tayin edin</string>
@@ -44,13 +45,13 @@
   <string name="Night_mode_title">Gece modu</string>
   <string name="choose_app">Uygulama seçin</string>
   <string name="category_double_swipe_gesture">II hareketi</string>
-  <string name="gesture_app_title">Uygulama başlat</string>
+  <string name="offscreen_gesture_title">Kapalı ekran hareketleri</string>
   <string name="category_circle_gesture">O hareketi</string>
   <string name="category_down_arrow_gesture">V hareketi</string>
   <string name="category_up_arrow_gesture">A hareketi</string>
   <string name="category_left_arrow_gesture">&lt; hareketi</string>
   <string name="category_right_arrow_gesture">&gt; hareketi</string>
-  <string name="category_gestures_summary">Kapalı ekran hareketlerini yapılandırın</string>
+  <string name="category_gestures_summary">Hareket eylemlerini ayarlayın</string>
   <string name="torch_entry">Fener</string>
   <string name="disabled_entry">Devre dışı</string>
   <string name="camera_entry">Kamera</string>
@@ -63,6 +64,12 @@
   <string name="category_up_swipe_gesture">Yukarı kaydır</string>
   <string name="category_left_swipe_gesture">Sola kaydır</string>
   <string name="category_right_swipe_gesture">Sağa kaydır</string>
+  <string name="category_fp_down_swipe_gesture">Parmağı Aşağı Kaydırma</string>
+  <string name="category_fp_up_swipe_gesture">Parmağı Yukarı Kaydırma</string>
+  <string name="category_fp_right_swipe_gesture">Parmağı Sağa Kaydırma</string>
+  <string name="category_fp_left_swipe_gesture">Parmağı Sola Kaydırma</string>
+  <string name="fp_swipe_down_switch_summary_head">Varsayılan parmağı aşağı kaydırma hareketi bildirimi</string>
+  <string name="fp_swipe_down_switch_title_head">Parmağı aşağı kaydırma hareketi</string>
   <string name="doze_category_title">Ortam ekranı</string>
   <string name="doze_category_summary">Bildirim aldığınızda ekranı uyandırın</string>
   <string name="wave_check_summary">Bildirimleri elimi salladığımda göster</string>
@@ -72,4 +79,10 @@
   <string name="pocket_check_summary">Bildirimleri cihazı cebimdem çıkardığımda göster</string>
   <string name="pocket_check_title">Cep</string>
   <string name="ambient_display_enable">Ekran ayarlarındaki ortam ekranı etkinleştirilmelidir</string>
+  <string name="panel_category_title">Panel modları</string>
+  <string name="panel_category_summary">Panel rengini düzeltme modları</string>
+  <string name="off_mode_title">Kapalı</string>
+  <string name="tile_panel_mode">Panel modları</string>
+  <string name="tile_hbm_mode">Yüksek parlaklık modları</string>
+  <string name="wake_entry">Uyanma</string>
 </resources>

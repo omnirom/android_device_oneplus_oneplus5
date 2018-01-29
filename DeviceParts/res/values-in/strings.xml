@@ -16,7 +16,6 @@
 -->
 <resources>
   <string name="app_name">Oneplus 5</string>
-  <string name="category_gestures_title">Tidak aktif</string>
   <string name="category_vibrator">Vibrator</string>
   <string name="vib_strength_title_head">Kekuatan</string>
   <string name="vib_strength_summary_head">Tentukan kekuatan vibrator</string>
@@ -44,13 +43,11 @@
   <string name="Night_mode_title">Mode malam</string>
   <string name="choose_app">Pilih aplikasi</string>
   <string name="category_double_swipe_gesture">Gerakan kedua</string>
-  <string name="gesture_app_title">Luncurkan aplikasi</string>
   <string name="category_circle_gesture">O isyarat</string>
   <string name="category_down_arrow_gesture">Gerakan V</string>
   <string name="category_up_arrow_gesture">Sebuah isyarat</string>
   <string name="category_left_arrow_gesture">&lt; sikap</string>
   <string name="category_right_arrow_gesture">&gt; sikap</string>
-  <string name="category_gestures_summary">Konfigurasikan tindakan isyarat di luar layar</string>
   <string name="torch_entry">Senter</string>
   <string name="disabled_entry">Cacat</string>
   <string name="camera_entry">Kamera</string>

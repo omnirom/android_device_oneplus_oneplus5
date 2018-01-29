@@ -16,7 +16,6 @@
 -->
 <resources>
   <string name="app_name">Oneplus 5</string>
-  <string name="category_gestures_title">关闭屏幕手势</string>
   <string name="category_vibrator">振动</string>
   <string name="vib_strength_title_head">强度</string>
   <string name="vib_strength_summary_head">设置振动强度</string>

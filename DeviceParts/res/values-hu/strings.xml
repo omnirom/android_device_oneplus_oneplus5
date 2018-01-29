@@ -16,7 +16,8 @@
 -->
 <resources>
   <string name="app_name">Oneplus 5</string>
-  <string name="category_gestures_title">Kikapcsolt képernyő melletti gesztusok</string>
+  <string name="category_gestures_title">Eszköz gesztusok</string>
+  <string name="fp_gesture_title">Ujjlenyomat szkenner gesztusok</string>
   <string name="category_vibrator">Rezgés</string>
   <string name="vib_strength_title_head">Erősség</string>
   <string name="vib_strength_summary_head">Rezgés erősségének meghatározása</string>
@@ -44,13 +45,13 @@
   <string name="Night_mode_title">Éjszakai mód</string>
   <string name="choose_app">Válasszon alkalmazást</string>
   <string name="category_double_swipe_gesture">II gesztus</string>
-  <string name="gesture_app_title">Alkalmazás indítása</string>
+  <string name="offscreen_gesture_title">Kikapcsolt képernyős gesztusok</string>
   <string name="category_circle_gesture">O gesztus</string>
   <string name="category_down_arrow_gesture">V gesztus</string>
   <string name="category_up_arrow_gesture">A gesztus</string>
   <string name="category_left_arrow_gesture">&lt; gesztus</string>
   <string name="category_right_arrow_gesture">&gt; gesztus</string>
-  <string name="category_gestures_summary">Kikapcsolt képernyős gesztusok testreszabása</string>
+  <string name="category_gestures_summary">Gesztus műveletek konfigurálása</string>
   <string name="torch_entry">Zseblámpa</string>
   <string name="disabled_entry">Kikapcsolva</string>
   <string name="camera_entry">Kamera</string>
@@ -63,6 +64,12 @@
   <string name="category_up_swipe_gesture">Felfelé húzás</string>
   <string name="category_left_swipe_gesture">Balra húzás</string>
   <string name="category_right_swipe_gesture">Jobbra húzás</string>
+  <string name="category_fp_down_swipe_gesture">Ujjlenyomat lefelé csúsztatás</string>
+  <string name="category_fp_up_swipe_gesture">Ujjlenyomat felfelé csúsztatás</string>
+  <string name="category_fp_right_swipe_gesture">Ujjlenyomat jobbra csúsztatás</string>
+  <string name="category_fp_left_swipe_gesture">Ujjlenyomat balra csúsztatás</string>
+  <string name="fp_swipe_down_switch_summary_head">Alapértelmezett ujjlenyomat értesítés lefelé csúsztatás gesztushoz</string>
+  <string name="fp_swipe_down_switch_title_head">Ujjlenyomat lefelé csúsztatás gesztus</string>
   <string name="doze_category_title">Környezeti kijelző</string>
   <string name="doze_category_summary">Képernyő felébresztése értesítés esetén</string>
   <string name="wave_check_summary">Értesítések pulzálása lebegő simításkor</string>
@@ -72,4 +79,10 @@
   <string name="pocket_check_summary">Értesítések pulzálása zsebből való kivétel után</string>
   <string name="pocket_check_title">Zseb</string>
   <string name="ambient_display_enable">A környezeti kijelzőt engedélyezni kell a képernyő beállításokban</string>
+  <string name="panel_category_title">Panel módok</string>
+  <string name="panel_category_summary">Panel színkorrekciós módjai</string>
+  <string name="off_mode_title">Ki</string>
+  <string name="tile_panel_mode">Panel módok</string>
+  <string name="tile_hbm_mode">Nagy fényerő módok</string>
+  <string name="wake_entry">Ébresztés</string>
 </resources>
