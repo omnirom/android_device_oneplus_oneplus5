@@ -58,6 +58,7 @@ import android.view.WindowManagerGlobal;
 
 import com.android.internal.os.DeviceKeyHandler;
 import com.android.internal.util.ArrayUtils;
+import com.android.internal.util.omni.OmniUtils;
 
 public class KeyHandler implements DeviceKeyHandler {
 
@@ -606,6 +607,18 @@ public class KeyHandler implements DeviceKeyHandler {
             return true;
         } else if (value.equals(AppSelectListPreference.VOLUME_DOWN_ENTRY)) {
             mAudioManager.adjustSuggestedStreamVolume(AudioManager.ADJUST_LOWER,AudioManager.USE_DEFAULT_STREAM_TYPE,AudioManager.FLAG_SHOW_UI);
+            return true;
+        } else if (value.equals(AppSelectListPreference.SCROLL_DOWN_ENTRY)) {
+            OmniUtils.sendKeycode(KeyEvent.KEYCODE_DPAD_DOWN);
+            return true;
+        } else if (value.equals(AppSelectListPreference.SCROLL_UP_ENTRY)) {
+            OmniUtils.sendKeycode(KeyEvent.KEYCODE_DPAD_UP);
+            return true;
+        } else if (value.equals(AppSelectListPreference.BROWSE_SCROLL_DOWN_ENTRY)) {
+            OmniUtils.sendKeycode(KeyEvent.KEYCODE_PAGE_DOWN);
+            return true;
+        } else if (value.equals(AppSelectListPreference.BROWSE_SCROLL_UP_ENTRY)) {
+            OmniUtils.sendKeycode(KeyEvent.KEYCODE_PAGE_UP);
             return true;
         }
         return false;
