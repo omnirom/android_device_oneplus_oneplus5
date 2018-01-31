@@ -61,6 +61,8 @@ public class AppSelectListPreference extends CustomDialogPreference {
     public static final String WAKE_ENTRY = "wake";
     public static final String VOLUME_UP_ENTRY = "volume_up";
     public static final String VOLUME_DOWN_ENTRY = "volume_down";
+    public static final String SCROLL_DOWN_ENTRY = "scroll_down";
+    public static final String SCROLL_UP_ENTRY = "scroll_up";
 
     private AppSelectListAdapter mAdapter;
     private Drawable mAppIconDrawable;
@@ -147,6 +149,14 @@ public class AppSelectListPreference extends CustomDialogPreference {
                 PackageItem volumeDownItem = new PackageItem(getContext().getResources().getString(R.string.volume_down),
                         R.drawable.ic_settings_sound, VOLUME_DOWN_ENTRY);
                 mInstalledPackages.add(0, volumeDownItem);
+
+                PackageItem scrollDownItem = new PackageItem(getContext().getResources().getString(R.string.scroll_down),
+                        R.drawable.arrow_collapse_down, SCROLL_DOWN_ENTRY);
+                mInstalledPackages.add(0, scrollDownItem);
+
+                PackageItem scrollUpItem = new PackageItem(getContext().getResources().getString(R.string.scroll_up),
+                        R.drawable.arrow_collapse_up, SCROLL_UP_ENTRY);
+                mInstalledPackages.add(0, scrollUpItem);
 
                 PackageItem disabledItem = new PackageItem(getContext().getResources().getString(R.string.disabled_entry),
                         R.drawable.ic_disabled, DISABLED_ENTRY);
