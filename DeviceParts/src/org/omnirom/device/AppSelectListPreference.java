@@ -61,6 +61,10 @@ public class AppSelectListPreference extends CustomDialogPreference {
     public static final String WAKE_ENTRY = "wake";
     public static final String VOLUME_UP_ENTRY = "volume_up";
     public static final String VOLUME_DOWN_ENTRY = "volume_down";
+    public static final String SCROLL_DOWN_ENTRY = "scroll_down";
+    public static final String SCROLL_UP_ENTRY = "scroll_up";
+    public static final String BROWSE_SCROLL_DOWN_ENTRY = "browse_scroll_down";
+    public static final String BROWSE_SCROLL_UP_ENTRY = "browse_scroll_up";
 
     private AppSelectListAdapter mAdapter;
     private Drawable mAppIconDrawable;
@@ -147,6 +151,22 @@ public class AppSelectListPreference extends CustomDialogPreference {
                 PackageItem volumeDownItem = new PackageItem(getContext().getResources().getString(R.string.volume_down),
                         R.drawable.ic_settings_sound, VOLUME_DOWN_ENTRY);
                 mInstalledPackages.add(0, volumeDownItem);
+
+                PackageItem scrollDownItem = new PackageItem(getContext().getResources().getString(R.string.scroll_down),
+                        R.drawable.arrow_down, SCROLL_DOWN_ENTRY);
+                mInstalledPackages.add(0, scrollDownItem);
+
+                PackageItem scrollUpItem = new PackageItem(getContext().getResources().getString(R.string.scroll_up),
+                        R.drawable.arrow_up, SCROLL_UP_ENTRY);
+                mInstalledPackages.add(0, scrollUpItem);
+
+                PackageItem browseScrollDownItem = new PackageItem(getContext().getResources().getString(R.string.browse_scroll_down),
+                        R.drawable.arrow_collapse_down, BROWSE_SCROLL_DOWN_ENTRY);
+                mInstalledPackages.add(0, browseScrollDownItem);
+
+                PackageItem browseScrollUpItem = new PackageItem(getContext().getResources().getString(R.string.browse_scroll_up),
+                        R.drawable.arrow_collapse_up, BROWSE_SCROLL_UP_ENTRY);
+                mInstalledPackages.add(0, browseScrollUpItem);
 
                 PackageItem disabledItem = new PackageItem(getContext().getResources().getString(R.string.disabled_entry),
                         R.drawable.ic_disabled, DISABLED_ENTRY);
@@ -348,6 +368,18 @@ public class AppSelectListPreference extends CustomDialogPreference {
                 } else if (name.equals(VOLUME_DOWN_ENTRY)) {
                     mTitle = getContext().getResources().getString(R.string.volume_down);
                     mAppIconResourceId = R.drawable.ic_settings_sound;
+                } else if (name.equals(SCROLL_DOWN_ENTRY)) {
+                    mTitle = getContext().getResources().getString(R.string.scroll_down);
+                    mAppIconResourceId = R.drawable.arrow_down;
+                } else if (name.equals(SCROLL_UP_ENTRY)) {
+                    mTitle = getContext().getResources().getString(R.string.scroll_up);
+                    mAppIconResourceId = R.drawable.arrow_up;
+                } else if (name.equals(BROWSE_SCROLL_DOWN_ENTRY)) {
+                    mTitle = getContext().getResources().getString(R.string.browse_scroll_down);
+                    mAppIconResourceId = R.drawable.arrow_collapse_down;
+                } else if (name.equals(BROWSE_SCROLL_UP_ENTRY)) {
+                    mTitle = getContext().getResources().getString(R.string.browse_scroll_up);
+                    mAppIconResourceId = R.drawable.arrow_collapse_up;
                 } else {
                     ComponentName componentName = ComponentName.unflattenFromString(name);
                     PackageItem item = mAdapter.resolveApplication(componentName);
