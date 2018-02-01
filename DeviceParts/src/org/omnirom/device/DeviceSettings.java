@@ -57,6 +57,8 @@ public class DeviceSettings extends PreferenceFragment implements
 
     public static final String SLIDER_DEFAULT_VALUE = "4,2,0";
 
+    public static final String KEY_TRISTATE_FEEDBACK_SWITCH = "tristate_feedback";
+
     private VibratorStrengthPreference mVibratorStrength;
     private ListPreference mSliderModeTop;
     private ListPreference mSliderModeCenter;
@@ -64,6 +66,7 @@ public class DeviceSettings extends PreferenceFragment implements
     private TwoStatePreference mSwapBackRecents;
     private static TwoStatePreference mHBMModeSwitch;
     private PreferenceCategory buttonCategory;
+    private TwoStatePreference mTristateFeedbackSwitch;
 
 
     @Override
@@ -111,6 +114,10 @@ public class DeviceSettings extends PreferenceFragment implements
         mHBMModeSwitch.setEnabled(HBMModeSwitch.isSupported());
         mHBMModeSwitch.setChecked(HBMModeSwitch.isCurrentlyEnabled(this.getContext()));
         mHBMModeSwitch.setOnPreferenceChangeListener(new HBMModeSwitch());
+
+        mTristateFeedbackSwitch = (TwoStatePreference) findPreference(KEY_TRISTATE_FEEDBACK_SWITCH);
+        mTristateFeedbackSwitch.setChecked(Settings.System.getInt(getContext().getContentResolver(),
+                Settings.System.TRISTATE_FEEDBACK_ENABLED, 0) != 0);
     }
 
     @Override
@@ -118,6 +125,11 @@ public class DeviceSettings extends PreferenceFragment implements
         if (preference == mSwapBackRecents) {
             Settings.System.putInt(getContext().getContentResolver(),
                     Settings.System.BUTTON_SWAP_BACK_RECENTS, mSwapBackRecents.isChecked() ? 1 : 0);
+            return true;
+        }
+        if (preference == mTristateFeedbackSwitch) {
+            Settings.System.putInt(getContext().getContentResolver(),
+                    Settings.System.TRISTATE_FEEDBACK_ENABLED, mTristateFeedbackSwitch.isChecked() ? 1 : 0);
             return true;
         }
         return super.onPreferenceTreeClick(preference);
