@@ -34,6 +34,10 @@
     <string name="hbm_mode_title">High brightness mode</string>
     <string name="proxi_summary_head">Check proximity sensor for handling gesture and fingerprint sensor</string>
     <string name="proxi_title_head">Proximity check</string>
+    <string name="gesture_feedback_summary_head">Enable/disable gesture haptic feedback</string>
+    <string name="gesture_feedback_title_head">Gesture haptic feedback</string>
+    <string name="off_screen_gesture_feedback_summary_head">Enable/disable off-screen gesture haptic feedback</string>
+    <string name="off_screen_gesture_feedback_title_head">Off-screen gesture haptic feedback</string>
     <string name="slider_mode_off">Off</string>
     <string name="slider_mode_vibrate">Vibrate</string>
     <string name="slider_mode_silent">Silent</string>
