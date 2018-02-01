@@ -44,6 +44,11 @@
 
     <PreferenceCategory
         android:title="@string/category_slider">
+        <SwitchPreference
+            android:key="tristate_feedback"
+            android:summary="@string/tristate_feedback_summary_head"
+            android:title="@string/tristate_feedback_title_head"
+            android:persistent="false" />
         <ListPreference
             android:key="slider_mode_top"
             android:title="@string/slider_mode_title_top"
