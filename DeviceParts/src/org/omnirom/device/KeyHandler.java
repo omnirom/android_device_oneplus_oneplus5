@@ -168,6 +168,7 @@ public class KeyHandler implements DeviceKeyHandler {
     private boolean mUsePocketCheck;
     private boolean mFPcheck;
     private boolean mDispOn;
+    private IDeviceKeyHandlerCallback mCallback;
 
     private SensorEventListener mProximitySensor = new SensorEventListener() {
         @Override
@@ -580,6 +581,7 @@ public class KeyHandler implements DeviceKeyHandler {
                 try {
                     mCameraManager.setTorchMode(rearCameraId, !mTorchEnabled);
                     mTorchEnabled = !mTorchEnabled;
+                    mCallback.performHapticFeedback();
                 } catch (Exception e) {
                     // Ignore
                 }
@@ -695,5 +697,10 @@ public class KeyHandler implements DeviceKeyHandler {
             mUsePocketCheck = Boolean.valueOf(parts[1]);
             mUseTiltCheck = Boolean.valueOf(parts[2]);
         }
+    }
+
+    @Override
+    public void setCallBack(IDeviceKeyHandlerCallback callback) {
+        mCallback = callback;
     }
 }
