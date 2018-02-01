@@ -21,6 +21,12 @@
         android:title="@string/proxi_title_head"
         android:persistent="false" />
 
+    <SwitchPreference
+        android:key="off_screen_gesture_feedback"
+        android:summary="@string/off_screen_gesture_feedback_summary_head"
+        android:title="@string/off_screen_gesture_feedback_title_head"
+        android:persistent="false" />
+
     <Preference
         android:key="gesture_settings"
         android:title="@string/fp_swipe_down_switch_title_head"
