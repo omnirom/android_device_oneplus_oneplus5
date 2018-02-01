@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "73325b3c_ebc9f7c0",
+        "filename": "DeviceParts/res/values/strings.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2018-02-01T21:44:22Z",
+      "side": 1,
+      "message": "never uppercase",
+      "revId": "a4abe4c0d77323131811d48a5a8a504858f96d78",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35180b58_8f93124d",
+        "filename": "DeviceParts/src/org/omnirom/device/GestureSettings.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2018-02-01T21:44:22Z",
+      "side": 1,
+      "message": "default must be off \u003d\u003d 0",
+      "revId": "a4abe4c0d77323131811d48a5a8a504858f96d78",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0705c788_3b984e8d",
+        "filename": "DeviceParts/src/org/omnirom/device/KeyHandler.java",
+        "patchSetId": 7
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2018-02-01T21:44:22Z",
+      "side": 1,
+      "message": "default must be 0",
+      "revId": "a4abe4c0d77323131811d48a5a8a504858f96d78",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    }
+  ]
+}
