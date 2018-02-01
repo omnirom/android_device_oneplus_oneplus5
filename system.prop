@@ -223,7 +223,7 @@ sys.games.gt.prof=1
 ro.qualcomm.cabl=0
 
 # Additional buffers shared between Camera and Video
-vidc.enc.dcvs.extra-buff-count=2
+vendor.vidc.enc.dcvs.extra-buff-count=2
 
 persist.radio.aosp_usr_pref_sel=true
 
