@@ -108,5 +108,10 @@
             android:title="@string/category_fp_left_swipe_gesture"
             android:persistent="false"/>
 
+        <org.omnirom.device.AppSelectListPreference
+            android:key="fp_long_press_gesture_app"
+            android:title="@string/category_fp_long_press_gesture"
+            android:persistent="false"/>
+
     </PreferenceCategory>
 </PreferenceScreen>

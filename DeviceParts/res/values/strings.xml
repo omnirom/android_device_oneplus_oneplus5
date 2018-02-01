@@ -71,12 +71,13 @@
     <string name="category_up_swipe_gesture">Up swipe</string>
     <string name="category_left_swipe_gesture">Left swipe</string>
     <string name="category_right_swipe_gesture">Right swipe</string>
-    <string name="category_fp_down_swipe_gesture">Fingerprint Down Swipe</string>
-    <string name="category_fp_up_swipe_gesture">Fingerprint Up Swipe</string>
-    <string name="category_fp_right_swipe_gesture">Fingerprint Right Swipe</string>
-    <string name="category_fp_left_swipe_gesture">Fingerprint Left Swipe</string>
-    <string name="fp_swipe_down_switch_summary_head">Default Fingerprint notification swipe down gesture</string>
-    <string name="fp_swipe_down_switch_title_head">Fingerprint Swipe down gesture</string>
+    <string name="category_fp_down_swipe_gesture">Fingerprint down swipe</string>
+    <string name="category_fp_up_swipe_gesture">Fingerprint up swipe</string>
+    <string name="category_fp_right_swipe_gesture">Fingerprint right swipe</string>
+    <string name="category_fp_left_swipe_gesture">Fingerprint left swipe</string>
+    <string name="category_fp_long_press_gesture">Fingerprint long press</string>
+    <string name="fp_swipe_down_switch_summary_head">Default fingerprint notification swipe down gesture</string>
+    <string name="fp_swipe_down_switch_title_head">Fingerprint swipe down gesture</string>
 
     <string name="doze_category_title">Ambient display</string>
     <string name="doze_category_summary">Wake screen when you receive notifications</string>
