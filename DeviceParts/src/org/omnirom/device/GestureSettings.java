@@ -62,6 +62,7 @@ public class GestureSettings extends PreferenceFragment implements
     public static final String FP_GESTURE_SWIPE_UP_APP = "fp_up_swipe_gesture_app";
     public static final String FP_GESTURE_SWIPE_RIGHT_APP = "fp_right_swipe_gesture_app";
     public static final String FP_GESTURE_SWIPE_LEFT_APP = "fp_left_swipe_gesture_app";
+    public static final String FP_GESTURE_LONG_PRESS_APP = "fp_long_press_gesture_app";
 
     public static final String DEVICE_GESTURE_MAPPING_0 = "device_gesture_mapping_0_0";
     public static final String DEVICE_GESTURE_MAPPING_1 = "device_gesture_mapping_1_0";
@@ -77,6 +78,7 @@ public class GestureSettings extends PreferenceFragment implements
     public static final String DEVICE_GESTURE_MAPPING_11 = "device_gesture_mapping_11_0";
     public static final String DEVICE_GESTURE_MAPPING_12 = "device_gesture_mapping_12_0";
     public static final String DEVICE_GESTURE_MAPPING_13 = "device_gesture_mapping_13_0";
+    public static final String DEVICE_GESTURE_MAPPING_14 = "device_gesture_mapping_14_0";
 
     private TwoStatePreference mProxiSwitch;
     private TwoStatePreference mFpSwipeDownSwitch;
@@ -95,6 +97,7 @@ public class GestureSettings extends PreferenceFragment implements
     private AppSelectListPreference mFPUpSwipeApp;
     private AppSelectListPreference mFPRightSwipeApp;
     private AppSelectListPreference mFPLeftSwipeApp;
+    private AppSelectListPreference mFPLongPressApp;
     private PreferenceCategory fpGestures;
     private boolean mFpDownSwipe;
 
@@ -195,6 +198,12 @@ public class GestureSettings extends PreferenceFragment implements
             value = Settings.System.getString(getContext().getContentResolver(), DEVICE_GESTURE_MAPPING_13);
             mFPLeftSwipeApp.setValue(value);
             mFPLeftSwipeApp.setOnPreferenceChangeListener(this);
+
+            mFPLongPressApp = (AppSelectListPreference) findPreference(FP_GESTURE_LONG_PRESS_APP);
+            mFPLongPressApp.setEnabled(true);
+            value = Settings.System.getString(getContext().getContentResolver(), DEVICE_GESTURE_MAPPING_14);
+            mFPLongPressApp.setValue(value);
+            mFPLongPressApp.setOnPreferenceChangeListener(this);
         } else {
             Preference fpGestures = findPreference(KEY_FP_GESTURE_CATEGORY);
             Preference fpGesturesDefault = findPreference(KEY_FP_GESTURE_DEFAULT_CATEGORY);
@@ -287,6 +296,9 @@ public class GestureSettings extends PreferenceFragment implements
         } else if (preference == mFPLeftSwipeApp) {
             String value = (String) newValue;
             Settings.System.putString(getContext().getContentResolver(), DEVICE_GESTURE_MAPPING_13, value);
+        } else if (preference == mFPLongPressApp) {
+            String value = (String) newValue;
+            Settings.System.putString(getContext().getContentResolver(), DEVICE_GESTURE_MAPPING_14, value);
         }
         return true;
     }
