@@ -34,3 +34,6 @@ attribute priv_app_property_placeholder;
 allow priv_app mkfs_exec:lnk_file getattr;
 
 allow priv_app wifi_prop:file { getattr open read };
+
+allow priv_app fsck_exec:lnk_file getattr;
+
