@@ -3,3 +3,4 @@
 #allow untrusted_app_25 qti_debugfs:file read;
 
 allow untrusted_app_25 camera_prop:file { getattr open read };
+
