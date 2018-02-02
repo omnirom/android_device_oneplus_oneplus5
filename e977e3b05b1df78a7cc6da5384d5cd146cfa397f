@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "015e611b_d06f3164",
+        "filename": "DeviceParts/res/values/strings.xml",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1001070
+      },
+      "writtenOn": "2018-02-02T10:46:08Z",
+      "side": 1,
+      "message": "small b capital S ?",
+      "revId": "e977e3b05b1df78a7cc6da5384d5cd146cfa397f",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    }
+  ]
+}
