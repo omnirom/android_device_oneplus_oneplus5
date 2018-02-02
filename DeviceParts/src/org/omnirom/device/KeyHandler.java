@@ -101,6 +101,7 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final int FP_GESTURE_SWIPE_UP = 103;
     private static final int FP_GESTURE_SWIPE_LEFT = 105;
     private static final int FP_GESTURE_SWIPE_RIGHT = 106;
+    private static final int FP_GESTURE_LONG_PRESS = 305;
 
 
     private static final int[] sSupportedGestures = new int[]{
@@ -121,7 +122,8 @@ public class KeyHandler implements DeviceKeyHandler {
         FP_GESTURE_SWIPE_DOWN,
         FP_GESTURE_SWIPE_UP,
         FP_GESTURE_SWIPE_LEFT,
-        FP_GESTURE_SWIPE_RIGHT
+        FP_GESTURE_SWIPE_RIGHT,
+        FP_GESTURE_LONG_PRESS,
     };
 
     private static final int[] sHandledGestures = new int[]{
@@ -674,6 +676,9 @@ public class KeyHandler implements DeviceKeyHandler {
             case FP_GESTURE_SWIPE_RIGHT:
                 return Settings.System.getStringForUser(mContext.getContentResolver(),
                     GestureSettings.DEVICE_GESTURE_MAPPING_13, UserHandle.USER_CURRENT);
+            case FP_GESTURE_LONG_PRESS:
+                return Settings.System.getStringForUser(mContext.getContentResolver(),
+                    GestureSettings.DEVICE_GESTURE_MAPPING_14, UserHandle.USER_CURRENT);
         }
         return null;
     }
