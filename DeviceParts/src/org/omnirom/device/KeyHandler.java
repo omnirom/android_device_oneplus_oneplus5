@@ -694,27 +694,26 @@ public class KeyHandler implements DeviceKeyHandler {
     }
 
     private String getGestureValueForFPScanCode(int scanCode) {
-        switch(scanCode) {
-            case FP_GESTURE_SWIPE_DOWN:
-                if (areSystemNavigationKeysEnabled() == false){
-                    return Settings.System.getStringForUser(mContext.getContentResolver(),
-                       GestureSettings.DEVICE_GESTURE_MAPPING_10, UserHandle.USER_CURRENT);
+        if (scanCode == FP_GESTURE_SWIPE_DOWN) {
+            if (areSystemNavigationKeysEnabled() == false){
+                return Settings.System.getStringForUser(mContext.getContentResolver(),
+                    GestureSettings.DEVICE_GESTURE_MAPPING_10, UserHandle.USER_CURRENT);
                 }
-            case FP_GESTURE_SWIPE_UP:
+            } else if (scanCode == FP_GESTURE_SWIPE_UP) {
                 if (areSystemNavigationKeysEnabled() == false){
                     return Settings.System.getStringForUser(mContext.getContentResolver(),
                        GestureSettings.DEVICE_GESTURE_MAPPING_11, UserHandle.USER_CURRENT);
                 }
-            case FP_GESTURE_SWIPE_LEFT:
+            }else if (scanCode == FP_GESTURE_SWIPE_LEFT) {
                 return Settings.System.getStringForUser(mContext.getContentResolver(),
                     GestureSettings.DEVICE_GESTURE_MAPPING_12, UserHandle.USER_CURRENT);
-            case FP_GESTURE_SWIPE_RIGHT:
+            } else if (scanCode == FP_GESTURE_SWIPE_RIGHT) {
                 return Settings.System.getStringForUser(mContext.getContentResolver(),
                     GestureSettings.DEVICE_GESTURE_MAPPING_13, UserHandle.USER_CURRENT);
-            case FP_GESTURE_LONG_PRESS:
+            } else if (scanCode == FP_GESTURE_LONG_PRESS) {
                 return Settings.System.getStringForUser(mContext.getContentResolver(),
                     GestureSettings.DEVICE_GESTURE_MAPPING_14, UserHandle.USER_CURRENT);
-        }
+            }
         return null;
     }
 
