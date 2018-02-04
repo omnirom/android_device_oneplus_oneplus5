@@ -16,6 +16,23 @@
       "revId": "f12c97f1df1214b8b7637517f496b7764de69180",
       "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "068c3f56_ec6c9239",
+        "filename": "DeviceParts/src/org/omnirom/device/KeyHandler.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2018-02-04T12:31:42Z",
+      "side": 1,
+      "message": "mVibrator is name for an instance variable!",
+      "revId": "f12c97f1df1214b8b7637517f496b7764de69180",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
     }
   ]
 }
