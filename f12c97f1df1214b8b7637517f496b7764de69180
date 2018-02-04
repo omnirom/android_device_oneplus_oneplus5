@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "f4163859_146f8620",
+        "filename": "DeviceParts/src/org/omnirom/device/KeyHandler.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 580,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2018-02-04T12:43:36Z",
+      "side": 1,
+      "message": "as dicussed - not currently for slider",
+      "revId": "f12c97f1df1214b8b7637517f496b7764de69180",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ccb66774_988ec937",
         "filename": "DeviceParts/src/org/omnirom/device/KeyHandler.java",
         "patchSetId": 22
@@ -36,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "701a3791_a3c944f4",
+        "filename": "DeviceParts/src/org/omnirom/device/KeyHandler.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 748,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2018-02-04T12:43:36Z",
+      "side": 1,
+      "message": "so either chnage here for create Vibrator only once in constructor (better)",
+      "parentUuid": "068c3f56_ec6c9239",
+      "revId": "f12c97f1df1214b8b7637517f496b7764de69180",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1abd9cb5_a27aa641",
         "filename": "DeviceParts/src/org/omnirom/device/KeyHandler.java",
         "patchSetId": 22
@@ -47,6 +82,24 @@
       "writtenOn": "2018-02-04T12:34:10Z",
       "side": 1,
       "message": "what means 1? why you inlcude all the VibratorEffects if you dont use it anyway",
+      "revId": "f12c97f1df1214b8b7637517f496b7764de69180",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "aaa049f8_2bd6e7bc",
+        "filename": "DeviceParts/src/org/omnirom/device/KeyHandler.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2018-02-04T12:43:36Z",
+      "side": 1,
+      "message": "so use e.g. HapticFeedbackConstants.LONG_PRESS\nand also add AudioAttributes as second param - see PhoneWindowManager",
+      "parentUuid": "1abd9cb5_a27aa641",
       "revId": "f12c97f1df1214b8b7637517f496b7764de69180",
       "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
       "unresolved": false
