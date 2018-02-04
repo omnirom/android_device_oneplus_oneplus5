@@ -33,6 +33,23 @@
       "revId": "f12c97f1df1214b8b7637517f496b7764de69180",
       "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1abd9cb5_a27aa641",
+        "filename": "DeviceParts/src/org/omnirom/device/KeyHandler.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2018-02-04T12:34:10Z",
+      "side": 1,
+      "message": "what means 1? why you inlcude all the VibratorEffects if you dont use it anyway",
+      "revId": "f12c97f1df1214b8b7637517f496b7764de69180",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
     }
   ]
 }
