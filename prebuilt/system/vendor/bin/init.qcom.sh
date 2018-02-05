@@ -394,6 +394,11 @@ echo 1 > /data/vendor/radio/copy_complete
 
 #check build variant for printk logging
 #current default minimum boot-time-default
+
+# Link camera data out of system and remove existing
+rm -rf /data/misc/camera
+ln -s /etc/camera /data/misc/camera
+
 buildvariant=`getprop ro.build.type`
 case "$buildvariant" in
     "userdebug" | "eng")
