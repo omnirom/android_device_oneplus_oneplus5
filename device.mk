@@ -266,8 +266,8 @@ PRODUCT_PACKAGES += \
     fs_config_files
 
 # Shims
-#PRODUCT_PACKAGES += \
-    libshims_system_properties
+PRODUCT_PACKAGES += \
+    libcamera_shim
 
 # QMI
 PRODUCT_PACKAGES += \
