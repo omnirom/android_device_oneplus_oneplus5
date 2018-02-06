@@ -68,6 +68,8 @@
   <string name="category_fp_up_swipe_gesture">Отпечаток пальца вверх</string>
   <string name="category_fp_right_swipe_gesture">Отпечаток пальца вправо</string>
   <string name="category_fp_left_swipe_gesture">Отпечаток пальца влево</string>
+  <string name="fp_swipe_down_switch_summary_head">Уведомление по умолчанию при свайпе вниз по сканеру отпечатков пальцев</string>
+  <string name="fp_swipe_down_switch_title_head">Свайп вниз по сканеру отпечатков пальцев</string>
   <string name="doze_category_title">Активный экран</string>
   <string name="doze_category_summary">Включение экрана при получении уведомлений</string>
   <string name="wave_check_summary">Пульсирующие уведомления при проведении рукой над телефоном</string>
