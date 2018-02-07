@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "045620ba_52120d55",
+        "filename": "DeviceParts/src/org/omnirom/device/GestureSettings.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2018-02-07T22:22:03Z",
+      "side": 1,
+      "message": "huh? why? offscreen gestures should NOT be influenced from vibrate on touch",
+      "revId": "6aca18f18e80051e6b51f47a1d17b854829678a4",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ece1815_7008c7af",
+        "filename": "DeviceParts/src/org/omnirom/device/KeyHandler.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2018-02-07T22:22:03Z",
+      "side": 1,
+      "message": "I would add two vibe - one for fpc and one for offscreen\nthen its way easier - pass true or false as 4th param and no need to even check HAPTIC_FEEDBACK_ENABLED",
+      "revId": "6aca18f18e80051e6b51f47a1d17b854829678a4",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ab51a8e_27ee083c",
+        "filename": "DeviceParts/src/org/omnirom/device/KeyHandler.java",
+        "patchSetId": 23
+      },
+      "lineNbr": 740,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2018-02-07T22:22:03Z",
+      "side": 1,
+      "message": "I think the default here is 1 - grep for it in base",
+      "revId": "6aca18f18e80051e6b51f47a1d17b854829678a4",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    }
+  ]
+}
