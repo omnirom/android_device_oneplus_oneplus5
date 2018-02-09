@@ -105,15 +105,15 @@ DEVICE_PROVISIONED=1
 # Set network mode to (T/L/G/W/1X/EVDO, T/G/W/L) for 7+5 mode device on DSDS mode
 ro.telephony.default_network=22,20
 persist.radio.multisim.config=dsds
-persist.radio.ignore_dom_time=10
-persist.radio.rat_on=combine
+persist.vendor.radio.ignore_dom_time=10
+persist.vendor.radio.rat_on=combine
 persist.data.iwlan.enable=true
-persist.radio.data_ltd_sys_ind=1
-persist.radio.data_con_rprt=1
+persist.vendor.radio.data_ltd_sys_ind=1
+persist.vendor.radio.data_con_rprt=1
 persist.radio.enhance_ecall=true
 persist.radio.apm_sim_not_pwdn=1
-persist.radio.sib16_support=1
-persist.radio.custom_ecc=1
+persist.vendor.radio.sib16_support=1
+persist.vendor.radio.custom_ecc=1
 ro.telephony.default_cdma_sub=0
 ril.ecclist=112,911,999,*911,#911
 ril.ecclist1=911,112,999,*911,#911,991,994
@@ -141,12 +141,12 @@ ro.build.selinux=1
 
 # Sensors
 audio.offload.min.duration.secs=30
-ro.qti.sensors.dev_ori=true
-ro.qti.sensors.pmd=true
-ro.qti.sensors.sta_detect=true
-ro.qti.sensors.mot_detect=true
-ro.qti.sensors.dpc=true
-ro.qti.sensors.multishake=true
+ro.vendor.sensors.dev_ori=true
+ro.vendor.sensors.pmd=true
+ro.vendor.sensors.sta_detect=true
+ro.vendor.sensors.mot_detect=true
+ro.vendor.sensors.dpc=true
+ro.vendor.sensors.multishake=true
 
 ro.bluetooth.a4wp=false
 ro.bluetooth.emb_wp_mode=false
