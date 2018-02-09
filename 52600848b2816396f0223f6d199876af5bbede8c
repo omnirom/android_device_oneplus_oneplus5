@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "747b4b9f_ca6d49c6",
+        "filename": "overlay/common/frameworks/base/packages/SystemUI/res/values/config.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2018-02-09T12:08:55Z",
+      "side": 1,
+      "message": "just remove the lines - those are the defaults",
+      "revId": "52600848b2816396f0223f6d199876af5bbede8c",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    }
+  ]
+}
