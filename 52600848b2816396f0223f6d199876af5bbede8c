@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "8e43277e_5665865a",
+        "filename": "overlay/common/frameworks/base/core/res/res/values/config.xml",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2018-02-09T12:09:32Z",
+      "side": 1,
+      "message": "better just delete the line",
+      "revId": "52600848b2816396f0223f6d199876af5bbede8c",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "747b4b9f_ca6d49c6",
         "filename": "overlay/common/frameworks/base/packages/SystemUI/res/values/config.xml",
         "patchSetId": 1
