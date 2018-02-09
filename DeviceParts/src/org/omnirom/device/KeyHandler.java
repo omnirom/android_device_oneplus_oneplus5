@@ -65,7 +65,7 @@ import com.android.internal.util.omni.OmniUtils;
 public class KeyHandler implements DeviceKeyHandler {
 
     private static final String TAG = "KeyHandler";
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
     private static final boolean DEBUG_SENSOR = false;
 
     protected static final int GESTURE_REQUEST = 1;
