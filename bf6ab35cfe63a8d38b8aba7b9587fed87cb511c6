@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8e40e1ee_0353f749",
+        "filename": "overlay/common/frameworks/base/packages/SystemUI/res/values/config.xml",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2018-02-09T20:10:09Z",
+      "side": 1,
+      "message": "sure this needs to be true?",
+      "revId": "bf6ab35cfe63a8d38b8aba7b9587fed87cb511c6",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": false
+    }
+  ]
+}
