@@ -63,6 +63,9 @@ public class AppSelectListPreference extends CustomDialogPreference {
     public static final String VOLUME_DOWN_ENTRY = "volume_down";
     public static final String BROWSE_SCROLL_DOWN_ENTRY = "browse_scroll_down";
     public static final String BROWSE_SCROLL_UP_ENTRY = "browse_scroll_up";
+    public static final String NAVIGATE_BACK_ENTRY = "navigate_back";
+    public static final String NAVIGATE_HOME_ENTRY = "navigate_home";
+    public static final String NAVIGATE_RECENT_ENTRY = "navigate_recent";
 
     private AppSelectListAdapter mAdapter;
     private Drawable mAppIconDrawable;
@@ -157,6 +160,18 @@ public class AppSelectListPreference extends CustomDialogPreference {
                 PackageItem browseScrollUpItem = new PackageItem(getContext().getResources().getString(R.string.browse_scroll_up),
                         R.drawable.arrow_collapse_up, BROWSE_SCROLL_UP_ENTRY);
                 mInstalledPackages.add(0, browseScrollUpItem);
+
+                PackageItem navigateBackItem = new PackageItem(getContext().getResources().getString(R.string.navigate_back),
+                        R.drawable.back, NAVIGATE_BACK_ENTRY);
+                mInstalledPackages.add(0, navigateBackItem);
+
+                PackageItem navigateHomeItem = new PackageItem(getContext().getResources().getString(R.string.navigate_home),
+                        R.drawable.home, NAVIGATE_HOME_ENTRY);
+                mInstalledPackages.add(0, navigateHomeItem);
+
+                PackageItem navigateRecentItem = new PackageItem(getContext().getResources().getString(R.string.navigate_recent),
+                        R.drawable.recent, NAVIGATE_RECENT_ENTRY);
+                mInstalledPackages.add(0, navigateRecentItem);
 
                 PackageItem disabledItem = new PackageItem(getContext().getResources().getString(R.string.disabled_entry),
                         R.drawable.ic_disabled, DISABLED_ENTRY);
@@ -364,6 +379,15 @@ public class AppSelectListPreference extends CustomDialogPreference {
                 } else if (name.equals(BROWSE_SCROLL_UP_ENTRY)) {
                     mTitle = getContext().getResources().getString(R.string.browse_scroll_up);
                     mAppIconResourceId = R.drawable.arrow_collapse_up;
+                } else if (name.equals(NAVIGATE_BACK_ENTRY)) {
+                    mTitle = getContext().getResources().getString(R.string.navigate_back);
+                    mAppIconResourceId = R.drawable.back;
+                } else if (name.equals(NAVIGATE_HOME_ENTRY)) {
+                    mTitle = getContext().getResources().getString(R.string.navigate_home);
+                    mAppIconResourceId = R.drawable.home;
+                } else if (name.equals(NAVIGATE_RECENT_ENTRY)) {
+                    mTitle = getContext().getResources().getString(R.string.navigate_recent);
+                    mAppIconResourceId = R.drawable.recent;
                 } else {
                     ComponentName componentName = ComponentName.unflattenFromString(name);
                     PackageItem item = mAdapter.resolveApplication(componentName);
