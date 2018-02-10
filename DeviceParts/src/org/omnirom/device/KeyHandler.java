@@ -631,6 +631,18 @@ public class KeyHandler implements DeviceKeyHandler {
             vibe();
             OmniUtils.sendKeycode(KeyEvent.KEYCODE_PAGE_UP);
             return true;
+        } else if (value.equals(AppSelectListPreference.NAVIGATE_BACK_ENTRY)) {
+            vibe();
+            OmniUtils.sendKeycode(KeyEvent.KEYCODE_BACK);
+            return true;
+        } else if (value.equals(AppSelectListPreference.NAVIGATE_HOME_ENTRY)) {
+            vibe();
+            OmniUtils.sendKeycode(KeyEvent.KEYCODE_HOME);
+            return true;
+        } else if (value.equals(AppSelectListPreference.NAVIGATE_RECENT_ENTRY)) {
+            vibe();
+            OmniUtils.sendKeycode(KeyEvent.KEYCODE_APP_SWITCH);
+            return true;
         }
         return false;
     }
