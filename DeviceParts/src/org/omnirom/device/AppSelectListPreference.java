@@ -326,11 +326,11 @@ public class AppSelectListPreference extends CustomDialogPreference {
         } else {
             name = mValue;
         }
+        mAppIconResourceId = R.drawable.ic_disabled;
 
         if (name != null) {
             if (mTitle == null) {
                 mAppIconDrawable = null;
-                mAppIconResourceId = 0;
                 if (name.equals(DISABLED_ENTRY)) {
                     mTitle = getContext().getResources().getString(R.string.disabled_entry);
                     mAppIconResourceId = R.drawable.ic_disabled;
@@ -404,10 +404,10 @@ public class AppSelectListPreference extends CustomDialogPreference {
         Drawable appIcon = null;
         try {
             appIcon = mPm.getActivityIcon(item.mComponentName);
-            if (appIcon == null) {
-                appIcon = getDefaultActivityIcon();
-            }
-        } catch (Exception e) {
+        } catch (PackageManager.NameNotFoundException e) {
+        }
+        if (appIcon == null) {
+            appIcon = getDefaultActivityIcon();
         }
         return appIcon;
     }
