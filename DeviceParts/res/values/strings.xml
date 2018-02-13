@@ -67,8 +67,11 @@
     <string name="music_next_entry">Next track</string>
     <string name="volume_up">Raise volume</string>
     <string name="volume_down">Lower volume</string>
-    <string name="browse_scroll_up">Browser scroll up</string>
-    <string name="browse_scroll_down">Browser scroll down</string>
+    <string name="browse_scroll_up">Scroll up</string>
+    <string name="browse_scroll_down">Scroll down</string>
+    <string name="navigate_back">Back</string>
+    <string name="navigate_home">Home</string>
+    <string name="navigate_recent">Recent</string>
     <string name="not_ready_summary">Resolving...</string>
     <string name="resolve_failed_summary">Resolving app failed</string>
     <string name="category_down_swipe_gesture">Down swipe</string>
