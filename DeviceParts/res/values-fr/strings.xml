@@ -16,6 +16,36 @@
 -->
 <resources>
   <string name="app_name">Oneplus 5</string>
+  <string name="category_gestures_title">Mouvements du terminal</string>
+  <string name="fp_gesture_title">Mouvement du lecteur d\'empreintes digitales</string>
+  <string name="category_vibrator">Vibreur</string>
+  <string name="vib_strength_title_head">Intensité</string>
+  <string name="vib_strength_summary_head">Définir l’intensité du vibreur</string>
+  <string name="vib_test">Tester</string>
+  <string name="advanced_settings">Paramètres avancés</string>
+  <string name="category_slider">Curseur</string>
+  <string name="slider_mode_title">Mode curseur</string>
+  <string name="buttons_title">Boutons</string>
+  <string name="swap_back_recents_title">Permuter le bouton retour et le bouton app. récents</string>
+  <string name="srgb_mode_title">mode sRGB</string>
+  <string name="proxi_summary_head">Vérifier le capteur de proximité pour les gestes tactiles et le capteur d\'empreinte</string>
+  <string name="proxi_title_head">Contrôle de proximité</string>
   <string name="slider_mode_off">Désactivé</string>
   <string name="slider_mode_vibrate">Vibreur</string>
+  <string name="slider_mode_silent">Mode silencieux</string>
+  <string name="slider_mode_dnd">Silence total</string>
+  <string name="Night_mode_title">Mode nuit</string>
+  <string name="choose_app">Choisir l\'app</string>
+  <string name="category_double_swipe_gesture">Geste II</string>
+  <string name="category_circle_gesture">Geste O</string>
+  <string name="category_down_arrow_gesture">Geste V</string>
+  <string name="category_up_arrow_gesture">Geste A</string>
+  <string name="torch_entry">Lampe de poche</string>
+  <string name="disabled_entry">Désactivé</string>
+  <string name="camera_entry">Appareil photo</string>
+  <string name="music_play_entry">Lecture / pause de la musique</string>
+  <string name="music_prev_entry">Piste précédente</string>
+  <string name="music_next_entry">Piste suivante</string>
+  <string name="category_down_swipe_gesture">Glissement vers le bas</string>
+  <string name="off_mode_title">Off</string>
 </resources>

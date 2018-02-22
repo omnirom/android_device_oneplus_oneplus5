@@ -84,5 +84,5 @@
   <string name="off_mode_title">Väljas</string>
   <string name="tile_panel_mode">Paneelirežiimid</string>
   <string name="tile_hbm_mode">Kõrge heleduse režiimid</string>
-  <string name="wake_entry">Äratus</string>
+  <string name="wake_entry">Ärkamine</string>
 </resources>
