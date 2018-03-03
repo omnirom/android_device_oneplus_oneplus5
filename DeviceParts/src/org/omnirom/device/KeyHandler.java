@@ -92,7 +92,6 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final int KEY_SLIDER_CENTER = 602;
     private static final int KEY_SLIDER_BOTTOM = 603;
 
-    private static final int BATCH_LATENCY_IN_MS = 100;
     private static final int MIN_PULSE_INTERVAL_MS = 2500;
     private static final String DOZE_INTENT = "com.android.systemui.doze.pulse";
     private static final int HANDWAVE_MAX_DELTA_MS = 1000;
@@ -160,11 +159,11 @@ public class KeyHandler implements DeviceKeyHandler {
     private boolean mProxyIsNear;
     private boolean mUseProxiCheck;
     private Sensor mTiltSensor;
-    private long mTiltSensorTimestamp;
     private boolean mUseTiltCheck;
     private boolean mProxyWasNear;
     private long mProxySensorTimestamp;
     private boolean mUseWaveCheck;
+    private Sensor mPocketSensor;
     private boolean mUsePocketCheck;
     private boolean mFPcheck;
     private boolean mDispOn;
@@ -174,7 +173,7 @@ public class KeyHandler implements DeviceKeyHandler {
     private SensorEventListener mProximitySensor = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
-            mProxyIsNear = event.values[0] < mSensor.getMaximumRange();
+            mProxyIsNear = event.values[0] == 1;
             if (DEBUG_SENSOR) Log.i(TAG, "mProxyIsNear = " + mProxyIsNear);
             if (mUseProxiCheck) {
                 if (android.os.Build.DEVICE.equals("OnePlus5")) {
@@ -210,13 +209,19 @@ public class KeyHandler implements DeviceKeyHandler {
     private SensorEventListener mTiltSensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
-            long delta = SystemClock.elapsedRealtime() - mTiltSensorTimestamp;
-            if (delta < MIN_PULSE_INTERVAL_MS) {
-                return;
-            } else {
-                mTiltSensorTimestamp = SystemClock.elapsedRealtime();
+            if (event.values[0] == 1) {
+                launchDozePulse();
             }
+        }
 
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        }
+    };
+
+    private SensorEventListener mPocketSensorListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent event) {
             if (event.values[0] == 1) {
                 launchDozePulse();
             }
@@ -294,8 +299,8 @@ public class KeyHandler implements DeviceKeyHandler {
         mNoMan = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
         mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
-        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
         mTiltSensor = getSensor(mSensorManager, "com.oneplus.sensor.pickup");
+        mPocketSensor = getSensor(mSensorManager, "com.oneplus.sensor.pocket");
         IntentFilter screenStateFilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
         screenStateFilter.addAction(Intent.ACTION_SCREEN_OFF);
         mContext.registerReceiver(mScreenStateReceiver, screenStateFilter);
@@ -462,11 +467,14 @@ public class KeyHandler implements DeviceKeyHandler {
     private void onDisplayOn() {
         if (DEBUG) Log.i(TAG, "Display on");
         if (enableProxiSensor()) {
-            mSensorManager.unregisterListener(mProximitySensor, mSensor);
+            mSensorManager.unregisterListener(mProximitySensor, mPocketSensor);
             enableGoodix();
         }
         if (mUseTiltCheck) {
             mSensorManager.unregisterListener(mTiltSensorListener, mTiltSensor);
+        }
+        if (mUsePocketCheck) {
+            mSensorManager.unregisterListener(mPocketSensorListener, mPocketSensor);
         }
     }
 
@@ -481,15 +489,18 @@ public class KeyHandler implements DeviceKeyHandler {
     private void onDisplayOff() {
         if (DEBUG) Log.i(TAG, "Display off");
         if (enableProxiSensor()) {
-            mSensorManager.registerListener(mProximitySensor, mSensor,
+            mSensorManager.registerListener(mProximitySensor, mPocketSensor,
                     SensorManager.SENSOR_DELAY_NORMAL);
             mProxySensorTimestamp = SystemClock.elapsedRealtime();
             mProxyWasNear = false;
         }
         if (mUseTiltCheck) {
             mSensorManager.registerListener(mTiltSensorListener, mTiltSensor,
-                    SensorManager.SENSOR_DELAY_NORMAL, BATCH_LATENCY_IN_MS * 1000);
-            mTiltSensorTimestamp = SystemClock.elapsedRealtime();
+                    SensorManager.SENSOR_DELAY_NORMAL);
+        }
+        if (mUsePocketCheck) {
+            mSensorManager.registerListener(mPocketSensorListener, mPocketSensor,
+                    SensorManager.SENSOR_DELAY_NORMAL);
         }
     }
 
@@ -722,5 +733,4 @@ public class KeyHandler implements DeviceKeyHandler {
         }
         return null;
     }
-
 }
