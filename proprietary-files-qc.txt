@@ -593,8 +593,6 @@ vendor/lib64/libqvop-service.so
 vendor/lib/libqvop-service.so
 
 # Widevine
-vendor/lib/libwvdrm_L3.so
-vendor/lib/libWVStreamControlAPI_L3.so
 vendor/lib/mediadrm/libwvdrmengine.so
 vendor/lib64/mediadrm/libdrmclearkeyplugin.so
 vendor/lib/mediadrm/libdrmclearkeyplugin.so
@@ -860,7 +858,11 @@ vendor/lib/com.qualcomm.qti.wifidisplayhal@1.0-halimpl.so
 lib64/libFileMux.so
 lib/libFileMux.so
 lib64/libmmparser_lite.so
+lib64/libmmparser.so
+lib64/libExtendedExtractor.so
+lib/libExtendedExtractor.so
 lib/libmmparser_lite.so
+lib/libmmparser.so
 -app/WfdService/WfdService.apk
 -framework/WfdCommon.jar
 
