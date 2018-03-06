@@ -101,7 +101,7 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final int FP_GESTURE_SWIPE_LEFT = 105;
     private static final int FP_GESTURE_SWIPE_RIGHT = 106;
     private static final int FP_GESTURE_LONG_PRESS = 305;
-
+    private static final boolean sIsOnePlus5t = android.os.Build.DEVICE.equals("OnePlus5T");
 
     private static final int[] sSupportedGestures = new int[]{
         GESTURE_II_SCANCODE,
@@ -176,11 +176,11 @@ public class KeyHandler implements DeviceKeyHandler {
             mProxyIsNear = event.values[0] == 1;
             if (DEBUG_SENSOR) Log.i(TAG, "mProxyIsNear = " + mProxyIsNear);
             if (mUseProxiCheck) {
-                if (android.os.Build.DEVICE.equals("OnePlus5")) {
+                if (!sIsOnePlus5t) {
                     if (Utils.fileWritable(FPC_CONTROL_PATH)) {
                         Utils.writeValue(FPC_CONTROL_PATH, mProxyIsNear ? "1" : "0");
                     }
-                } else if (android.os.Build.DEVICE.equals("OnePlus5T")) {
+                } else {
                     if (Utils.fileWritable(GOODIX_CONTROL_PATH)) {
                     Utils.writeValue(GOODIX_CONTROL_PATH, mProxyIsNear ? "1" : "0");
                     }
@@ -371,7 +371,7 @@ public class KeyHandler implements DeviceKeyHandler {
 
     public static void setButtonDisable(Context context) {
         // we should never come here on the 5t but just to be sure
-        if (android.os.Build.DEVICE.equals("OnePlus5")) {
+        if (!sIsOnePlus5t) {
             mButtonDisabled = Settings.System.getIntForUser(
                     context.getContentResolver(), Settings.System.HARDWARE_KEYS_DISABLE, 0,
                     UserHandle.USER_CURRENT) == 1;
@@ -479,7 +479,7 @@ public class KeyHandler implements DeviceKeyHandler {
     }
 
     private void enableGoodix() {
-        if (android.os.Build.DEVICE.equals("OnePlus5T")) {
+        if (sIsOnePlus5t) {
             if (Utils.fileWritable(GOODIX_CONTROL_PATH)) {
                 Utils.writeValue(GOODIX_CONTROL_PATH, "0");
             }

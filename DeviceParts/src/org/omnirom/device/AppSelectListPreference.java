@@ -73,6 +73,7 @@ public class AppSelectListPreference extends CustomDialogPreference {
     private CharSequence mTitle;
     private String mValue;
     private PackageManager mPm;
+    private static final boolean sIsOnePlus5t = android.os.Build.DEVICE.equals("OnePlus5T");
 
     public class PackageItem implements Comparable<PackageItem> {
         public final CharSequence mTitle;
@@ -145,34 +146,42 @@ public class AppSelectListPreference extends CustomDialogPreference {
                         R.drawable.ic_wakeup, WAKE_ENTRY);
                 mInstalledPackages.add(0, wakeItem);
 
-                PackageItem volumeUpItem = new PackageItem(getContext().getResources().getString(R.string.volume_up),
-                        R.drawable.ic_settings_sound, VOLUME_UP_ENTRY);
-                mInstalledPackages.add(0, volumeUpItem);
+                if (sIsOnePlus5t) {
+                    PackageItem volumeUpItem = new PackageItem(
+                            getContext().getResources().getString(R.string.volume_up),
+                            R.drawable.ic_settings_sound, VOLUME_UP_ENTRY);
+                    mInstalledPackages.add(0, volumeUpItem);
 
-                PackageItem volumeDownItem = new PackageItem(getContext().getResources().getString(R.string.volume_down),
-                        R.drawable.ic_settings_sound, VOLUME_DOWN_ENTRY);
-                mInstalledPackages.add(0, volumeDownItem);
+                    PackageItem volumeDownItem = new PackageItem(
+                            getContext().getResources().getString(R.string.volume_down),
+                            R.drawable.ic_settings_sound, VOLUME_DOWN_ENTRY);
+                    mInstalledPackages.add(0, volumeDownItem);
 
-                PackageItem browseScrollDownItem = new PackageItem(getContext().getResources().getString(R.string.browse_scroll_down),
-                        R.drawable.arrow_collapse_down, BROWSE_SCROLL_DOWN_ENTRY);
-                mInstalledPackages.add(0, browseScrollDownItem);
+                    PackageItem browseScrollDownItem = new PackageItem(
+                            getContext().getResources().getString(R.string.browse_scroll_down),
+                            R.drawable.arrow_collapse_down, BROWSE_SCROLL_DOWN_ENTRY);
+                    mInstalledPackages.add(0, browseScrollDownItem);
 
-                PackageItem browseScrollUpItem = new PackageItem(getContext().getResources().getString(R.string.browse_scroll_up),
-                        R.drawable.arrow_collapse_up, BROWSE_SCROLL_UP_ENTRY);
-                mInstalledPackages.add(0, browseScrollUpItem);
+                    PackageItem browseScrollUpItem = new PackageItem(
+                            getContext().getResources().getString(R.string.browse_scroll_up),
+                            R.drawable.arrow_collapse_up, BROWSE_SCROLL_UP_ENTRY);
+                    mInstalledPackages.add(0, browseScrollUpItem);
 
-                PackageItem navigateBackItem = new PackageItem(getContext().getResources().getString(R.string.navigate_back),
-                        R.drawable.back, NAVIGATE_BACK_ENTRY);
-                mInstalledPackages.add(0, navigateBackItem);
+                    PackageItem navigateBackItem = new PackageItem(
+                            getContext().getResources().getString(R.string.navigate_back),
+                            R.drawable.back, NAVIGATE_BACK_ENTRY);
+                    mInstalledPackages.add(0, navigateBackItem);
 
-                PackageItem navigateHomeItem = new PackageItem(getContext().getResources().getString(R.string.navigate_home),
-                        R.drawable.home, NAVIGATE_HOME_ENTRY);
-                mInstalledPackages.add(0, navigateHomeItem);
+                    PackageItem navigateHomeItem = new PackageItem(
+                            getContext().getResources().getString(R.string.navigate_home),
+                            R.drawable.home, NAVIGATE_HOME_ENTRY);
+                    mInstalledPackages.add(0, navigateHomeItem);
 
-                PackageItem navigateRecentItem = new PackageItem(getContext().getResources().getString(R.string.navigate_recent),
-                        R.drawable.recent, NAVIGATE_RECENT_ENTRY);
-                mInstalledPackages.add(0, navigateRecentItem);
-
+                    PackageItem navigateRecentItem = new PackageItem(
+                            getContext().getResources().getString(R.string.navigate_recent),
+                            R.drawable.recent, NAVIGATE_RECENT_ENTRY);
+                    mInstalledPackages.add(0, navigateRecentItem);
+                }
                 PackageItem disabledItem = new PackageItem(getContext().getResources().getString(R.string.disabled_entry),
                         R.drawable.ic_disabled, DISABLED_ENTRY);
                 mInstalledPackages.add(0, disabledItem);
@@ -344,59 +353,57 @@ public class AppSelectListPreference extends CustomDialogPreference {
         mAppIconResourceId = R.drawable.ic_disabled;
 
         if (name != null) {
-            if (mTitle == null) {
-                mAppIconDrawable = null;
-                if (name.equals(DISABLED_ENTRY)) {
-                    mTitle = getContext().getResources().getString(R.string.disabled_entry);
-                    mAppIconResourceId = R.drawable.ic_disabled;
-                } else if (name.equals(TORCH_ENTRY)) {
-                    mTitle = getContext().getResources().getString(R.string.torch_entry);
-                    mAppIconResourceId = R.drawable.ic_flashlight;
-                } else if (name.equals(CAMERA_ENTRY)) {
-                    mTitle = getContext().getResources().getString(R.string.camera_entry);
-                    mAppIconResourceId = R.drawable.ic_camera;
-                } else if (name.equals(MUSIC_PLAY_ENTRY)) {
-                    mTitle = getContext().getResources().getString(R.string.music_play_entry);
-                    mAppIconResourceId = R.drawable.ic_music_play;
-                } else if (name.equals(MUSIC_NEXT_ENTRY)) {
-                    mTitle = getContext().getResources().getString(R.string.music_next_entry);
-                    mAppIconResourceId = R.drawable.ic_music_next;
-                } else if (name.equals(MUSIC_PREV_ENTRY)) {
-                    mTitle = getContext().getResources().getString(R.string.music_prev_entry);
-                    mAppIconResourceId = R.drawable.ic_music_prev;
-                } else if (name.equals(WAKE_ENTRY)) {
-                    mTitle = getContext().getResources().getString(R.string.wake_entry);
-                    mAppIconResourceId = R.drawable.ic_wakeup;
-                } else if (name.equals(VOLUME_UP_ENTRY)) {
-                    mTitle = getContext().getResources().getString(R.string.volume_up);
-                    mAppIconResourceId = R.drawable.ic_settings_sound;
-                } else if (name.equals(VOLUME_DOWN_ENTRY)) {
-                    mTitle = getContext().getResources().getString(R.string.volume_down);
-                    mAppIconResourceId = R.drawable.ic_settings_sound;
-                } else if (name.equals(BROWSE_SCROLL_DOWN_ENTRY)) {
-                    mTitle = getContext().getResources().getString(R.string.browse_scroll_down);
-                    mAppIconResourceId = R.drawable.arrow_collapse_down;
-                } else if (name.equals(BROWSE_SCROLL_UP_ENTRY)) {
-                    mTitle = getContext().getResources().getString(R.string.browse_scroll_up);
-                    mAppIconResourceId = R.drawable.arrow_collapse_up;
-                } else if (name.equals(NAVIGATE_BACK_ENTRY)) {
-                    mTitle = getContext().getResources().getString(R.string.navigate_back);
-                    mAppIconResourceId = R.drawable.back;
-                } else if (name.equals(NAVIGATE_HOME_ENTRY)) {
-                    mTitle = getContext().getResources().getString(R.string.navigate_home);
-                    mAppIconResourceId = R.drawable.home;
-                } else if (name.equals(NAVIGATE_RECENT_ENTRY)) {
-                    mTitle = getContext().getResources().getString(R.string.navigate_recent);
-                    mAppIconResourceId = R.drawable.recent;
+            mAppIconDrawable = null;
+            if (name.equals(DISABLED_ENTRY)) {
+                mTitle = getContext().getResources().getString(R.string.disabled_entry);
+                mAppIconResourceId = R.drawable.ic_disabled;
+            } else if (name.equals(TORCH_ENTRY)) {
+                mTitle = getContext().getResources().getString(R.string.torch_entry);
+                mAppIconResourceId = R.drawable.ic_flashlight;
+            } else if (name.equals(CAMERA_ENTRY)) {
+                mTitle = getContext().getResources().getString(R.string.camera_entry);
+                mAppIconResourceId = R.drawable.ic_camera;
+            } else if (name.equals(MUSIC_PLAY_ENTRY)) {
+                mTitle = getContext().getResources().getString(R.string.music_play_entry);
+                mAppIconResourceId = R.drawable.ic_music_play;
+            } else if (name.equals(MUSIC_NEXT_ENTRY)) {
+                mTitle = getContext().getResources().getString(R.string.music_next_entry);
+                mAppIconResourceId = R.drawable.ic_music_next;
+            } else if (name.equals(MUSIC_PREV_ENTRY)) {
+                mTitle = getContext().getResources().getString(R.string.music_prev_entry);
+                mAppIconResourceId = R.drawable.ic_music_prev;
+            } else if (name.equals(WAKE_ENTRY)) {
+                mTitle = getContext().getResources().getString(R.string.wake_entry);
+                mAppIconResourceId = R.drawable.ic_wakeup;
+            } else if (name.equals(VOLUME_UP_ENTRY)) {
+                mTitle = getContext().getResources().getString(R.string.volume_up);
+                mAppIconResourceId = R.drawable.ic_settings_sound;
+            } else if (name.equals(VOLUME_DOWN_ENTRY)) {
+                mTitle = getContext().getResources().getString(R.string.volume_down);
+                mAppIconResourceId = R.drawable.ic_settings_sound;
+            } else if (name.equals(BROWSE_SCROLL_DOWN_ENTRY)) {
+                mTitle = getContext().getResources().getString(R.string.browse_scroll_down);
+                mAppIconResourceId = R.drawable.arrow_collapse_down;
+            } else if (name.equals(BROWSE_SCROLL_UP_ENTRY)) {
+                mTitle = getContext().getResources().getString(R.string.browse_scroll_up);
+                mAppIconResourceId = R.drawable.arrow_collapse_up;
+            } else if (name.equals(NAVIGATE_BACK_ENTRY)) {
+                mTitle = getContext().getResources().getString(R.string.navigate_back);
+                mAppIconResourceId = R.drawable.back;
+            } else if (name.equals(NAVIGATE_HOME_ENTRY)) {
+                mTitle = getContext().getResources().getString(R.string.navigate_home);
+                mAppIconResourceId = R.drawable.home;
+            } else if (name.equals(NAVIGATE_RECENT_ENTRY)) {
+                mTitle = getContext().getResources().getString(R.string.navigate_recent);
+                mAppIconResourceId = R.drawable.recent;
+            } else {
+                ComponentName componentName = ComponentName.unflattenFromString(name);
+                PackageItem item = mAdapter.resolveApplication(componentName);
+                if (item != null) {
+                    mTitle = item.mTitle;
+                    mAppIconDrawable = resolveAppIcon(item);
                 } else {
-                    ComponentName componentName = ComponentName.unflattenFromString(name);
-                    PackageItem item = mAdapter.resolveApplication(componentName);
-                    if (item != null) {
-                        mTitle = item.mTitle;
-                        mAppIconDrawable = resolveAppIcon(item);
-                    } else {
-                        mTitle = getContext().getResources().getString(R.string.resolve_failed_summary);
-                    }
+                    mTitle = getContext().getResources().getString(R.string.resolve_failed_summary);
                 }
             }
         } else {
