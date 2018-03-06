@@ -285,11 +285,11 @@ static int process_interaction_hint(void *data)
     if (sustained_performance_mode || vr_mode) {
         return HINT_HANDLED;
     }
-    int duration = 500; // 500ms by default
+    int duration = 1500; // 500ms by default
     if (data) {
         int input_duration = *((int*)data) + 500;
         if (input_duration > duration) {
-            duration = (input_duration > 1000) ? 1000 : input_duration;
+            duration = (input_duration > 2000) ? 2000 : input_duration;
         }
     }
 
