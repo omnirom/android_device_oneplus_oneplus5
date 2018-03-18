@@ -18,10 +18,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center_horizontal"
-        android:padding="24dip">
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp" >
 
      <ListView android:id="@+id/applist"
                android:layout_width="match_parent"
-               android:layout_height="match_parent"/>
+               android:layout_height="match_parent"
+               android:divider="@null" />
 
 </LinearLayout>
