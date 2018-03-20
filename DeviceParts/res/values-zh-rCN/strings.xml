@@ -73,6 +73,7 @@
   <string name="doze_category_title">主动显示</string>
   <string name="doze_category_summary">收到通知时点亮屏幕</string>
   <string name="wave_check_summary">手电波脉冲通知</string>
+  <string name="wave_check_title">手波</string>
   <string name="tilt_check_summary">设备拾取时的脉冲通知</string>
   <string name="tilt_check_title">拿起</string>
   <string name="pocket_check_summary">从口袋里取出时的脉冲通知</string>
