@@ -457,4 +457,7 @@
 
     <integer translatable="false" name="config_wifi_wakeup_available">1</integer>
 
+    <!-- True if the display hardware only has brightness buckets rather than a full range of
+         backlight values -->
+    <bool name="config_displayBrightnessBucketsInDoze">true</bool>
 </resources>
