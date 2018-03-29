@@ -24,4 +24,17 @@
     <!-- Doze: does this device support STATE_DOZE and STATE_DOZE_SUSPEND?  -->
     <bool name="doze_display_state_supported">true</bool>
 
+    <!-- Type of a sensor that provides a low-power estimate of the desired display
+         brightness, suitable to listen to while the device is asleep (e.g. during
+         always-on display) -->
+    <string name="doze_brightness_sensor_type" translatable="false">android.sensor.light</string>
+
+    <integer-array name="config_doze_brightness_sensor_to_brightness">
+        <item>-1</item> <!-- 0: OFF -->
+        <item>1</item> <!-- 1: NIGHT -->
+        <item>3</item> <!-- 2: LOW -->
+        <item>7</item> <!-- 3: HIGH -->
+        <item>27</item> <!-- 4: SUN -->
+    </integer-array>
+
 </resources>
