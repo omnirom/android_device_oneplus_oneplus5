@@ -32,6 +32,8 @@
   <string name="hbm_mode_title">Kõrge heleduse režiim</string>
   <string name="proxi_summary_head">Kontrolli lähedussensorit, haldamaks žeste ja sõrmejäljelugejat</string>
   <string name="proxi_title_head">Läheduskontroll</string>
+  <string name="off_screen_gesture_feedback_summary_head">Luba žestidele haptiline tagasiside</string>
+  <string name="off_screen_gesture_feedback_title_head">Haptine tagasiside</string>
   <string name="slider_mode_off">Väljas</string>
   <string name="slider_mode_vibrate">Vibreeri</string>
   <string name="slider_mode_silent">Hääletu</string>
@@ -58,6 +60,13 @@
   <string name="music_play_entry">Mängi/peata muusikat</string>
   <string name="music_prev_entry">Eelmine lugu</string>
   <string name="music_next_entry">Järgmine lugu</string>
+  <string name="volume_up">Suurenda helitugevust</string>
+  <string name="volume_down">Vähenda helitugevust</string>
+  <string name="browse_scroll_up">Keri üles</string>
+  <string name="browse_scroll_down">Keri alla</string>
+  <string name="navigate_back">Tagasi</string>
+  <string name="navigate_home">Kodu</string>
+  <string name="navigate_recent">Hiljutised</string>
   <string name="not_ready_summary">Lahendan...</string>
   <string name="resolve_failed_summary">Rakenduse lahendamine ebaõnnestus</string>
   <string name="category_down_swipe_gesture">Alla libistamine</string>
@@ -68,6 +77,7 @@
   <string name="category_fp_up_swipe_gesture">Sõrmejälje üles libistamine</string>
   <string name="category_fp_right_swipe_gesture">Sõrmejälje paremale libistamine</string>
   <string name="category_fp_left_swipe_gesture">Sõrmejälje vasakule libistamine</string>
+  <string name="category_fp_long_press_gesture">Sõrmejälje pikk vajutus</string>
   <string name="fp_swipe_down_switch_summary_head">Vaikimisi sõrmejälje teate alla libistamise žest</string>
   <string name="fp_swipe_down_switch_title_head">Sõrmejälje alla libistamise žest</string>
   <string name="doze_category_title">Ambientne ekraan</string>

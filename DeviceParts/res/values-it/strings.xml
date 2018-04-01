@@ -64,12 +64,6 @@
   <string name="category_up_swipe_gesture">Swipe in alto</string>
   <string name="category_left_swipe_gesture">Swipe a sinistra</string>
   <string name="category_right_swipe_gesture">Swipe a destra</string>
-  <string name="category_fp_down_swipe_gesture">Scorrimento verso il basso</string>
-  <string name="category_fp_up_swipe_gesture">Scorrimento verso l\'alto</string>
-  <string name="category_fp_right_swipe_gesture">Scorrimento verso destra</string>
-  <string name="category_fp_left_swipe_gesture">Scorrimento verso sinistra</string>
-  <string name="fp_swipe_down_switch_summary_head">Scorrimento verso il basso per le notifiche</string>
-  <string name="fp_swipe_down_switch_title_head">Scorrimento verso il basso</string>
   <string name="doze_category_title">Display Ambiente</string>
   <string name="doze_category_summary">Riattiva lo schermo quando ricevi le notifiche</string>
   <string name="wave_check_summary">Mostra le notifiche al passaggio della mano</string>

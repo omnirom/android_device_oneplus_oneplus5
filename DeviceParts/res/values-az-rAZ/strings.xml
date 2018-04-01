@@ -14,4 +14,17 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources></resources>
+<resources>
+  <string name="app_name">Oneplus 5</string>
+  <string name="category_vibrator">Vibrasiya motoru</string>
+  <string name="vib_strength_title_head">Güc</string>
+  <string name="vib_strength_summary_head">Vibrasiya motorunun gücünü təyin et</string>
+  <string name="vib_test">Test</string>
+  <string name="advanced_settings">Qabaqcıl</string>
+  <string name="category_slider">Slayder</string>
+  <string name="slider_mode_title">Slayder modu</string>
+  <string name="buttons_title">Düymələr</string>
+  <string name="swap_back_recents_title">Geri və son tətbiqlər düyməsini mübadilə et</string>
+  <string name="graphics_title">Qrafiklər</string>
+  <string name="srgb_mode_title">sRGB modu</string>
+</resources>

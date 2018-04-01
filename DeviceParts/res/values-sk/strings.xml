@@ -32,6 +32,8 @@
   <string name="hbm_mode_title">Režim vysokého jasu</string>
   <string name="proxi_summary_head">Kontrola senzoru priblíženia na ovládanie gest a snímača odtlačkov prstov</string>
   <string name="proxi_title_head">Kontrola senzora priblíženia</string>
+  <string name="off_screen_gesture_feedback_summary_head">Povoliť hmatovú odozvu pre gestá</string>
+  <string name="off_screen_gesture_feedback_title_head">Hmatová odozva</string>
   <string name="slider_mode_off">Vypnutý</string>
   <string name="slider_mode_vibrate">Vibrovanie</string>
   <string name="slider_mode_silent">Tichý</string>
@@ -58,6 +60,13 @@
   <string name="music_play_entry">Prehrávanie / pozastavenie hudby</string>
   <string name="music_prev_entry">Predchádzajúca skladba</string>
   <string name="music_next_entry">Ďalšia skladba</string>
+  <string name="volume_up">Zvýšiť hlasitosť</string>
+  <string name="volume_down">Znížiť hlasitosť</string>
+  <string name="browse_scroll_up">Posunutie nahor</string>
+  <string name="browse_scroll_down">Posunutie nadol</string>
+  <string name="navigate_back">Späť</string>
+  <string name="navigate_home">Domov</string>
+  <string name="navigate_recent">Nedávne</string>
   <string name="not_ready_summary">Riešenie...</string>
   <string name="resolve_failed_summary">Riešenie aplikácie zlyhalo</string>
   <string name="category_down_swipe_gesture">Potiahnutie dolu</string>
@@ -68,8 +77,9 @@
   <string name="category_fp_up_swipe_gesture">Odtlačok prsta potiahnutie nahor</string>
   <string name="category_fp_right_swipe_gesture">Odtlačok prsta potiahnutie vpravo</string>
   <string name="category_fp_left_swipe_gesture">Odtlačok prsta potiahnutie vľavo</string>
-  <string name="fp_swipe_down_switch_summary_head">Predvolené upozornenie odtlačku prsta pri potiahnutí prstom nadol</string>
-  <string name="fp_swipe_down_switch_title_head">Odtlačok prsta gesto potiahnutia dolu</string>
+  <string name="category_fp_long_press_gesture">Odtlačok prsta dlhé stlačenie</string>
+  <string name="fp_swipe_down_switch_summary_head">Predvolené gesto upozornenia odtlačkom prsta pri potiahnutí prstom nadol</string>
+  <string name="fp_swipe_down_switch_title_head">Gesto potiahnutia odtlačkom prsta nadol</string>
   <string name="doze_category_title">Ambientny displej</string>
   <string name="doze_category_summary">Prebudiť obrazovku po prijatí upozornenia</string>
   <string name="wave_check_summary">Zobraziť upozornenia pri mávnutí rukou</string>

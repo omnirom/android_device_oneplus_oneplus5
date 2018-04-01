@@ -64,12 +64,6 @@
   <string name="category_up_swipe_gesture">Hoch wischen</string>
   <string name="category_left_swipe_gesture">Links wischen</string>
   <string name="category_right_swipe_gesture">Rechts wischen</string>
-  <string name="category_fp_down_swipe_gesture">Fingerabdruck nach unten wischen</string>
-  <string name="category_fp_up_swipe_gesture">Fingerabdruck nach oben wischen</string>
-  <string name="category_fp_right_swipe_gesture">Fingerabdruck nach rechts wischen</string>
-  <string name="category_fp_left_swipe_gesture">Fingerabdruck nach links wischen</string>
-  <string name="fp_swipe_down_switch_summary_head">Standard-Fingerabdruck-Benachrichtigungswischgeste nach unten</string>
-  <string name="fp_swipe_down_switch_title_head">Fingerabdruck nach unten Wischgeste</string>
   <string name="doze_category_title">Inaktivitätsdisplay</string>
   <string name="doze_category_summary">Das Display einschalten, wenn eine Benachrichtigung empfangen wurde</string>
   <string name="wave_check_summary">Benachrichtigungen pulsieren, wenn mit der Hand gewunken wird</string>

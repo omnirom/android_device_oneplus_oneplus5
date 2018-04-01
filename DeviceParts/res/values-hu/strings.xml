@@ -32,6 +32,8 @@
   <string name="hbm_mode_title">Nagy fényerő mód</string>
   <string name="proxi_summary_head">Ellenőrizze a közelség érzékelőt a gesztus és az ujjlenyomat érzékelő kezeléséhez</string>
   <string name="proxi_title_head">Közelség ellenőrzés</string>
+  <string name="off_screen_gesture_feedback_summary_head">Engedélyezi az érintési visszajelzést a gesztusokhoz</string>
+  <string name="off_screen_gesture_feedback_title_head">Érintési visszajelzés</string>
   <string name="slider_mode_off">Ki</string>
   <string name="slider_mode_vibrate">Rezgés</string>
   <string name="slider_mode_silent">Néma</string>
@@ -58,6 +60,13 @@
   <string name="music_play_entry">Zene indítása / szüneteltetése</string>
   <string name="music_prev_entry">Előző szám</string>
   <string name="music_next_entry">Következő szám</string>
+  <string name="volume_up">Hangerő növelése</string>
+  <string name="volume_down">Hangerő csökkentése</string>
+  <string name="browse_scroll_up">Görgetés felfelé</string>
+  <string name="browse_scroll_down">Görgetés lefelé</string>
+  <string name="navigate_back">Vissza</string>
+  <string name="navigate_home">Kezdőlap</string>
+  <string name="navigate_recent">Előzmények</string>
   <string name="not_ready_summary">Elemzés...</string>
   <string name="resolve_failed_summary">Alkalmazás elemzése sikertelen</string>
   <string name="category_down_swipe_gesture">Lefelé húzás</string>
@@ -68,6 +77,7 @@
   <string name="category_fp_up_swipe_gesture">Ujjlenyomat felfelé csúsztatás</string>
   <string name="category_fp_right_swipe_gesture">Ujjlenyomat jobbra csúsztatás</string>
   <string name="category_fp_left_swipe_gesture">Ujjlenyomat balra csúsztatás</string>
+  <string name="category_fp_long_press_gesture">Ujjlenyomat hosszan nyomás</string>
   <string name="fp_swipe_down_switch_summary_head">Alapértelmezett ujjlenyomat értesítés lefelé csúsztatás gesztushoz</string>
   <string name="fp_swipe_down_switch_title_head">Ujjlenyomat lefelé csúsztatás gesztus</string>
   <string name="doze_category_title">Környezeti kijelző</string>

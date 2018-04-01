@@ -16,7 +16,7 @@
 -->
 <resources>
   <string name="app_name">Oneplus 5</string>
-  <string name="category_gestures_title">Detalles del dispositivo</string>
+  <string name="category_gestures_title">Gestos del dispositivo</string>
   <string name="fp_gesture_title">Detalles del escáner de huella digital</string>
   <string name="category_vibrator">Vibrador</string>
   <string name="vib_strength_title_head">Intensidad</string>
@@ -63,10 +63,6 @@
   <string name="category_up_swipe_gesture">Deslizar arriba</string>
   <string name="category_left_swipe_gesture">Deslizar a la izquierda</string>
   <string name="category_right_swipe_gesture">Deslizar a la derecha</string>
-  <string name="category_fp_down_swipe_gesture">Deslizar huella digital hacia abajo</string>
-  <string name="category_fp_up_swipe_gesture">Deslizar huella digital hacia arriba</string>
-  <string name="category_fp_right_swipe_gesture">Deslizar huella digital hacia la derecha</string>
-  <string name="category_fp_left_swipe_gesture">Deslizar huella digital hacia la izquierda</string>
   <string name="doze_category_title">Pantalla ambiente</string>
   <string name="doze_category_summary">Activar la pantalla cuando recibas notificaciones</string>
   <string name="wave_check_summary">Notificaciones de pulso en la mano</string>
@@ -77,4 +73,5 @@
   <string name="pocket_check_title">Bolsillo</string>
   <string name="ambient_display_enable">Visualización ambiental debe estar habilitada en configuración de pantalla</string>
   <string name="off_mode_title">Apagado</string>
+  <string name="wake_entry">Despertar</string>
 </resources>

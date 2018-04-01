@@ -14,4 +14,54 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources></resources>
+<resources>
+  <string name="category_gestures_title">Geste</string>
+  <string name="fp_gesture_title">Geste na čitalcu prstnih odtisov</string>
+  <string name="category_vibrator">Vibriranje</string>
+  <string name="vib_strength_title_head">Jakost</string>
+  <string name="vib_strength_summary_head">Nastavi moč vibriranja</string>
+  <string name="vib_test">Preizkus</string>
+  <string name="advanced_settings">Napredno</string>
+  <string name="category_slider">Drsnik</string>
+  <string name="slider_mode_title">Vrste drsnikov</string>
+  <string name="buttons_title">Gumbi</string>
+  <string name="swap_back_recents_title">Zamenjaj gumba nazaj in pregled</string>
+  <string name="graphics_title">Grafika</string>
+  <string name="srgb_mode_title">sRGB način</string>
+  <string name="hbm_mode_title">Visoka svetilnost</string>
+  <string name="proxi_summary_head">Preveri sensor bližine pred uporabo gest</string>
+  <string name="proxi_title_head">Preverjanje bližine</string>
+  <string name="off_screen_gesture_feedback_summary_head">Omogoci vibriranje ob zaznavanju gest</string>
+  <string name="off_screen_gesture_feedback_title_head">Vibriranje na dotik</string>
+  <string name="slider_mode_off">Izklop</string>
+  <string name="slider_mode_vibrate">Vibriranje</string>
+  <string name="slider_mode_silent">Tiho</string>
+  <string name="slider_mode_priority">Samo prednostno</string>
+  <string name="slider_mode_alarm">Samo budilke</string>
+  <string name="slider_mode_dnd">Popolna tišina</string>
+  <string name="slider_mode_title_top">Najvišji položaj</string>
+  <string name="slider_mode_title_center">Srednji položaj</string>
+  <string name="slider_mode_title_bottom">Spodnji položaj</string>
+  <string name="dci_mode_title">Načine \'wide gammut\'</string>
+  <string name="Night_mode_title">Nočni način</string>
+  <string name="choose_app">Izberite program</string>
+  <string name="category_double_swipe_gesture">II poteza</string>
+  <string name="offscreen_gesture_title">Poteze na izklopljenem zaslonu</string>
+  <string name="category_circle_gesture">O poteza</string>
+  <string name="category_down_arrow_gesture">V poteza</string>
+  <string name="category_up_arrow_gesture">A poteza</string>
+  <string name="category_left_arrow_gesture">&lt; poteza</string>
+  <string name="category_right_arrow_gesture">&gt; poteza</string>
+  <string name="category_gestures_summary">Nastavi funkcije gest</string>
+  <string name="torch_entry">Svetilka</string>
+  <string name="disabled_entry">Onemogoči</string>
+  <string name="camera_entry">Kamera</string>
+  <string name="music_play_entry">Predvajanje/pavza glasbe</string>
+  <string name="music_prev_entry">Korak nazaj</string>
+  <string name="music_next_entry">Korak naprej</string>
+  <string name="volume_up">Povečati glasnost</string>
+  <string name="volume_down">Znižati glasnost</string>
+  <string name="browse_scroll_up">Pomik navzgor</string>
+  <string name="browse_scroll_down">Pomik navzdol</string>
+  <string name="navigate_back">Nazaj</string>
+</resources>
