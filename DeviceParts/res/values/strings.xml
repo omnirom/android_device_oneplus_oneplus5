@@ -46,7 +46,7 @@
     <string name="slider_mode_title_center">Center position</string>
     <string name="slider_mode_title_bottom">Bottom position</string>
     <string name="dci_mode_summary"></string>
-    <string name="dci_mode_title">Wide color gammut mode</string>
+    <string name="dci_mode_title">Wide color gamut mode</string>
     <string name="Night_mode_summary"></string>
     <string name="Night_mode_title">Night mode</string>
 
