@@ -2506,11 +2506,6 @@ case "$target" in
 	echo 1 > /sys/devices/system/cpu/cpu4/core_ctl/is_big_cluster
 	echo 4 > /sys/devices/system/cpu/cpu4/core_ctl/task_thres
 
-	# Enable Adaptive LMK
-        echo 1 > /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk
-        echo "18432,23040,27648,51256,150296,200640" > /sys/module/lowmemorykiller/parameters/minfree
-        echo 162500 > /sys/module/lowmemorykiller/parameters/vmpressure_file_min
-
 	# Setting b.L scheduler parameters
 	echo 1 > /proc/sys/kernel/sched_migration_fixup
 	echo 95 > /proc/sys/kernel/sched_upmigrate
@@ -2652,22 +2647,6 @@ case "$target" in
         echo 0-3 > /dev/cpuset/background/cpus
         echo 0-3 > /dev/cpuset/system-background/cpus
         echo 0 > /proc/sys/kernel/sched_boost
-	if [ -f "/defrag_aging.ko" ]; then
-		insmod /defrag_aging.ko
-	else
-		insmod /system/lib/modules/defrag.ko
-	fi
-#OPChain
-        if [ -f "/opchain_aging.ko" ]; then
-                insmod /opchain_aging.ko
-        else
-                insmod /system/lib/modules/opchain.ko
-        fi
-    sleep 1
-	lsmod | grep defrag
-	if [ $? != 0 ]; then
-		echo 1 > /sys/module/defrag_helper/parameters/disable
-	fi
     ;;
 esac
 
