@@ -32,6 +32,7 @@
   <string name="hbm_mode_title">Modalità alta luminosità</string>
   <string name="proxi_summary_head">Controlla il sensore di prossimità per eventuali gesture e il sensore di impronte digitali</string>
   <string name="proxi_title_head">Controllo di prossimità</string>
+  <string name="off_screen_gesture_feedback_title_head">Feedback tattile</string>
   <string name="slider_mode_off">Disattivo</string>
   <string name="slider_mode_vibrate">Vibrazione</string>
   <string name="slider_mode_silent">Silenzioso</string>
@@ -41,7 +42,6 @@
   <string name="slider_mode_title_top">Posizione superiore</string>
   <string name="slider_mode_title_center">Posizione centrale</string>
   <string name="slider_mode_title_bottom">Posizione inferiore</string>
-  <string name="dci_mode_title">Modalità di colore larga gamma</string>
   <string name="Night_mode_title">Modalità notte</string>
   <string name="choose_app">Scegli app</string>
   <string name="category_double_swipe_gesture">Gesto doppio swipe</string>
@@ -58,6 +58,9 @@
   <string name="music_play_entry">Riproduci o metti in pausa la musica</string>
   <string name="music_prev_entry">Brano precedente</string>
   <string name="music_next_entry">Brano successivo</string>
+  <string name="volume_up">Alza volume</string>
+  <string name="volume_down">Abbassa volume</string>
+  <string name="navigate_back">Indietro</string>
   <string name="not_ready_summary">Risoluzione...</string>
   <string name="resolve_failed_summary">Risoluzione di app non riuscita</string>
   <string name="category_down_swipe_gesture">Swipe in basso</string>

@@ -15,6 +15,7 @@
      limitations under the License.
 -->
 <resources>
+  <string name="app_name">OnePlus 5</string>
   <string name="category_vibrator">Vibração</string>
   <string name="vib_strength_title_head">Intensidade</string>
   <string name="vib_strength_summary_head">Definir a intensidade da vibração</string>
@@ -38,8 +39,16 @@
   <string name="slider_mode_title_top">Posição superior</string>
   <string name="slider_mode_title_center">Posição central</string>
   <string name="slider_mode_title_bottom">Posição inferior</string>
+  <string name="Night_mode_title">Modo noturno</string>
   <string name="choose_app">Selecionar aplicativo</string>
   <string name="category_up_arrow_gesture">Gesto A</string>
   <string name="category_left_arrow_gesture">Gesto &lt;</string>
   <string name="category_right_arrow_gesture">Gesto &gt;</string>
+  <string name="camera_entry">Câmara</string>
+  <string name="music_play_entry">Reproduzir / pausar música</string>
+  <string name="music_prev_entry">Faixa anterior</string>
+  <string name="music_next_entry">Próxima faixa</string>
+  <string name="volume_up">Aumentar o volume</string>
+  <string name="volume_down">Diminuir o volume</string>
+  <string name="not_ready_summary">Resolvendo...</string>
 </resources>

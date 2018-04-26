@@ -42,7 +42,6 @@
   <string name="slider_mode_title_top">Верхнее положение</string>
   <string name="slider_mode_title_center">Среднее положение</string>
   <string name="slider_mode_title_bottom">Нижнее положение</string>
-  <string name="dci_mode_title">Режим широкой цветовой гаммы</string>
   <string name="Night_mode_title">Ночной режим</string>
   <string name="choose_app">Выбрать приложение</string>
   <string name="category_double_swipe_gesture">Жест ll</string>
