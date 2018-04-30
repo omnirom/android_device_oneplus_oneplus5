@@ -103,7 +103,7 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final int FP_GESTURE_LONG_PRESS = 305;
     private static final boolean sIsOnePlus5t = android.os.Build.DEVICE.equals("OnePlus5T");
 
-    private static final int[] sSupportedGestures = new int[]{
+    private static final int[] sSupportedGestures5t = new int[]{
         GESTURE_II_SCANCODE,
         GESTURE_CIRCLE_SCANCODE,
         GESTURE_V_SCANCODE,
@@ -123,6 +123,23 @@ public class KeyHandler implements DeviceKeyHandler {
         FP_GESTURE_SWIPE_LEFT,
         FP_GESTURE_SWIPE_RIGHT,
         FP_GESTURE_LONG_PRESS,
+    };
+
+    private static final int[] sSupportedGestures = new int[]{
+        GESTURE_II_SCANCODE,
+        GESTURE_CIRCLE_SCANCODE,
+        GESTURE_V_SCANCODE,
+        GESTURE_A_SCANCODE,
+        GESTURE_LEFT_V_SCANCODE,
+        GESTURE_RIGHT_V_SCANCODE,
+        GESTURE_DOWN_SWIPE_SCANCODE,
+        GESTURE_UP_SWIPE_SCANCODE,
+        GESTURE_LEFT_SWIPE_SCANCODE,
+        GESTURE_RIGHT_SWIPE_SCANCODE,
+        KEY_DOUBLE_TAP,
+        KEY_SLIDER_TOP,
+        KEY_SLIDER_CENTER,
+        KEY_SLIDER_BOTTOM
     };
 
     private static final int[] sHandledGestures = new int[]{
@@ -355,7 +372,11 @@ public class KeyHandler implements DeviceKeyHandler {
 
     @Override
     public boolean canHandleKeyEvent(KeyEvent event) {
-        return ArrayUtils.contains(sSupportedGestures, event.getScanCode());
+        if (sIsOnePlus5t) {
+            return ArrayUtils.contains(sSupportedGestures5t, event.getScanCode());
+        } else {
+            return ArrayUtils.contains(sSupportedGestures, event.getScanCode());
+        }
     }
 
     @Override
