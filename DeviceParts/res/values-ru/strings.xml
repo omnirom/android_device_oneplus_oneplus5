@@ -32,6 +32,7 @@
   <string name="hbm_mode_title">Режим повышенной яркости</string>
   <string name="proxi_summary_head">Проверить датчики жестов и отпечатков пальцев</string>
   <string name="proxi_title_head">Проверка датчика приближения</string>
+  <string name="off_screen_gesture_feedback_summary_head">Включить виброотклик при использовании жестов</string>
   <string name="off_screen_gesture_feedback_title_head">Виброотклик</string>
   <string name="slider_mode_off">Выкл.</string>
   <string name="slider_mode_vibrate">Вибрация</string>
@@ -42,6 +43,7 @@
   <string name="slider_mode_title_top">Верхнее положение</string>
   <string name="slider_mode_title_center">Среднее положение</string>
   <string name="slider_mode_title_bottom">Нижнее положение</string>
+  <string name="dci_mode_title">Режим широкой цветовой гаммы</string>
   <string name="Night_mode_title">Ночной режим</string>
   <string name="choose_app">Выбрать приложение</string>
   <string name="category_double_swipe_gesture">Жест ll</string>
@@ -58,6 +60,8 @@
   <string name="music_play_entry">Воспр. или остановка музыки</string>
   <string name="music_prev_entry">Предыдущий трек</string>
   <string name="music_next_entry">Следующий трек</string>
+  <string name="volume_up">Увеличить громкость</string>
+  <string name="volume_down">Уменьшить громкость</string>
   <string name="browse_scroll_up">Прокрутка вверх</string>
   <string name="browse_scroll_down">Прокрутка вниз</string>
   <string name="navigate_back">Назад</string>
