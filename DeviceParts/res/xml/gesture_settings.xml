@@ -15,11 +15,11 @@
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <SwitchPreference
+    <!--<SwitchPreference
         android:key="proxi"
         android:summary="@string/proxi_summary_head"
         android:title="@string/proxi_title_head"
-        android:persistent="false" />
+        android:persistent="false" />-->
 
     <SwitchPreference
         android:key="off_screen_gesture_feedback"
