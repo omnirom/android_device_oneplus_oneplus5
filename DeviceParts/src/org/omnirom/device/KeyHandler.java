@@ -63,7 +63,7 @@ import com.android.internal.statusbar.IStatusBarService;
 public class KeyHandler implements DeviceKeyHandler {
 
     private static final String TAG = "KeyHandler";
-    private static final boolean DEBUG = true;
+    private static final boolean DEBUG = false;
     private static final boolean DEBUG_SENSOR = false;
 
     protected static final int GESTURE_REQUEST = 1;
@@ -172,7 +172,6 @@ public class KeyHandler implements DeviceKeyHandler {
     private final NotificationManager mNoMan;
     private final AudioManager mAudioManager;
     private SensorManager mSensorManager;
-    private Sensor mSensor;
     private boolean mProxyIsNear;
     private boolean mUseProxiCheck;
     private Sensor mTiltSensor;
@@ -191,7 +190,7 @@ public class KeyHandler implements DeviceKeyHandler {
         @Override
         public void onSensorChanged(SensorEvent event) {
             mProxyIsNear = event.values[0] == 1;
-            if (DEBUG_SENSOR) Log.i(TAG, "mProxyIsNear = " + mProxyIsNear);
+            if (DEBUG_SENSOR) Log.i(TAG, "mProxyIsNear = " + mProxyIsNear + " mProxyWasNear = " + mProxyWasNear);
             if (mUseProxiCheck) {
                 if (!sIsOnePlus5t) {
                     if (Utils.fileWritable(FPC_CONTROL_PATH)) {
@@ -199,13 +198,14 @@ public class KeyHandler implements DeviceKeyHandler {
                     }
                 } else {
                     if (Utils.fileWritable(GOODIX_CONTROL_PATH)) {
-                    Utils.writeValue(GOODIX_CONTROL_PATH, mProxyIsNear ? "1" : "0");
+                        Utils.writeValue(GOODIX_CONTROL_PATH, mProxyIsNear ? "1" : "0");
                     }
                 }
             }
             if (mUseWaveCheck || mUsePocketCheck) {
                 if (mProxyWasNear && !mProxyIsNear) {
                     long delta = SystemClock.elapsedRealtime() - mProxySensorTimestamp;
+                    if (DEBUG_SENSOR) Log.i(TAG, "delta = " + delta);
                     if (mUseWaveCheck && delta < HANDWAVE_MAX_DELTA_MS) {
                         launchDozePulse();
                     }
@@ -224,19 +224,6 @@ public class KeyHandler implements DeviceKeyHandler {
     };
 
     private SensorEventListener mTiltSensorListener = new SensorEventListener() {
-        @Override
-        public void onSensorChanged(SensorEvent event) {
-            if (event.values[0] == 1) {
-                launchDozePulse();
-            }
-        }
-
-        @Override
-        public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        }
-    };
-
-    private SensorEventListener mPocketSensorListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
             if (event.values[0] == 1) {
@@ -494,9 +481,6 @@ public class KeyHandler implements DeviceKeyHandler {
         if (mUseTiltCheck) {
             mSensorManager.unregisterListener(mTiltSensorListener, mTiltSensor);
         }
-        if (mUsePocketCheck) {
-            mSensorManager.unregisterListener(mPocketSensorListener, mPocketSensor);
-        }
     }
 
     private void enableGoodix() {
@@ -510,17 +494,13 @@ public class KeyHandler implements DeviceKeyHandler {
     private void onDisplayOff() {
         if (DEBUG) Log.i(TAG, "Display off");
         if (enableProxiSensor()) {
+            mProxyWasNear = false;
             mSensorManager.registerListener(mProximitySensor, mPocketSensor,
                     SensorManager.SENSOR_DELAY_NORMAL);
             mProxySensorTimestamp = SystemClock.elapsedRealtime();
-            mProxyWasNear = false;
         }
         if (mUseTiltCheck) {
             mSensorManager.registerListener(mTiltSensorListener, mTiltSensor,
-                    SensorManager.SENSOR_DELAY_NORMAL);
-        }
-        if (mUsePocketCheck) {
-            mSensorManager.registerListener(mPocketSensorListener, mPocketSensor,
                     SensorManager.SENSOR_DELAY_NORMAL);
         }
     }
@@ -753,5 +733,15 @@ public class KeyHandler implements DeviceKeyHandler {
             }
         }
         return null;
+    }
+
+    @Override
+    public boolean getCustomProxiIsNear(SensorEvent event) {
+        return event.values[0] == 1;
+    }
+
+    @Override
+    public String getCustomProxiSensor() {
+        return "com.oneplus.sensor.pocket";
     }
 }
