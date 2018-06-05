@@ -26,12 +26,12 @@
   <string name="category_slider">Kaydırak</string>
   <string name="slider_mode_title">Kaydırak modu</string>
   <string name="buttons_title">Düğmeler</string>
-  <string name="swap_back_recents_title">Geri ve son uygulamalar düğmesini mübadele edin</string>
+  <string name="swap_back_recents_title">Geri ve son uygulamalar düğmesini değiş tokuş et</string>
   <string name="graphics_title">Grafikler</string>
   <string name="srgb_mode_title">sRGB modu</string>
   <string name="hbm_mode_title">Yüksek parlaklık modu</string>
   <string name="proxi_summary_head">Hareketi ve parmak izi sensörünü idare etmek için yakınlık sensörünü yokla</string>
-  <string name="proxi_title_head">Yakınlık denetimi</string>
+  <string name="proxi_title_head">Yakınlık yoklaması</string>
   <string name="off_screen_gesture_feedback_summary_head">Temas geri bildirimini hareketler için fa\'âl hâle getirin</string>
   <string name="off_screen_gesture_feedback_title_head">Temas geri bildirimi</string>
   <string name="slider_mode_off">Kapalı</string>
@@ -57,7 +57,7 @@
   <string name="torch_entry">Fener</string>
   <string name="disabled_entry">Devre dışı</string>
   <string name="camera_entry">Kamera</string>
-  <string name="music_play_entry">Müziği oynat veyâ duraklat</string>
+  <string name="music_play_entry">Müziği çal veyâ duraklat</string>
   <string name="music_prev_entry">Evvelki parça</string>
   <string name="music_next_entry">Sonraki parça</string>
   <string name="volume_up">Ses seviyesini artır</string>
