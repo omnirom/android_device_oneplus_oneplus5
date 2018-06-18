@@ -43,6 +43,7 @@
   <string name="slider_mode_title_top">Position oben</string>
   <string name="slider_mode_title_center">Position in der Mitte</string>
   <string name="slider_mode_title_bottom">Position unten</string>
+  <string name="dci_mode_title">DCI-Modus (erweiteter Farbraum)</string>
   <string name="Night_mode_title">Nachtmodus</string>
   <string name="choose_app">App wählen</string>
   <string name="category_double_swipe_gesture">II-Geste</string>
@@ -76,6 +77,7 @@
   <string name="category_fp_up_swipe_gesture">Fingerabdruck nach oben wischen</string>
   <string name="category_fp_right_swipe_gesture">Fingerabdruck nach rechts wischen</string>
   <string name="category_fp_left_swipe_gesture">Fingerabdruck nach links wischen</string>
+  <string name="category_fp_long_press_gesture">Fingerabdruck lange drücken</string>
   <string name="fp_swipe_down_switch_summary_head">Standard-Fingerabdruck-Benachrichtigungswischgeste nach unten</string>
   <string name="fp_swipe_down_switch_title_head">Fingerabdruck nach unten Wischgeste</string>
   <string name="doze_category_title">Inaktivitätsdisplay</string>
