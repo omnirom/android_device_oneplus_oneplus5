@@ -458,4 +458,10 @@
     <integer translatable="false" name="config_wifi_wakeup_available">1</integer>
 
     <bool name="config_proxiSensorWakupCheck">true</bool>
+
+    <!-- The CPU temperature sensor path, defaults to empty -->
+    <string name="config_cpuTempSensor" translatable="false">/sys/class/thermal/thermal_zone8/temp</string>
+
+    <!-- The CPU temperature divider, if needed -->
+    <integer name="config_cpuTempDivider" translatable="false">10</integer>
 </resources>
