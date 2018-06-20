@@ -239,7 +239,6 @@ PRODUCT_PACKAGES += \
     wifi-mac-generator
 
 PRODUCT_PACKAGES += \
-    wcnss_service \
     libcld80211 \
     lib_driver_cmd_qcwcn
 
