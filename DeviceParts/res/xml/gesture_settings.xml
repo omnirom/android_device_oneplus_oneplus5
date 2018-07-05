@@ -19,7 +19,8 @@
         android:key="proxi"
         android:summary="@string/proxi_summary_head"
         android:title="@string/proxi_title_head"
-        android:persistent="false" />
+        android:persistent="false"
+        android:defaultValue="true" />
 
     <SwitchPreference
         android:key="off_screen_gesture_feedback"
