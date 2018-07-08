@@ -32,7 +32,7 @@
   <string name="hbm_mode_title">Mode de brillantor alta</string>
   <string name="proxi_summary_head">Comprova el sensor de proximitat per a la gestió dels gestos i del sensor d\'empremta digital</string>
   <string name="proxi_title_head">Comprovació de proximitat</string>
-  <string name="off_screen_gesture_feedback_summary_head">Habilita la resposta hàptica per als gestos</string>
+  <string name="off_screen_gesture_feedback_summary_head">Habilita la resposta hàptica per als gests</string>
   <string name="off_screen_gesture_feedback_title_head">Resposta Hàptica</string>
   <string name="slider_mode_off">Desactivat</string>
   <string name="slider_mode_vibrate">Vibració</string>
@@ -47,7 +47,7 @@
   <string name="Night_mode_title">Mode nocturn</string>
   <string name="choose_app">Trieu l\'app</string>
   <string name="category_double_swipe_gesture">Gest II</string>
-  <string name="offscreen_gesture_title">Gestos amb la pantalla apagada</string>
+  <string name="offscreen_gesture_title">Gests amb la pantalla apagada</string>
   <string name="category_circle_gesture">Gest O</string>
   <string name="category_down_arrow_gesture">Gest V</string>
   <string name="category_up_arrow_gesture">Gest A</string>
@@ -80,7 +80,7 @@
   <string name="category_fp_long_press_gesture">Pressió llarga al sensor d\'empremta digital</string>
   <string name="fp_swipe_down_switch_summary_head">Acció per defecte als avisos en lliscar avall al sensor d\'empremta digital</string>
   <string name="fp_swipe_down_switch_title_head">Gest de lliscar avall al sensor d\'empremta digital</string>
-  <string name="doze_category_title">Pantalla ambient</string>
+  <string name="doze_category_title">Pantalla activa</string>
   <string name="doze_category_summary">Activa la pantalla en rebre avisos</string>
   <string name="wave_check_summary">Avisos intermitents amb el moviment de la mà</string>
   <string name="wave_check_title">Moviment de la mà</string>
@@ -88,11 +88,11 @@
   <string name="tilt_check_title">Recollir</string>
   <string name="pocket_check_summary">Avisos intermitents en treure de la butxaca</string>
   <string name="pocket_check_title">Butxaca</string>
-  <string name="ambient_display_enable">S\'ha d\'habilitar la pantalla ambient a la configuració de pantalla</string>
+  <string name="ambient_display_enable">S\'ha d\'habilitar la pantalla activa a la configuració de pantalla</string>
   <string name="panel_category_title">Modes per al panell</string>
   <string name="panel_category_summary">Modes per al panell de correcció de color</string>
   <string name="off_mode_title">Desactivat</string>
   <string name="tile_panel_mode">Modes per al panell</string>
   <string name="tile_hbm_mode">Modes de brillantor alta</string>
-  <string name="wake_entry">Despertar</string>
+  <string name="wake_entry">Desperta</string>
 </resources>
