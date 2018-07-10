@@ -1,3 +1,0 @@
-allow hal_gnss_qti debug_prop:file read;
-allow hal_gnss_qti property_socket:sock_file write;
-

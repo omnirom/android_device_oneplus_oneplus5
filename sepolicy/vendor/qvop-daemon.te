@@ -1,2 +1,0 @@
-allow qvop-daemon debug_prop:file read;
-

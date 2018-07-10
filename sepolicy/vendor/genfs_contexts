@@ -1,9 +1,0 @@
-genfscon proc /touchpanel    u:object_r:proc_touchpanel:s0
-genfscon proc /s1302         u:object_r:proc_touchpanel:s0
-genfscon proc /tri-state-key u:object_r:proc_touchpanel:s0
-genfscon proc /fingerprint   u:object_r:proc_fingerprint:s0
-
-genfscon debugfs /rpm_stats                           u:object_r:debugfs_rpm:s0
-genfscon debugfs /rpm_master_stats                    u:object_r:debugfs_rpm:s0
-genfscon debugfs /system_stats                        u:object_r:debugfs_rpm:s0
-genfscon debugfs /wlan0                               u:object_r:debugfs_wlan:s0

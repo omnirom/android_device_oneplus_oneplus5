@@ -1,2 +1,0 @@
-set_prop(hal_rcsservice, debug_prop);
-allow hal_rcsservice debug_prop:property_service set;

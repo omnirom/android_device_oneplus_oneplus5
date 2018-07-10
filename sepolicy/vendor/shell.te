@@ -1,2 +1,0 @@
-allow shell proc_stat:file read;
-

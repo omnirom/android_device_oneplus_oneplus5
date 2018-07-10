@@ -1,2 +1,0 @@
-allow installd media_rw_data_file:file setattr;
-
