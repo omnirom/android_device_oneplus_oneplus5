@@ -1,5 +1,0 @@
-allow location permission_service:service_manager find;
-
-allow location debug_prop:file { read open getattr };
-allow location self:capability net_raw;
-allow location debug_prop:property_service set;

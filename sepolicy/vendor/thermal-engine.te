@@ -1,9 +1,0 @@
-set_prop(thermal-engine, debug_prop)
-allow thermal-engine sysfs_kgsl:file { getattr open read };
-allow thermal-engine sysfs_batteryinfo:file r_file_perms;
-
-allow thermal-engine sysfs_uio:dir { open read search };
-allow thermal-engine sysfs_uio:lnk_file read;
-allow thermal-engine sysfs_uio_file:dir search;
-allow thermal-engine sysfs_uio_file:file { getattr open read };
-

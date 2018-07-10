@@ -1,2 +1,0 @@
-allow drmserver debug_prop:file read;
-

@@ -1,2 +1,0 @@
-set_prop(hal_imsrtp, debug_prop);
-allow hal_imsrtp property_socket:sock_file write;

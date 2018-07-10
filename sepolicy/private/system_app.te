@@ -1,1 +1,8 @@
-allow system_app storaged:binder call;
+allow system_app sysfs_graphics_omni:file rw_file_perms;
+allow system_app sysfs_graphics_omni:dir search;
+
+#selinux status
+allow system_app selinuxfs:file r_file_perms;
+
+allow system_app wificond:binder call;
+

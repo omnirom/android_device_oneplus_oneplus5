@@ -1,2 +1,0 @@
-allow ipacm system_data_file:dir write;
-

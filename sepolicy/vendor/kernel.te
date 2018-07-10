@@ -1,7 +1,0 @@
-allow kernel vfat:file open;
-allow kernel self:socket create;
-
-# modem subsystem
-rw_dir_file(kernel, param_block_device)
-
-allow kernel debugfs_wlan:dir search;

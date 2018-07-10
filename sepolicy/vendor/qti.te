@@ -1,4 +1,0 @@
-set_prop(qti, debug_prop)
-
-allow qti shell_exec:file { execute execute_no_trans getattr open read };
-

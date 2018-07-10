@@ -1,0 +1,17 @@
+###################################
+# sysfs
+#
+/sys/devices/soc/soc:fpc_fpc1020/irq                            u:object_r:sysfs_fpc_irq:s0
+/sys/devices/soc/soc:fpc_fpc1020/proximity_state                u:object_r:sysfs_fpc_proximity:s0
+/sys/devices/soc/soc:goodix_fp/proximity_state                  u:object_r:sysfs_fpc_proximity:s0
+
+/system/etc/audio_policy_configuration_omni.xml    u:object_r:vendor_configs_file:s0
+/system/etc/audio_effects_omni.xml    u:object_r:vendor_configs_file:s0
+/system/lib/modules/wlan.ko    u:object_r:vendor_file:s0
+
+/sys/devices/virtual/timed_output/vibrator/vtg_level            u:object_r:sysfs_vibrator:s0
+
+/sys/devices/virtual/graphics/fb0/hbm                           u:object_r:sysfs_graphics_omni:s0
+/sys/devices/virtual/graphics/fb0/SRGB                          u:object_r:sysfs_graphics_omni:s0
+/sys/devices/virtual/graphics/fb0/DCI_P3                        u:object_r:sysfs_graphics_omni:s0
+/sys/devices/virtual/graphics/fb0/night_mode                    u:object_r:sysfs_graphics_omni:s0

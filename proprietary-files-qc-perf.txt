@@ -1,14 +1,2 @@
 # Perf
-vendor/bin/perfd|df6236fe2907ce52880c08194ed80dcc3ee9a391
-vendor/lib64/libqti-utils.so
-vendor/lib64/libqti-util.so|df073d33419f1f8b2933ebdd684c4ced8d934d77
-vendor/lib64/libqti-perfd-client.so|2527dac7c927e579435d31f01c1babccc821bf16
-vendor/lib64/libqtigef.so
-vendor/lib/libqti-utils.so
-vendor/lib/libqti-perfd-client.so|745c0986272216020eb6ed512d07b08eabee2ee3
-vendor/lib/libqtigef.so
-vendor/lib64/vendor.qti.hardware.perf@1.0_vendor.so
-vendor/lib/vendor.qti.hardware.perf@1.0_vendor.so
-vendor/lib64/libperfgluelayer.so
-vendor/lib/libperfgluelayer.so
 
