@@ -1,1 +1,11 @@
-allow system_app storaged:binder call;
+allow system_app sysfs_graphics_omni:file rw_file_perms;
+allow system_app sysfs_graphics_omni:dir search;
+allow system_app sysfs_fpc_proximity:file rw_file_perms;
+allow system_app sysfs_vibrator:file rw_file_perms;
+allow system_app sysfs_vibrator:dir search;
+
+#selinux status
+allow system_app selinuxfs:file r_file_perms;
+
+allow system_app wificond:binder call;
+

@@ -26,13 +26,14 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
-
-#define LOG_TAG "QCOM PowerHAL"
-
-#include <unistd.h>
-#include <log/log.h>
+#include <cutils/log.h>
+#include <fcntl.h>
+#include <string.h>
+#include <cutils/properties.h>
 #include <libxml/parser.h>
+#include <libxml/tree.h>
 #include "powerhintparser.h"
+#define LOG_TAG "QCOM PowerHAL"
 
 int parsePowerhintXML() {
 
@@ -156,7 +157,7 @@ int* getPowerhint(int hint_id, int *params) {
    if(!hint_id)
        return result;
 
-    ALOGV("Powerhal hint received=%x\n",hint_id);
+    ALOGI("Powerhal hint received=%x\n",hint_id);
 
     if(!powerhint[0].numParams) {
        parsePowerhintXML();
@@ -170,5 +171,8 @@ int* getPowerhint(int hint_id, int *params) {
        }
     }
 
-    return result;
+    /*for (int j = 0; j < *params; j++)
+        ALOGI("Powerhal resource again%x = \n", result[j]);*/
+
+       return result;
 }

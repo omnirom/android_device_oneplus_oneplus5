@@ -1,4 +1,0 @@
-allow rmt_storage self:capability net_raw;
-
-allow rmt_storage debugfs_rmts:file write;
-allow rmt_storage debugfs_rmts:file open;
