@@ -1,6 +1,0 @@
-get_prop(surfaceflinger, debug_prop);
-
-allow surfaceflinger hal_perf_default:binder call;
-
-allow surfaceflinger hal_display_config_hwservice:hwservice_manager find;
-

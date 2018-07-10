@@ -1,0 +1,11 @@
+allow system_server sysfs_graphics_omni:file rw_file_perms;
+allow system_server sysfs_graphics_omni:dir search;
+allow system_server sysfs_fpc_proximity:file rw_file_perms;
+allow system_server sysfs_vibrator:file rw_file_perms;
+allow system_server sysfs_vibrator:dir search;
+
+set_prop(system_server, shell_prop)
+
+allow system_server audioserver:file w_file_perms;
+allow system_server hal_audio:file write;
+

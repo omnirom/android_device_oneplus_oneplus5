@@ -1,0 +1,10 @@
+allow shell asec_apk_file:dir { getattr open read };
+allow shell e2fs_exec:file getattr;
+allow shell hal_allocator_default_exec:file getattr;
+allow shell mnt_media_rw_file:dir getattr;
+allow shell uncrypt_exec:file getattr;
+allow shell update_verifier_exec:file getattr;
+allow shell vdc_exec:file getattr;
+allow shell webview_zygote_exec:file getattr;
+allow shell pstorefs:dir r_dir_perms;
+

@@ -1,2 +1,0 @@
-allow wfdservice self:netlink_generic_socket { create bind getattr read setopt write };
-

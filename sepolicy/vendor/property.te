@@ -1,5 +1,0 @@
-#type debug_prop, property_type;
-type oem_prop, property_type;
-type qti_telephony_prop, property_type;
-
-type thermal_prop, property_type;
