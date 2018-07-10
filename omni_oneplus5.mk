@@ -29,6 +29,9 @@ $(call inherit-product, vendor/omni/config/gsm.mk)
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 
+#treble
+$(call inherit-product, build/make/target/product/treble_common_64.mk)
+
 # must be before including omni part
 TARGET_BOOTANIMATION_SIZE := 1080p
 
@@ -43,9 +46,6 @@ PRODUCT_PROPERTY_OVERRIDES += ro.hardware.nfc_nci=nqx.default
 ALLOW_MISSING_DEPENDENCIES := true
 
 DEVICE_PACKAGE_OVERLAYS += device/oneplus/oneplus5/overlay/device
-
-PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.1-service
 
 # Discard inherited values and use our own instead.
 PRODUCT_NAME := omni_oneplus5

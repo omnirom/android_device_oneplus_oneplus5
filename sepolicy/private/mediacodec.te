@@ -1,0 +1,2 @@
+allow mediacodec oem_prop:file { getattr open };
+

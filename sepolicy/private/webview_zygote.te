@@ -1,0 +1,2 @@
+allow webview_zygote oem_prop:file { getattr open read };
+

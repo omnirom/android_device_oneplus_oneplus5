@@ -1,0 +1,7 @@
+service wifi-mac-generator /system/bin/wifi-mac-generator
+    class main
+    user wifi
+    group wifi
+    oneshot
+    disabled
+    seclabel u:r:wifi_mac_generator:s0
