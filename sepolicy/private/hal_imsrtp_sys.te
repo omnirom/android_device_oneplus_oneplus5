@@ -1,0 +1,2 @@
+type hal_imsrtp_sys, domain;
+type hal_imsrtp_sys_exec, exec_type, vendor_file_type, file_type;

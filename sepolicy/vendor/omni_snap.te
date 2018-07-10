@@ -1,3 +1,0 @@
-type omni_snap, domain, coredomain;
-app_domain(omni_snap)
-net_domain(omni_snap)
