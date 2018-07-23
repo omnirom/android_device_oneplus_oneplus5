@@ -80,7 +80,7 @@
   <string name="category_fp_long_press_gesture">Pressão longa no sensor de impressões digitais</string>
   <string name="fp_swipe_down_switch_summary_head">Deslizar para baixo no sensor de impressões digitais abre o painel de notificações por defeito</string>
   <string name="fp_swipe_down_switch_title_head">Gesto de deslizar para baixo no sensor de impressões digitais</string>
-  <string name="doze_category_title">Visualização de ambiente</string>
+  <string name="doze_category_title">Visualização ambiente</string>
   <string name="doze_category_summary">Acordar o ecrã quando receber notificações</string>
   <string name="wave_check_summary">Mostrar notificações ao passar a mão</string>
   <string name="wave_check_title">Passar a mão</string>
@@ -88,7 +88,7 @@
   <string name="tilt_check_title">Levantar</string>
   <string name="pocket_check_summary">Mostrar notificações ao retirar do bolso</string>
   <string name="pocket_check_title">Bolso</string>
-  <string name="ambient_display_enable">A visualização de ambiente tem de estar ativada nas definições de ecrã</string>
+  <string name="ambient_display_enable">A visualização ambiente tem de estar ativada nas definições do ecrã</string>
   <string name="panel_category_title">Modos do painel</string>
   <string name="panel_category_summary">Modos para correção de cor do painel</string>
   <string name="off_mode_title">Desligado</string>

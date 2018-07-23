@@ -30,7 +30,7 @@
   <string name="graphics_title">Gràfics</string>
   <string name="srgb_mode_title">Mode sRGB</string>
   <string name="hbm_mode_title">Mode de brillantor alta</string>
-  <string name="proxi_summary_head">Comprova el sensor de proximitat per a la gestió dels gestos i del sensor d\'empremta digital</string>
+  <string name="proxi_summary_head">Comprova el sensor de proximitat per a la gestió dels gests i del sensor d\'empremta digital</string>
   <string name="proxi_title_head">Comprovació de proximitat</string>
   <string name="off_screen_gesture_feedback_summary_head">Habilita la resposta hàptica per als gests</string>
   <string name="off_screen_gesture_feedback_title_head">Resposta Hàptica</string>
@@ -60,8 +60,8 @@
   <string name="music_play_entry">Reprodueix / atura la música</string>
   <string name="music_prev_entry">Pista prèvia</string>
   <string name="music_next_entry">Pista següent</string>
-  <string name="volume_up">Augmenta el volum</string>
-  <string name="volume_down">Redueix el volum</string>
+  <string name="volume_up">Eleva el volum</string>
+  <string name="volume_down">Baixa el volum</string>
   <string name="browse_scroll_up">Desplaçament amunt</string>
   <string name="browse_scroll_down">Desplaçament avall</string>
   <string name="navigate_back">Enrere</string>

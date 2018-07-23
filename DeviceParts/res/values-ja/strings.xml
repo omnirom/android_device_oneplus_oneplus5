@@ -78,7 +78,7 @@
   <string name="category_fp_right_swipe_gesture">指紋で右にスワイプ</string>
   <string name="category_fp_left_swipe_gesture">指紋で左にスワイプ</string>
   <string name="category_fp_long_press_gesture">指紋長押し</string>
-  <string name="fp_swipe_down_switch_summary_head">既定の指紋での通知下スワイプジェスチャー</string>
+  <string name="fp_swipe_down_switch_summary_head">デフォルトの指紋での通知下スワイプジェスチャー</string>
   <string name="fp_swipe_down_switch_title_head">指紋での下スワイプジェスチャー</string>
   <string name="doze_category_title">アンビエント表示</string>
   <string name="doze_category_summary">通知を受け取った時画面をスリープ解除する</string>
