@@ -5,4 +5,18 @@
         carrier="O2 UK"
         vmnumber="901"
         vmtag="Voicemail" />
+    <!-- Angela 20180419 add for Bouygues Telecom-->
+    <voicemail
+        numeric="20820"
+        carrier="Bouygues Telecom"
+        vmnumber="+33660660001"
+        vmtag="Voicemail" />
+    <!-- Angela 20180419 end -->
+    <!-- VENDOR_EDIT Brian+@20181025 start -->
+    <voicemail
+        numeric="22201"
+        carrier="TIM"
+        vmnumber="41919"
+        vmtag="Voicemail" />
+    <!-- VENDOR_EDIT Brian-@20181025 end -->
 </voicemail>
