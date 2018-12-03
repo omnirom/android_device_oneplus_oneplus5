@@ -1,0 +1,5 @@
+allow vendor_init fpc_images_file:dir { search setattr };
+
+allow vendor_init rootfs:dir write;
+allow vendor_init rootfs:lnk_file setattr;
+

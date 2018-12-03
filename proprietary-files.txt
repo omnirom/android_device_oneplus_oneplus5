@@ -159,7 +159,7 @@ etc/firmware/cpp_firmware_v1_4_0.fw
 etc/firmware/cpp_firmware_v1_2_0.fw
 
 # DASH
--sbin/dashd;rootfs
+#-sbin/dashd;rootfs
 
 # Fingerprint sensor
 lib64/hw/fingerprint.msm8998.so
@@ -241,7 +241,6 @@ etc/permissions/com.qualcomm.qti.imscmservice.xml
 etc/permissions/com.qti.snapdragon.sdk.display.xml
 etc/permissions/qti_permissions.xml
 etc/permissions/qti-vzw-ims-internal.xml
-etc/permissions/com.qti.dpmframework.xml
 etc/permissions/dpmapi.xml
 etc/sysconfig/qti_whitelist.xml
 lib/libstagefright_soft_qtiflacdec.so

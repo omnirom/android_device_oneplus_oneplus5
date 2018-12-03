@@ -1,10 +1,9 @@
 allow priv_app device:dir r_dir_perms;
 allow priv_app proc_interrupts:file { read open };
 allow priv_app proc_modules:file r_file_perms;
-allow priv_app zygote:dir search;
-allow priv_app zygote:file r_file_perms;
 
 
 allow priv_app fsck_exec:lnk_file getattr;
 allow priv_app unlabeled:file getattr;
 allow priv_app unlabeled:lnk_file getattr;
+

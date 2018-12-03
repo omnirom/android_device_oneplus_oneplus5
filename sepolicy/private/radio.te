@@ -1,0 +1,2 @@
+allow radio self:netlink_kobject_uevent_socket { read bind setopt };
+

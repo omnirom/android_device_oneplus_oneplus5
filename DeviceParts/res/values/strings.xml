@@ -41,7 +41,7 @@
     <string name="slider_mode_silent">Silent</string>
     <string name="slider_mode_priority">Priority only</string>
     <string name="slider_mode_alarm">Alarms only</string>
-    <string name="slider_mode_dnd">Total silence</string>
+    <string name="slider_mode_dnd">Do not disturb</string>
     <string name="slider_mode_title_top">Top position</string>
     <string name="slider_mode_title_center">Center position</string>
     <string name="slider_mode_title_bottom">Bottom position</string>
