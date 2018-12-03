@@ -287,3 +287,6 @@
 
 # Kmsg device
 /dev/kmsg                                               0620   root       system
+
+/dev/block/sda14            0600   system     system
+

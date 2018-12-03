@@ -1,0 +1,2 @@
+allow vendor_init fpc_images_file:dir { search setattr };
+

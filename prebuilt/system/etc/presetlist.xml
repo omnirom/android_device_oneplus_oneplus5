@@ -29,6 +29,8 @@
 	<pkg package="com.android.vending" flag="4096" action="1"/>
 	<pkg package="com.google.android.googlequicksearchbox" flag="4096" action="1"/>
 
+        <pkg package="com.vfuchongcontrol" flag="4096" action="1"/>
+
 	<pkg package="com.qiyi.video" flag="4096" action="2"/>
-	<pkg package="com.ruguoapp.jike" flag="0" action="2"/>
+	<pkg package="com.ruguoapp.jike" flag="4096" action="2"/>
 </prelist>

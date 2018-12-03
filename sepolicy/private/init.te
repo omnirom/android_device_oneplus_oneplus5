@@ -2,7 +2,6 @@
 allow init vendor_configs_file:file mounton;
 allow init vendor_overlay_file:file mounton;
 
-allow init sysfs:dir add_name;
 allow init sysfs:file create;
 
 allow init debugfs:dir mounton;
@@ -10,5 +9,6 @@ allow init debugfs:dir mounton;
 allow init system_file:system module_load;
 allow init vendor_file:file mounton;
 
-allow init proc:dir rw_dir_perms;
-allow init proc:file rw_file_perms;
+allow init sysfs_fpc_proximity:file setattr;
+allow init sysfs_graphics_omni:file setattr;
+

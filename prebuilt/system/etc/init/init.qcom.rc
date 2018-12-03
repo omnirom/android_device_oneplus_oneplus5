@@ -1,11 +1,12 @@
 on init
-    #stop power-hal-1-0
-
     mount none /system/etc/audio_policy_configuration_omni.xml /vendor/etc/audio_policy_configuration.xml bind
-    mount none /system/etc/audio_effects_omni.conf /vendor/etc/audio_effects.conf bind
     mount none /system/lib/modules/wlan.ko /vendor/lib/modules/qca_cld3_wlan.ko bind
     mount none /dev/null /vendor/overlay/SysuiDarkTheme/SysuiDarkThemeOverlay.apk bind
-    #mount none /system/etc/init/android.hardware.power@1.1-service.oneplus6.rc /vendor/etc/init/android.hardware.power@1.0-service.rc bind
+    mount none /system/lib/hw/lights.oneplus5.so /vendor/lib/hw/lights.msm8998.so bind
+    mount none /system/lib64/hw/lights.oneplus5.so /vendor/lib64/hw/lights.msm8998.so bind
+    mount none /system/lib/hw/power.oneplus5.so /vendor/lib/hw/power.qcom.so bind
+    mount none /system/lib64/hw/power.oneplus5.so /vendor/lib64/hw/power.qcom.so bind
+    mount none /dev/null /vendor/etc/init/android.hardware.health@2.0-service.rc bind
 
 on boot
    # default country code
@@ -20,3 +21,8 @@ on boot
     chown spi spi /dev/p61
     chmod 0666 /dev/dash/
 
+    chown system system /sys/devices/virtual/graphics/fb0/hbm
+    chmod 0660 /sys/devices/virtual/graphics/fb0/hbm
+
+on post-fs
+    setprop sys.usb.ffs.aio_compat 1
