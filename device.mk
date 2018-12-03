@@ -20,8 +20,25 @@
 # product configuration (apps).
 #
 $(call inherit-product, vendor/omni/config/phone-xxhdpi-4096-dalvik-heap.mk)
+$(call inherit-product, vendor/omni/config/phone-xxhdpi-2048-hwui-memory.mk)
 
-DEVICE_PACKAGE_OVERLAYS += device/oneplus/oneplus5/overlay/common
+#from build treble includes
+PRODUCT_COPY_FILES += \
+    system/core/rootdir/init.zygote64_32.rc:root/init.zygote64_32.rc \
+    system/core/rootdir/init.zygote32_64.rc:root/init.zygote32_64.rc
+
+TARGET_SUPPORTS_32_BIT_APPS := true
+TARGET_SUPPORTS_64_BIT_APPS := true
+
+# SP-NDK:
+PRODUCT_PACKAGES += \
+    libvulkan
+
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
+    ro.build.version.all_codenames=$(PLATFORM_VERSION_ALL_CODENAMES) \
+    ro.build.version.codename=$(PLATFORM_VERSION_CODENAME) \
+    ro.build.version.release=$(PLATFORM_VERSION) \
+    ro.build.version.sdk=$(PLATFORM_SDK_VERSION)
 
 PRODUCT_PACKAGES += \
     omni_charger_res_images
@@ -72,9 +89,11 @@ PRODUCT_COPY_FILES += \
 # NFC
 PRODUCT_PACKAGES += \
     com.android.nfc_extras \
-    nfc_nci.msm8998 \
-    NfcNci \
     Tag
+
+PRODUCT_PACKAGES += \
+    android.hardware.nfc@1.1 \
+    android.hardware.nfc@1.0
 
 PRODUCT_PACKAGES += \
     libwifi-hal-qcom \
@@ -161,11 +180,10 @@ PRODUCT_PACKAGES += \
     RcsService \
     PresencePolling
 
-PRODUCT_BOOT_JARS += \
+#PRODUCT_BOOT_JARS += \
     tcmiface \
-    WfdCommon
 
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     tcmiface
 
 # Netutils
@@ -188,6 +206,31 @@ PRODUCT_PACKAGES += \
     android.hidl.manager@1.0-java \
     android.hidl.base@1.0
 
+PRODUCT_PACKAGES += \
+    vndk_package
+
+# VNDK-SP
+PRODUCT_PACKAGES += \
+    vndk-sp
+
+PRODUCT_PACKAGES += \
+    vendor.display.config@1.0 \
+    vendor.display.config@1.1
+
+PRODUCT_PACKAGES += \
+    ld.config.txt
+
+# TODO(b/78308559): includes vr_hwc into GSI before vr_hwc move to vendor
+PRODUCT_PACKAGES += \
+    vr_hwc
+
+PRODUCT_PACKAGES += android.hardware.health@2.0-service.oneplus5
+DEVICE_FRAMEWORK_MANIFEST_FILE += \
+    system/libhidl/vintfdata/manifest_healthd_exclude.xml
+
+PRODUCT_PACKAGES += \
+    OmniDisplayManager
+
 # Audio:
 USE_XML_AUDIO_POLICY_CONF := 1
 # The following policy XML files are used as fallback for
@@ -201,8 +244,6 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/media_codecs_google_video.xml
-
-PRODUCT_PACKAGE_OVERLAYS += vendor/omni/overlay/CarrierConfig
 
 # Temporary handling
 #

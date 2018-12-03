@@ -1,0 +1,2 @@
+allow hal_bluetooth vendor_data_file:file getattr;
+

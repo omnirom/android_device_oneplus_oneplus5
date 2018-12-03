@@ -1,2 +1,1 @@
-allow vold vendor_file:file {open getattr read};
 

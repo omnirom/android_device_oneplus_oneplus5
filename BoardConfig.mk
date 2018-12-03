@@ -20,21 +20,19 @@
 #
 BOARD_PATH := device/oneplus/oneplus5
 
-PRODUCT_FULL_TREBLE := true
+PRODUCT_FULL_TREBLE := false
 BOARD_VNDK_VERSION := current
-BOARD_VNDK_RUNTIME_DISABLE := true
+BOARD_VNDK_RUNTIME_DISABLE := false
+PRODUCT_SEPOLICY_SPLIT := true
 PRODUCT_SHIPPING_API_LEVEL := 25
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_KERNEL := false
 TARGET_NO_RECOVERY := false
-BOARD_SEPOLICY_VERS := 30
 
 TARGET_NO_BOOTLOADER := true
 TARGET_OTA_ASSERT_DEVICE := oneplus5,oneplus5t,cheeseburger,dumpling
 TARGET_KERNEL_VERSION := 4.4
 TARGET_BOOTLOADER_BOARD_NAME := msm8998
-TARGET_KERNEL_CLANG_COMPILE := true
-TARGET_USE_SDCLANG := true
 
 # Platform
 TARGET_BOARD_PLATFORM := msm8998
@@ -48,7 +46,7 @@ TARGET_CPU_ABI2 :=
 TARGET_CPU_VARIANT := kryo
 
 TARGET_2ND_ARCH := arm
-TARGET_2ND_ARCH_VARIANT := armv7-a-neon
+TARGET_2ND_ARCH_VARIANT := armv8-a
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := kryo
@@ -60,14 +58,14 @@ TARGET_COMPILE_WITH_MSM_KERNEL := true
 ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
 
-BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 sched_enable_hmp=1 sched_enable_power_aware=1 service_locator.enable=1 swiotlb=2048 androidboot.usbcontroller=a800000.dwc3
-BOARD_KERNEL_CMDLINE += androidboot.configfs=true
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 sched_enable_hmp=1 sched_enable_power_aware=1 service_locator.enable=1 swiotlb=2048 androidboot.usbconfigfs=true androidboot.usbcontroller=a800000.dwc3 firmware_class.path=/vendor/firmware_mnt/image loop.max_part=7 androidboot.configfs=true
 #BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_TAGS_OFFSET := 0x01E00000
 BOARD_RAMDISK_OFFSET     := 0x02000000
-BOARD_ROOT_EXTRA_FOLDERS := bt_firmware firmware firmware/radio persist
+BOARD_ROOT_EXTRA_FOLDERS := oem
+BOARD_ROOT_EXTRA_SYMLINKS := /vendor/bt_firmware:/bt_firmware /vendor/dsp:/dsp /vendor/firmware_mnt:/firmware /mnt/vendor/persist:/persist
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
@@ -102,20 +100,17 @@ TARGET_USES_HWC2 := true
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 
 # TODO(b/35790399): remove when b/35790399 is fixed.
-BOARD_NAND_SPARE_SIZE := 0
 BOARD_FLASH_BLOCK_SIZE := 512
 
 # audio effects
 TARGET_SYSTEM_AUDIO_EFFECTS := true
 
-# Camera
-TARGET_USES_QTI_CAMERA2CLIENT := true
-USE_CAMERA_STUB := true
-TARGET_USES_MEDIA_EXTENSIONS := false
-BOARD_USES_SNAPDRAGONCAMERA_VERSION := 2
+# Enable DRM plugins 64 bit compilation
+TARGET_ENABLE_MEDIADRM_64 := true
 
-#Media
-TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
+# Camera
+USE_CAMERA_STUB := true
+BOARD_USES_SNAPDRAGONCAMERA_VERSION := 2
 
 # Disable secure discard because it's SLOW
 BOARD_SUPPRESS_SECURE_ERASE := true
@@ -182,7 +177,7 @@ BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
 
 # Crypto
 TARGET_HW_DISK_ENCRYPTION := true
-TARGET_CRYPTFS_HW_PATH := $(BOARD_PATH)/cryptfs_hw
+TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/commonsys/cryptfs_hw
 
 #vold
 TARGET_KERNEL_HAVE_NTFS := true
@@ -191,6 +186,18 @@ TARGET_EXFAT_DRIVER := exfat
 # CNE and DPM
 #TARGET_LDPRELOAD := libNimsWrap.so
 BOARD_USES_QCNE := true
+
+USE_CUSTOM_AUDIO_POLICY := true
+AUDIO_FEATURE_ENABLED_VOICE_CONCURRENCY := true
+AUDIO_FEATURE_ENABLED_RECORD_PLAY_CONCURRENCY := true
+AUDIO_FEATURE_ENABLED_PCM_OFFLOAD := true
+AUDIO_FEATURE_ENABLED_PCM_OFFLOAD_24 := true
+AUDIO_FEATURE_ENABLED_EXTN_FORMATS := true
+AUDIO_FEATURE_ENABLED_AAC_ADTS_OFFLOAD := true
+AUDIO_FEATURE_ENABLED_HDMI_SPK := true
+AUDIO_FEATURE_ENABLED_PROXY_DEVICE := true
+USE_XML_AUDIO_POLICY_CONF := 1
+AUDIO_FEATURE_ENABLED_COMPRESS_VOIP := true
 
 # selinux
 include device/qcom/sepolicy/sepolicy.mk
