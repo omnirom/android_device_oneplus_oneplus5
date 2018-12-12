@@ -85,10 +85,10 @@
             android:key="dci"
             android:summary="@string/dci_mode_summary"
             android:title="@string/dci_mode_title" />-->
-        <SwitchPreference
+<!--        <SwitchPreference
             android:key="hbm"
             android:summary="@string/hbm_mode_summary"
-            android:title="@string/hbm_mode_title" />
+            android:title="@string/hbm_mode_title" /> -->
         <!--<SwitchPreference
             android:key="night"
             android:summary="@string/Night_mode_summary"
