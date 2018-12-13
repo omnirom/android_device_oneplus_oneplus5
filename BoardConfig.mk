@@ -177,7 +177,7 @@ BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
 
 # Crypto
 TARGET_HW_DISK_ENCRYPTION := true
-#TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/commonsys/cryptfs_hw
+TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/commonsys/cryptfs_hw
 
 #vold
 TARGET_KERNEL_HAVE_NTFS := true
