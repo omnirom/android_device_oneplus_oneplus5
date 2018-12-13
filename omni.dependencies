@@ -16,5 +16,17 @@
     "repository": "android_kernel_oneplus_msm8998",
     "target_path": "kernel/oneplus/msm8998",
     "revision": "android-9.0"
+  },
+  {
+    "remote": "omnirom",
+    "repository": "android_vendor_qcom_opensource_interfaces",
+    "target_path": "vendor/qcom/opensource/interfaces",
+    "revision": "android-9.0"
+  },
+  {
+    "remote": "omnirom",
+    "repository": "android_packages_apps_OmniDisplayManager",
+    "target_path": "packages/apps/OmniDisplayManager",
+    "revision": "android-9.0"
   }
 ]
