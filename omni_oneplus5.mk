@@ -65,5 +65,4 @@ PLATFORM_SECURITY_PATCH_OVERRIDE := 2018-11-01
 
 TARGET_VENDOR := oneplus
 
-$(call inherit-product, vendor/oneplus/oneplus5/device-vendor.mk)
 
