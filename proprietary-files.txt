@@ -150,7 +150,7 @@ lib/libwfduibcinterface.so
 lib/libwfdcommonutils.so
 lib64/libwfdnative.so
 lib64/libwfdclient.so
-framework/WfdCommon.jar
+-framework/WfdCommon.jar
 -priv-app/WfdService/WfdService.apk
 lib/libnl.so
 lib/libdisplayconfig.so
