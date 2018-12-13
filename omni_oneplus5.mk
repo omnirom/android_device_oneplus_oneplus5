@@ -44,6 +44,7 @@ $(call inherit-product, vendor/omni/config/common.mk)
 
 # Inherit from hardware-specific part of the product configuration
 $(call inherit-product, device/oneplus/oneplus5/device.mk)
+$(call inherit-product, vendor/oneplus/oneplus5/device-vendor.mk)
 
 ALLOW_MISSING_DEPENDENCIES := true
 
