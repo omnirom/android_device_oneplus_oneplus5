@@ -49,7 +49,7 @@ public class DeviceSettings extends PreferenceFragment implements
     private static final String KEY_CATEGORY_GRAPHICS = "graphics";
 
     public static final String KEY_SRGB_SWITCH = "srgb";
-    public static final String KEY_HBM_SWITCH = "hbm";
+    //public static final String KEY_HBM_SWITCH = "hbm";
     public static final String KEY_PROXI_SWITCH = "proxi";
     public static final String KEY_DCI_SWITCH = "dci";
     public static final String KEY_NIGHT_SWITCH = "night";
@@ -60,7 +60,7 @@ public class DeviceSettings extends PreferenceFragment implements
     private ListPreference mSliderModeTop;
     private ListPreference mSliderModeCenter;
     private ListPreference mSliderModeBottom;
-    private static TwoStatePreference mHBMModeSwitch;
+    //private static TwoStatePreference mHBMModeSwitch;
     private PreferenceCategory buttonCategory;
 
 
@@ -94,10 +94,10 @@ public class DeviceSettings extends PreferenceFragment implements
         mSliderModeBottom.setValueIndex(valueIndex);
         mSliderModeBottom.setSummary(mSliderModeBottom.getEntries()[valueIndex]);
 
-        mHBMModeSwitch = (TwoStatePreference) findPreference(KEY_HBM_SWITCH);
-        mHBMModeSwitch.setEnabled(HBMModeSwitch.isSupported());
-        mHBMModeSwitch.setChecked(HBMModeSwitch.isCurrentlyEnabled(this.getContext()));
-        mHBMModeSwitch.setOnPreferenceChangeListener(new HBMModeSwitch());
+        //mHBMModeSwitch = (TwoStatePreference) findPreference(KEY_HBM_SWITCH);
+        //mHBMModeSwitch.setEnabled(HBMModeSwitch.isSupported());
+        //mHBMModeSwitch.setChecked(HBMModeSwitch.isCurrentlyEnabled(this.getContext()));
+        //mHBMModeSwitch.setOnPreferenceChangeListener(new HBMModeSwitch());
     }
 
     @Override
