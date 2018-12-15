@@ -39,7 +39,9 @@ PRODUCT_SYSTEM_DEFAULT_PROPERTIES += \
     ro.build.version.sdk=$(PLATFORM_SDK_VERSION)
 
 PRODUCT_PACKAGES += \
-    omni_charger_res_images
+    omni_charger_res_images \
+    animation.txt \
+    font_charger.png
 
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
