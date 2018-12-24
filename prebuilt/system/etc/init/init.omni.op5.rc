@@ -115,6 +115,10 @@ on boot
 
     setprop vendor.camera.aux.packagelist "org.omnirom.snap"
     setprop camera.hal1.packagelist "none"
+    
+    # Swap Hardware Keys
+    chown system system /proc/s1302/key_rep
+    chmod 0660 /proc/s1302/key_rep
 
 on post-fs
     # Vibrator
