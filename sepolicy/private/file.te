@@ -6,5 +6,6 @@ type proc_fingerprint, fs_type;
 type sysfs_fpc_proximity, sysfs_type, fs_type;
 type nv_data_file, file_type;
 type sysfs_graphics_omni, sysfs_type, fs_type;
+type proc_key_rep, proc_type, fs_type;
 
 type debugfs_wlan, debugfs_type, fs_type;
