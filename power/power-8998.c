@@ -29,6 +29,7 @@
 #define LOG_NIDEBUG 0
 
 #include <errno.h>
+#include <time.h>
 #include <string.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -52,6 +53,14 @@
 
 #define CHECK_HANDLE(x) ((x)>0)
 #define NUM_PERF_MODES  3
+
+#define UNUSED(data) (void) data
+#define USINSEC 1000000L
+#define NSINUS 1000L
+
+const int kMaxInteractiveDuration = 3500; /* ms */
+const int kMinInteractiveDuration = 100; /* ms */
+const int kMinFlingDuration = 1500; /* ms */
 
 typedef enum {
     NORMAL_MODE       = 0,
@@ -194,6 +203,66 @@ static int process_video_encode_hint(void *metadata)
     return HINT_NONE;
 }
 
+static int process_activity_launch_hint(void *UNUSED)
+{
+    if (current_mode != NORMAL_MODE) {
+        ALOGV("%s: ignoring due to other active perf hints", __func__);
+    } else {
+        perf_hint_enable_with_type(VENDOR_HINT_FIRST_LAUNCH_BOOST, -1, LAUNCH_BOOST_V1);
+    }
+    return HINT_HANDLED;
+}
+
+/* Declare function before use */
+static long long calc_timespan_us(struct timespec start, struct timespec end) {
+    long long diff_in_us = 0;
+    diff_in_us += (end.tv_sec - start.tv_sec) * USINSEC;
+    diff_in_us += (end.tv_nsec - start.tv_nsec) / NSINUS;
+    return diff_in_us;
+}
+
+static int process_interaction_hint(void *data)
+{
+    static struct timespec s_previous_boost_timespec;
+    static int s_previous_duration = 0;
+
+    struct timespec cur_boost_timespec;
+    int duration = kMinInteractiveDuration;
+
+    if (current_mode != NORMAL_MODE) {
+        ALOGV("%s: ignoring due to other active perf hints", __func__);
+        return HINT_HANDLED;
+    }
+
+    if (data) {
+        int input_duration = *((int*)data);
+        if (input_duration > duration) {
+            duration = (input_duration > kMaxInteractiveDuration) ?
+                    kMaxInteractiveDuration : input_duration;
+        }
+    }
+
+    clock_gettime(CLOCK_MONOTONIC, &cur_boost_timespec);
+
+    long long elapsed_time = calc_timespan_us(s_previous_boost_timespec, cur_boost_timespec);
+    // don't hint if previous hint's duration covers this hint's duration
+    if ((s_previous_duration * 1000) > (elapsed_time + duration * 1000)) {
+        return HINT_HANDLED;
+    }
+    s_previous_boost_timespec = cur_boost_timespec;
+    s_previous_duration = duration;
+
+    if (duration >= kMinFlingDuration) {
+        perf_hint_enable_with_type(VENDOR_HINT_SCROLL_BOOST, -1, SCROLL_PREFILING);
+    } else {
+        perf_hint_enable_with_type(VENDOR_HINT_SCROLL_BOOST, duration, SCROLL_VERTICAL);
+    }
+    return HINT_HANDLED;
+}
+
+/* Declare function before use */
+//void interaction(int duration, int num_args, int opt_list[]);
+
 int power_hint_override(struct power_module *module, power_hint_t hint, void *data)
 {
     int ret_val = HINT_NONE;
@@ -208,12 +277,11 @@ int power_hint_override(struct power_module *module, power_hint_t hint, void *da
             ret_val = process_perf_hint(data, VR_MODE);
             break;
         case POWER_HINT_INTERACTION:
-            pthread_mutex_lock(&perf_mode_switch_lock);
-            if (current_mode != NORMAL_MODE) {
-                ret_val = HINT_HANDLED;
-            }
-            pthread_mutex_unlock(&perf_mode_switch_lock);
+            ret_val = process_interaction_hint(data);
             break;
+        case POWER_HINT_LAUNCH:
+            ret_val = process_activity_launch_hint(data);
+        break;
         default:
             break;
     }
