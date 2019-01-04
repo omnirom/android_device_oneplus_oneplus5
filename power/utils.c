@@ -33,13 +33,14 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 #include "utils.h"
 #include "list.h"
 #include "hint-data.h"
 #include "power-common.h"
 
-#define LOG_TAG "QCOM PowerHAL"
+#define LOG_TAG "QTI PowerHAL"
 #include <utils/Log.h>
 
 char scaling_gov_path[4][80] ={

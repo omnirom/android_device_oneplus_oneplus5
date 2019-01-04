@@ -36,10 +36,9 @@
 #include <fcntl.h>
 #include <dlfcn.h>
 #include <stdlib.h>
+#include <unistd.h>
 
-#define LOG_TAG "Omni PowerHAL"
-#define DOUBLE_TAP_FILE "/proc/touchpanel/double_tap_enable"
-
+#define LOG_TAG "QTI PowerHAL"
 #include <utils/Log.h>
 #include <hardware/hardware.h>
 #include <hardware/power.h>
@@ -50,6 +49,8 @@
 #include "performance.h"
 #include "power-common.h"
 
+#define DOUBLE_TAP_FILE "/proc/touchpanel/double_tap_enable"
+
 static int saved_dcvs_cpu0_slack_max = -1;
 static int saved_dcvs_cpu0_slack_min = -1;
 static int saved_mpdecision_slack_max = -1;
@@ -58,6 +59,13 @@ static int saved_interactive_mode = -1;
 static int slack_node_rw_failed = 0;
 static int display_hint_sent;
 int display_boost;
+
+void set_feature(struct power_module __unused *module, feature_t feature, int state) {
+    if (feature == POWER_FEATURE_DOUBLE_TAP_TO_WAKE) {
+        ALOGI("%s POWER_FEATURE_DOUBLE_TAP_TO_WAKE %s", __func__, (state ? "ON" : "OFF"));
+        sysfs_write(DOUBLE_TAP_FILE, state ? "1" : "0");
+    }
+}
 
 static int power_device_open(const hw_module_t* module, const char* name,
         hw_device_t** device);
@@ -68,7 +76,7 @@ static struct hw_module_methods_t power_module_methods = {
 
 static void power_init(struct power_module *module)
 {
-    ALOGI("QCOM power HAL initing.");
+    ALOGI("QTI power HAL initing.");
 
     int fd;
     char buf[10] = {0};
@@ -455,13 +463,6 @@ void set_interactive(struct power_module *module, int on)
     saved_interactive_mode = !!on;
 }
 
-void set_feature(struct power_module __unused *module, feature_t feature, int state) {
-    if (feature == POWER_FEATURE_DOUBLE_TAP_TO_WAKE) {
-        ALOGI("%s POWER_FEATURE_DOUBLE_TAP_TO_WAKE %s", __func__, (state ? "ON" : "OFF"));
-        sysfs_write(DOUBLE_TAP_FILE, state ? "1" : "0");
-    }
-}
-
 static int power_device_open(const hw_module_t* module, const char* name,
         hw_device_t** device)
 {
@@ -506,8 +507,8 @@ struct power_module HAL_MODULE_INFO_SYM = {
         .module_api_version = POWER_MODULE_API_VERSION_0_2,
         .hal_api_version = HARDWARE_HAL_API_VERSION,
         .id = POWER_HARDWARE_MODULE_ID,
-        .name = "QCOM Power HAL",
-        .author = "Qualcomm",
+        .name = "QTI Power HAL",
+        .author = "QTI",
         .methods = &power_module_methods,
     },
 
