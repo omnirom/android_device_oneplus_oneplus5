@@ -101,25 +101,12 @@ public class DeviceSettings extends PreferenceFragment implements
         mSliderModeBottom.setValueIndex(valueIndex);
         mSliderModeBottom.setSummary(mSliderModeBottom.getEntries()[valueIndex]);
 
-        mHWKSwitch = (TwoStatePreference) findPreference(KEY_HWK_SWITCH);
         if (!sIsOnePlus5t) {
-            mContext = this.getContext();
-            mHWKSwitch.setEnabled(true);
-            SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
-            mHWKSwitch.setChecked(sharedPrefs.getBoolean(DeviceSettings.KEY_HWK_SWITCH, false));
+            mHWKSwitch.setEnabled(HWKSwitch.isSupported());
             mHWKSwitch.setOnPreferenceChangeListener(new HWKSwitch());
-
         } else {
             mHWKSwitch.setVisible(false);
         }
-    }
-
-    public static void setHWKSwitchValue() {
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(mContext).edit();
-        Boolean enabled = HWKSwitch.isCurrentlyEnabled();
-        editor.putBoolean(DeviceSettings.KEY_HWK_SWITCH, enabled);
-        editor.commit();
     }
 
     @Override
