@@ -19,13 +19,16 @@ package org.omnirom.device;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.res.Resources;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v14.preference.PreferenceFragment;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.TwoStatePreference;
 import android.provider.Settings;
@@ -58,6 +61,7 @@ public class DeviceSettings extends PreferenceFragment implements
     public static final String SLIDER_DEFAULT_VALUE = "2,1,0";
 
     private static final boolean sIsOnePlus5t = android.os.Build.DEVICE.equals("OnePlus5T");
+    public static final String KEY_SWAP_SWITCH = "kws";
 
     private VibratorStrengthPreference mVibratorStrength;
     private ListPreference mSliderModeTop;
@@ -65,6 +69,7 @@ public class DeviceSettings extends PreferenceFragment implements
     private ListPreference mSliderModeBottom;
     private static TwoStatePreference mHWKSwitch;
     private PreferenceCategory buttonCategory;
+    private static Context mContext;
 
 
     @Override
@@ -99,12 +104,23 @@ public class DeviceSettings extends PreferenceFragment implements
 
         mHWKSwitch = (TwoStatePreference) findPreference(KEY_HWK_SWITCH);
         if (!sIsOnePlus5t) {
+            mContext = this.getContext();
             mHWKSwitch.setEnabled(true);
-            mHWKSwitch.setChecked(HWKSwitch.isCurrentlyEnabled(this.getContext()));
+            SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+            mHWKSwitch.setChecked(sharedPrefs.getBoolean(DeviceSettings.KEY_HWK_SWITCH, false));
             mHWKSwitch.setOnPreferenceChangeListener(new HWKSwitch());
+            
         } else {
             mHWKSwitch.setVisible(false);
         }
+    }
+
+    public static void setHWKSwitchValue() {
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(mContext).edit();
+        Boolean enabled = HWKSwitch.isCurrentlyEnabled();
+        editor.putBoolean(DeviceSettings.KEY_HWK_SWITCH, enabled);
+        editor.commit();
     }
 
     @Override

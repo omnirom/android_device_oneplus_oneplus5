@@ -22,7 +22,6 @@ import android.content.SharedPreferences;
 import android.os.SystemProperties;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
-import android.support.v7.preference.PreferenceManager;
 import org.omnirom.device.DeviceSettings;
 
 public class HWKSwitch implements OnPreferenceChangeListener {
@@ -40,7 +39,7 @@ public class HWKSwitch implements OnPreferenceChangeListener {
         return Utils.fileWritable(getFile());
     }
 
-    public static boolean isCurrentlyEnabled(Context context) {
+    public static boolean isCurrentlyEnabled() {
         return Utils.getFileValueAsBoolean(getFile(), false);
     }
 
@@ -48,6 +47,7 @@ public class HWKSwitch implements OnPreferenceChangeListener {
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         Boolean enabled = (Boolean) newValue;
         Utils.writeValue(getFile(), enabled ? "1" : "0");
+        DeviceSettings.setHWKSwitchValue();
         return true;
     }
 }
