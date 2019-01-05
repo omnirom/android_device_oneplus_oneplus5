@@ -108,18 +108,9 @@ public class DeviceSettings extends PreferenceFragment implements
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
             mHWKSwitch.setChecked(sharedPrefs.getBoolean(DeviceSettings.KEY_HWK_SWITCH, false));
             mHWKSwitch.setOnPreferenceChangeListener(new HWKSwitch());
-
         } else {
             mHWKSwitch.setVisible(false);
         }
-    }
-
-    public static void setHWKSwitchValue() {
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(mContext).edit();
-        Boolean enabled = HWKSwitch.isCurrentlyEnabled();
-        editor.putBoolean(DeviceSettings.KEY_HWK_SWITCH, enabled);
-        editor.commit();
     }
 
     @Override
