@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d76097b5_178f97b2",
+        "filename": "DeviceParts/src/org/omnirom/device/Startup.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-01-05T11:26:15Z",
+      "side": 1,
+      "message": "must be\n\u003cremove the if enabled\u003e\nUtils.writeValue(file, enabled ? \"1\" : \"0\");",
+      "revId": "1707dd003d1ed7670e459ff2d7bc3aa7968f8075",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c29f05b6_32405c21",
+        "filename": "DeviceParts/src/org/omnirom/device/Startup.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-01-05T11:26:15Z",
+      "side": 1,
+      "message": "delete",
+      "revId": "1707dd003d1ed7670e459ff2d7bc3aa7968f8075",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "93f96f7b_bb48c762",
+        "filename": "DeviceParts/src/org/omnirom/device/Startup.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-01-05T11:26:15Z",
+      "side": 1,
+      "message": "delete",
+      "revId": "1707dd003d1ed7670e459ff2d7bc3aa7968f8075",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "711e78a4_fd65c734",
+        "filename": "DeviceParts/src/org/omnirom/device/Startup.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-01-05T11:26:15Z",
+      "side": 1,
+      "message": "delete",
+      "revId": "1707dd003d1ed7670e459ff2d7bc3aa7968f8075",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "67488f3e_567b32fd",
+        "filename": "DeviceParts/src/org/omnirom/device/Startup.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000026
+      },
+      "writtenOn": "2019-01-05T11:26:15Z",
+      "side": 1,
+      "message": "delete",
+      "revId": "1707dd003d1ed7670e459ff2d7bc3aa7968f8075",
+      "serverId": "56841c99-7c94-43d4-bf0b-cb4707e66d55",
+      "unresolved": true
+    }
+  ]
+}
