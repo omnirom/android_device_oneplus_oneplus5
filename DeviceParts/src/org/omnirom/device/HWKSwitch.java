@@ -47,7 +47,6 @@ public class HWKSwitch implements OnPreferenceChangeListener {
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         Boolean enabled = (Boolean) newValue;
         Utils.writeValue(getFile(), enabled ? "1" : "0");
-        DeviceSettings.setHWKSwitchValue();
         return true;
     }
 }
