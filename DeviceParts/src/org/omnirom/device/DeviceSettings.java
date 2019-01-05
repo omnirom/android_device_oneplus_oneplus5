@@ -61,7 +61,6 @@ public class DeviceSettings extends PreferenceFragment implements
     public static final String SLIDER_DEFAULT_VALUE = "2,1,0";
 
     private static final boolean sIsOnePlus5t = android.os.Build.DEVICE.equals("OnePlus5T");
-    public static final String KEY_SWAP_SWITCH = "kws";
 
     private VibratorStrengthPreference mVibratorStrength;
     private ListPreference mSliderModeTop;
@@ -109,7 +108,7 @@ public class DeviceSettings extends PreferenceFragment implements
             SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
             mHWKSwitch.setChecked(sharedPrefs.getBoolean(DeviceSettings.KEY_HWK_SWITCH, false));
             mHWKSwitch.setOnPreferenceChangeListener(new HWKSwitch());
-            
+
         } else {
             mHWKSwitch.setVisible(false);
         }

@@ -26,7 +26,7 @@ import android.provider.Settings;
 import android.text.TextUtils;
 
 public class Startup extends BroadcastReceiver {
-    
+
     private static final boolean sIsOnePlus5t = android.os.Build.DEVICE.equals("OnePlus5T");
 
     private void restore(String file, boolean enabled) {
@@ -125,7 +125,7 @@ public class Startup extends BroadcastReceiver {
             enabled = sharedPrefs.getBoolean(DeviceSettings.KEY_HWK_SWITCH, false);
             SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
             editor.putBoolean(DeviceSettings.KEY_HWK_SWITCH, enabled);
-            editor.commit();           
+            editor.commit();
             Utils.writeValue(HWKSwitch.getFile(), enabled ? "1" : "0");
             restore(HWKSwitch.getFile(), enabled);
         }
