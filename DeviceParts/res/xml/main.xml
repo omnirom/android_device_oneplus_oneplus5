@@ -72,6 +72,11 @@
             android:summary="@string/swap_back_recents_summary"
             android:title="@string/swap_back_recents_title"
             android:persistent="true" />
+        <SwitchPreference
+            android:key="swap"
+            android:summary="@string/remap_keys_summary"
+            android:title="@string/remap_keys_title"
+            android:persistent="true" />
     </PreferenceCategory>
 
     <PreferenceCategory

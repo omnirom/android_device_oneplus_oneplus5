@@ -27,6 +27,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.support.v7.preference.PreferenceManager;
 import android.database.ContentObserver;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -68,8 +70,8 @@ import com.android.internal.statusbar.IStatusBarService;
 public class KeyHandler implements DeviceKeyHandler {
 
     private static final String TAG = "KeyHandler";
-    private static final boolean DEBUG = false;
-    private static final boolean DEBUG_SENSOR = false;
+    private static final boolean DEBUG = true;
+    private static final boolean DEBUG_SENSOR = true;
 
     protected static final int GESTURE_REQUEST = 1;
     private static final int GESTURE_WAKELOCK_DURATION = 2000;
@@ -150,7 +152,7 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final int[] sHandledGestures = new int[]{
         KEY_SLIDER_TOP,
         KEY_SLIDER_CENTER,
-        KEY_SLIDER_BOTTOM
+        KEY_SLIDER_BOTTOM,
     };
 
     private static final int[] sProxiCheckedGestures = new int[]{
@@ -189,6 +191,8 @@ public class KeyHandler implements DeviceKeyHandler {
     private boolean mFPcheck;
     private boolean mDispOn;
     private boolean isFpgesture;
+    private boolean mRemapDisabled;
+    private SharedPreferences sharedPrefs;
 
     private SensorEventListener mProximitySensor = new SensorEventListener() {
         @Override
@@ -309,6 +313,7 @@ public class KeyHandler implements DeviceKeyHandler {
         mSensorManager = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
         mTiltSensor = getSensor(mSensorManager, "com.oneplus.sensor.pickup");
         mPocketSensor = getSensor(mSensorManager, "com.oneplus.sensor.pocket");
+        sharedPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
         IntentFilter screenStateFilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
         screenStateFilter.addAction(Intent.ACTION_SCREEN_OFF);
         mContext.registerReceiver(mScreenStateReceiver, screenStateFilter);
@@ -326,6 +331,8 @@ public class KeyHandler implements DeviceKeyHandler {
             return false;
         }
         isFpgesture = false;
+        Boolean mRemapKeys = sharedPrefs.getBoolean(DeviceSettings.KEY_SWAP_SWITCH, false);
+        Log.i(TAG, "RemapKey mRemapKeys=" + mRemapKeys);
         boolean isKeySupported = ArrayUtils.contains(sHandledGestures, event.getScanCode());
         if (isKeySupported) {
             if (DEBUG) Log.i(TAG, "scanCode=" + event.getScanCode());
@@ -357,6 +364,21 @@ public class KeyHandler implements DeviceKeyHandler {
                     if (DEBUG) Log.i(TAG, "intent = " + intent);
                     mContext.startActivity(intent);
             }
+        }
+        Log.i(TAG, "RemapKey=" + event.getKeyCode());
+        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {      
+            Log.i(TAG, "RemapKey=" + event.getKeyCode());
+            if (mRemapKeys) {
+                event = KeyEvent.changeAction(event, KeyEvent.KEYCODE_APP_SWITCH);
+                OmniUtils.sendKeycode(KeyEvent.KEYCODE_APP_SWITCH);
+            }
+        }
+        if (event.getKeyCode() == KeyEvent.KEYCODE_APP_SWITCH) {
+            Log.i(TAG, "RemapKey=" + event.getKeyCode());
+            if (mRemapKeys) {
+                event = KeyEvent.changeAction(event, KeyEvent.KEYCODE_BACK);
+                OmniUtils.sendKeycode(KeyEvent.KEYCODE_BACK);
+            }  
         }
         return isKeySupported;
     }

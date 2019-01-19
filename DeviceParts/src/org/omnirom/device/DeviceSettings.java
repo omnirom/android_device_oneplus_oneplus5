@@ -57,6 +57,7 @@ public class DeviceSettings extends PreferenceFragment implements
     public static final String KEY_PROXI_SWITCH = "proxi";
     public static final String KEY_DCI_SWITCH = "dci";
     public static final String KEY_NIGHT_SWITCH = "night";
+    public static final String KEY_SWAP_SWITCH = "swap";
 
     public static final String SLIDER_DEFAULT_VALUE = "2,1,0";
 
@@ -67,6 +68,7 @@ public class DeviceSettings extends PreferenceFragment implements
     private ListPreference mSliderModeCenter;
     private ListPreference mSliderModeBottom;
     private static TwoStatePreference mHWKSwitch;
+    private static TwoStatePreference mRemapSwitch;
     private PreferenceCategory buttonCategory;
     private static Context mContext;
 
@@ -108,6 +110,9 @@ public class DeviceSettings extends PreferenceFragment implements
         } else {
             mHWKSwitch.setVisible(false);
         }
+        
+        mRemapSwitch = (TwoStatePreference) findPreference(KEY_SWAP_SWITCH);
+        //mRemapSwitch.setOnPreferenceChangeListener(this);
     }
 
     @Override
