@@ -92,7 +92,7 @@ lib/lib-imsvtutils.so
 lib64/lib-imsvideocodec.so
 lib/lib-imsvideocodec.so
 lib64/lib-imsvt.so
--app/ims/ims.apk|1aab8ee5e3b81f9534a034b4e0fa2b1a857ac05b
+-priv-app/ims/ims.apk
 -app/imssettings/imssettings.apk
 lib64/lib-imscamera.so
 lib64/libimscamera_jni.so
