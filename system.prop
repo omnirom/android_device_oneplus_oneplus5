@@ -347,4 +347,4 @@ persist.rcs.supported=0
 persist.vendor.radio.add_power_save=true
 debug.sf.enable_hwc_vds=1
 
-vendor.camera.hal1.packagelist="com.whatsapp"
+vendor.camera.hal1.packagelist=com.whatsapp
