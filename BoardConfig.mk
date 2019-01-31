@@ -212,7 +212,10 @@ BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(BOARD_PATH)/sepolicy/private
 
 BOARD_SECCOMP_POLICY += $(BOARD_PATH)/seccomp_policy
 
+ifeq ($(TARGET_DEVICE),oneplus5)
 TARGET_SYSTEM_PROP := $(BOARD_PATH)/system.prop
+endif
+
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 
 # for offmode charging

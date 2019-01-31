@@ -9,6 +9,8 @@ on init
     mount none /system/lib64/hw/power.oneplus5.so /vendor/lib64/hw/power.qcom.so bind
     mount none /dev/null /vendor/etc/init/android.hardware.health@2.0-service.rc bind
 
+    setprop vendor.boot.project_name ${ro.boot.project_name}
+
 on boot
    # default country code
    setprop ro.boot.wificountrycode 00
