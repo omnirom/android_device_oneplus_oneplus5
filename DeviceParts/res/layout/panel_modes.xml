@@ -23,6 +23,21 @@ limitations under the License
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd" >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/panel_mode_preview"
+            android:contentDescription="@null" />
+    </LinearLayout>
+
     <RadioGroup
         android:id="@+id/radio_group"
         android:layout_width="match_parent"
