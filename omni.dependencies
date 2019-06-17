@@ -38,6 +38,12 @@
   },
   {
     "remote": "omnirom",
+    "repository": "android_hardware_qcom_display-caf-msm8998",
+    "target_path": "hardware/qcom/display-caf-msm8998",
+    "revision": "android-9.0"
+  },
+  {
+    "remote": "omnirom",
     "repository": "android_packages_apps_OmniDisplayManager",
     "target_path": "packages/apps/OmniDisplayManager",
     "revision": "android-9.0"
