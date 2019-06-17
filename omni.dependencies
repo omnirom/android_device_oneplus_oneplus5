@@ -32,8 +32,8 @@
   },
   {
     "remote": "omnirom",
-    "repository": "android_vendor_qcom_opensource_display-commonsys-intf",
-    "target_path": "vendor/qcom/opensource/display-commonsys-intf",
+    "repository": "android_hardware_qcom_display-caf-msm8998",
+    "target_path": "hardware/qcom/display-caf-msm8998",
     "revision": "android-9.0"
   },
   {
