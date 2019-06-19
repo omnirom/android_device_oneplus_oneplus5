@@ -189,6 +189,8 @@ public class KeyHandler implements DeviceKeyHandler {
     private boolean mFPcheck;
     private boolean mDispOn;
     private boolean isFpgesture;
+    private boolean mTorchState = false;
+    private boolean mUseSliderTorch = false;
 
     private SensorEventListener mProximitySensor = new SensorEventListener() {
         @Override
@@ -533,15 +535,46 @@ public class KeyHandler implements DeviceKeyHandler {
         if ( action == 0) {
             mNoMan.setZenMode(ZEN_MODE_OFF, null, TAG);
             mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
+            mTorchState = false;
         } else if (action == 1) {
             mNoMan.setZenMode(ZEN_MODE_OFF, null, TAG);
             mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_VIBRATE);
+            mTorchState = false;
         } else if (action == 2) {
             mNoMan.setZenMode(ZEN_MODE_OFF, null, TAG);
             mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_SILENT);
+            mTorchState = false;
         } else if (action == 3) {
             mNoMan.setZenMode(ZEN_MODE_IMPORTANT_INTERRUPTIONS, null, TAG);
             mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
+            mTorchState = false;
+        } else if (action == 4) {
+            mNoMan.setZenMode(ZEN_MODE_OFF, null, TAG);
+            mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
+            mUseSliderTorch = true;
+            mTorchState = true;
+        }
+
+        if (((!mProxyIsNear && mUseProxiCheck) || !mUseProxiCheck) && mUseSliderTorch && action < 4) {
+            toggleTorch();
+            mUseSliderTorch = false;
+        } else if (((!mProxyIsNear && mUseProxiCheck) || !mUseProxiCheck) && mUseSliderTorch) {
+            toggleTorch();
+        }
+    }
+
+    private void toggleTorch() {
+        IStatusBarService service = getStatusBarService();
+        if (service != null) {
+            try {
+                if (mUseSliderTorch) {
+                    service.toggleCameraFlashState(mTorchState);
+                } else {
+                    service.toggleCameraFlash();
+                }
+            } catch (RemoteException e) {
+                // do nothing.
+            }
         }
     }
 
@@ -558,15 +591,8 @@ public class KeyHandler implements DeviceKeyHandler {
     private boolean launchSpecialActions(String value) {
         if (value.equals(AppSelectListPreference.TORCH_ENTRY)) {
             mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
-            IStatusBarService service = getStatusBarService();
-            if (service != null) {
-                try {
-                    service.toggleCameraFlash();
-                    OmniVibe.performHapticFeedbackLw(HapticFeedbackConstants.LONG_PRESS, false, mContext);
-                } catch (RemoteException e) {
-                    // do nothing.
-                }
-            }
+            toggleTorch();
+            OmniVibe.performHapticFeedbackLw(HapticFeedbackConstants.LONG_PRESS, false, mContext);
             return true;
         } else if (value.equals(AppSelectListPreference.MUSIC_PLAY_ENTRY)) {
             mGestureWakeLock.acquire(GESTURE_WAKELOCK_DURATION);
