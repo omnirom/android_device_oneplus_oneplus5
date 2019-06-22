@@ -189,6 +189,8 @@ public class KeyHandler implements DeviceKeyHandler {
     private boolean mFPcheck;
     private boolean mDispOn;
     private boolean isFpgesture;
+    private boolean isSliderTorch = false;
+    private int action;
 
     private SensorEventListener mProximitySensor = new SensorEventListener() {
         @Override
@@ -529,7 +531,8 @@ public class KeyHandler implements DeviceKeyHandler {
     }
 
     private void doHandleSliderAction(int position) {
-        int action = getSliderAction(position);
+        action = getSliderAction(position);
+        IStatusBarService service = getStatusBarService();
         if ( action == 0) {
             mNoMan.setZenMode(ZEN_MODE_OFF, null, TAG);
             mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
@@ -540,6 +543,8 @@ public class KeyHandler implements DeviceKeyHandler {
             mNoMan.setZenMode(ZEN_MODE_IMPORTANT_INTERRUPTIONS, null, TAG);
             mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
         }
+        isSliderTorch = true;
+        launchSpecialActions(AppSelectListPreference.TORCH_ENTRY);
     }
 
     private Intent createIntent(String value) {
@@ -558,8 +563,14 @@ public class KeyHandler implements DeviceKeyHandler {
             IStatusBarService service = getStatusBarService();
             if (service != null) {
                 try {
-                    service.toggleCameraFlash();
-                    OmniVibe.performHapticFeedbackLw(HapticFeedbackConstants.LONG_PRESS, false, mContext);
+                    if (isSliderTorch && action == 0) {
+                        service.toggleCameraFlashState(false);
+                    } else if (isSliderTorch && action < 3) {
+                        service.toggleCameraFlashState(true);
+                    } else {
+                        service.toggleCameraFlash();
+                        OmniVibe.performHapticFeedbackLw(HapticFeedbackConstants.LONG_PRESS, false, mContext);
+                    }
                 } catch (RemoteException e) {
                     // do nothing.
                 }
