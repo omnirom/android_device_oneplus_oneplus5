@@ -189,6 +189,7 @@ public class KeyHandler implements DeviceKeyHandler {
     private boolean mFPcheck;
     private boolean mDispOn;
     private boolean isFpgesture;
+    private boolean mAlertSliderTorchState = false;
 
     private SensorEventListener mProximitySensor = new SensorEventListener() {
         @Override
@@ -533,12 +534,24 @@ public class KeyHandler implements DeviceKeyHandler {
         if ( action == 0) {
             mNoMan.setZenMode(ZEN_MODE_OFF, null, TAG);
             mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
+            if (mAlertSliderTorchState) {
+                mAlertSliderTorchState = false;
+                launchSpecialActions(AppSelectListPreference.TORCH_ENTRY);
+            }
         } else if (action == 1) {
             mNoMan.setZenMode(ZEN_MODE_OFF, null, TAG);
             mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_VIBRATE);
+            if (!mAlertSliderTorchState) {
+                launchSpecialActions(AppSelectListPreference.TORCH_ENTRY);
+                mAlertSliderTorchState = true;
+            }
         } else if (action == 2) {
             mNoMan.setZenMode(ZEN_MODE_IMPORTANT_INTERRUPTIONS, null, TAG);
             mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
+            if (!mAlertSliderTorchState) {
+                launchSpecialActions(AppSelectListPreference.TORCH_ENTRY);
+                mAlertSliderTorchState = true;
+            }
         }
     }
 
