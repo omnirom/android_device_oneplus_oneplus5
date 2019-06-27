@@ -20,7 +20,6 @@
 #
 BOARD_PATH := device/oneplus/oneplus5
 
-TARGET_USE_SDCLANG := true
 PRODUCT_FULL_TREBLE := false
 BOARD_VNDK_VERSION := current
 BOARD_VNDK_RUNTIME_DISABLE := false
