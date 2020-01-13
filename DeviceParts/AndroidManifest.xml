@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="org.omnirom.device"
     android:sharedUserId="android.uid.system" >
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
@@ -17,6 +18,8 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/advanced_settings"
         android:theme="@style/AppTheme"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        tools:replace="android:appComponentFactory"
         android:supportsRtl="true" >
         <activity
             android:name="org.omnirom.device.DeviceSettingsActivity"

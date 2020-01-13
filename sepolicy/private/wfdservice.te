@@ -1,2 +1,0 @@
-allow wfdservice self:netlink_generic_socket create_socket_perms_no_ioctl;
-allow wfdservice wfdservice_service:service_manager add;

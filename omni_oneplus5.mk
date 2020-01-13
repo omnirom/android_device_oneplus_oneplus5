@@ -19,8 +19,9 @@
 # product configuration (apps).
 #
 
-# Sample: This is where we'd set a backup provider if we had one
-# $(call inherit-product, device/sample/products/backup_overlay.mk)
+VENDOR_EXCEPTION_PATHS += oneplus \
+    omni
+
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 
 # Get the prebuilt list of APNs
@@ -28,9 +29,6 @@ $(call inherit-product, vendor/omni/config/gsm.mk)
 
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
-
-#treble
-$(call inherit-product, build/make/target/product/treble_common_64.mk)
 
 # must be before including omni part
 TARGET_BOOTANIMATION_SIZE := 1080p
@@ -42,11 +40,19 @@ DEVICE_PACKAGE_OVERLAYS += vendor/omni/overlay/CarrierConfig
 # Inherit from our custom product configuration
 $(call inherit-product, vendor/omni/config/common.mk)
 
+# # get the rest of aosp stuff after ours
+$(call inherit-product, $(SRC_TARGET_DIR)/product/mainline_system_arm64.mk)
+
 # Inherit from hardware-specific part of the product configuration
 $(call inherit-product, device/oneplus/oneplus5/device.mk)
 $(call inherit-product, vendor/oneplus/oneplus5/device-vendor.mk)
 
 ALLOW_MISSING_DEPENDENCIES := true
+PRODUCT_SHIPPING_API_LEVEL := 25
+
+# Verity
+PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/bootdevice/by-name/system
+$(call inherit-product, build/target/product/verity.mk)
 
 # Discard inherited values and use our own instead.
 PRODUCT_NAME := omni_oneplus5
@@ -57,9 +63,8 @@ PRODUCT_MODEL := ONEPLUS A5000
 
 PRODUCT_BUILD_PROP_OVERRIDES += TARGET_DEVICE=OnePlus5 PRODUCT_NAME=OnePlus5
 
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    BUILD_FINGERPRINT=OnePlus/OnePlus5/OnePlus5:9/PKQ1.180716.001/1905271736:user/release-keys \
-    PRIVATE_BUILD_DESC="OnePlus5-user 9 PKQ1.180716.001 1905271736 release-keys"
+OMNI_BUILD_FINGERPRINT := OnePlus/OnePlus5/OnePlus5:9/PKQ1.180716.001/1905271736:user/release-keys
+OMNI_PRIVATE_BUILD_DESC := "'OnePlus5-user 9 PKQ1.180716.001 1905271736 release-keys'"
 
 PLATFORM_SECURITY_PATCH_OVERRIDE := 2019-05-01
 

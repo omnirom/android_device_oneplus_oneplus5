@@ -6,4 +6,13 @@ type hal_health_omni_exec, exec_type, file_type;
 init_daemon_domain(hal_health_omni)
 
 #typeattribute hal_health_omni vendor_executes_system_violators;
-typeattribute hal_health_omni coredomain;
+#typeattribute hal_health_omni coredomain;
+
+#allow hal_health_omni sysfs_batteryinfo:file { getattr open read };
+
+#allow hal_health_omni persist_file:lnk_file read;
+allow hal_health_omni sysfs:file { getattr open read };
+
+allow hal_health_omni mnt_vendor_file:lnk_file read;
+
+

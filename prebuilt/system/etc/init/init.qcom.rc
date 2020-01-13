@@ -1,7 +1,7 @@
 on init
-    mount none /system/etc/audio_policy_configuration_omni.xml /vendor/etc/audio_policy_configuration.xml bind
-    mount none /system/lib/modules/wlan.ko /vendor/lib/modules/qca_cld3_wlan.ko bind
-    mount none /system/lib/modules/msm_11ad_proxy.ko /vendor/lib/modules/msm_11ad_proxy.ko bind
+#    mount none /system/etc/audio_policy_configuration_omni.xml /vendor/etc/audio_policy_configuration.xml bind
+#    mount none /system/lib/modules/wlan.ko /vendor/lib/modules/qca_cld3_wlan.ko bind
+#    mount none /system/lib/modules/msm_11ad_proxy.ko /vendor/lib/modules/msm_11ad_proxy.ko bind
     mount none /dev/null /vendor/overlay/SysuiDarkTheme/SysuiDarkThemeOverlay.apk bind
     mount none /system/lib/hw/lights.oneplus5.so /vendor/lib/hw/lights.msm8998.so bind
     mount none /system/lib64/hw/lights.oneplus5.so /vendor/lib64/hw/lights.msm8998.so bind
@@ -29,3 +29,6 @@ on boot
 
 #on post-fs
 #    setprop sys.usb.ffs.aio_compat 1
+
+#service vendor.boot-hal-1-0 /system/bin/true
+#    disabled

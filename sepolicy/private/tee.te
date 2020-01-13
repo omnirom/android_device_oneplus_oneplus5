@@ -1,0 +1,3 @@
+allow tee tee_data_file:dir { add_name open read remove_name write };
+allow tee tee_data_file:file { create open unlink write };
+

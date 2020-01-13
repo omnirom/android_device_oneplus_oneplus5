@@ -1,0 +1,5 @@
+#allow hal_camera persist_file:lnk_file read;
+allow hal_camera sysfs:file read;
+allow hal_camera vendor_default_prop:property_service set;
+
+allow hal_camera exported3_default_prop:property_service set;

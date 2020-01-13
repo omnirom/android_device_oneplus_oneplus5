@@ -1,2 +1,0 @@
-allow untrusted_app_25 vendor_file:file r_file_perms;
-

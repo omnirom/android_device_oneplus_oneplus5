@@ -9,3 +9,8 @@ set_prop(system_server, shell_prop)
 allow system_server audioserver:file w_file_perms;
 allow system_server hal_audio:file write;
 
+#add_service(system_server, izat_service)
+
+# Ant ipc
+hal_client_domain(system_server,hal_bluetooth);
+

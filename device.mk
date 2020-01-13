@@ -59,7 +59,7 @@ PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,device/oneplus/oneplus5/prebuilt/root,root)
 
 # Ramdisk
-PRODUCT_COPY_FILES += \
+#PRODUCT_COPY_FILES += \
     device/oneplus/oneplus5/twrp/twrp.fstab:recovery/root/etc/twrp.fstab
 
 PRODUCT_AAPT_CONFIG := xxhdpi
@@ -93,7 +93,8 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     android.hardware.nfc@1.1 \
-    android.hardware.nfc@1.0
+    android.hardware.nfc@1.0 \
+    android.hardware.nfc@1.2
 
 #PRODUCT_PACKAGES += \
     wificond \
@@ -159,19 +160,35 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.midi.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.software.midi.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.software.sip.voip.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/handheld_core_hardware.xml \
-    frameworks/native/data/etc/com.android.nfc_extras.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.android.nfc_extras.xml \
     frameworks/native/data/etc/com.nxp.mifare.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/com.nxp.mifare.xml
-
-# For android_filesystem_config.h
-PRODUCT_PACKAGES += \
-    fs_config_files
 
 # QMI
 PRODUCT_PACKAGES += \
     libjson
 
 PRODUCT_PACKAGES += \
-    ims-ext-common
+    ims-ext-common \
+    ims_ext_common.xml \
+    qti-telephony-hidl-wrapper \
+    qti_telephony_hidl_wrapper.xml \
+    qti-telephony-utils \
+    qti_telephony_utils.xml \
+    tcmiface
+
+
+PRODUCT_PACKAGES += \
+    libdisplayconfig \
+    libqdMetaData.system \
+    libqdMetaData \
+    vendor.nxp.nxpese@1.0 \
+    ese_spi_nxp \
+    vendor.nxp.nxpnfc@1.0 \
+    vendor.oneplus.camera.CameraHIDL@1.0 \
+    vendor.qti.hardware.camera.device@1.0 \
+    vendor.qti.hardware.camera.postproc@1.0 \
+    vendor.qti.hardware.systemhelper@1.1 \
+    vendor.qti.hardware.bluetooth_dun@1.0
+
 
 PRODUCT_PACKAGES += \
     com.android.ims.rcsmanager \
@@ -179,14 +196,9 @@ PRODUCT_PACKAGES += \
     RcsService \
     PresencePolling
 
-#PRODUCT_BOOT_JARS += \
-    tcmiface \
-
-#PRODUCT_PACKAGES += \
-    tcmiface
-
 PRODUCT_BOOT_JARS += \
-    WfdCommon
+    WfdCommon \
+    tcmiface
 
 # Netutils
 PRODUCT_PACKAGES += \
@@ -226,15 +238,21 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     vr_hwc
 
-PRODUCT_PACKAGES += android.hardware.health@2.0-service.oneplus5
-DEVICE_FRAMEWORK_MANIFEST_FILE += \
-    system/libhidl/vintfdata/manifest_healthd_exclude.xml
+# Lights & Health
+PRODUCT_PACKAGES += \
+    android.hardware.health@2.0-service.oneplus5 \
+    android.hardware.light@2.0-service.oneplus5 \
+    android.hardware.boot@1.0-service-op5 \
+    android.hardware.boot@1.0-impl \
+    android.hardware.boot@1.0-impl.op5
 
 PRODUCT_PACKAGES += \
-    OmniDisplayManager
+    fstab.qcom \
+    RemovePackages
 
-# Audio:
-USE_XML_AUDIO_POLICY_CONF := 1
+# Enable updating of APEXes
+$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+
 # The following policy XML files are used as fallback for
 # vendors/devices not using XML to configure audio policy.
 PRODUCT_COPY_FILES += \
@@ -242,6 +260,9 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/primary_audio_policy_configuration.xml:system/etc/primary_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:system/etc/r_submix_audio_policy_configuration.xml
 
+
+# Audio:
+USE_XML_AUDIO_POLICY_CONF := 1
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/media_codecs_google_audio.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/media_codecs_google_telephony.xml \

@@ -1,5 +1,4 @@
-allow vendor_init fpc_images_file:dir { search setattr };
-
-allow vendor_init rootfs:dir write;
-allow vendor_init rootfs:lnk_file setattr;
+allow vendor_init fpc_data_file:dir { ioctl open read setattr };
+allow vendor_init fpc_images_file:dir { ioctl open read setattr };
+#allow vendor_init persist_file:lnk_file read;
 

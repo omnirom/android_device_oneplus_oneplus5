@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013-2018, The Linux Foundation. All rights reserved.
+ * Copyright (c) 2013-2019 The Linux Foundation. All rights reserved.
  * Not a contribution.
  *
  * Copyright (C) 2009 The Android Open Source Project
@@ -21,6 +21,7 @@
 #include <audiopolicy/managerdefault/AudioPolicyManager.h>
 #include <audio_policy_conf.h>
 #include <Volume.h>
+#include "APMConfigHelper.h"
 
 
 namespace android {
@@ -85,7 +86,8 @@ public:
         status_t setDeviceConnectionStateInt(audio_devices_t device,
                                           audio_policy_dev_state_t state,
                                           const char *device_address,
-                                          const char *device_name);
+                                          const char *device_name,
+                                          audio_format_t encodedFormat);
         virtual void setPhoneState(audio_mode_t state);
         virtual void setForceUse(audio_policy_force_use_t usage,
                                  audio_policy_forced_cfg_t config);
@@ -94,6 +96,7 @@ public:
 
         virtual status_t getInputForAttr(const audio_attributes_t *attr,
                                          audio_io_handle_t *input,
+                                         audio_unique_id_t riid,
                                          audio_session_t session,
                                          uid_t uid,
                                          const audio_config_base_t *config,
@@ -106,71 +109,57 @@ public:
         uint32_t activeNonSoundTriggerInputsCountOnDevices(
             audio_devices_t devices = AUDIO_DEVICE_IN_DEFAULT) const;
         // indicates to the audio policy manager that the input starts being used.
-        virtual status_t startInput(audio_io_handle_t input,
-                                    audio_session_t session,
-                                    bool silenced,
-                                    concurrency_type__mask_t *concurrency);
+        virtual status_t startInput(audio_port_handle_t portId);
         // indicates to the audio policy manager that the input stops being used.
-        virtual status_t stopInput(audio_io_handle_t input,
-                                   audio_session_t session);
+        virtual status_t stopInput(audio_port_handle_t portId);
+
+        static sp<APMConfigHelper> mApmConfigs;
 
 protected:
-
-         status_t checkAndSetVolume(audio_stream_type_t stream,
-                                                   int index,
-                                                   const sp<AudioOutputDescriptor>& outputDesc,
-                                                   audio_devices_t device,
-                                                   int delayMs = 0, bool force = false);
+        // check that volume change is permitted, compute and send new volume to audio hardware
+        virtual status_t checkAndSetVolume(IVolumeCurves &curves,
+                                           VolumeSource volumeSource, int index,
+                                           const sp<AudioOutputDescriptor>& outputDesc,
+                                           audio_devices_t device,
+                                           int delayMs = 0, bool force = false);
 
         // avoid invalidation for active music stream on  previous outputs
         // which is supported on the new device.
-        bool isInvalidationOfMusicStreamNeeded(routing_strategy strategy);
+
+        bool isInvalidationOfMusicStreamNeeded(const audio_attributes_t &attr);
 
         // Must be called before updateDevicesAndOutputs()
-        void checkOutputForStrategy(routing_strategy strategy);
-
-        // returns true if given output is direct output
-        bool isDirectOutput(audio_io_handle_t output);
+        void checkOutputForAttributes(const audio_attributes_t &attr);
 
         // if argument "device" is different from AUDIO_DEVICE_NONE,  startSource() will force
         // the re-evaluation of the output device.
-        status_t startSource(const sp<AudioOutputDescriptor>& outputDesc,
-                             audio_stream_type_t stream,
-                             audio_devices_t device,
-                             const char *address,
+        status_t startSource(const sp<SwAudioOutputDescriptor>& outputDesc,
+                             const sp<TrackClientDescriptor>& client,
                              uint32_t *delayMs);
-         status_t stopSource(const sp<AudioOutputDescriptor>& outputDesc,
-                            audio_stream_type_t stream,
-                            bool forceDeviceUpdate);
+        status_t stopSource(const sp<SwAudioOutputDescriptor>& outputDesc,
+                            const sp<TrackClientDescriptor>& client);
         // event is one of STARTING_OUTPUT, STARTING_BEACON, STOPPING_OUTPUT, STOPPING_BEACON
         // returns 0 if no mute/unmute event happened, the largest latency of the device where
         //   the mute/unmute happened
+
         uint32_t handleEventForBeacon(int){return 0;}
         uint32_t setBeaconMute(bool){return 0;}
-#ifdef VOICE_CONCURRENCY
         static audio_output_flags_t getFallBackPath();
         int mFallBackflag;
-#endif /*VOICE_CONCURRENCY*/
-        void moveGlobalEffect();
-
-        // handle special cases for sonification strategy while in call: mute streams or replace by
-        // a special tone in the device used for communication
-        void handleIncallSonification(audio_stream_type_t stream, bool starting, bool stateChange, audio_io_handle_t output);
         //parameter indicates of HDMI speakers disabled
         bool mHdmiAudioDisabled;
         //parameter indicates if HDMI plug in/out detected
         bool mHdmiAudioEvent;
+
 private:
-        // updates device caching and output for streams that can influence the
-        //    routing of notifications
-        void handleNotificationRoutingForStream(audio_stream_type_t stream);
         // internal method to return the output handle for the given device and format
-        audio_io_handle_t getOutputForDevice(
-                audio_devices_t device,
+        audio_io_handle_t getOutputForDevices(
+                const DeviceVector &devices,
                 audio_session_t session,
                 audio_stream_type_t stream,
                 const audio_config_t *config,
-                audio_output_flags_t *flags);
+                audio_output_flags_t *flags,
+                bool forceMutingHaptic = false);
 
         // internal method to fill offload info in case of Direct PCM
         status_t getOutputForAttr(const audio_attributes_t *attr,
@@ -181,23 +170,19 @@ private:
                 const audio_config_t *config,
                 audio_output_flags_t *flags,
                 audio_port_handle_t *selectedDeviceId,
-                audio_port_handle_t *portId);
+                audio_port_handle_t *portId,
+                std::vector<audio_io_handle_t> *secondaryOutputs);
+
+
+
+
         // internal method to query hal for whether display-port is connected
         // and can be used for voip/voice call
         void chkDpConnAndAllowedForVoice();
         // Used for voip + voice concurrency usecase
         int mPrevPhoneState;
-#ifdef VOICE_CONCURRENCY
         int mvoice_call_state;
-#endif
-#ifdef RECORD_PLAY_CONCURRENCY
         // Used for record + playback concurrency
         bool mIsInputRequestOnProgress;
-#endif
-
-#ifdef FM_POWER_OPT
-        float mPrevFMVolumeDb;
-        bool mFMIsActive;
-#endif
 };
 };

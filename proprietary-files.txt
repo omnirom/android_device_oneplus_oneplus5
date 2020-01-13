@@ -1,4 +1,3 @@
-
 # Alipay
 -priv-app/IFAAService/IFAAService.apk
 
@@ -159,3 +158,4 @@ lib/com.qualcomm.qti.wifidisplayhal@1.0.so
 lib/libaacwrapper.so
 
 
+etc/permissions/privapp-permissions-oem-system.xml

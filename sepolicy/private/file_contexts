@@ -8,7 +8,6 @@
 /system/etc/audio_policy_configuration_omni.xml    u:object_r:vendor_configs_file:s0
 /system/lib/modules/wlan.ko    u:object_r:vendor_file:s0
 /system/lib/modules/msm_11ad_proxy.ko    u:object_r:vendor_file:s0
-/system/bin/hw/android.hardware.health@2.0-service.oneplus5 u:object_r:hal_health_omni_exec:s0
 
 /sys/devices/virtual/timed_output/vibrator/vtg_level            u:object_r:sysfs_vibrator:s0
 
@@ -17,10 +16,17 @@
 /sys/devices/virtual/graphics/fb0/DCI_P3                        u:object_r:sysfs_graphics_omni:s0
 /sys/devices/virtual/graphics/fb0/night_mode                    u:object_r:sysfs_graphics_omni:s0
 
-
-# /
+/firmware(/.*)?                                                 u:object_r:firmware_file:s0
+/bt_firmware(/.*)?                                              u:object_r:bt_firmware_file:s0
 /tombstones             u:object_r:rootfs:s0
 /dsp                    u:object_r:rootfs:s0
 
-# files in firmware
-/firmware(/.*)?         u:object_r:firmware_file:s0
+# /persist
+/persist(/.*)?          u:object_r:persist_file:s0
+
+
+
+/system/bin/hw/android\.hardware\.health@2\.0-service\.oneplus5 u:object_r:hal_health_omni_exec:s0
+/system/bin/hw/android\.hardware\.boot@1\.0-service-op5 u:object_r:hal_bootctl_default_exec:s0
+
+data/system/users/[0-9]+/fpdata(/.*)? u:object_r:tee_data_file:s0

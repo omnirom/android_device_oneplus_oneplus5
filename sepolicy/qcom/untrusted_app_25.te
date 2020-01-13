@@ -1,2 +1,0 @@
-allow untrusted_app_25 camera_prop:file read;
-allow untrusted_app_25 vendor_file:file read;

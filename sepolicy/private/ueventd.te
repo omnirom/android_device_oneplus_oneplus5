@@ -1,3 +1,0 @@
-allow ueventd rootfs:file entrypoint;
-allow ueventd rootfs:file execute;
-

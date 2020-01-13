@@ -7,3 +7,4 @@ allow priv_app fsck_exec:lnk_file getattr;
 allow priv_app unlabeled:file getattr;
 allow priv_app unlabeled:lnk_file getattr;
 
+allow priv_app rs_exec:file { read execute execute_no_trans open };
