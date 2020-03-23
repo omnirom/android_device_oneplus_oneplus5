@@ -1,5 +1,0 @@
-service omni-health-hal-2-0 /system/bin/hw/android.hardware.health@2.0-service.oneplus5
-    class hal
-    user system
-    group system
-    file /dev/kmsg w

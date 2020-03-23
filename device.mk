@@ -72,14 +72,6 @@ PRODUCT_COPY_FILES += \
     device/oneplus/oneplus5/keylayout/synaptics.kl:system/usr/keylayout/synaptics.kl \
     device/oneplus/oneplus5/keylayout/synaptics.kl:system/usr/keylayout/synaptics_s3320.kl
 
-# Lights
-PRODUCT_PACKAGES += \
-    lights.oneplus5 \
-    power.oneplus5
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hardware.lights=oneplus5 \
-    ro.hardware.power=oneplus5
 
 PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/media_codecs_google_audio.xml \
@@ -111,11 +103,6 @@ PRODUCT_PACKAGES += \
 # Camera
 PRODUCT_PACKAGES += \
     SnapdragonCamera2
-
-# power
-PRODUCT_PACKAGES += \
-    power.oneplus5 \
-    powerhint.qti
 
 # Permissions
 PRODUCT_COPY_FILES += \

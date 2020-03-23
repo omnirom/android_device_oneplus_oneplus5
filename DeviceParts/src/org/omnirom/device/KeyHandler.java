@@ -77,6 +77,7 @@ public class KeyHandler implements DeviceKeyHandler {
     private static final String FPC_CONTROL_PATH = "/sys/devices/soc/soc:fpc_fpc1020/proximity_state";
     private static final String FPC_KEY_CONTROL_PATH = "/sys/devices/soc/soc:fpc_fpc1020/key_disable";
     private static final String GOODIX_CONTROL_PATH = "/sys/devices/soc/soc:goodix_fp/proximity_state";
+    private static final String DT2W_CONTROL_PATH = "/proc/touchpanel/double_tap_enable";
 
     private static final int GESTURE_CIRCLE_SCANCODE = 250;
     private static final int GESTURE_V_SCANCODE = 255;
@@ -191,6 +192,7 @@ public class KeyHandler implements DeviceKeyHandler {
     private boolean isFpgesture;
     private boolean mTorchState = false;
     private boolean mUseSliderTorch = false;
+    private boolean mDoubleTapToWake;
 
     private SensorEventListener mProximitySensor = new SensorEventListener() {
         @Override
@@ -257,6 +259,9 @@ public class KeyHandler implements DeviceKeyHandler {
             mContext.getContentResolver().registerContentObserver(Settings.System.getUriFor(
                     Settings.System.OMNI_DEVICE_FEATURE_SETTINGS),
                     false, this);
+            mContext.getContentResolver().registerContentObserver(Settings.Secure.getUriFor(
+                    Settings.Secure.DOUBLE_TAP_TO_WAKE),
+                    false, this);
             update();
             updateDozeSettings();
         }
@@ -281,6 +286,10 @@ public class KeyHandler implements DeviceKeyHandler {
             mUseProxiCheck = Settings.System.getIntForUser(
                     mContext.getContentResolver(), Settings.System.OMNI_DEVICE_PROXI_CHECK_ENABLED, 1,
                     UserHandle.USER_CURRENT) == 1;
+            mDoubleTapToWake = Settings.Secure.getIntForUser(
+                    mContext.getContentResolver(), Settings.Secure.DOUBLE_TAP_TO_WAKE, 0,
+                    UserHandle.USER_CURRENT) == 1;
+            updateDoubleTapToWake();
         }
     }
 
@@ -754,6 +763,13 @@ public class KeyHandler implements DeviceKeyHandler {
     @Override
     public String getCustomProxiSensor() {
         return "com.oneplus.sensor.pocket";
+    }
+
+    private void updateDoubleTapToWake() {
+        Log.i(TAG, "udateDoubleTapToWake " + mDoubleTapToWake);
+        if (Utils.fileWritable(DT2W_CONTROL_PATH)) {
+            Utils.writeValue(DT2W_CONTROL_PATH, mDoubleTapToWake ? "1" : "0");
+        }
     }
 
     /*private void vibe(){

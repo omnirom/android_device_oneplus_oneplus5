@@ -1,13 +1,16 @@
 on init
-#    mount none /system/etc/audio_policy_configuration_omni.xml /vendor/etc/audio_policy_configuration.xml bind
-#    mount none /system/lib/modules/wlan.ko /vendor/lib/modules/qca_cld3_wlan.ko bind
-#    mount none /system/lib/modules/msm_11ad_proxy.ko /vendor/lib/modules/msm_11ad_proxy.ko bind
-    mount none /dev/null /vendor/overlay/SysuiDarkTheme/SysuiDarkThemeOverlay.apk bind
-    mount none /system/lib/hw/lights.oneplus5.so /vendor/lib/hw/lights.msm8998.so bind
-    mount none /system/lib64/hw/lights.oneplus5.so /vendor/lib64/hw/lights.msm8998.so bind
-    mount none /system/lib/hw/power.oneplus5.so /vendor/lib/hw/power.qcom.so bind
-    mount none /system/lib64/hw/power.oneplus5.so /vendor/lib64/hw/power.qcom.so bind
-    mount none /dev/null /vendor/etc/init/android.hardware.health@2.0-service.rc bind
+    mount none /system/overlay/EmptyOverlay/EmptyOverlay.apk /vendor/overlay/FrameworksResCommon.apk bind
+    mount none /system/overlay/EmptyOverlay/EmptyOverlay.apk /vendor/overlay/FrameworksResTarget.apk bind
+    mount none /system/overlay/EmptyOverlay/EmptyOverlay.apk /vendor/overlay/OPFrameworkConfigOverlay.apk bind
+    mount none /system/overlay/EmptyOverlay/EmptyOverlay.apk /vendor/overlay/SystemUIResCommon.apk bind
+    mount none /system/overlay/EmptyOverlay/EmptyOverlay.apk /vendor/overlay/TelecommResCommon.apk bind
+    mount none /system/overlay/EmptyOverlay/EmptyOverlay.apk /vendor/overlay/TelephonyResCommon.apk bind
+    mount none /system/overlay/EmptyOverlay/EmptyOverlay.apk /vendor/overlay/CellBroadcastReceiverResCommon.apk bind
+    mount none /system/overlay/EmptyOverlay/EmptyOverlay.apk /vendor/overlay/oneplus_shape_squircle/OnePlusIconShapeSquircleOverlay.apk bind
+    mount none /system/overlay/EmptyOverlay/EmptyOverlay.apk /vendor/overlay/oneplus_shape_circle/OnePlusIconShapeCircleOverlay.apk bind
+    mount none /system/overlay/EmptyOverlay/EmptyOverlay.apk /vendor/overlay/oneplus_shape_teardrop/OnePlusIconShapeTeardropOverlay.apk bind
+    mount none /system/overlay/EmptyOverlay/EmptyOverlay.apk /vendor/overlay/oneplus_shape_square/OnePlusIconShapeSquareOverlay.apk bind
+    mount none /system/overlay/EmptyOverlay/EmptyOverlay.apk /vendor/overlay/oneplus_shape_roundedrect/OnePlusIconShapeRoundedRectOverlay.apk bind
 
     setprop vendor.boot.project_name ${ro.boot.project_name}
 
